@@ -1,8 +1,6 @@
 # helium-py
 
-<p style="text-align: center;">
-  <img src="helium-py.png" width="250px" height="250px" alt="helium-py logo" title="helium.py">
-</p>
+<img src="helium-py.png" width="250px" height="250px" alt="helium-py logo" title="helium.py">
 
 ## Versioning
 
