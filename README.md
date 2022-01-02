@@ -1,6 +1,8 @@
 # helium-py
 
-!["helium-py logo"](helium-py.png "helium.py")
+<p align="center">
+  <img src="helium-py.png" width="250px" height="250px" alt="helium-py logo" title="helium.py">
+</p>
 
 ## Versioning
 
