@@ -1,0 +1,150 @@
+"""Base client for Helium Blockchain API."""
+import logging
+import math
+from urllib.parse import urlunsplit
+from typing import List, Optional, Union
+
+import requests
+from urllib3.util.retry import Retry
+
+from .version import VERSION
+
+
+logger = logging.getLogger(__name__)
+
+HELIUM_API_DEFAULT_HOST = 'api.helium.io'
+HELIUM_API_BETA_HOST = 'api.helium.wtf'
+HELIUM_API_TESTNET_HOST = 'testnet-api.helium.wtf'
+HELIUM_API_OFFICIAL_HOSTS = {
+    HELIUM_API_DEFAULT_HOST,
+    HELIUM_API_BETA_HOST,
+    HELIUM_API_TESTNET_HOST,
+}
+
+HELIUM_API_DEFAULT_VERSION = 'v1'
+
+
+class Client:
+    """Base client class for Helium Blockchain API.
+
+    Sub-classes define specific paths or parameters for different aspects of the
+    API.
+    """
+
+    base_path = ''
+    _page_cache = {}
+
+    def __init__(
+        self,
+        host: str = HELIUM_API_DEFAULT_HOST,
+        port: int = 443,
+        user_agent: str = '',
+        **kwargs,
+    ) -> None:
+        """Initialize the API client.
+
+        Args:
+            host (str): Hostname for Helium blockchain API.
+            port (int): Port for Helium blockchain API.
+            user_agent (str): Custom user agent.
+        """
+        self.host = host
+        self.port = port
+        self.netloc = f'{self.host}:{self.port}'
+        self.user_agent = user_agent
+
+        self.session = requests.Session()
+        retry_adapter = requests.adapters.HTTPAdapter(
+            max_retries=Retry(
+                total=3,
+                status_forcelist=[429],
+                backoff_factor=1,
+            ),
+        )
+        base_url = urlunsplit(('https', self.netloc, '', '', ''))
+        self.session.mount(base_url, retry_adapter)
+        self.session.headers.update({'User-Agent': self.build_user_agent()})
+
+    def build_user_agent(self):
+        """Return the User-Agent."""
+        agent = f'helium-py/{VERSION}'
+        return f'{agent} {self.user_agent}' if self.user_agent else agent
+
+    @property
+    def _base_path(self) -> str:
+        base_path = ''
+        if self.host in HELIUM_API_OFFICIAL_HOSTS:
+            base_path += f'{HELIUM_API_DEFAULT_VERSION}/'
+        if self.base_path:
+            base_path += f'{self.base_path}'
+
+        return base_path
+
+    def get(self, path: str, params: dict = {}) -> dict:
+        """Get the esponse for a request.
+
+        Args:
+            path: URL path for query.
+            params: Query parameters.
+        Returns:
+            The payload from the request.
+        Raises:
+            requests.exceptions.HTTPError: If the response code is not a successful one.
+        """
+        url = urlunsplit(('https', self.netloc, f'{self._base_path}{path}/', '', ''))
+        r = self.session.get(url, params=params)
+        r.raise_for_status()
+        return r.json()
+
+    def all(
+        self,
+        path: str = '',
+        params: Optional[dict] = None,
+        page_limit: Union[float, int] = math.inf,
+    ) -> List[dict]:
+        """Yield objects returned by API.
+
+        Args:
+            path: Path for initial query.
+            params: Query params
+            page_limit: The max number of pages to return. float is permitted since math.inf
+                is the provided representation of inifinity in the language, and the default is
+                that there is no limit.
+        """
+        params = params or {}
+        page_limit = int(page_limit) if type(page_limit) is float and page_limit is not math.inf else page_limit
+        page_count = 0
+        page = {}
+        prev_page_cursor = None
+
+        while page_count < page_limit:
+            if 'cursor' in page and page['cursor'] in self._page_cache:
+                page = self._page_cache[params['cursor']]
+                logger.debug(f'loaded page from cache: {params["cursor"]}')
+            else:
+                page = self.get(path, params)
+            data = page['data']
+            if type(data) is list:
+                for obj in data:
+                    yield obj
+            else:
+                yield data
+            if prev_page_cursor:
+                self._page_cache[prev_page_cursor] = page  # Unknown: Can we cache the first 'None' call?
+                logger.debug(f'caching page: {prev_page_cursor}')
+            prev_page_cursor = page.get('cursor', None)
+            page_count += 1
+            if 'cursor' not in page:
+                page_limit = -1  # break
+            else:
+                params['cursor'] = page['cursor']
+
+
+__all__ = [
+    'HELIUM_API_DEFAULT_HOST',
+    'HELIUM_API_BETA_HOST',
+    'HELIUM_API_TESTNET_HOST',
+    'HELIUM_API_OFFICIAL_HOSTS',
+    'HELIUM_API_DEFAULT_VERSION',
+    'Client',
+]

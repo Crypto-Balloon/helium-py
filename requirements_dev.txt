@@ -1,0 +1,12 @@
+-r requirements.txt
+
+pip-tools
+
+flake8
+flake8-quotes
+flake8-docstrings
+
+pytest
+pytest-cov
+
+tox
