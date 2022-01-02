@@ -1,5 +1,7 @@
 # helium-py
 
+!["helium-py logo"](helium-py.png "helium.py")
+
 ## Versioning
 
 This project follows [semantic versioning](https://semver.org/). Prior to 1.0.0 this project does not
