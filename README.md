@@ -15,7 +15,7 @@ guarantee a stable public API.
 
 - [/] API module coverage ([helium docs](https://docs.helium.com/api/blockchain/introduction)):
 
-  - [] Stats
+  - [X] Stats
 
   - [] Blocks
 
@@ -35,7 +35,7 @@ guarantee a stable public API.
 
   - [] Oracle Prices
 
-  - [] Chain Variables
+  - [X] Chain Variables
 
   - [] OUIs
 
@@ -47,6 +47,6 @@ guarantee a stable public API.
 
   - [] Elections
 
-  - [] State Channels
+  - [X] State Channels
 
   - [] Assert Locations

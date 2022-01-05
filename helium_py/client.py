@@ -123,7 +123,7 @@ class Client:
                 logger.debug(f'loaded page from cache: {params["cursor"]}')
             else:
                 page = self.get(path, params)
-            data = page['data']
+            data = page if type(page) is float else page['data']
             if type(data) is list:
                 for obj in data:
                     yield obj
@@ -132,12 +132,15 @@ class Client:
             if prev_page_cursor:
                 self._page_cache[prev_page_cursor] = page  # Unknown: Can we cache the first 'None' call?
                 logger.debug(f'caching page: {prev_page_cursor}')
-            prev_page_cursor = page.get('cursor', None)
-            page_count += 1
-            if 'cursor' not in page:
-                page_limit = -1  # break
+            if type(page) is dict:
+                prev_page_cursor = page.get('cursor', None)
+                page_count += 1
+                if 'cursor' not in page:
+                    page_limit = -1  # break
+                else:
+                    params['cursor'] = page['cursor']
             else:
-                params['cursor'] = page['cursor']
+                break
 
 
 __all__ = [
