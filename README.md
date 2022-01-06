@@ -49,4 +49,4 @@ guarantee a stable public API.
 
   - [X] State Channels
 
-  - [] Assert Locations
+  - [X] Assert Locations
