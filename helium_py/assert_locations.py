@@ -35,4 +35,4 @@ class AssertLocations(Client):
             params['max_time'] = max_time.isoformat()
         if limit:
             params['limit'] = str(limit)
-        return list(super().all(params=params if params else None, **kwargs))[0]
+        return super().all(params=params if params else None, **kwargs)
