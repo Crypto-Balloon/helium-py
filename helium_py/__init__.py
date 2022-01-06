@@ -1,5 +1,6 @@
 # flake8: noqa
 
+from .assert_locations import AssertLocations
 from .chain_variables import ChainVariables
 from .client import *
 from .cities import Cities

@@ -1,0 +1,13 @@
+"""Tests for ChainVariables client."""
+
+from helium_py import AssertLocations
+
+
+def test_assert_locations():
+    """Initial integration tests for assert locations.
+
+    TODO: This are PoC tests and integration tests must be separated from unit tests.
+    """
+    assert_locations = AssertLocations()
+
+    assert 'assert_location_v2' == assert_locations.all(limit=1)['type']

@@ -12,6 +12,7 @@
 auto-save-list
 tramp
 .\#*
+.idea
 
 # Org-mode
 .org-id-locations
@@ -58,6 +59,7 @@ flycheck_*.el
 __pycache__/
 *.py[cod]
 *$py.class
+.python-version
 
 # C extensions
 *.so
