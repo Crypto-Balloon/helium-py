@@ -21,7 +21,7 @@ class AssertLocations(Client):
         limit: Optional[int] = None,
         **kwargs,
     ):
-        """Yield all cities.
+        """Yield all assert location transactions.
 
         Args:
             min_time: The earliest time to return values for.
