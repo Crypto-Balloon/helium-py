@@ -33,7 +33,7 @@ guarantee a stable public API.
  
   - [] Pending Transactions
 
-  - [] Oracle Prices
+  - [X] Oracle Prices
 
   - [X] Chain Variables
 
