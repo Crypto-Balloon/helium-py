@@ -1,4 +1,4 @@
-"""Tests for ChainVariables client."""
+"""Tests for AssertLocations client."""
 
 from helium_py import AssertLocations
 
