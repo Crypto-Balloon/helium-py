@@ -10,4 +10,4 @@ def test_assert_locations():
     """
     assert_locations = AssertLocations()
 
-    assert 'assert_location_v2' == assert_locations.all(limit=1)['type']
+    assert 'assert_location_v2' == next(assert_locations.all(limit=1))['type']
