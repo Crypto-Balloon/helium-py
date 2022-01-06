@@ -2,6 +2,7 @@
 
 from .assert_locations import AssertLocations
 from .chain_variables import ChainVariables
+from .challenges import Challenges
 from .client import *
 from .cities import Cities
 from .elections import Elections

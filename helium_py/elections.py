@@ -16,5 +16,5 @@ class Elections(Client):
 
     @time_filterable_api
     def all(self, params: Optional[dict], **kwargs):
-        """Yield all consensus group transactions."""
+        """Yield all consensus_group transactions."""
         return super().all(params=params, **kwargs)
