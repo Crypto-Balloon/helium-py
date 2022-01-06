@@ -1,4 +1,4 @@
-"""Chain Variables client for Helium Blockchain API."""
+"""Assert Locations client for Helium Blockchain API."""
 
 from typing import Optional
 
