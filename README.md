@@ -39,7 +39,7 @@ guarantee a stable public API.
 
   - [] OUIs
 
-  - [] Rewards
+  - [X] Rewards
 
   - [] DC Burns
 
