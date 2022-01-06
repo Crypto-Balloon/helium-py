@@ -13,15 +13,8 @@ class Rewards(Client):
     """
 
     base_path = 'rewards'
-    valid_buckets = ('hour', 'day', 'week')
 
-    @time_filterable_api()
-    def all(self, params: Optional[dict], bucket: Optional[str], **kwargs):
-        """Yield all reward_receipts transactions."""
-        if bucket:
-            if bucket not in self.valid_buckets:
-                raise ValueError(f'{bucket} not a valid option in {self.valid_buckets}')
-            if not params:
-                params = {}
-            params['bucket'] = bucket
+    @time_filterable_api(has_bucket=True)
+    def get_total(self, params: Optional[dict], **kwargs):
+        """Yield total network rewards for given params."""
         return super().all(path='/sum', params=params, **kwargs)

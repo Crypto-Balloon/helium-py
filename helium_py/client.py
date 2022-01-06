@@ -80,7 +80,7 @@ class Client:
 
         return base_path
 
-    def get(self, path: str, params: dict = {}) -> dict:
+    def get(self, path: str, params: dict = None) -> dict:
         """Get the esponse for a request.
 
         Args:
@@ -91,6 +91,8 @@ class Client:
         Raises:
             requests.exceptions.HTTPError: If the response code is not a successful one.
         """
+        if params is None:
+            params = {}
         url = urlunsplit(('https', self.netloc, f'{self._base_path}{path}/', '', ''))
         r = self.session.get(url, params=params)
         r.raise_for_status()
