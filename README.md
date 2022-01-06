@@ -43,9 +43,9 @@ guarantee a stable public API.
 
   - [] DC Burns
 
-  - [] Challenges
+  - [X] Challenges
 
-  - [] Elections
+  - [X] Elections
 
   - [X] State Channels
 
