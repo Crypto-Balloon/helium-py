@@ -34,4 +34,8 @@ def time_filterable_api(has_limit=False):
 
             return f(obj, params=params if params else None, **kwargs)
         return wrapper
-    return decorator
+
+    if callable(has_limit):
+        return decorator(has_limit)
+    else:
+        return decorator
