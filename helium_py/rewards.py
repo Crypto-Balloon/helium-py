@@ -2,11 +2,11 @@
 
 from typing import Optional
 
-from .client import Client
+from .api import API
 from .decorators import time_filterable_api
 
 
-class Rewards(Client):
+class Rewards(API):
     """Rewards client class for Helium Blockchain API.
 
     https://docs.helium.com/api/blockchain/rewards
@@ -17,4 +17,4 @@ class Rewards(Client):
     @time_filterable_api(has_bucket=True)
     def get_total(self, params: Optional[dict], **kwargs):
         """Yield total network rewards for given params."""
-        return super().all(path='/sum', params=params, **kwargs)
+        return self.client.fetch_all(path='/sum', params=params, **kwargs)

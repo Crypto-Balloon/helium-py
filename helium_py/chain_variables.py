@@ -2,11 +2,11 @@
 
 from typing import Optional
 
-from .client import Client
+from .api import API
 from .decorators import time_filterable_api
 
 
-class ChainVariables(Client):
+class ChainVariables(API):
     """Chain Variables client class for Helium Blockchain API.
 
     https://docs.helium.com/api/blockchain/chain-variables
@@ -17,7 +17,7 @@ class ChainVariables(Client):
     @time_filterable_api(has_limit=True)
     def get_all(self, params: Optional[dict], **kwargs):
         """Yield all chain variables."""
-        return list(super().all(params=params, **kwargs))[0]
+        return list(self.client.fetch_all(params=params, **kwargs))[0]
 
     def get_by_name(self, var_name: str):
         """Return a var identified by var_name.
@@ -25,8 +25,8 @@ class ChainVariables(Client):
         Args:
             var_name: The name of a chain variable.
         """
-        return list(self.all(path=f'/{var_name}'))[0]
+        return list(self.client.fetch_all(path=f'/{var_name}'))[0]
 
     def all_activity(self, **kwargs):
         """Yield all chain variable activity."""
-        return super().all(path='/activity', **kwargs)
+        return self.client.fetch_all(path='/activity', **kwargs)

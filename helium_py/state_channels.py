@@ -2,11 +2,11 @@
 
 from typing import Optional
 
-from .client import Client
+from .api import API
 from .decorators import time_filterable_api
 
 
-class StateChannels(Client):
+class StateChannels(API):
     """Stats client class for Helium Blockchain API.
 
     https://docs.helium.com/api/blockchain/state-channels
@@ -17,4 +17,4 @@ class StateChannels(Client):
     @time_filterable_api(has_limit=True)
     def all(self, params: Optional[dict], **kwargs):
         """Yield all state_channels."""
-        return super().all(params=params if params else None, **kwargs)
+        return self.client.fetch_all(params=params if params else None, **kwargs)

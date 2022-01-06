@@ -2,11 +2,11 @@
 
 from typing import Optional
 
-from .client import Client
+from .api import API
 from .decorators import time_filterable_api
 
 
-class Elections(Client):
+class Elections(API):
     """Elections client class for Helium Blockchain API.
 
     https://docs.helium.com/api/blockchain/elections
@@ -17,4 +17,4 @@ class Elections(Client):
     @time_filterable_api(has_limit=True)
     def all(self, params: Optional[dict], **kwargs):
         """Yield all consensus_group transactions."""
-        return super().all(params=params, **kwargs)
+        return self.client.fetch_all(params=params, **kwargs)

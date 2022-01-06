@@ -2,10 +2,10 @@
 
 from typing import Dict, Optional, Union
 
-from .client import Client
+from .api import API
 
 
-class Stats(Client):
+class Stats(API):
     """Stats client class for Helium Blockchain API.
 
     https://docs.helium.com/api/blockchain/stats
@@ -16,7 +16,7 @@ class Stats(Client):
 
     def get_all(self, **kwargs):
         """Get all stats."""
-        return list(super().all(**kwargs))[0]
+        return list(self.client.fetch_all(**kwargs))[0]
 
     def get_token_supply(self, format: Optional[str] = None, **kwargs) -> Union[float, Dict]:
         """Retrieve the Helium token supply.
@@ -26,7 +26,7 @@ class Stats(Client):
         """
         if format and not format == self.VALID_FORMAT:
             raise ValueError(f'{format} not {self.VALID_FORMAT}')
-        return list(super().all(
+        return list(self.client.fetch_all(
             path='/token_supply',
             params={'format': format} if format else None,
             **kwargs),

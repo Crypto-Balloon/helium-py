@@ -39,6 +39,7 @@ class Client:
         host: str = HELIUM_API_DEFAULT_HOST,
         port: int = 443,
         user_agent: str = '',
+        base_path: str = None,
         **kwargs,
     ) -> None:
         """Initialize the API client.
@@ -65,6 +66,9 @@ class Client:
         self.session.mount(base_url, retry_adapter)
         self.session.headers.update({'User-Agent': self.build_user_agent()})
 
+        if base_path is not None:
+            self.base_path = base_path
+
     def build_user_agent(self):
         """Return the User-Agent."""
         agent = f'helium-py/{VERSION}'
@@ -81,7 +85,7 @@ class Client:
         return base_path
 
     def get(self, path: str, params: dict = None) -> dict:
-        """Get the esponse for a request.
+        """Get the response for a request.
 
         Args:
             path: URL path for query.
@@ -98,7 +102,7 @@ class Client:
         r.raise_for_status()
         return r.json()
 
-    def all(
+    def fetch_all(
         self,
         path: str = '',
         params: Optional[dict] = None,
