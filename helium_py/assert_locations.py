@@ -14,7 +14,7 @@ class AssertLocations(Client):
 
     base_path = 'assert_locations'
 
-    @time_filterable_api
+    @time_filterable_api(has_limit=True)
     def all(self, params: Optional[dict], **kwargs):
         """Yield all assert location transactions."""
         return super().all(params=params, **kwargs)

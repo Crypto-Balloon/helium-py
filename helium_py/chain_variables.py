@@ -14,7 +14,7 @@ class ChainVariables(Client):
 
     base_path = 'vars'
 
-    @time_filterable_api
+    @time_filterable_api(has_limit=True)
     def get_all(self, params: Optional[dict], **kwargs):
         """Yield all chain variables."""
         return list(super().all(params=params, **kwargs))[0]

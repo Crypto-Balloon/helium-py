@@ -6,6 +6,7 @@ from .challenges import Challenges
 from .client import *
 from .cities import Cities
 from .elections import Elections
+from .rewards import Rewards
 from .state_channels import StateChannels
 from .stats import Stats
 from .version import VERSION

@@ -14,7 +14,7 @@ class Elections(Client):
 
     base_path = 'elections'
 
-    @time_filterable_api
+    @time_filterable_api(has_limit=True)
     def all(self, params: Optional[dict], **kwargs):
         """Yield all consensus_group transactions."""
         return super().all(params=params, **kwargs)

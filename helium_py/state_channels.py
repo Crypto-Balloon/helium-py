@@ -14,7 +14,7 @@ class StateChannels(Client):
 
     base_path = 'state_channels'
 
-    @time_filterable_api
+    @time_filterable_api(has_limit=True)
     def all(self, params: Optional[dict], **kwargs):
         """Yield all state_channels."""
         return super().all(params=params if params else None, **kwargs)
