@@ -24,7 +24,9 @@ class StateChannels(Client):
         """Yield all state_channels.
 
         Args:
-            search: Search term.
+            min_time: The earliest time to return values for.
+            max_time: The latest time to return values for.
+            limit: The max number of results to return.
         """
         params = {}
         if min_time:
