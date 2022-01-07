@@ -23,11 +23,11 @@ guarantee a stable public API.
 
   - [] Validators
 
-  - [] Hotspots
+  - [X] Hotspots
 
   - [X] Cities
 
-  - [] Locations
+  - [X] Locations
 
   - [] Transactions
  
@@ -37,11 +37,11 @@ guarantee a stable public API.
 
   - [X] Chain Variables
 
-  - [] OUIs
+  - [X] OUIs
 
   - [X] Rewards
 
-  - [] DC Burns
+  - [X] DC Burns
 
   - [X] Challenges
 
