@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 def test_transactions():
-    """Initial integration tests for ouis.
+    """Initial integration tests for transactions.
 
     TODO: This are PoC tests and integration tests must be separated from unit tests.
     """
@@ -31,4 +31,4 @@ def test_transactions():
         }
     }
 
-    assert expected == transactions.get_transaction('bUc6-LQXdR6zOBaR_8TPWlf3THCpb4wI6WPXJHJfnYw''')
+    assert expected == transactions.get_transaction('bUc6-LQXdR6zOBaR_8TPWlf3THCpb4wI6WPXJHJfnYw')

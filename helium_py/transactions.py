@@ -1,4 +1,4 @@
-"""Transaction client for Helium Blockchain API."""
+"""Transactions client for Helium Blockchain API."""
 from .api import API
 
 
