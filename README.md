@@ -31,7 +31,7 @@ guarantee a stable public API.
 
   - [X] Transactions
  
-  - [] Pending Transactions
+  - [X] Pending Transactions
 
   - [X] Oracle Prices
 
