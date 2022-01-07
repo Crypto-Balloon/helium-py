@@ -11,6 +11,7 @@ from .hotspots import Hotspots
 from .locations import Locations
 from .oracle_prices import OraclePrices
 from .ouis import OUIs
+from .pending_transactions import PendingTransactions
 from .rewards import Rewards
 from .state_channels import StateChannels
 from .stats import Stats

@@ -148,6 +148,24 @@ class Client:
             else:
                 break
 
+    def post(self, path: str, json: dict) -> dict:
+        """Get the response for a POST request.
+
+        Args:
+            path: URL path for query.
+            json: JSON payload as dict.
+        Returns:
+            The payload from the request.
+        Raises:
+            requests.exceptions.HTTPError: If the response code is not a successful one.
+        """
+        if json is None:
+            json = {}
+        url = urlunsplit(('https', self.netloc, f'{self._base_path}{path}/', '', ''))
+        r = self.session.post(url, json=json)
+        r.raise_for_status()
+        return r.json()
+
 
 __all__ = [
     'HELIUM_API_DEFAULT_HOST',

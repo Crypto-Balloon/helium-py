@@ -22,7 +22,7 @@ def test_hotspots():
     assert 'block_added' in hotspots.hotspots_search_by_geo(
         swlat=38.0795392, swlon=-122.5671627, nelat=38.1588012, nelon=-122.5046937)['data'][0]
     assert 'block_added' in hotspots.hotspots_by_hex(oversaturated_hex_id)['data'][0]
-    assert 'end_epoch' in next(hotspots.get_hotspot_activity(fresh_cinnamon_duck))
+    assert 'hash' in next(hotspots.get_hotspot_activity(fresh_cinnamon_duck))
     assert 'add_gateway_v1' in hotspots.get_hotspot_activity_counts(fresh_cinnamon_duck)['data']
     assert 'challenger' in next(hotspots.get_hotspot_challenges(fresh_cinnamon_duck))
     assert 'amount' in next(hotspots.get_hotspot_rewards(
