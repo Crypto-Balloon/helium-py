@@ -14,11 +14,11 @@ class Stats(API):
     base_path = 'stats'
     VALID_FORMAT = 'raw'
 
-    def get_all(self, **kwargs):
+    def get_all(self):
         """Get all stats."""
-        return list(self.client.fetch_all(**kwargs))[0]
+        return list(self.client.fetch_all())[0]
 
-    def get_token_supply(self, format: Optional[str] = None, **kwargs) -> Union[float, Dict]:
+    def get_token_supply(self, format: Optional[str] = None) -> Union[float, Dict]:
         """Retrieve the Helium token supply.
 
         Args:
@@ -28,6 +28,5 @@ class Stats(API):
             raise ValueError(f'{format} not {self.VALID_FORMAT}')
         return list(self.client.fetch_all(
             path='/token_supply',
-            params={'format': format} if format else None,
-            **kwargs),
+            params={'format': format} if format else None),
         )[0]

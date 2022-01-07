@@ -3,6 +3,7 @@
 from typing import Optional
 
 from .api import API
+from .decorators import filter_modes_api
 
 
 class Cities(API):
@@ -18,22 +19,20 @@ class Cities(API):
         'light',
     }
 
-    def all(self, search: Optional[str] = None, **kwargs):
+    def all(self, search: Optional[str] = None):
         """Yield all cities.
 
         Args:
             search: Search term.
         """
-        return self.client.fetch_all(params={'search': search} if search else None, **kwargs)
+        return self.client.fetch_all(params={'search': search} if search else None)
 
-    def hotspots_for_id(self, city_id: str, filter_modes: Optional[str] = None, **kwargs):
+    @filter_modes_api
+    def hotspots_for_id(self, city_id: str, params: Optional[dict]):
         """Yield hotspots for a city."""
-        if filter_modes and not all([mode in self.VALID_FILTER_MODES for mode in filter_modes.split(',')]):
-            raise ValueError(f'One or more of {filter_modes} not in {self.VALID_FILTER_MODES}')
         return self.client.fetch_all(
             path=f'/{city_id}/hotspots',
-            params={'filter_modes': filter_modes} if filter_modes else None,
-            **kwargs
+            params=params if params else None
         )
 
     def get_by_id(self, city_id: str):
