@@ -12,6 +12,7 @@ from .ouis import OUIs
 from .rewards import Rewards
 from .state_channels import StateChannels
 from .stats import Stats
+from .transactions import Transactions
 from .version import VERSION
 
 __version__ = VERSION
