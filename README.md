@@ -29,7 +29,7 @@ guarantee a stable public API.
 
   - [X] Locations
 
-  - [] Transactions
+  - [X] Transactions
  
   - [] Pending Transactions
 
