@@ -8,6 +8,7 @@ from .cities import Cities
 from .dc_burns import DCBurns
 from .elections import Elections
 from .oracle_prices import OraclePrices
+from .ouis import OUIs
 from .rewards import Rewards
 from .state_channels import StateChannels
 from .stats import Stats

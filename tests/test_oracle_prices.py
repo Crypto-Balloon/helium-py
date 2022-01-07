@@ -7,7 +7,7 @@ from helium_py import OraclePrices
 logger = logging.getLogger(__name__)
 
 
-def test_assert_locations():
+def test_oracle_prices():
     """Initial integration tests for oracle prices.
 
     TODO: This are PoC tests and integration tests must be separated from unit tests.

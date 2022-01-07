@@ -9,7 +9,7 @@ from .decorators import time_filterable_api
 class OraclePrices(API):
     """Oracle Prices client class for Helium Blockchain API.
 
-    https://docs.helium.com/api/blockchain/oracle/prices/
+    https://docs.helium.com/api/blockchain/oracle-prices/
     """
 
     base_path = 'oracle'
