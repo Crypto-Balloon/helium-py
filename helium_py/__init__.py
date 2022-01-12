@@ -1,5 +1,6 @@
 # flake8: noqa
 
+from .accounts import Accounts
 from .assert_locations import AssertLocations
 from .chain_variables import ChainVariables
 from .challenges import Challenges
