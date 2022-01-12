@@ -3,7 +3,7 @@
 from typing import Optional
 
 from .api import API
-from .decorators import time_filterable_api
+from .decorators import time_filterable_api, limit_api
 
 
 class Challenges(API):
@@ -14,7 +14,8 @@ class Challenges(API):
 
     base_path = 'challenges'
 
-    @time_filterable_api(has_limit=True)
+    @limit_api
+    @time_filterable_api
     def all(self, params: Optional[dict], **kwargs):
         """Yield all challenge_receipts transactions."""
         return self.client.fetch_all(params=params, **kwargs)

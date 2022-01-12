@@ -3,7 +3,7 @@
 from typing import Optional
 
 from .api import API
-from .decorators import time_filterable_api
+from .decorators import time_filterable_api, limit_api
 
 
 class StateChannels(API):
@@ -14,7 +14,8 @@ class StateChannels(API):
 
     base_path = 'state_channels'
 
-    @time_filterable_api(has_limit=True)
+    @limit_api
+    @time_filterable_api
     def all(self, params: Optional[dict]):
         """Yield all state_channels."""
         return self.client.fetch_all(params=params if params else None)

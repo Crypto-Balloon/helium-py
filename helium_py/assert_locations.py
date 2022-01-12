@@ -3,7 +3,7 @@
 from typing import Optional
 
 from .api import API
-from .decorators import time_filterable_api
+from .decorators import time_filterable_api, limit_api
 
 
 class AssertLocations(API):
@@ -14,7 +14,8 @@ class AssertLocations(API):
 
     base_path = 'assert_locations'
 
-    @time_filterable_api(has_limit=True)
+    @limit_api
+    @time_filterable_api
     def all(self, params: Optional[dict], **kwargs):
         """Yield all assert location transactions."""
         return self.client.fetch_all(params=params, **kwargs)

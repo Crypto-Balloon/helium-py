@@ -3,7 +3,7 @@
 from typing import Optional
 
 from .api import API
-from .decorators import filter_modes_api, time_filterable_api
+from .decorators import filter_modes_api, time_filterable_api, filter_transaction_types_api
 
 
 class Hotspots(API):
@@ -35,7 +35,7 @@ class Hotspots(API):
 
     def hotspots_search_by_name(self, name: str):
         """Return a hotspot identified by hotspot_id."""
-        return self.client.get(path=f'/name?search={name}')
+        return self.client.get(path=f'/name', params={'search': name})
 
     def hotspots_search_by_geo(self, swlat: float, swlon: float, nelat: float, nelon: float):
         """Return a hotspot identified by hotspot_id."""
@@ -56,24 +56,22 @@ class Hotspots(API):
         """Return a hotspot identified by hotspot_id."""
         return self.client.fetch_all(path=f'/{address}/activity')
 
-    def get_hotspot_activity_counts(self, address: str, filter_types: Optional[str] = ''):
+    @filter_transaction_types_api
+    def get_hotspot_activity_counts(self, address: str, params: Optional[dict]):
         """Return a hotspot identified by hotspot_id."""
-        filter_str = ''
-        if filter_types:
-            filter_str = '?filter_types={filter_types}'
-        return self.client.get(path=f'/{address}/activity/count{filter_str}')
+        return self.client.get(path=f'/{address}/activity/count', params=params if params else None)
 
-    @time_filterable_api(has_limit=True)
+    @time_filterable_api
     def get_hotspot_challenges(self, address: str, params: Optional[dict]):
         """Return a hotspot identified by hotspot_id."""
         return self.client.fetch_all(path=f'/{address}/challenges', params=params if params else None)
 
-    @time_filterable_api()
+    @time_filterable_api
     def get_hotspot_rewards(self, address: str, params: Optional[dict]):
         """Return a hotspot identified by hotspot_id."""
         return self.client.fetch_all(path=f'/{address}/rewards', params=params if params else None)
 
-    @time_filterable_api()
+    @time_filterable_api
     def get_hotspot_rewards_total(self, address: str, params: Optional[dict]):
         """Return a hotspot identified by hotspot_id."""
         return self.client.get(path=f'/{address}/rewards/sum', params=params if params else None)

@@ -3,7 +3,7 @@
 from typing import Optional
 
 from .api import API
-from .decorators import time_filterable_api
+from .decorators import time_filterable_api, limit_api
 
 
 class ChainVariables(API):
@@ -14,7 +14,8 @@ class ChainVariables(API):
 
     base_path = 'vars'
 
-    @time_filterable_api(has_limit=True)
+    @limit_api
+    @time_filterable_api
     def get_all(self, params: Optional[dict], **kwargs):
         """Yield all chain variables."""
         return list(self.client.fetch_all(params=params, **kwargs))[0]

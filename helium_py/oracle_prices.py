@@ -3,7 +3,7 @@
 from typing import Optional
 
 from .api import API
-from .decorators import time_filterable_api
+from .decorators import time_filterable_api, limit_api
 
 
 class OraclePrices(API):
@@ -18,12 +18,14 @@ class OraclePrices(API):
         """Yield all price data."""
         return self.client.fetch_all(path='/prices', **kwargs)
 
-    @time_filterable_api(has_limit=True)
+    @limit_api
+    @time_filterable_api
     def all_activity(self, params: Optional[dict], **kwargs):
         """Yield all oracle activity."""
         return self.client.fetch_all(path='/activity', params=params, **kwargs)
 
-    @time_filterable_api(has_limit=True)
+    @limit_api
+    @time_filterable_api
     def all_activity_for_oracle(self, params: Optional[dict], address: str, **kwargs):
         """Yield all activity for specific oracle.
 

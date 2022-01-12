@@ -3,7 +3,7 @@
 from typing import Optional
 
 from .api import API
-from .decorators import time_filterable_api
+from .decorators import time_filterable_api, limit_api
 
 
 class Elections(API):
@@ -14,7 +14,8 @@ class Elections(API):
 
     base_path = 'elections'
 
-    @time_filterable_api(has_limit=True)
+    @limit_api
+    @time_filterable_api
     def all(self, params: Optional[dict], **kwargs):
         """Yield all consensus_group transactions."""
         return self.client.fetch_all(params=params, **kwargs)

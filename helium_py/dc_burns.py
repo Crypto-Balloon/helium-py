@@ -3,7 +3,7 @@
 from typing import Optional
 
 from .api import API
-from .decorators import time_filterable_api
+from .decorators import time_filterable_api, bucket_api
 
 
 class DCBurns(API):
@@ -18,7 +18,8 @@ class DCBurns(API):
         """Yield all data credits burned."""
         return self.client.fetch_all(**kwargs)
 
-    @time_filterable_api(has_bucket=True)
+    @bucket_api
+    @time_filterable_api
     def get_total(self, params: Optional[dict], **kwargs):
         """Yield total data credits burned for given params."""
         return self.client.fetch_all(path='/sum', params=params, **kwargs)

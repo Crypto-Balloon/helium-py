@@ -3,7 +3,7 @@
 from typing import Optional
 
 from .api import API
-from .decorators import time_filterable_api
+from .decorators import time_filterable_api, bucket_api
 
 
 class Validators(API):
@@ -59,17 +59,18 @@ class Validators(API):
         """Return elected validators for the provided block height."""
         return self.client.get(path=f'/elected/hash/{election_hash}')
 
-    @time_filterable_api()
+    @time_filterable_api
     def get_validator_rewards(self, address: str, params: Optional[dict]):
         """Return a validator identified by validator_id."""
         return self.client.fetch_all(path=f'/{address}/rewards', params=params if params else None)
 
-    @time_filterable_api(has_bucket=True)
+    @bucket_api
+    @time_filterable_api
     def get_validator_rewards_total(self, address: str, params: Optional[dict]):
         """Return a validator identified by validator_id."""
         return self.client.get(path=f'/{address}/rewards/sum', params=params if params else None)
 
-    @time_filterable_api()
+    @time_filterable_api
     def get_all_validator_rewards_total(self, params: Optional[dict]):
         """Return a validator identified by validator_id."""
         return self.client.get(path='/rewards/sum', params=params if params else None)
