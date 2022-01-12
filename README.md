@@ -21,7 +21,7 @@ guarantee a stable public API.
 
   - [] Accounts
 
-  - [] Validators
+  - [X] Validators
 
   - [X] Hotspots
 
