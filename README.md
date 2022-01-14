@@ -17,9 +17,9 @@ guarantee a stable public API.
 
   - [X] Stats
 
-  - [] Blocks
+  - [X] Blocks
 
-  - [] Accounts
+  - [X] Accounts
 
   - [X] Validators
 
