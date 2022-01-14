@@ -95,6 +95,7 @@ def filter_modes_api(f):
         return f(obj, *args, params=params if params else None, **kwargs)
     return wrapper
 
+
 def filter_transaction_types_api(f):
     """Decorate Client methods for API endpoints that support time-filtering."""
     @wraps(f)

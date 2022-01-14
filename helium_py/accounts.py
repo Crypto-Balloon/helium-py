@@ -43,20 +43,20 @@ class Accounts(API):
     @limit_api
     @time_filterable_api
     @filter_transaction_types_api
-    def activity_for_account(self, address: str, params: Optional[dict]):
+    def get_account_activity(self, address: str, params: Optional[dict]):
         """Return a account identified by account_id."""
         return self.client.fetch_all(path=f'/{address}/activity', params=params if params else None)
 
     @filter_transaction_types_api
-    def activity_counts_for_account(self, address: str, params: Optional[dict]):
+    def get_account_activity_counts(self, address: str, params: Optional[dict]):
         """Return a account identified by account_id."""
         return self.client.get(path=f'/{address}/activity/count', params=params if params else None)
 
     @limit_api
     @time_filterable_api
-    def elections_for_account(self, address: str, params: Optional[dict]):
+    def get_account_elections(self, address: str, params: Optional[dict]):
         """Return a account identified by account_id."""
-        return self.client.fetch_all(path=f'/{address}/elections', params=params if params else None)
+        return self.client.get(path=f'/{address}/elections', params=params if params else None)
 
     @limit_api
     @time_filterable_api
@@ -68,13 +68,14 @@ class Accounts(API):
         """Return a account identified by account_id."""
         return self.client.fetch_all(path=f'/{address}/pending_transactions')
 
-    def rewards_for_account(self, address: str):
+    @time_filterable_api
+    def get_account_rewards(self, address: str, params: Optional[dict]):
         """Return a account identified by account_id."""
-        return self.client.fetch_all(path=f'/{address}/rewards')
+        return self.client.fetch_all(path=f'/{address}/rewards', params=params if params else None)
 
     @bucket_api
     @time_filterable_api
-    def rewards_for_account(self, address: str, params: Optional[dict]):
+    def get_account_rewards_total(self, address: str, params: Optional[dict]):
         """Return a account identified by account_id."""
         return self.client.get(path=f'/{address}/rewards/sum', params=params if params else None)
 

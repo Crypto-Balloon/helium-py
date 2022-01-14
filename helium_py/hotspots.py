@@ -35,7 +35,7 @@ class Hotspots(API):
 
     def hotspots_search_by_name(self, name: str):
         """Return a hotspot identified by hotspot_id."""
-        return self.client.get(path=f'/name', params={'search': name})
+        return self.client.get(path='/name', params={'search': name})
 
     def hotspots_search_by_geo(self, swlat: float, swlon: float, nelat: float, nelon: float):
         """Return a hotspot identified by hotspot_id."""
