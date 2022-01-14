@@ -2,6 +2,7 @@
 
 from .accounts import Accounts
 from .assert_locations import AssertLocations
+from .blocks import Blocks
 from .chain_variables import ChainVariables
 from .challenges import Challenges
 from .client import *
