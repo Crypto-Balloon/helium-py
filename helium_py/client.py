@@ -1,14 +1,13 @@
 """Base client for Helium Blockchain API."""
 import logging
 import math
-from urllib.parse import urlunsplit
 from typing import List, Optional, Union
+from urllib.parse import urlunsplit
 
 import requests
 from urllib3.util.retry import Retry
 
 from .version import VERSION
-
 
 logger = logging.getLogger(__name__)
 

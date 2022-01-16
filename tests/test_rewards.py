@@ -1,5 +1,5 @@
 """Tests for Rewards client."""
-from datetime import timedelta, datetime
+from datetime import datetime, timedelta
 
 from helium_py import Rewards
 

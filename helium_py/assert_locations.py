@@ -3,7 +3,7 @@
 from typing import Optional
 
 from .api import API
-from .decorators import time_filterable_api, limit_api
+from .decorators import limit_api, time_filterable_api
 
 
 class AssertLocations(API):

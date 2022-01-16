@@ -1,7 +1,6 @@
 """Tests for Client."""
 
 import pytest
-
 from requests.exceptions import HTTPError
 
 from helium_py import Client
