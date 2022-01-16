@@ -111,7 +111,7 @@ def filter_transaction_types_api(f):
         if filter_types:
             if not all([mode in VALID_FILTER_TYPES for mode in filter_types.split(',')]):
                 raise ValueError(f'One or more of {filter_types} not in {VALID_FILTER_TYPES}')
-            params['filter_modes'] = filter_types
+            params['filter_types'] = filter_types
 
         return f(obj, *args, params=params if params else None, **kwargs)
     return wrapper

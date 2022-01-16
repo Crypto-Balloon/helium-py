@@ -18,7 +18,7 @@ def test_accounts():
     assert 'block_added' in next(accounts.hotspots_for_account(random_account))
     assert 'block_added' in next(accounts.validators_for_account(random_account))
     assert 'oui' in next(accounts.ouis_for_account(random_oui_account))
-    assert 'hash' in next(accounts.get_account_activity(random_account))
+    assert 'type' in next(accounts.get_account_activity(random_account))
     assert 'add_gateway_v1' in accounts.get_account_activity_counts(random_account)['data']
     assert 'data' in accounts.get_account_elections(random_account)
     assert 'hash' in next(accounts.pending_transactions_for_account(random_account))
@@ -27,3 +27,7 @@ def test_accounts():
     assert 'avg' in accounts.get_account_rewards_total(
         random_account, min_time=datetime.now() - timedelta(days=1))['data']
     assert 'balance' in accounts.get_stats_for_account(random_account)['data']['last_day'][0]
+    assert 'challenger' in next(accounts.challenges_for_account(random_account))
+
+    # TODO: This lookup tends to be very slow, and often 500s
+    # assert 'hash' in next(accounts.get_account_activity(random_account))

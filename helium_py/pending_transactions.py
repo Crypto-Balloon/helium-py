@@ -18,10 +18,10 @@ class PendingTransactions(API):
         """
         return self.client.get(path=f'/{transaction_hash}')
 
-    def submit_transaction(self, txn: str):
-        """Yield transaction details for a particular hash.
+    def submit_transaction(self, transaction_hash: str, txn: str):
+        """Submit a transaction.
 
         Args:
-            txn: The transaction hash to fetch transaction details.
+            txn: A base64 encoded transaction.
         """
-        return self.client.post(json={'txn': txn})
+        return self.client.post(path=f'/{transaction_hash}', json={'txn': txn})

@@ -32,7 +32,7 @@ class OraclePrices(API):
         Args:
             address: The oracle addres to fetch activity for.
         """
-        return self.client.fetch_all(path=f'{address}/activity', params=params, **kwargs)
+        return self.client.fetch_all(path=f'/{address}/activity', params=params, **kwargs)
 
     def get_current(self, **kwargs):
         """Get the current oracle price data."""

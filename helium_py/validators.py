@@ -23,21 +23,25 @@ class Validators(API):
         return self.client.get(path=f'/{address}')
 
     def validators_for_name(self, name: str):
-        """Return a validator identified by validator_id."""
+        """Return validators identified by prvided three-word animal name."""
         if len(name.split(' ')) == 3:
             name = '-'.join(name.split(' ')).lower()
         return self.client.get(path=f'/name/{name}')
 
     def validators_search_by_name(self, name: str):
-        """Return a validator identified by validator_id."""
+        """Search for validators by name."""
         return self.client.get(path=f'/name?search={name}')
 
-    def get_validator_activity(self, address: str):
-        """Return a validator identified by validator_id."""
-        return self.client.fetch_all(path=f'/{address}/activity')
+    @time_filterable_api
+    def get_validator_activity(self, *, params: Optional[dict], address: str, filter_types: Optional[str] = ''):
+        """Return validator activity for validator address."""
+        params = params or {}
+        if filter_types:
+            params['filter_types'] = filter_types
+        return self.client.fetch_all(path=f'/{address}/activity', params=params)
 
     def get_validator_activity_counts(self, address: str, filter_types: Optional[str] = ''):
-        """Return a validator identified by validator_id."""
+        """Return validator activity counts for validator address."""
         filter_str = ''
         if filter_types:
             filter_str = '?filter_types={filter_types}'

@@ -6,7 +6,10 @@ flake8
 flake8-quotes
 flake8-docstrings
 
+isort
+
 pytest
 pytest-cov
+pytest-mock
 
 tox

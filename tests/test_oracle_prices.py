@@ -14,7 +14,12 @@ def test_oracle_prices():
     """
     oracle_prices = OraclePrices()
 
+    assert 'price' in next(oracle_prices.all())
+
     assert 'price' in oracle_prices.get_current()
+
+    oracle_address = '13CFFcmPtMvNQCpWQRXCTqXPnXtcsibDWVwiQRKpUCt4nqtF7RE'
+    assert 'block_height' in next(oracle_prices.all_activity_for_oracle(address=oracle_address))
 
     assert 'type' in next(oracle_prices.all_activity())
 
