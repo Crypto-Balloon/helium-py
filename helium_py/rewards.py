@@ -3,7 +3,7 @@
 from typing import Optional
 
 from .api import API
-from .decorators import time_filterable_api, bucket_api
+from .decorators import bucket_api, time_filterable_api
 
 
 class Rewards(API):

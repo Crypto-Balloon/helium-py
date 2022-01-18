@@ -5,8 +5,8 @@ from .assert_locations import AssertLocations
 from .blocks import Blocks
 from .chain_variables import ChainVariables
 from .challenges import Challenges
-from .client import *
 from .cities import Cities
+from .client import *
 from .dc_burns import DCBurns
 from .elections import Elections
 from .hotspots import Hotspots

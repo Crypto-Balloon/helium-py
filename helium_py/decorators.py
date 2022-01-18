@@ -4,7 +4,11 @@ import datetime as dt
 from functools import wraps
 from typing import Optional
 
-from helium_py.constants import VALID_BUCKETS, VALID_FILTER_MODES, VALID_FILTER_TYPES
+from helium_py.constants import (
+    VALID_BUCKETS,
+    VALID_FILTER_MODES,
+    VALID_FILTER_TYPES,
+)
 
 
 def time_filterable_api(f):
