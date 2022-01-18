@@ -33,7 +33,7 @@ def test_validators():
     assert 'block_added' in validators.get_elected_validators_by_election(some_random_election)['data'][0]
 
     assert 'amount' in next(validators.get_validator_rewards(
-        low_seaweed_mandrill, min_time=datetime.now() - timedelta(days=3)))
+        low_seaweed_mandrill, min_time=datetime.now() - timedelta(days=30)))
     assert 'avg' in validators.get_validator_rewards_total(
-        low_seaweed_mandrill, min_time=datetime.now() - timedelta(days=3))['data']
+        low_seaweed_mandrill, min_time=datetime.now() - timedelta(days=30))['data']
     assert 'avg' in validators.get_all_validator_rewards_total()['data']
