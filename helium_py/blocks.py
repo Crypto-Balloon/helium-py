@@ -20,25 +20,25 @@ class Blocks(API):
 
     @time_filterable_api
     def get_height(self, params: Optional[dict]):
-        """Yield all blocks."""
+        """Return the current height of the blockchain."""
         return self.client.get(path='/height', params=params if params else None)
 
     def get_stats(self):
-        """Return stats for blocks."""
+        """Return stats for block production time."""
         return self.client.get(path='/stats')
 
     def get_block_descriptor_for_height(self, height: int):
-        """Yield block descriptor for given block height."""
+        """Return block descriptor for block at height"""
         return self.client.get(path=f'/{height}')
 
     def get_transactions_for_height(self, height: int):
-        """Yield block descriptor for given block height."""
+        """Yield transactions for block at height"""
         return self.client.fetch_all(path=f'/{height}/transactions')
 
     def get_block_descriptor_for_hash(self, hash: str):
-        """Yield block descriptor for given block height."""
+        """Return block descriptor for block with provided hash"""
         return self.client.get(path=f'/hash/{hash}')
 
     def get_transactions_for_hash(self, hash: str):
-        """Yield block descriptor for given block height."""
+        """Yield transactions for block with provided hash"""
         return self.client.fetch_all(path=f'/hash/{hash}/transactions')

@@ -3,12 +3,12 @@ from .client import Client
 
 
 class API:
-    """API Base class for Helium Blockchain API.
+    """Base API class for Helium Blockchain API.
 
-    https://docs.helium.com/api/blockchain/challenges
+    https://docs.helium.com/api/
     """
 
-    base_path = None
+    base_path: str = None
     _client: Client = None
 
     @property
