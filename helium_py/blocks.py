@@ -28,17 +28,17 @@ class Blocks(API):
         return self.client.get(path='/stats')
 
     def get_block_descriptor_for_height(self, height: int):
-        """Return block descriptor for block at height"""
+        """Return block descriptor for block at height."""
         return self.client.get(path=f'/{height}')
 
     def get_transactions_for_height(self, height: int):
-        """Yield transactions for block at height"""
+        """Yield transactions for block at height."""
         return self.client.fetch_all(path=f'/{height}/transactions')
 
     def get_block_descriptor_for_hash(self, hash: str):
-        """Return block descriptor for block with provided hash"""
+        """Return block descriptor for block with provided hash."""
         return self.client.get(path=f'/hash/{hash}')
 
     def get_transactions_for_hash(self, hash: str):
-        """Yield transactions for block with provided hash"""
+        """Yield transactions for block with provided hash."""
         return self.client.fetch_all(path=f'/hash/{hash}/transactions')
