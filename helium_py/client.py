@@ -7,20 +7,16 @@ from urllib.parse import urlunsplit
 import requests
 from urllib3.util.retry import Retry
 
+from .constants import (
+    HELIUM_API_DEFAULT_HOST,
+    HELIUM_API_OFFICIAL_HOSTS,
+    HELIUM_API_DEFAULT_VERSION,
+    HELIUM_API_BETA_HOST,
+    HELIUM_API_TESTNET_HOST,
+)
 from .version import VERSION
 
 logger = logging.getLogger(__name__)
-
-HELIUM_API_DEFAULT_HOST = 'api.helium.io'
-HELIUM_API_BETA_HOST = 'api.helium.wtf'
-HELIUM_API_TESTNET_HOST = 'testnet-api.helium.wtf'
-HELIUM_API_OFFICIAL_HOSTS = {
-    HELIUM_API_DEFAULT_HOST,
-    HELIUM_API_BETA_HOST,
-    HELIUM_API_TESTNET_HOST,
-}
-
-HELIUM_API_DEFAULT_VERSION = 'v1'
 
 
 class Client:

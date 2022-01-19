@@ -13,11 +13,6 @@ class Cities(API):
     """
 
     base_path = 'cities'
-    VALID_FILTER_MODES = {
-        'full',
-        'dataonly',
-        'light',
-    }
 
     def all(self, search: Optional[str] = None):
         """Yield all cities.
@@ -29,14 +24,19 @@ class Cities(API):
 
     @filter_modes_api
     def hotspots_for_id(self, city_id: str, params: Optional[dict]):
-        """Yield hotspots for a city."""
+        """Yield hotspots for provided city_id.
+
+        Args:
+            city_id: The id for a city in the API.
+            params: Params for filter_modes_api decorator
+        """
         return self.client.fetch_all(
             path=f'/{city_id}/hotspots',
             params=params if params else None
         )
 
     def get_by_id(self, city_id: str):
-        """Return a city identified by city_id.
+        """Return city identified by provided city_id.
 
         Args:
             city_id: The id for a city in the API.

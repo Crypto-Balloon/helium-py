@@ -28,21 +28,31 @@ class Hotspots(API):
         return self.client.fetch_all(params=params if params else None)
 
     def hotspot_for_address(self, address: str):
-        """Yield hotspots for a hotspot."""
+        """Return hotspot details for a hotspot with provided address."""
         return self.client.get(path=f'/{address}')
 
     def hotspots_for_name(self, name: str):
-        """Return a hotspot identified by hotspot_id."""
+        """Return hotspot details for a hotspot with provided name."""
         if len(name.split(' ')) == 3:
             name = '-'.join(name.split(' ')).lower()
         return self.client.get(path=f'/name/{name}')
 
     def hotspots_search_by_name(self, name: str):
-        """Return a hotspot identified by hotspot_id."""
+        """Return search results for provided hotspot name."""
         return self.client.get(path='/name', params={'search': name})
 
+    def hotspots_search_by_location_distance(self, lat: float, lon: float, distance: int):
+        """Return hotspots that are contained within `distance` meters of point coordinates."""
+        return self.client.get(
+            path='/location/distance',
+            params={
+                'lat': lat,
+                'lon': lon,
+                'distance': distance,
+            })
+
     def hotspots_search_by_geo(self, swlat: float, swlon: float, nelat: float, nelon: float):
-        """Return a hotspot identified by hotspot_id."""
+        """Return hotspots that are contained within the box coordinates."""
         return self.client.get(
             path='/location/box',
             params={
@@ -53,37 +63,37 @@ class Hotspots(API):
             })
 
     def hotspots_by_hex(self, h3_index: str):
-        """Return a hotspot identified by hotspot_id."""
+        """Return hotspots located within hex provided by h3_index."""
         return self.client.get(path=f'/hex/{h3_index}')
 
     def get_hotspot_activity(self, address: str):
-        """Return a hotspot identified by hotspot_id."""
+        """Yield hotspot activity for provided address."""
         return self.client.fetch_all(path=f'/{address}/activity')
 
     @filter_transaction_types_api
     def get_hotspot_activity_counts(self, address: str, params: Optional[dict]):
-        """Return a hotspot identified by hotspot_id."""
+        """Return hotspot activity counts for provided address."""
         return self.client.get(path=f'/{address}/activity/count', params=params if params else None)
 
     @time_filterable_api
     def get_hotspot_challenges(self, address: str, params: Optional[dict]):
-        """Return a hotspot identified by hotspot_id."""
+        """Yield hotspot challenges for provided address."""
         return self.client.fetch_all(path=f'/{address}/challenges', params=params if params else None)
 
     @time_filterable_api
     def get_hotspot_rewards(self, address: str, params: Optional[dict]):
-        """Return a hotspot identified by hotspot_id."""
+        """Yield hotspot rewards for provided address."""
         return self.client.fetch_all(path=f'/{address}/rewards', params=params if params else None)
 
     @time_filterable_api
     def get_hotspot_rewards_total(self, address: str, params: Optional[dict]):
-        """Return a hotspot identified by hotspot_id."""
+        """Return hotspot rewards totals for provided address."""
         return self.client.get(path=f'/{address}/rewards/sum', params=params if params else None)
 
     def get_hotspot_witnesses(self, address: str):
-        """Return a hotspot identified by hotspot_id."""
+        """Return list of witnesses for a hotspot with provided address."""
         return self.client.get(path=f'/{address}/witnesses')
 
     def get_hotspot_witnessed(self, address: str):
-        """Return a hotspot identified by hotspot_id."""
+        """Return list of hotspots witnessed by hotspot with provided address."""
         return self.client.get(path=f'/{address}/witnessed')

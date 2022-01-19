@@ -1,5 +1,13 @@
 """Constants for Helium Blockchain API."""
-
+HELIUM_API_DEFAULT_VERSION = 'v1'
+HELIUM_API_DEFAULT_HOST = 'api.helium.io'
+HELIUM_API_BETA_HOST = 'api.helium.wtf'
+HELIUM_API_TESTNET_HOST = 'testnet-api.helium.wtf'
+HELIUM_API_OFFICIAL_HOSTS = {
+    HELIUM_API_DEFAULT_HOST,
+    HELIUM_API_BETA_HOST,
+    HELIUM_API_TESTNET_HOST,
+}
 VALID_BUCKETS = ('hour', 'day', 'week')
 VALID_FILTER_MODES = ('full', 'dataonly', 'light')
 VALID_FILTER_TYPES = (

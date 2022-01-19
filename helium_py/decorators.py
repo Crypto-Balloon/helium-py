@@ -22,14 +22,12 @@ def time_filterable_api(f):
         max_time: Optional[dt.datetime] = None,
         **kwargs,
     ):
-        """Parse params common to API endpoints that allow time and limit querying.
+        """Parse params common to API endpoints that allow time querying.
 
         Args:
             params: Params dict pass through for decorators.
             min_time: The earliest time to return values for.
             max_time: The latest time to return values for.
-            limit: The max number of results to return.
-            bucket: The bucket to group results by.
         """
         if params is None:
             params = {}
@@ -42,14 +40,14 @@ def time_filterable_api(f):
 
 
 def limit_api(f):
-    """Decorate Client methods for API endpoints that support time-filtering."""
+    """Decorate Client methods for API endpoints that support limiting results."""
     @wraps(f)
     def wrapper(obj, *args, params: Optional[dict] = None, limit: Optional[int] = None, **kwargs):
-        """Parse params common to API endpoints that allow time and limit querying.
+        """Parse params common to API endpoints that allow limiting results.
 
         Args:
             params: Params dict pass through for decorators.
-            limit: Limit number of results.
+            limit: Limit for number of results.
         """
         if params is None:
             params = {}
@@ -60,10 +58,10 @@ def limit_api(f):
 
 
 def bucket_api(f):
-    """Decorate Client methods for API endpoints that support time-filtering."""
+    """Decorate Client methods for API endpoints that support bucketing results."""
     @wraps(f)
     def wrapper(obj, *args, params: Optional[dict] = None, bucket: Optional[str] = None, **kwargs):
-        """Parse params common to API endpoints that allow time and limit querying.
+        """Parse params common to API endpoints that allow bucketing results.
 
         Args:
             params: Params dict pass through for decorators.
@@ -80,14 +78,14 @@ def bucket_api(f):
 
 
 def filter_modes_api(f):
-    """Decorate Client methods for API endpoints that support time-filtering."""
+    """Decorate Client methods for API endpoints that support filtering by hotspot type."""
     @wraps(f)
     def wrapper(obj, *args, params: Optional[dict] = None,  filter_modes: Optional[str] = None, **kwargs):
-        """Parse params common to API endpoints that allow time and limit querying.
+        """Parse params common to API endpoints that allow filtering by hotspot type.
 
         Args:
             params: Params dict pass through for decorators.
-            filter_modes: The earliest time to return values for.
+            filter_modes: The modes (hotspot types) to filter for.
         """
         if params is None:
             params = {}
@@ -101,14 +99,14 @@ def filter_modes_api(f):
 
 
 def filter_transaction_types_api(f):
-    """Decorate Client methods for API endpoints that support time-filtering."""
+    """Decorate Client methods for API endpoints that support filtering by transaction type."""
     @wraps(f)
     def wrapper(obj, *args, params: Optional[dict] = None,  filter_types: Optional[str] = None, **kwargs):
-        """Parse params common to API endpoints that allow time and limit querying.
+        """Parse params common to API endpoints that allow filtering by transaction type.
 
         Args:
             params: Params dict pass through for decorators.
-            filter_modes: The earliest time to return values for.
+            filter_types: The types of transactions to filter for.
         """
         if params is None:
             params = {}
