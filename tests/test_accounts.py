@@ -10,13 +10,14 @@ def test_accounts():
     TODO: This are PoC tests and integration tests must be separated from unit tests.
     """
     accounts = Accounts()
-    random_account = '13bNBZAxmhwzrLySVH7pwzXQGJodPLhXEV4kKAC6yQ1PX6FbDEs'
+    random_account = '13E5hct3JbobrikGyo6FiUdhusYVZ2c8EQhoCZdw6m5DoS3aWs7'
+    random_validator_account = '13bNBZAxmhwzrLySVH7pwzXQGJodPLhXEV4kKAC6yQ1PX6FbDEs'
     random_oui_account = '13i2S7ieX6BCgsBVJADyWtdAVoNPZbgpz5JxUpmPSUiAvstGrrr'
     assert 'balance' in next(accounts.all())
     assert 'balance' in accounts.richest()['data'][0]
     assert 'balance' in accounts.account_for_address(random_account)['data']
     assert 'block_added' in next(accounts.hotspots_for_account(random_account))
-    assert 'block_added' in next(accounts.validators_for_account(random_account))
+    assert 'block_added' in next(accounts.validators_for_account(random_validator_account))
     assert 'oui' in next(accounts.ouis_for_account(random_oui_account))
     assert 'type' in next(accounts.get_account_activity(random_account))
     assert 'add_gateway_v1' in accounts.get_account_activity_counts(random_account)['data']
