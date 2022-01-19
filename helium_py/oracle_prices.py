@@ -14,46 +14,47 @@ class OraclePrices(API):
 
     base_path = 'oracle'
 
-    def all(self, **kwargs):
+    def all(self):
         """Yield all price data."""
-        return self.client.fetch_all(path='/prices', **kwargs)
+        return self.client.fetch_all(path='/prices')
 
     @limit_api
     @time_filterable_api
-    def all_activity(self, params: Optional[dict], **kwargs):
+    def all_activity(self, params: Optional[dict]):
         """Yield all oracle activity."""
-        return self.client.fetch_all(path='/activity', params=params, **kwargs)
+        return self.client.fetch_all(path='/activity', params=params)
 
     @limit_api
     @time_filterable_api
-    def all_activity_for_oracle(self, params: Optional[dict], address: str, **kwargs):
-        """Yield all activity for specific oracle.
+    def all_activity_for_oracle(self, address: str, params: Optional[dict]):
+        """Yield all activity for specific oracle with provided address.
 
         Args:
             address: The oracle addres to fetch activity for.
+            params: Limit and time filter parameters
         """
-        return self.client.fetch_all(path=f'/{address}/activity', params=params, **kwargs)
+        return self.client.fetch_all(path=f'/{address}/activity', params=params)
 
-    def get_current(self, **kwargs):
-        """Get the current oracle price data."""
-        return list(self.client.fetch_all(path='/prices/current', **kwargs))[0]
+    def get_current(self):
+        """Return the current oracle price data."""
+        return self.client.get(path='/prices/current')
 
-    def get_price_at_block(self, block: int, **kwargs):
+    def get_price_at_block(self, block: int):
         """Return price at a specific block.
 
         Args:
             block: The block to retrieve price data for.
         """
-        return list(self.client.fetch_all(path=f'/prices/{block}', **kwargs))[0]
+        return self.client.get(path=f'/prices/{block}')
 
     @time_filterable_api
-    def get_stats(self, params: Optional[dict], **kwargs):
-        """Get price stats."""
-        return list(self.client.fetch_all(path='/prices/stats', params=params, **kwargs))[0]
+    def get_stats(self, params: Optional[dict]):
+        """Return price stats."""
+        return self.client.get(path='/prices/stats', params=params)
 
-    def predictions(self, **kwargs):
+    def predictions(self):
         """Yield price predictions.
 
         May return one or more so caller should be prepared to handle StopIteration.
         """
-        return self.client.fetch_all(path='/predictions', **kwargs)
+        return self.client.fetch_all(path='/predictions')

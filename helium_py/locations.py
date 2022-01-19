@@ -10,10 +10,10 @@ class Locations(API):
 
     base_path = 'locations'
 
-    def get_location(self, hex: str):
-        """Yield location details for a particular h3 hex.
+    def get_location(self, h3_index: str):
+        """Return location details for a provided h3 hex index.
 
         Args:
-            hex: The h3 hex location to fetch location details.
+            h3_index: The h3 hex index to fetch location details.
         """
-        return self.client.get(path=f'/{hex}')
+        return self.client.get(path=f'/{h3_index}')
