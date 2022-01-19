@@ -8,10 +8,10 @@ import requests
 from urllib3.util.retry import Retry
 
 from .constants import (
-    HELIUM_API_DEFAULT_HOST,
-    HELIUM_API_OFFICIAL_HOSTS,
-    HELIUM_API_DEFAULT_VERSION,
     HELIUM_API_BETA_HOST,
+    HELIUM_API_DEFAULT_HOST,
+    HELIUM_API_DEFAULT_VERSION,
+    HELIUM_API_OFFICIAL_HOSTS,
     HELIUM_API_TESTNET_HOST,
 )
 from .version import VERSION
