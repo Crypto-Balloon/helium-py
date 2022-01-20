@@ -11,21 +11,21 @@ class OUIs(API):
     base_path = 'ouis'
 
     def all(self):
-        """Yield all price data."""
+        """Yield all ouis."""
         return self.client.fetch_all()
 
-    def get_oui(self, oui: int):
-        """Yield all activity for specific oracle.
+    def get_oui(self, address: int):
+        """Return information for a specific OUI.
 
         Args:
-            oui: The oracle addres to fetch activity for.
+            address: The oui address to fetch information for.
         """
-        return list(self.client.fetch_all(path=f'/{oui}'))[0]
+        return self.client.get(path=f'/{address}')
 
     def get_last(self):
-        """Get price stats."""
-        return list(self.client.fetch_all(path='/last'))[0]
+        """Return the last assigned OUI transaction."""
+        return self.client.get(path='/last')
 
     def get_stats(self):
-        """Get price stats."""
-        return list(self.client.fetch_all(path='/stats'))[0]
+        """Return stats for the registered OUIs."""
+        return self.client.get(path='/stats')

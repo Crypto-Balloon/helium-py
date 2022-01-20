@@ -16,6 +16,6 @@ class Rewards(API):
 
     @bucket_api
     @time_filterable_api
-    def get_total(self, params: Optional[dict], **kwargs):
-        """Yield total network rewards for given params."""
-        return self.client.fetch_all(path='/sum', params=params, **kwargs)
+    def get_total(self, params: Optional[dict]):
+        """Yield total network rewards for given bucket and time params."""
+        return self.client.fetch_all(path='/sum', params=params)

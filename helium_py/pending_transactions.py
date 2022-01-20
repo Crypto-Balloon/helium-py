@@ -19,9 +19,10 @@ class PendingTransactions(API):
         return self.client.get(path=f'/{transaction_hash}')
 
     def submit_transaction(self, transaction_hash: str, txn: str):
-        """Submit a transaction.
+        """Submit a transaction to the Helium Blockchain API.
 
         Args:
-            txn: A base64 encoded transaction.
+            transaction_hash: The transaction hash for transaction being submitted.
+            txn: The base64 encoded transaction data.
         """
         return self.client.post(path=f'/{transaction_hash}', json={'txn': txn})
