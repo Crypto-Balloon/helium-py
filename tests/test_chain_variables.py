@@ -10,7 +10,7 @@ def test_chain_variables():
     """
     chain_vars = ChainVariables()
 
-    assert 'poc_version' in chain_vars.get_all()
+    assert 'poc_version' in chain_vars.get_all()['data']
 
     assert type(chain_vars.get_by_name('staking_fee_txn_oui_v1_per_address')['data']) is int
 

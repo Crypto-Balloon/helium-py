@@ -35,7 +35,6 @@ class Client:
         port: int = 443,
         user_agent: str = '',
         base_path: str = None,
-        **kwargs,
     ) -> None:
         """Initialize the API client.
 
@@ -79,7 +78,7 @@ class Client:
 
         return base_path
 
-    def get(self, path: str, params: dict = None) -> dict:
+    def get(self, path: str = None, params: dict = None) -> dict:
         """Get the response for a request.
 
         Args:
@@ -90,6 +89,8 @@ class Client:
         Raises:
             requests.exceptions.HTTPError: If the response code is not a successful one.
         """
+        if path is None:
+            path = ''
         if params is None:
             params = {}
         url = urlunsplit(('https', self.netloc, f'{self._base_path}{path}/', '', ''))

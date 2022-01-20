@@ -14,15 +14,15 @@ class DCBurns(API):
 
     base_path = 'dc_burns'
 
-    def all(self, **kwargs):
+    def all(self):
         """Yield all data credits burn events."""
-        return self.client.fetch_all(**kwargs)
+        return self.client.fetch_all()
 
     @bucket_api
     @time_filterable_api
-    def get_total(self, params: Optional[dict], **kwargs):
+    def get_total(self, params: Optional[dict]):
         """Return total data credits burned for given params."""
-        return self.client.get(path='/sum', params=params, **kwargs)
+        return self.client.get(path='/sum', params=params)
 
     def get_stats(self):
         """Return current statistics for Data Credits burned."""

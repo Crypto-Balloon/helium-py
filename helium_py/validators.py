@@ -3,7 +3,7 @@
 from typing import Optional
 
 from .api import API
-from .decorators import bucket_api, time_filterable_api
+from .decorators import bucket_api, time_filterable_api, filter_transaction_types_api
 
 
 class Validators(API):
@@ -19,11 +19,11 @@ class Validators(API):
         return self.client.fetch_all()
 
     def validator_for_address(self, address: str):
-        """Yield validators for a validator."""
+        """Return validators for provided address."""
         return self.client.get(path=f'/{address}')
 
     def validators_for_name(self, name: str):
-        """Return validators identified by prvided three-word animal name."""
+        """Return validators identified by provided three-word animal name."""
         if len(name.split(' ')) == 3:
             name = '-'.join(name.split(' ')).lower()
         return self.client.get(path=f'/name/{name}')
@@ -33,22 +33,20 @@ class Validators(API):
         return self.client.get(path=f'/name?search={name}')
 
     @time_filterable_api
-    def get_validator_activity(self, *, params: Optional[dict], address: str, filter_types: Optional[str] = ''):
-        """Return validator activity for validator address."""
-        params = params or {}
-        if filter_types:
-            params['filter_types'] = filter_types
-        return self.client.fetch_all(path=f'/{address}/activity', params=params)
+    @filter_transaction_types_api
+    def get_validator_activity(self, address: str, params: Optional[dict]):
+        """Yield validator activity for provided validator address."""
+        return self.client.fetch_all(path=f'/{address}/activity', params=params if params else None)
 
     def get_validator_activity_counts(self, address: str, filter_types: Optional[str] = ''):
-        """Return validator activity counts for validator address."""
+        """Return validator activity counts for provided validator address."""
         filter_str = ''
         if filter_types:
             filter_str = '?filter_types={filter_types}'
         return self.client.get(path=f'/{address}/activity/count{filter_str}')
 
     def get_stats(self):
-        """Return stats for validators."""
+        """Return stats for all validators."""
         return self.client.get(path='/stats')
 
     def get_currently_elected_validators(self):
@@ -65,16 +63,16 @@ class Validators(API):
 
     @time_filterable_api
     def get_validator_rewards(self, address: str, params: Optional[dict]):
-        """Return a validator identified by validator_id."""
+        """Yield rewards information for a validator identified by validator_id."""
         return self.client.fetch_all(path=f'/{address}/rewards', params=params if params else None)
 
     @bucket_api
     @time_filterable_api
     def get_validator_rewards_total(self, address: str, params: Optional[dict]):
-        """Return a validator identified by validator_id."""
+        """Return rewards totals for a validator identified by validator_id."""
         return self.client.get(path=f'/{address}/rewards/sum', params=params if params else None)
 
     @time_filterable_api
     def get_all_validator_rewards_total(self, params: Optional[dict]):
-        """Return a validator identified by validator_id."""
+        """Return rewards totals for all validators."""
         return self.client.get(path='/rewards/sum', params=params if params else None)

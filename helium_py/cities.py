@@ -41,4 +41,4 @@ class Cities(API):
         Args:
             city_id: The id for a city in the API.
         """
-        return list(self.client.fetch_all(path=f'/{city_id}'))[0]
+        return self.client.get(path=f'/{city_id}')

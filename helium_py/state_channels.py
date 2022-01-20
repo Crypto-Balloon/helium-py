@@ -7,7 +7,7 @@ from .decorators import limit_api, time_filterable_api
 
 
 class StateChannels(API):
-    """Stats client class for Helium Blockchain API.
+    """State Channels client class for Helium Blockchain API.
 
     https://docs.helium.com/api/blockchain/state-channels
     """

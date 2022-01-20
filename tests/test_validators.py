@@ -21,10 +21,10 @@ def test_validators():
     assert 'block_added' in validators.validators_search_by_name('Low Seaweed Man')['data'][0]
 
     assert 'hash' in next(validators.get_validator_activity(address=low_seaweed_mandrill))
-    assert 'rewards' in next(validators.get_validator_activity(address=low_seaweed_mandrill, filter_types='rewards_v2'))
+    assert 'rewards' in next(validators.get_validator_activity(address=low_seaweed_mandrill, filter_types='rewards'))
     assert 'add_gateway_v1' in validators.get_validator_activity_counts(low_seaweed_mandrill)['data']
     # filter_types is documented but always returns an empty object as of 1-12-2022
-    assert validators.get_validator_activity_counts(low_seaweed_mandrill,  filter_types='rewards_v2')['data'] == {}
+    assert validators.get_validator_activity_counts(low_seaweed_mandrill,  filter_types='rewards')['data'] == {}
 
     assert 'unstaked' in validators.get_stats()['data']
 

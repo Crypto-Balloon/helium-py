@@ -16,17 +16,14 @@ class Stats(API):
 
     def get_all(self):
         """Get all stats."""
-        return list(self.client.fetch_all())[0]
+        return self.client.get()
 
-    def get_token_supply(self, format: Optional[str] = None) -> Union[float, Dict]:
+    def get_token_supply(self, fmt: Optional[str] = None) -> Union[float, Dict]:
         """Retrieve the Helium token supply.
 
         Args:
-            format: specify 'raw' to get a raw number, otherwise returns json.
+            fmt: Specify 'raw' to get a raw number, otherwise returns json.
         """
-        if format and not format == self.VALID_FORMAT:
-            raise ValueError(f'{format} not {self.VALID_FORMAT}')
-        return list(self.client.fetch_all(
-            path='/token_supply',
-            params={'format': format} if format else None),
-        )[0]
+        if fmt and not fmt == self.VALID_FORMAT:
+            raise ValueError(f'{fmt} not {self.VALID_FORMAT}')
+        return self.client.get(path='/token_supply', params={'format': fmt} if fmt else None)

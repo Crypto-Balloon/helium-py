@@ -16,14 +16,14 @@ class ChainVariables(API):
 
     @limit_api
     @time_filterable_api
-    def get_all(self, params: Optional[dict], **kwargs):
+    def get_all(self, params: Optional[dict]):
         """Return all chain variables."""
-        return list(self.client.fetch_all(params=params, **kwargs))[0]
+        return self.client.get(params=params)
 
     def get_by_name(self, var_name: str):
         """Return a var identified by var_name."""
         return self.client.get(path=f'/{var_name}')
 
-    def all_activity(self, **kwargs):
+    def all_activity(self):
         """Yield all chain variable activity."""
-        return self.client.fetch_all(path='/activity', **kwargs)
+        return self.client.fetch_all(path='/activity')

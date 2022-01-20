@@ -12,11 +12,11 @@ def test_stats():
     """
     stats = Stats()
 
-    assert 'block_times' in stats.get_all()
+    assert 'block_times' in stats.get_all()['data']
 
-    assert 'token_supply' in stats.get_token_supply()
+    assert 'token_supply' in stats.get_token_supply()['data']
 
-    assert type(stats.get_token_supply(format='raw')) is float
+    assert type(stats.get_token_supply(fmt='raw')) is float
 
     with pytest.raises(ValueError):
-        stats.get_token_supply(format='foo')
+        stats.get_token_supply(fmt='foo')

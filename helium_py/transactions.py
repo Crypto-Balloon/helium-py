@@ -11,7 +11,7 @@ class Transactions(API):
     base_path = 'transactions'
 
     def get_transaction(self, transaction_hash: str):
-        """Yield transaction details for a particular hash.
+        """Return transaction details for a particular hash.
 
         Args:
             transaction_hash: The transaction hash to fetch transaction details.
