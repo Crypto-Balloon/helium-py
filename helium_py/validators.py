@@ -5,8 +5,8 @@ from typing import Optional
 from .api import API
 from .decorators import (
     bucket_api,
-    time_filterable_api,
     filter_transaction_types_api,
+    time_filterable_api,
 )
 
 
