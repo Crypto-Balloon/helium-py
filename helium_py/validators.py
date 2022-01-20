@@ -3,7 +3,11 @@
 from typing import Optional
 
 from .api import API
-from .decorators import bucket_api, time_filterable_api, filter_transaction_types_api
+from .decorators import (
+    bucket_api,
+    time_filterable_api,
+    filter_transaction_types_api,
+)
 
 
 class Validators(API):
