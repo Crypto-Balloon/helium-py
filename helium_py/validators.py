@@ -42,12 +42,10 @@ class Validators(API):
         """Yield validator activity for provided validator address."""
         return self.client.fetch_all(path=f'/{address}/activity', params=params if params else None)
 
-    def get_validator_activity_counts(self, address: str, filter_types: Optional[str] = ''):
+    @filter_transaction_types_api
+    def get_validator_activity_counts(self, address: str, params: Optional[dict]):
         """Return validator activity counts for provided validator address."""
-        filter_str = ''
-        if filter_types:
-            filter_str = '?filter_types={filter_types}'
-        return self.client.get(path=f'/{address}/activity/count{filter_str}')
+        return self.client.get(path=f'/{address}/activity/count', params=params if params else None)
 
     def get_stats(self):
         """Return stats for all validators."""

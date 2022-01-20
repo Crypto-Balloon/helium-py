@@ -6,8 +6,8 @@ from typing import Optional
 
 from helium_py.constants import (
     VALID_BUCKETS,
-    VALID_FILTER_MODES,
-    VALID_FILTER_TYPES,
+    VALID_HOTSPOT_MODES,
+    VALID_TRANSACTION_TYPES,
 )
 
 
@@ -90,8 +90,8 @@ def filter_modes_api(f):
         if params is None:
             params = {}
         if filter_modes:
-            if not all([mode in VALID_FILTER_MODES for mode in filter_modes.split(',')]):
-                raise ValueError(f'One or more of {filter_modes} not in {VALID_FILTER_MODES}')
+            if not all([mode in VALID_HOTSPOT_MODES for mode in filter_modes.split(',')]):
+                raise ValueError(f'One or more of {filter_modes} not in {VALID_HOTSPOT_MODES}')
             params['filter_modes'] = filter_modes
 
         return f(obj, *args, params=params if params else None, **kwargs)
@@ -111,8 +111,8 @@ def filter_transaction_types_api(f):
         if params is None:
             params = {}
         if filter_types:
-            if not all([mode in VALID_FILTER_TYPES for mode in filter_types.split(',')]):
-                raise ValueError(f'One or more of {filter_types} not in {VALID_FILTER_TYPES}')
+            if not all([mode in VALID_TRANSACTION_TYPES for mode in filter_types.split(',')]):
+                raise ValueError(f'One or more of {filter_types} not in {VALID_TRANSACTION_TYPES}')
             params['filter_types'] = filter_types
 
         return f(obj, *args, params=params if params else None, **kwargs)
