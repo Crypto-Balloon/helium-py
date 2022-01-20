@@ -16,18 +16,18 @@ def test_oracle_prices():
 
     assert 'price' in next(oracle_prices.all())
 
-    assert 'price' in oracle_prices.get_current()['data']
+    assert 'price' in oracle_prices.get_current()
 
     oracle_address = '13CFFcmPtMvNQCpWQRXCTqXPnXtcsibDWVwiQRKpUCt4nqtF7RE'
     assert 'block_height' in next(oracle_prices.all_activity_for_oracle(address=oracle_address))
 
     assert 'type' in next(oracle_prices.all_activity())
 
-    assert 'stddev' in oracle_prices.get_stats()['data']
+    assert 'stddev' in oracle_prices.get_stats()
 
     try:
         assert all([key in next(oracle_prices.predictions()) for key in ('time', 'price')])
     except (IndexError, StopIteration):
         logger.info('No predictions returned')
 
-    assert oracle_prices.get_price_at_block(1167890)['data']['price'] == 3888590000
+    assert oracle_prices.get_price_at_block(1167890)['price'] == 3888590000

@@ -78,7 +78,7 @@ class Client:
 
         return base_path
 
-    def get(self, path: str = None, params: dict = None) -> dict:
+    def __get(self, path: str = None, params: dict = None) -> dict:
         """Get the response for a request.
 
         Args:
@@ -97,6 +97,24 @@ class Client:
         r = self.session.get(url, params=params)
         r.raise_for_status()
         return r.json()
+
+    @staticmethod
+    def __unpack_response(data):
+        return data if type(data) is float else data['data']
+
+    def get(self, path: str = None, params: dict = None) -> dict:
+        """Get the response for a request.
+
+        Args:
+            path: URL path for query.
+            params: Query parameters.
+        Returns:
+            The payload from the request, unpacked if possible
+        Raises:
+            requests.exceptions.HTTPError: If the response code is not a successful one.
+        """
+        result = self.__get(path=path, params=params)
+        return self.__unpack_response(result)
 
     def fetch_all(
         self,
@@ -124,8 +142,8 @@ class Client:
                 page = self._page_cache[params['cursor']]
                 logger.debug(f'loaded page from cache: {params["cursor"]}')
             else:
-                page = self.get(path, params)
-            data = page if type(page) is float else page['data']
+                page = self.__get(path, params)
+            data = self.__unpack_response(page)
             if type(data) is list:
                 for obj in data:
                     yield obj

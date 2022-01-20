@@ -12,9 +12,9 @@ def test_stats():
     """
     stats = Stats()
 
-    assert 'block_times' in stats.get_all()['data']
+    assert 'block_times' in stats.get_all()
 
-    assert 'token_supply' in stats.get_token_supply()['data']
+    assert 'token_supply' in stats.get_token_supply()
 
     assert type(stats.get_token_supply(fmt='raw')) is float
 

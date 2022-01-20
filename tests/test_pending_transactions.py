@@ -17,7 +17,7 @@ def test_transactions():
     """
     pending_transactions = PendingTransactions()
 
-    assert 'data' in pending_transactions.get_status('q7pnrm2LvPoZKclF4f2BB6AmcnD0SORECgq9VbNLir4')
+    assert pending_transactions.get_status('q7pnrm2LvPoZKclF4f2BB6AmcnD0SORECgq9VbNLir4') == []
 
     with pytest.raises(HTTPError):
         pending_transactions.submit_transaction(transaction_hash='foo', txn='bar')

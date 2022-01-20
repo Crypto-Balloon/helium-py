@@ -15,18 +15,16 @@ def test_locations():
     locations = Locations()
 
     expected = {
-        'data': {
-            'short_street': 'Weyburn Ln',
-            'short_state': 'CA',
-            'short_country': 'US',
-            'short_city': 'San Jose',
-            'long_street': 'Weyburn Lane',
-            'long_state': 'California',
-            'long_country': 'United States',
-            'long_city': 'San Jose',
-            'location': '8c28347213117ff',
-            'city_id': 'c2FuIGpvc2VjYWxpZm9ybmlhdW5pdGVkIHN0YXRlcw'
-        }
+        'short_street': 'Weyburn Ln',
+        'short_state': 'CA',
+        'short_country': 'US',
+        'short_city': 'San Jose',
+        'long_street': 'Weyburn Lane',
+        'long_state': 'California',
+        'long_country': 'United States',
+        'long_city': 'San Jose',
+        'location': '8c28347213117ff',
+        'city_id': 'c2FuIGpvc2VjYWxpZm9ybmlhdW5pdGVkIHN0YXRlcw'
     }
 
     assert expected == locations.get_location('8c28347213117ff')

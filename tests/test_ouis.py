@@ -16,8 +16,8 @@ def test_ouis():
 
     assert 'oui' in next(ouis.all())
 
-    assert 'oui' in ouis.get_last()['data']
+    assert 'oui' in ouis.get_last()
 
-    assert 'oui' in ouis.get_oui(1)['data']
+    assert 'oui' in ouis.get_oui(1)
 
-    assert 'count' in ouis.get_stats()['data']
+    assert 'count' in ouis.get_stats()

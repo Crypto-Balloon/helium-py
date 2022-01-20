@@ -11,9 +11,9 @@ def test_blocks():
     some_hash = '8tMFcKgjx6AUiJ7T2B-by_-Hi7Mlu2hOnBsIyw2hyBw'
     blocks = Blocks()
     assert 'hash' in next(blocks.all())
-    assert isinstance(blocks.get_height()['data']['height'], int)
-    assert 'avg' in blocks.get_stats()['data']['last_day']
-    assert 'height' in blocks.get_block_descriptor_for_height(some_height)['data']
+    assert isinstance(blocks.get_height()['height'], int)
+    assert 'avg' in blocks.get_stats()['last_day']
+    assert 'height' in blocks.get_block_descriptor_for_height(some_height)
     assert 'height' in next(blocks.get_transactions_for_height(some_height))
-    assert 'height' in blocks.get_block_descriptor_for_hash(some_hash)['data']
+    assert 'height' in blocks.get_block_descriptor_for_hash(some_hash)
     assert 'height' in next(blocks.get_transactions_for_hash(some_hash))
