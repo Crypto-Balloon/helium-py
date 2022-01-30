@@ -1,6 +1,6 @@
 """Rewards client for Helium Blockchain API."""
 
-from typing import Optional, Generator
+from typing import Generator, Optional
 
 from .api import API
 from .decorators import bucket_api, time_filterable_api

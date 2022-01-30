@@ -1,6 +1,4 @@
 """Tests for Hotspots client."""
-from datetime import datetime, timedelta
-
 from helium_py import Hotspots
 
 
@@ -25,6 +23,7 @@ def test_hotspots():
     assert 'hash' in next(hotspots.get_hotspot_activity(fresh_cinnamon_duck))
     assert 'add_gateway_v1' in hotspots.get_hotspot_activity_counts(fresh_cinnamon_duck)
     assert 'challenger' in next(hotspots.get_hotspot_challenges(fresh_cinnamon_duck))
+    # Uncomment once more consistent
     # assert 'amount' in next(hotspots.get_hotspot_rewards(
     #     fresh_cinnamon_duck, min_time=datetime.now() - timedelta(days=5)))
     # assert 'avg' in hotspots.get_hotspot_rewards_total(

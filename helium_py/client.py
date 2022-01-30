@@ -1,7 +1,7 @@
 """Base client for Helium Blockchain API."""
 import logging
 import math
-from typing import Optional, Union, Generator
+from typing import Generator, Optional, Union
 from urllib.parse import urlunsplit
 
 import requests

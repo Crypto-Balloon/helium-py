@@ -1,6 +1,6 @@
 """Chain Variables client for Helium Blockchain API."""
 
-from typing import Optional, Generator, Any
+from typing import Any, Generator, Optional
 
 from .api import API
 from .decorators import limit_api, time_filterable_api
