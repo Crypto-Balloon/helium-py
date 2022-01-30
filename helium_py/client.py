@@ -1,7 +1,7 @@
 """Base client for Helium Blockchain API."""
 import logging
 import math
-from typing import List, Optional, Union
+from typing import Optional, Union, Generator
 from urllib.parse import urlunsplit
 
 import requests
@@ -27,7 +27,7 @@ class Client:
     """
 
     base_path = ''
-    _page_cache = {}
+    _page_cache: dict = {}
 
     def __init__(
         self,
@@ -98,11 +98,7 @@ class Client:
         r.raise_for_status()
         return r.json()
 
-    @staticmethod
-    def __unpack_response(data):
-        return data if type(data) is float else data['data']
-
-    def get(self, path: str = None, params: dict = None) -> dict:
+    def get(self, path: str = None, params: dict = None):
         """Get the response for a request.
 
         Args:
@@ -114,14 +110,14 @@ class Client:
             requests.exceptions.HTTPError: If the response code is not a successful one.
         """
         result = self.__get(path=path, params=params)
-        return self.__unpack_response(result)
+        return result['data'] if isinstance(result, dict) and 'data' in result else result
 
     def fetch_all(
         self,
         path: str = '',
         params: Optional[dict] = None,
         page_limit: Union[float, int] = math.inf,
-    ) -> List[dict]:
+    ) -> Generator[dict, None, None]:
         """Yield objects returned by API.
 
         Args:
@@ -134,7 +130,7 @@ class Client:
         params = params or {}
         page_limit = int(page_limit) if type(page_limit) is float and page_limit is not math.inf else page_limit
         page_count = 0
-        page = {}
+        page: dict = {}
         prev_page_cursor = None
 
         while page_count < page_limit:
@@ -143,7 +139,7 @@ class Client:
                 logger.debug(f'loaded page from cache: {params["cursor"]}')
             else:
                 page = self.__get(path, params)
-            data = self.__unpack_response(page)
+            data = page['data']
             if type(data) is list:
                 for obj in data:
                     yield obj

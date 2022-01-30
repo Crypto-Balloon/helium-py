@@ -1,6 +1,6 @@
 """Elections client for Helium Blockchain API."""
 
-from typing import Optional
+from typing import Optional, Generator
 
 from .api import API
 from .decorators import limit_api, time_filterable_api
@@ -16,6 +16,6 @@ class Elections(API):
 
     @limit_api
     @time_filterable_api
-    def all(self, params: Optional[dict]):
+    def all(self, params: Optional[dict]) -> Generator[dict, None, None]:
         """Yield all elections (consensus group transactions)."""
         return self.client.fetch_all(params=params)

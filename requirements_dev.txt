@@ -8,6 +8,9 @@ flake8-docstrings
 
 isort
 
+mypy
+types-requests
+
 pytest
 pytest-cov
 pytest-mock

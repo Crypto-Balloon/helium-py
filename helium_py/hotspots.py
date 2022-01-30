@@ -1,6 +1,6 @@
 """Hotspots client for Helium Blockchain API."""
 
-from typing import Optional
+from typing import Optional, Generator
 
 from .api import API
 from .decorators import (
@@ -19,7 +19,7 @@ class Hotspots(API):
     base_path = 'hotspots'
 
     @filter_modes_api
-    def all(self, params: Optional[dict]):
+    def all(self, params: Optional[dict]) -> Generator[dict, None, None]:
         """Yield all hotspots.
 
         Args:
@@ -27,21 +27,21 @@ class Hotspots(API):
         """
         return self.client.fetch_all(params=params if params else None)
 
-    def hotspot_for_address(self, address: str):
+    def hotspot_for_address(self, address: str) -> dict:
         """Return hotspot details for a hotspot with provided address."""
         return self.client.get(path=f'/{address}')
 
-    def hotspots_for_name(self, name: str):
+    def hotspots_for_name(self, name: str) -> list[dict]:
         """Return hotspot details for a hotspot with provided name."""
         if len(name.split(' ')) == 3:
             name = '-'.join(name.split(' ')).lower()
         return self.client.get(path=f'/name/{name}')
 
-    def hotspots_search_by_name(self, name: str):
+    def hotspots_search_by_name(self, name: str) -> list[dict]:
         """Return search results for provided hotspot name."""
         return self.client.get(path='/name', params={'search': name})
 
-    def hotspots_search_by_location_distance(self, lat: float, lon: float, distance: int):
+    def hotspots_search_by_location_distance(self, lat: float, lon: float, distance: int) -> list[dict]:
         """Return hotspots that are contained within `distance` meters of point coordinates."""
         return self.client.get(
             path='/location/distance',
@@ -51,7 +51,7 @@ class Hotspots(API):
                 'distance': distance,
             })
 
-    def hotspots_search_by_geo(self, swlat: float, swlon: float, nelat: float, nelon: float):
+    def hotspots_search_by_geo(self, swlat: float, swlon: float, nelat: float, nelon: float) -> list[dict]:
         """Return hotspots that are contained within the box coordinates."""
         return self.client.get(
             path='/location/box',
@@ -62,38 +62,38 @@ class Hotspots(API):
                 'nelon': nelon,
             })
 
-    def hotspots_by_hex(self, h3_index: str):
+    def hotspots_by_hex(self, h3_index: str) -> list[dict]:
         """Return hotspots located within hex provided by h3_index."""
         return self.client.get(path=f'/hex/{h3_index}')
 
-    def get_hotspot_activity(self, address: str):
+    def get_hotspot_activity(self, address: str) -> Generator[dict, None, None]:
         """Yield hotspot activity for provided address."""
         return self.client.fetch_all(path=f'/{address}/activity')
 
     @filter_transaction_types_api
-    def get_hotspot_activity_counts(self, address: str, params: Optional[dict]):
+    def get_hotspot_activity_counts(self, address: str, params: Optional[dict]) -> dict:
         """Return hotspot activity counts for provided address."""
         return self.client.get(path=f'/{address}/activity/count', params=params if params else None)
 
     @time_filterable_api
-    def get_hotspot_challenges(self, address: str, params: Optional[dict]):
+    def get_hotspot_challenges(self, address: str, params: Optional[dict]) -> Generator[dict, None, None]:
         """Yield hotspot challenges for provided address."""
         return self.client.fetch_all(path=f'/{address}/challenges', params=params if params else None)
 
     @time_filterable_api
-    def get_hotspot_rewards(self, address: str, params: Optional[dict]):
+    def get_hotspot_rewards(self, address: str, params: Optional[dict]) -> Generator[dict, None, None]:
         """Yield hotspot rewards for provided address."""
         return self.client.fetch_all(path=f'/{address}/rewards', params=params if params else None)
 
     @time_filterable_api
-    def get_hotspot_rewards_total(self, address: str, params: Optional[dict]):
+    def get_hotspot_rewards_total(self, address: str, params: Optional[dict]) -> dict:
         """Return hotspot rewards totals for provided address."""
         return self.client.get(path=f'/{address}/rewards/sum', params=params if params else None)
 
-    def get_hotspot_witnesses(self, address: str):
+    def get_hotspot_witnesses(self, address: str) -> list[dict]:
         """Return list of witnesses for a hotspot with provided address."""
         return self.client.get(path=f'/{address}/witnesses')
 
-    def get_hotspot_witnessed(self, address: str):
+    def get_hotspot_witnessed(self, address: str) -> list[dict]:
         """Return list of hotspots witnessed by hotspot with provided address."""
         return self.client.get(path=f'/{address}/witnessed')

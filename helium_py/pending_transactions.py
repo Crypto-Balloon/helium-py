@@ -10,7 +10,7 @@ class PendingTransactions(API):
 
     base_path = 'pending_transactions'
 
-    def get_status(self, transaction_hash: str):
+    def get_status(self, transaction_hash: str) -> dict:
         """Yield transaction status details for a particular hash.
 
         Args:
@@ -18,7 +18,7 @@ class PendingTransactions(API):
         """
         return self.client.get(path=f'/{transaction_hash}')
 
-    def submit_transaction(self, transaction_hash: str, txn: str):
+    def submit_transaction(self, transaction_hash: str, txn: str) -> dict:
         """Submit a transaction to the Helium Blockchain API.
 
         Args:

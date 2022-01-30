@@ -10,7 +10,7 @@ class Transactions(API):
 
     base_path = 'transactions'
 
-    def get_transaction(self, transaction_hash: str):
+    def get_transaction(self, transaction_hash: str) -> dict:
         """Return transaction details for a particular hash.
 
         Args:

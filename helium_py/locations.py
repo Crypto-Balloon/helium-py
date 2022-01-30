@@ -10,7 +10,7 @@ class Locations(API):
 
     base_path = 'locations'
 
-    def get_location(self, h3_index: str):
+    def get_location(self, h3_index: str) -> dict:
         """Return location details for a provided h3 hex index.
 
         Args:

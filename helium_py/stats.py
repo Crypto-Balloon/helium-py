@@ -1,6 +1,6 @@
 """Stats client for Helium Blockchain API."""
 
-from typing import Dict, Optional, Union
+from typing import Optional
 
 from .api import API
 
@@ -18,7 +18,7 @@ class Stats(API):
         """Get all stats."""
         return self.client.get()
 
-    def get_token_supply(self, fmt: Optional[str] = None) -> Union[float, Dict]:
+    def get_token_supply(self, fmt: Optional[str] = None) -> dict:
         """Retrieve the Helium token supply.
 
         Args:

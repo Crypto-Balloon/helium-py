@@ -1,6 +1,6 @@
 """Cities client for Helium Blockchain API."""
 
-from typing import Optional
+from typing import Optional, Generator
 
 from .api import API
 from .decorators import filter_modes_api
@@ -14,7 +14,7 @@ class Cities(API):
 
     base_path = 'cities'
 
-    def all(self, search: Optional[str] = None):
+    def all(self, search: Optional[str] = None) -> Generator[dict, None, None]:
         """Yield all cities.
 
         Args:
@@ -23,7 +23,7 @@ class Cities(API):
         return self.client.fetch_all(params={'search': search} if search else None)
 
     @filter_modes_api
-    def hotspots_for_id(self, city_id: str, params: Optional[dict]):
+    def hotspots_for_id(self, city_id: str, params: Optional[dict]) -> Generator[dict, None, None]:
         """Yield hotspots for provided city_id.
 
         Args:
@@ -35,7 +35,7 @@ class Cities(API):
             params=params if params else None
         )
 
-    def get_by_id(self, city_id: str):
+    def get_by_id(self, city_id: str) -> dict:
         """Return city identified by provided city_id.
 
         Args:
