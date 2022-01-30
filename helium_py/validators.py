@@ -1,6 +1,6 @@
 """Validators client for Helium Blockchain API."""
 
-from typing import Generator, Optional
+from typing import Generator, List, Optional
 
 from .api import API
 from .decorators import (
@@ -26,13 +26,13 @@ class Validators(API):
         """Return validators for provided address."""
         return self.client.get(path=f'/{address}')
 
-    def validators_for_name(self, name: str) -> list[dict]:
+    def validators_for_name(self, name: str) -> List[dict]:
         """Return validators identified by provided three-word animal name."""
         if len(name.split(' ')) == 3:
             name = '-'.join(name.split(' ')).lower()
         return self.client.get(path=f'/name/{name}')
 
-    def validators_search_by_name(self, name: str) -> list[dict]:
+    def validators_search_by_name(self, name: str) -> List[dict]:
         """Search for validators by name."""
         return self.client.get(path=f'/name?search={name}')
 
@@ -51,15 +51,15 @@ class Validators(API):
         """Return stats for all validators."""
         return self.client.get(path='/stats')
 
-    def get_currently_elected_validators(self) -> list[dict]:
+    def get_currently_elected_validators(self) -> List[dict]:
         """Return currently elected validators."""
         return self.client.get(path='/elected')
 
-    def get_elected_validators_by_height(self, height: int) -> list[dict]:
+    def get_elected_validators_by_height(self, height: int) -> List[dict]:
         """Return elected validators for the provided block height."""
         return self.client.get(path=f'/elected/{height}')
 
-    def get_elected_validators_by_election(self, election_hash: str) -> list[dict]:
+    def get_elected_validators_by_election(self, election_hash: str) -> List[dict]:
         """Return elected validators for the provided block height."""
         return self.client.get(path=f'/elected/hash/{election_hash}')
 

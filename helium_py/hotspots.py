@@ -1,6 +1,6 @@
 """Hotspots client for Helium Blockchain API."""
 
-from typing import Generator, Optional
+from typing import Generator, List, Optional
 
 from .api import API
 from .decorators import (
@@ -31,17 +31,17 @@ class Hotspots(API):
         """Return hotspot details for a hotspot with provided address."""
         return self.client.get(path=f'/{address}')
 
-    def hotspots_for_name(self, name: str) -> list[dict]:
+    def hotspots_for_name(self, name: str) -> List[dict]:
         """Return hotspot details for a hotspot with provided name."""
         if len(name.split(' ')) == 3:
             name = '-'.join(name.split(' ')).lower()
         return self.client.get(path=f'/name/{name}')
 
-    def hotspots_search_by_name(self, name: str) -> list[dict]:
+    def hotspots_search_by_name(self, name: str) -> List[dict]:
         """Return search results for provided hotspot name."""
         return self.client.get(path='/name', params={'search': name})
 
-    def hotspots_search_by_location_distance(self, lat: float, lon: float, distance: int) -> list[dict]:
+    def hotspots_search_by_location_distance(self, lat: float, lon: float, distance: int) -> List[dict]:
         """Return hotspots that are contained within `distance` meters of point coordinates."""
         return self.client.get(
             path='/location/distance',
@@ -51,7 +51,7 @@ class Hotspots(API):
                 'distance': distance,
             })
 
-    def hotspots_search_by_geo(self, swlat: float, swlon: float, nelat: float, nelon: float) -> list[dict]:
+    def hotspots_search_by_geo(self, swlat: float, swlon: float, nelat: float, nelon: float) -> List[dict]:
         """Return hotspots that are contained within the box coordinates."""
         return self.client.get(
             path='/location/box',
@@ -62,7 +62,7 @@ class Hotspots(API):
                 'nelon': nelon,
             })
 
-    def hotspots_by_hex(self, h3_index: str) -> list[dict]:
+    def hotspots_by_hex(self, h3_index: str) -> List[dict]:
         """Return hotspots located within hex provided by h3_index."""
         return self.client.get(path=f'/hex/{h3_index}')
 
@@ -90,10 +90,10 @@ class Hotspots(API):
         """Return hotspot rewards totals for provided address."""
         return self.client.get(path=f'/{address}/rewards/sum', params=params if params else None)
 
-    def get_hotspot_witnesses(self, address: str) -> list[dict]:
+    def get_hotspot_witnesses(self, address: str) -> List[dict]:
         """Return list of witnesses for a hotspot with provided address."""
         return self.client.get(path=f'/{address}/witnesses')
 
-    def get_hotspot_witnessed(self, address: str) -> list[dict]:
+    def get_hotspot_witnessed(self, address: str) -> List[dict]:
         """Return list of hotspots witnessed by hotspot with provided address."""
         return self.client.get(path=f'/{address}/witnessed')

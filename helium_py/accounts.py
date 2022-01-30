@@ -1,5 +1,5 @@
 """Accounts client for Helium Blockchain API."""
-from typing import Generator, Optional
+from typing import Generator, List, Optional
 
 from .api import API
 from .decorators import (
@@ -24,7 +24,7 @@ class Accounts(API):
         return self.client.fetch_all()
 
     @limit_api
-    def richest(self, params: Optional[dict]) -> list[dict]:
+    def richest(self, params: Optional[dict]) -> List[dict]:
         """Return list of richest acounts."""
         return self.client.get(path='/rich', params=params if params else None)
 
@@ -59,7 +59,7 @@ class Accounts(API):
 
     @limit_api
     @time_filterable_api
-    def get_account_elections(self, address: str, params: Optional[dict]) -> list[dict]:
+    def get_account_elections(self, address: str, params: Optional[dict]) -> List[dict]:
         """Return account elections for given account address."""
         return self.client.get(path=f'/{address}/elections', params=params if params else None)
 
