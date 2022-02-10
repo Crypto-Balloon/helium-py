@@ -50,7 +50,21 @@ Feature parity with Helium-JS is tracked here.
 
 - [ ] __NetType__
 
+  Defines constants to indicate the network used, either test or main.
+
+  * [ ] `MAINNET` - constant 0x00
+  * [ ] `TESTNET` - constant 0x10
+  * [ ] `SUPPORTED_NET_TYPES` - list containing the above two constants
+  * [ ] `NetType` - type represented as a number
+
 - [ ] __KeyType__
+
+  Defines constants to indicate the public key type, either ECC or ED25519.
+
+  * [ ] `ECC_COMPACT_KEY_TYPE` - constant 0
+  * [ ] `ED25519_KEY_TYPE` - constant 1
+  * [ ] `SUPPORTED_KEY_TYPES` - list containing the above two constants
+  * [ ] `KeyType` - type represented as a number
 
 - [ ] __Utils__
 
