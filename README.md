@@ -54,6 +54,24 @@ Feature parity with Helium-JS is tracked here.
 
 - [ ] __Utils__
 
+  Utility functions used by classes in the crypto module.
+
+  * __Functions:__
+    * [ ] `randomBytes` - uses libsodium to generate random bytes from a passed seed number
+    * [ ] `sha256` - generates a SHA256 digest of the buffer passed in
+    * [ ] `lpad` - takes a source string, a pad string, and a length and left-pads the source string with the pad string until it is greater than or equal to the length requested
+    * [ ] `bytesToBinary` - takes a buffer of bytes and returns a binary string representation
+    * [ ] `binaryToByte` - takes a string of 0s and 1s and parses it as binary, returning a number
+    * [ ] `deriveChecksumBits` - calculates the checksum of a passed buffer using the sha256 helper
+    * [ ] `bs58CheckEncode` - base-58 encodes a passed binary buffer payload after concatinating it with its checksum
+    * [ ] `bs58ToBin` - extracts the payload from a base-58 encoded string and verifies its checksum before returning the binary data
+    * [ ] `byteToNetType` - bitwise ANDs a byte with 0xf0, producing a NetType object
+    * [ ] `byteToKeyType` - bitwise ANDs a byte with 0x0f, producing a KeyType object
+    * [ ] `bs58NetType` - takes a base-58 encoded address string and returns its NetType from the first byte
+    * [ ] `bs58KeyType` - takes a base-58 encoded address string and returns its KeyType from the first byte
+    * [ ] `bs58Version` - takes a base-58 encoded address string and returns its version from the first byte
+    * [ ] `bs58PublicKey` - takes a base-58 encoded address string and returns its public key from the second byte
+
 ### Transactions Module
 
 ### Proto Module
