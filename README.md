@@ -32,6 +32,18 @@ Feature parity with Helium-JS is tracked here.
 
 - [ ] __Mnemonic__
 
+  Imports English wordlist JSON for mapping to a random mnemonic.
+
+  - [ ] Class `Mnemonic` with fields and methods:
+
+    * [ ] __Fields:__
+      * `words` - Array<string>
+
+    * [ ] __Methods:__
+      * [ ] `create` - takes a length (defaults to 12, can also be 24) and constructs a new Mnemonic object from random bytes generated with a seed of (16/12) * length using the `fromEntropy` methods (see below)
+      * [ ] `fromEntropy` - takes a entropy buffer of random bytes (16 < len < 32 and divisible by 4), converts to binary bits and a checksum (using `deriveChecksumBits` method from utils; see below), and maps the bits to words in the wordlist, generating the new `Mnemonic` object from the selected words
+      * [ ] `toEntropy` - converts a `Mnenomic` object back into a bit string, checksum is calculated (again using `deriveChecksumBits`) and verified (throws if invalid)
+
 - [ ] __Keypair__
 
 - [ ] __Address__
