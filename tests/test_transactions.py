@@ -2,7 +2,7 @@
 
 import logging
 
-from helium_py import Transactions
+from helium_py.api import Transactions
 
 logger = logging.getLogger(__name__)
 

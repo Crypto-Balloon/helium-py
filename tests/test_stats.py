@@ -2,7 +2,7 @@
 
 import pytest
 
-from helium_py import Stats
+from helium_py.api import Stats
 
 
 def test_stats():

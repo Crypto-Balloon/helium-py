@@ -3,7 +3,7 @@
 import pytest
 from requests.exceptions import HTTPError
 
-from helium_py import Client
+from helium_py.api import Client
 
 
 def test_client_cursor_cache():

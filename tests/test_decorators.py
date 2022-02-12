@@ -2,7 +2,7 @@
 
 import pytest
 
-from helium_py.decorators import (
+from helium_py.api.decorators import (
     bucket_api,
     filter_modes_api,
     filter_transaction_types_api,

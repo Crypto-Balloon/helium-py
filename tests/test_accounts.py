@@ -1,7 +1,7 @@
 """Tests for Accounts client."""
 from datetime import datetime, timedelta
 
-from helium_py import Accounts
+from helium_py.api import Accounts
 
 
 def test_accounts():

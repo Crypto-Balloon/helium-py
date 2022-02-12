@@ -2,7 +2,7 @@
 
 import logging
 
-from helium_py import OUIs
+from helium_py.api import OUIs
 
 logger = logging.getLogger(__name__)
 

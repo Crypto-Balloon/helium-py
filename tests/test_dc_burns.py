@@ -1,7 +1,7 @@
 """Tests for DCBurns client."""
 from datetime import datetime, timedelta
 
-from helium_py import DCBurns
+from helium_py.api import DCBurns
 
 
 def test_dc_burns():

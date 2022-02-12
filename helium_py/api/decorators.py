@@ -4,7 +4,7 @@ import datetime as dt
 from functools import wraps
 from typing import Optional
 
-from helium_py.constants import (
+from .constants import (
     VALID_BUCKETS,
     VALID_HOTSPOT_MODES,
     VALID_TRANSACTION_TYPES,

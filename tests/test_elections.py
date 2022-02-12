@@ -1,6 +1,6 @@
 """Tests for Elections client."""
 
-from helium_py import Elections
+from helium_py.api import Elections
 
 
 def test_elections():

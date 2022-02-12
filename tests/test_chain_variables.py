@@ -1,6 +1,6 @@
 """Tests for ChainVariables client."""
 
-from helium_py import ChainVariables
+from helium_py.api import ChainVariables
 
 
 def test_chain_variables():

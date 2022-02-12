@@ -1,7 +1,7 @@
 """Tests for Rewards client."""
 from datetime import datetime, timedelta
 
-from helium_py import Rewards
+from helium_py.api import Rewards
 
 
 def test_rewards():

@@ -1,5 +1,5 @@
 """Tests for Blocks client."""
-from helium_py import Blocks
+from helium_py.api import Blocks
 
 
 def test_blocks():

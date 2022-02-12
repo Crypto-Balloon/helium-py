@@ -3,7 +3,7 @@
 
 import datetime as dt
 
-from helium_py import StateChannels
+from helium_py.api import StateChannels
 
 
 def test_state_channels():

@@ -1,5 +1,5 @@
 """Tests for Hotspots client."""
-from helium_py import Hotspots
+from helium_py.api import Hotspots
 
 
 def test_hotspots():

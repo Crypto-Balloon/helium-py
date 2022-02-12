@@ -1,7 +1,7 @@
 """Tests for Validators client."""
 from datetime import datetime, timedelta
 
-from helium_py import Validators
+from helium_py.api import Validators
 
 
 def test_validators():

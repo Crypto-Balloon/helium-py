@@ -1,6 +1,6 @@
 """Tests for the Cities client."""
 
-from helium_py import Cities
+from helium_py.api import Cities
 
 
 def test_cities():

@@ -1,6 +1,6 @@
 """Tests for AssertLocations client."""
 
-from helium_py import AssertLocations
+from helium_py.api import AssertLocations
 
 
 def test_assert_locations():

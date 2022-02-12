@@ -2,7 +2,7 @@
 
 import logging
 
-from helium_py import Locations
+from helium_py.api import Locations
 
 logger = logging.getLogger(__name__)
 

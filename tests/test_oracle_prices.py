@@ -2,7 +2,7 @@
 
 import logging
 
-from helium_py import OraclePrices
+from helium_py.api import OraclePrices
 
 logger = logging.getLogger(__name__)
 

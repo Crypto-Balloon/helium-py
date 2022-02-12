@@ -1,6 +1,6 @@
 """Tests for Challenges client."""
 
-from helium_py import Challenges
+from helium_py.api import Challenges
 
 
 def test_challenges():
