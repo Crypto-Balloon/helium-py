@@ -1,5 +1,5 @@
 # flake8: noqa
-from .client import OnboardingClient
 from ..version import VERSION
+from .client import OnboardingClient
 
 __version__ = VERSION

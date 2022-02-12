@@ -7,6 +7,7 @@ from urllib.parse import urlunsplit
 import requests
 from urllib3.util.retry import Retry
 
+from ..version import VERSION
 from .constants import (
     HELIUM_API_BETA_HOST,
     HELIUM_API_DEFAULT_HOST,
@@ -14,7 +15,6 @@ from .constants import (
     HELIUM_API_OFFICIAL_HOSTS,
     HELIUM_API_TESTNET_HOST,
 )
-from ..version import VERSION
 
 logger = logging.getLogger(__name__)
 
