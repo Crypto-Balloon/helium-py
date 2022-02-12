@@ -19,6 +19,6 @@ from .state_channels import StateChannels
 from .stats import Stats
 from .transactions import Transactions
 from .validators import Validators
-from .version import VERSION
+from ..version import VERSION
 
 __version__ = VERSION

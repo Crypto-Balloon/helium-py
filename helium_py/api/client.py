@@ -14,7 +14,7 @@ from .constants import (
     HELIUM_API_OFFICIAL_HOSTS,
     HELIUM_API_TESTNET_HOST,
 )
-from .version import VERSION
+from ..version import VERSION
 
 logger = logging.getLogger(__name__)
 
@@ -27,13 +27,16 @@ class Client:
     """
 
     base_path = ''
+    host = HELIUM_API_DEFAULT_HOST
+    port = 443
+    user_agent = ''
     _page_cache: dict = {}
 
     def __init__(
         self,
-        host: str = HELIUM_API_DEFAULT_HOST,
-        port: int = 443,
-        user_agent: str = '',
+        host: str = None,
+        port: int = None,
+        user_agent: str = None,
         base_path: str = None,
     ) -> None:
         """Initialize the API client.
@@ -43,10 +46,16 @@ class Client:
             port (int): Port for Helium blockchain API.
             user_agent (str): Custom user agent.
         """
-        self.host = host
-        self.port = port
+        if host is not None:
+            self.host = host
+        if port is not None:
+            self.port = port
+        if user_agent is not None:
+            self.user_agent = user_agent
+        if base_path is not None:
+            self.base_path = base_path
+
         self.netloc = f'{self.host}:{self.port}'
-        self.user_agent = user_agent
 
         self.session = requests.Session()
         retry_adapter = requests.adapters.HTTPAdapter(
@@ -59,9 +68,6 @@ class Client:
         base_url = urlunsplit(('https', self.netloc, '', '', ''))
         self.session.mount(base_url, retry_adapter)
         self.session.headers.update({'User-Agent': self.build_user_agent()})
-
-        if base_path is not None:
-            self.base_path = base_path
 
     def build_user_agent(self):
         """Return the User-Agent."""
