@@ -1,5 +1,6 @@
 # flake8: noqa
 
+from ..version import VERSION
 from .accounts import Accounts
 from .assert_locations import AssertLocations
 from .blocks import Blocks
@@ -19,6 +20,5 @@ from .state_channels import StateChannels
 from .stats import Stats
 from .transactions import Transactions
 from .validators import Validators
-from .version import VERSION
 
 __version__ = VERSION

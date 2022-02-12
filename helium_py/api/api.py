@@ -10,6 +10,9 @@ class API:
     https://docs.helium.com/api/
     """
 
+    host: Optional[str] = None
+    port: Optional[int] = None
+    user_agent: Optional[str] = None
     base_path: Optional[str] = None
     _client: Optional[Client] = None
 
@@ -17,5 +20,10 @@ class API:
     def client(self) -> Client:
         """Return a client singleton per API."""
         if self._client is None:
-            self._client = Client(base_path=self.base_path)
+            self._client = Client(
+                host=self.host,
+                port=self.port,
+                user_agent=self.user_agent,
+                base_path=self.base_path,
+            )
         return self._client
