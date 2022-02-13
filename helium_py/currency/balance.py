@@ -1,9 +1,17 @@
 """Balance class for converting between currency types."""
 from typing import Optional
 
-from .exceptions import MixedCurrencyTypeError, UnsupportedCurrencyConversionError
-from .types import US_DOLLARS, DATA_CREDITS, NETWORK_TOKENS, TEST_NETWORK_TOKENS
 from ..api import OraclePrices
+from .exceptions import (
+    MixedCurrencyTypeError,
+    UnsupportedCurrencyConversionError,
+)
+from .types import (
+    DATA_CREDITS,
+    NETWORK_TOKENS,
+    TEST_NETWORK_TOKENS,
+    US_DOLLARS,
+)
 
 DC_TO_USD_MULTIPLIER = 0.00001
 
