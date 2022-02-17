@@ -2,9 +2,9 @@
 import binascii
 from typing import List
 
-from base58 import b58encode, b58decode
 import nacl.bindings
 import nacl.encoding
+from base58 import b58decode, b58encode
 from nacl.hash import sha256
 
 
