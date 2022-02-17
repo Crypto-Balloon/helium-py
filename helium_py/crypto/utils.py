@@ -17,7 +17,7 @@ def binary_to_byte(bin_val: str) -> bytes:
 
 def derive_checksum_bits(entropy: bytes):
     ent = len(entropy) * 8
-    cs = ent / 32
+    cs = int(ent / 32)
     hash_val = sha256(entropy)
     return bytes_to_binary(hash_val)[0:cs]
 
@@ -37,6 +37,7 @@ def bs58_to_bin(bs58_address: str) -> bytes:
     checksum = bs85_bin[-4:]
     checksum_verify = sha256(bytes(sha256(versioned_payload)))
     checksum_verify_bytes = checksum_verify[:4]
+    breakpoint()
     if checksum_verify_bytes != checksum:
         raise Exception("ouchie")
     return payload

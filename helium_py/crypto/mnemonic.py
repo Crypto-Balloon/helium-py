@@ -1,3 +1,4 @@
+import re
 from math import floor
 
 from . import utils
@@ -43,7 +44,7 @@ class Mnemonic:
     def to_entropy(self) -> bytes:
         # convert word indices to 11 bit binary strings
         bits = ''.join([
-            f'{wordlist.index(word)}'.zfill(11)
+            f'{bin(wordlist.index(word))}'.lstrip('0b').zfill(11)
             for word in self.words
         ])
 
@@ -53,10 +54,9 @@ class Mnemonic:
         checksumBits = bits[dividerIndex:]
 
         # calculate the checksum and compare
-        # TODO: What is this next line doing?
-        # entropy_bytes = (entropyBits.match(/(.{1,8})/g) || []).map(binaryToByte)
-        # entropy_bytes = (entropyBits.match(/(.{1,8})/g) || []).map(binaryToByte)
-        entropy_bytes = [3] * 17
+        chunks = [entropyBits[x:x + 8] for x in range(0, len(entropyBits), 8)]
+        entropy_bytes = [int(entropy, 2).to_bytes((len(entropy) + 7) // 8, byteorder='big') for entropy in chunks]
+
         if len(entropy_bytes) < 16:
             raise Exception('invalid checksum')
         if len(entropy_bytes) > 32:
@@ -64,7 +64,7 @@ class Mnemonic:
         if len(entropy_bytes) % 4 != 0:
             raise Exception('invalid checksum')
 
-        entropy = bytes(entropy_bytes)
+        entropy = bytes([int(byte_val, 2) for byte_val in chunks])
         new_checksum = utils.derive_checksum_bits(entropy)
         if checksumBits != '0000' and new_checksum != checksumBits:
             raise Exception('invalid checksum')
