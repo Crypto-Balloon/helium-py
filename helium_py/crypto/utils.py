@@ -40,7 +40,7 @@ def bs58_check_encode(version: int, binary: bytes) -> bytes:
     return b58encode(result)
 
 
-def bs58_to_bin(bs58_address: str) -> bytes:
+def bs58_to_bin(bs58_address: bytes) -> bytes:
     """Replace Placeholder docstring."""
     bs85_bin = b58decode(bs58_address)
     versioned_payload = bs85_bin[0:-4]
@@ -62,28 +62,28 @@ def byte_to_key_type(byte_val: int) -> int:
     return byte_val & 15
 
 
-def bs58_net_type(bs58_address: str) -> int:
+def bs58_net_type(bs58_address: bytes) -> int:
     """Replace Placeholder docstring."""
     bs85_bin = bs58_to_bin(bs58_address)
     byte_val = bs85_bin[0]
     return byte_to_net_type(byte_val)
 
 
-def bs58_key_type(bs58_address: str) -> int:
+def bs58_key_type(bs58_address: bytes) -> int:
     """Replace Placeholder docstring."""
     bs85_bin = bs58_to_bin(bs58_address)
     byte_val = bs85_bin[0]
     return byte_to_key_type(byte_val)
 
 
-def bs58_version(bs58_address: str) -> int:
+def bs58_version(bs58_address: bytes) -> int:
     """Replace Placeholder docstring."""
     bs85_bin = b58decode(bs58_address)
     version = bs85_bin[0]
     return version
 
 
-def bs58_public_key(bs58_address: str) -> bytes:
+def bs58_public_key(bs58_address: bytes) -> bytes:
     """Replace Placeholder docstring."""
     bs85_bin = bs58_to_bin(bs58_address)
     public_key = bs85_bin[1:]

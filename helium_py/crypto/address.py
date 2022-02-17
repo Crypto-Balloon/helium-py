@@ -39,7 +39,7 @@ class Address:
         return utils.bs58_check_encode(self.version, self.bin)
 
     @staticmethod
-    def from_b58(b58: str) -> 'Address':
+    def from_b58(b58: bytes) -> 'Address':
         """Replace Placeholder docstring."""
         version = utils.bs58_version(b58)
         net_type = utils.bs58_net_type(b58)
@@ -58,7 +58,7 @@ class Address:
         return Address(version, netType, keyType, publicKey)
 
     @staticmethod
-    def is_valid(b58: str) -> bool:
+    def is_valid(b58: bytes) -> bool:
         """Replace Placeholder docstring."""
         try:
             Address.from_b58(b58)
