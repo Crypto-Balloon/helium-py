@@ -28,12 +28,10 @@ aliceWords = [
   'myth',
   'gym',
 ]
-bobB58 = '13M8dUbxymE3xtiAXszRkGMmezMhBS8Li7wEsMojLdb4Sdxc4wc'
-aliceB58 = '148d8KTRcKA5JKPekBcKFd4KfvprvFRpjGtivhtmRmnZ8MFYnP3'
+bobB58 = b'13M8dUbxymE3xtiAXszRkGMmezMhBS8Li7wEsMojLdb4Sdxc4wc'
+aliceB58 = b'148d8KTRcKA5JKPekBcKFd4KfvprvFRpjGtivhtmRmnZ8MFYnP3'
 
 bobBip39Words = ['episode' if word == 'energy' else word for word in bobWords]
 
-usersFixture = {
-  'bob': Keypair.from_words(bobWords),
-  'alice': Keypair.from_words(aliceWords),
-}
+bob = Keypair.from_words(bobWords)
+alice = Keypair.from_words(aliceWords)
