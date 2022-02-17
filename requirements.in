@@ -2,3 +2,9 @@ requests>=2.26.0,<3
 
 # proto -- TODO: Replace with official proto build
 betterproto[compiler]>=2.0.0b4,<3
+
+# PyNaCl - libsodium
+pynacl>=1.5.0
+
+# base58
+base58==2.1.1
