@@ -48,7 +48,7 @@ def bs58_to_bin(bs58_address: bytes) -> bytes:
     checksum = binascii.hexlify(bs85_bin[-4:])
     checksum_verify = sha256(binascii.unhexlify(sha256(versioned_payload)))[:8]
     if checksum_verify != checksum:
-        raise Exception("Invalid checksum")
+        raise Exception('Invalid checksum')
     return payload
 
 
