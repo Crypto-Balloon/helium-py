@@ -1,21 +1,22 @@
 import re
 from math import floor
+from typing import List
 
 from . import utils
 from .wordlists.english import wordlist
 
-ALLOWABLE_MNEMONIC_LENGTH = 12 | 24
+ALLOWABLE_MNEMONIC_LENGTHS = (12, 24)
 
 
 class Mnemonic:
-    words: [str]
+    words: List[str]
 
-    def __init__(self, words: [str]):
+    def __init__(self, words: List[str]):
         self.words = words
 
     @staticmethod
     def create(length: int = 12) -> 'Mnemonic':
-        if length not in ALLOWABLE_MNEMONIC_LENGTH:
+        if length not in ALLOWABLE_MNEMONIC_LENGTHS:
             raise Exception(f'supported mnemonic lengths: 12, 24. received {length}')
         entropy_bytes = 16 if length == 12 else 32
         entropy = utils.random_bytes(entropy_bytes)
@@ -31,10 +32,10 @@ class Mnemonic:
             raise Exception('invalid entropy, not divisble by 4')
 
         # TODO: `entropy` on the next line is of the wrong type?
-        entropyBits = bin(entropy)
-        checksumBits = utils.derive_checksum_bits(entropy)
-
-        bits = entropyBits + checksumBits
+        # entropyBits = bin(entropy)
+        # checksumBits = utils.derive_checksum_bits(entropy)
+        #
+        # bits = entropyBits + checksumBits
         # TODO: What is this JS doing?
         # chunks = bits.match(/(.{1,11})/g) || []
         # words = chunks.map((binary) => wordlist[binaryToByte(binary)])

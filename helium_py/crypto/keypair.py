@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, List
 
 import nacl.bindings
 
@@ -39,13 +39,15 @@ class Keypair:
         return Keypair(SodiumKeyPair(pk=keypair[0], sk=keypair[1]), net_type)
 
     @classmethod
-    def from_words(cls, words: [str], net_type: int = None) -> 'Keypair':
+    def from_words(cls, words: List[str], net_type: int = None) -> 'Keypair':
         mnemonic = Mnemonic(words)
         keypair = cls.from_mnemonic(mnemonic, net_type)
         return keypair
 
     @classmethod
     def from_mnemonic(cls, mnemonic: Mnemonic, net_type: int = None) -> 'Keypair':
+        if net_type is None:
+            net_type = MAINNET
         entropy = mnemonic.to_entropy()
         seed = entropy + entropy if len(entropy) == 16 else entropy
         return cls.from_entropy(seed, net_type)
@@ -57,6 +59,6 @@ class Keypair:
         keypair = nacl.bindings.crypto_sign_seed_keypair(entropy)
         return cls(SodiumKeyPair(pk=keypair[0], sk=keypair[1]), net_type)
 
-    def sign(self, message: str | bytes) -> bytes:
+    def sign(self, message: bytes) -> bytes:
         signature = nacl.bindings.crypto_sign(message, self.private_key)
         return signature

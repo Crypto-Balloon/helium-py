@@ -1,4 +1,5 @@
 import binascii
+from typing import List
 
 from base58 import b58encode, b58decode
 import nacl.bindings
@@ -10,7 +11,7 @@ def random_bytes(n: int) -> bytes:
     return nacl.bindings.randombytes(n)
 
 
-def bytes_to_binary(byte_array: bytes) -> []:
+def bytes_to_binary(byte_array: bytes) -> List[str]:
     return [bin(byte_data) for byte_data in byte_array]
 
 
