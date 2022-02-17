@@ -1,5 +1,8 @@
+import binascii
+
 from base58 import b58encode, b58decode
 import nacl.bindings
+import nacl.encoding
 from nacl.hash import sha256
 
 
@@ -24,8 +27,8 @@ def derive_checksum_bits(entropy: bytes):
 
 def bs58_check_encode(version: int, binary: bytes) -> bytes:
     versioned_payload = bytes([version]) + binary
-    checksum = sha256(bytes(sha256(versioned_payload)))
-    checksum_bytes = bytes(checksum[:4])
+    checksum = sha256(binascii.unhexlify(sha256(versioned_payload)))
+    checksum_bytes = bytes(binascii.unhexlify(checksum[:8]))
     result = versioned_payload + checksum_bytes
     return b58encode(result)
 
@@ -34,12 +37,10 @@ def bs58_to_bin(bs58_address: str) -> bytes:
     bs85_bin = b58decode(bs58_address)
     versioned_payload = bs85_bin[0:-4]
     payload = bs85_bin[1:-4]
-    checksum = bs85_bin[-4:]
-    checksum_verify = sha256(bytes(sha256(versioned_payload)))
-    checksum_verify_bytes = checksum_verify[:4]
-    breakpoint()
-    if checksum_verify_bytes != checksum:
-        raise Exception("ouchie")
+    checksum = binascii.hexlify(bs85_bin[-4:])
+    checksum_verify = sha256(binascii.unhexlify(sha256(versioned_payload)))[:8]
+    if checksum_verify != checksum:
+        raise Exception("Invalid checksum")
     return payload
 
 
