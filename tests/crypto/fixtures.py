@@ -1,3 +1,4 @@
+"""Replace Placeholder docstring."""
 from helium_py.crypto.keypair import Keypair
 
 bobWords = [

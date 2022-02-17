@@ -1,4 +1,4 @@
-import re
+"""Replace Placeholder docstring."""
 from math import floor
 from typing import List
 
@@ -9,13 +9,17 @@ ALLOWABLE_MNEMONIC_LENGTHS = (12, 24)
 
 
 class Mnemonic:
+    """Replace Placeholder docstring."""
+
     words: List[str]
 
     def __init__(self, words: List[str]):
+        """Replace Placeholder docstring."""
         self.words = words
 
     @staticmethod
     def create(length: int = 12) -> 'Mnemonic':
+        """Replace Placeholder docstring."""
         if length not in ALLOWABLE_MNEMONIC_LENGTHS:
             raise Exception(f'supported mnemonic lengths: 12, 24. received {length}')
         entropy_bytes = 16 if length == 12 else 32
@@ -24,6 +28,7 @@ class Mnemonic:
 
     @staticmethod
     def from_entropy(entropy: bytes) -> 'Mnemonic':
+        """Replace Placeholder docstring."""
         if len(entropy) < 16:
             raise Exception('invalid entropy, less than 16')
         if len(entropy) > 32:
@@ -43,6 +48,7 @@ class Mnemonic:
         return Mnemonic(words)
 
     def to_entropy(self) -> bytes:
+        """Replace Placeholder docstring."""
         # convert word indices to 11 bit binary strings
         bits = ''.join([
             f'{bin(wordlist.index(word))}'.lstrip('0b').zfill(11)
