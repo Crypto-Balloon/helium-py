@@ -37,14 +37,11 @@ class Mnemonic:
             raise Exception('invalid entropy, not divisble by 4')
 
         # TODO: `entropy` on the next line is of the wrong type?
-        # entropyBits = bin(entropy)
-        # checksumBits = utils.derive_checksum_bits(entropy)
-        #
-        # bits = entropyBits + checksumBits
-        # TODO: What is this JS doing?
-        # chunks = bits.match(/(.{1,11})/g) || []
-        # words = chunks.map((binary) => wordlist[binaryToByte(binary)])
-        words = ['some', 'words']
+        entropyBits = utils.bytes_to_binary(entropy)
+        checksumBits = utils.derive_checksum_bits(entropy)
+        bits = entropyBits + checksumBits
+        chunks = [bits[x:x + 11] for x in range(0, len(bits), 11)]
+        words = [wordlist[int(binary, 2)] for binary in chunks]
         return Mnemonic(words)
 
     def to_entropy(self) -> bytes:

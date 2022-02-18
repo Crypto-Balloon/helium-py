@@ -48,13 +48,13 @@ class Address:
         return Address(version, net_type, key_type, public_key)
 
     @staticmethod
-    def from_bin(bin: bytes) -> 'Address':
+    def from_bin(bin_val: bytes) -> 'Address':
         """Replace Placeholder docstring."""
         version = 0
-        byte = bin[0]
+        byte = bin_val[0]
         netType = utils.byte_to_net_type(byte)
         keyType = utils.byte_to_key_type(byte)
-        publicKey = bin[1:len(bin)]
+        publicKey = bin_val[1:len(bin_val)]
         return Address(version, netType, keyType, publicKey)
 
     @staticmethod

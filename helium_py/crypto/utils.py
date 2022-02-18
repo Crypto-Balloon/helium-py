@@ -1,6 +1,5 @@
 """Replace Placeholder docstring."""
 import binascii
-from typing import List
 
 import nacl.bindings
 import nacl.encoding
@@ -13,9 +12,9 @@ def random_bytes(n: int) -> bytes:
     return nacl.bindings.randombytes(n)
 
 
-def bytes_to_binary(byte_array: bytes) -> List[str]:
+def bytes_to_binary(byte_array: bytes) -> str:
     """Replace Placeholder docstring."""
-    return [bin(byte_data) for byte_data in byte_array]
+    return ''.join([format(byte_data, '08b') for byte_data in byte_array])
 
 
 def binary_to_byte(bin_val: str) -> bytes:
@@ -28,7 +27,7 @@ def derive_checksum_bits(entropy: bytes):
     ent = len(entropy) * 8
     cs = int(ent / 32)
     hash_val = sha256(entropy)
-    return bytes_to_binary(hash_val)[0:cs]
+    return bytes_to_binary(binascii.unhexlify(hash_val))[:cs]
 
 
 def bs58_check_encode(version: int, binary: bytes) -> bytes:
