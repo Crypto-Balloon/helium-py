@@ -10,4 +10,4 @@ def test_rewards():
     TODO: This are PoC tests and integration tests must be separated from unit tests.
     """
     rewards = Rewards()
-    assert 'total' in next(rewards.get_total(min_time=datetime.now().date() - timedelta(days=1)))
+    assert 'total' in rewards.get_total(min_time=datetime.now().date() - timedelta(days=1))
