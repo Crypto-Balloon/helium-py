@@ -1,4 +1,4 @@
-"""Replace Placeholder docstring."""
+"""Mnemonic class for cryptography."""
 from math import floor
 from typing import List
 
@@ -9,17 +9,17 @@ ALLOWABLE_MNEMONIC_LENGTHS = (12, 24)
 
 
 class Mnemonic:
-    """Replace Placeholder docstring."""
+    """Mnemonic class with conversion to/from entropy."""
 
     words: List[str]
 
     def __init__(self, words: List[str]):
-        """Replace Placeholder docstring."""
+        """Initialize Mnemonic class with list of words."""
         self.words = words
 
     @staticmethod
     def create(length: int = 12) -> 'Mnemonic':
-        """Replace Placeholder docstring."""
+        """Return a randomly generated Mnemonic of the provided length."""
         if length not in ALLOWABLE_MNEMONIC_LENGTHS:
             raise Exception(f'supported mnemonic lengths: 12, 24. received {length}')
         entropy_bytes = 16 if length == 12 else 32
@@ -28,7 +28,7 @@ class Mnemonic:
 
     @staticmethod
     def from_entropy(entropy: bytes) -> 'Mnemonic':
-        """Replace Placeholder docstring."""
+        """Return a Mnemonic generated from provided entropy."""
         if len(entropy) < 16:
             raise Exception('invalid entropy, less than 16')
         if len(entropy) > 32:
@@ -36,7 +36,6 @@ class Mnemonic:
         if len(entropy) % 4 != 0:
             raise Exception('invalid entropy, not divisble by 4')
 
-        # TODO: `entropy` on the next line is of the wrong type?
         entropyBits = utils.bytes_to_binary(entropy)
         checksumBits = utils.derive_checksum_bits(entropy)
         bits = entropyBits + checksumBits
@@ -45,14 +44,13 @@ class Mnemonic:
         return Mnemonic(words)
 
     def to_entropy(self) -> bytes:
-        """Replace Placeholder docstring."""
-        # convert word indices to 11 bit binary strings
+        """Return entropy bytes generated from provided Mnemonic."""
         bits = ''.join([
             f'{bin(wordlist.index(word))}'.lstrip('0b').zfill(11)
             for word in self.words
         ])
 
-        # split the binary string into ENT/CS
+        # split the binary string into entropy and checksum
         dividerIndex = floor(len(bits) / 33) * 32
         entropyBits = bits[0:dividerIndex]
         checksumBits = bits[dividerIndex:]

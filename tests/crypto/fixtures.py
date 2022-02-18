@@ -1,4 +1,4 @@
-"""Replace Placeholder docstring."""
+# flake8: noqa
 from helium_py.crypto.keypair import Keypair
 
 bob_words = [

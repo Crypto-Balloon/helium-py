@@ -1,4 +1,4 @@
-"""Replace Placeholder docstring."""
+# flake8: noqa
 import binascii
 
 import base58
@@ -10,7 +10,6 @@ from tests.crypto.fixtures import bob, bobB58
 
 
 def test_derive_checksum_bits():
-    """Replace Placeholder docstring."""
     entropy = b'00000000000000000000000000000000'
     entropyBuffer = binascii.unhexlify(entropy)
     derivedChecksumBits = utils.derive_checksum_bits(entropyBuffer)
@@ -18,7 +17,6 @@ def test_derive_checksum_bits():
 
 
 def test_encode_publickey_to_bs58_address():
-    """Replace Placeholder docstring."""
     address = Address(0, MAINNET, 1, bob.public_key)
     versioned_payload = bytes([0]) + address.bin
     checksum = utils.sha256(binascii.unhexlify(utils.sha256(versioned_payload)))
@@ -29,7 +27,6 @@ def test_encode_publickey_to_bs58_address():
 
 
 def test_bs58_to_bin():
-    """Replace Placeholder docstring."""
     address_b58 = Address(0, MAINNET, 1, bob.public_key).b58
     binary = base58.b58decode(address_b58)
     versioned_payload = binary[0:-4]

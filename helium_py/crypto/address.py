@@ -1,11 +1,11 @@
-"""Replace Placeholder docstring."""
+"""Address class for cryptography."""
 from helium_py.crypto import utils
 from helium_py.crypto.key_types import SUPPORTED_KEY_TYPES
 from helium_py.crypto.net_types import SUPPORTED_NET_TYPES
 
 
 class Address:
-    """Replace Placeholder docstring."""
+    """Address class for cryptography."""
 
     version: int
     net_type: int
@@ -13,7 +13,7 @@ class Address:
     public_key: bytes
 
     def __init__(self, version: int, net_type: int, key_type: int, public_key: bytes):
-        """Replace Placeholder docstring."""
+        """Instantiate an address class."""
         if version != 0:
             raise Exception('unsupported version')
 
@@ -30,17 +30,17 @@ class Address:
 
     @property
     def bin(self) -> bytes:
-        """Replace Placeholder docstring."""
+        """Return binary representation of address."""
         return bytes([self.net_type | self.key_type]) + self.public_key
 
     @property
     def b58(self) -> bytes:
-        """Replace Placeholder docstring."""
+        """Return b58 representation of address."""
         return utils.bs58_check_encode(self.version, self.bin)
 
     @staticmethod
     def from_b58(b58: bytes) -> 'Address':
-        """Replace Placeholder docstring."""
+        """Return Address instance created from provided b58."""
         version = utils.bs58_version(b58)
         net_type = utils.bs58_net_type(b58)
         key_type = utils.bs58_key_type(b58)
@@ -49,7 +49,7 @@ class Address:
 
     @staticmethod
     def from_bin(bin_val: bytes) -> 'Address':
-        """Replace Placeholder docstring."""
+        """Return Address instance created from provided binary."""
         version = 0
         byte = bin_val[0]
         netType = utils.byte_to_net_type(byte)
@@ -59,7 +59,7 @@ class Address:
 
     @staticmethod
     def is_valid(b58: bytes) -> bool:
-        """Replace Placeholder docstring."""
+        """Return True if b58 is valid."""
         try:
             Address.from_b58(b58)
             return True

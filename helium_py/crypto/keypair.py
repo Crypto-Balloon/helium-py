@@ -1,4 +1,4 @@
-"""Replace Placeholder docstring."""
+"""Keypair class for cryptography."""
 from dataclasses import dataclass
 from typing import List, Optional
 
@@ -12,7 +12,7 @@ from .net_types import MAINNET, SUPPORTED_NET_TYPES
 
 @dataclass
 class SodiumKeyPair:
-    """Replace Placeholder docstring."""
+    """Base SodiumKeypair dataclass."""
 
     pk: bytes
     sk: bytes
@@ -20,7 +20,7 @@ class SodiumKeyPair:
 
 
 class Keypair:
-    """Replace Placeholder docstring."""
+    """Keypair class with mnemonic, entropy, and signing capabilities."""
 
     keypair: SodiumKeyPair
     public_key: bytes
@@ -29,7 +29,7 @@ class Keypair:
     net_type: int
 
     def __init__(self, keypair: SodiumKeyPair, net_type: int = None):
-        """Replace Placeholder docstring."""
+        """Initialize Keypair instance."""
         self.keypair = keypair
         self.public_key = keypair.pk
         self.private_key = keypair.sk
@@ -38,39 +38,39 @@ class Keypair:
 
     @property
     def address(self) -> Address:
-        """Replace Placeholder docstring."""
+        """Return Address instance for Keypair."""
         return Address(0, self.net_type, ED25519_KEY_TYPE, self.public_key)
 
     @staticmethod
     def make_random(net_type: int = None) -> 'Keypair':
-        """Replace Placeholder docstring."""
+        """Return randomly generated Keypair."""
         keypair = nacl.bindings.crypto_sign_keypair()
         return Keypair(SodiumKeyPair(pk=keypair[0], sk=keypair[1]), net_type)
 
     @classmethod
     def from_words(cls, words: List[str], net_type: Optional[int] = None) -> 'Keypair':
-        """Replace Placeholder docstring."""
+        """Return Keypair generated from list of words (mnemonic)."""
         mnemonic = Mnemonic(words)
         keypair = cls.from_mnemonic(mnemonic, net_type)
         return keypair
 
     @classmethod
     def from_mnemonic(cls, mnemonic: Mnemonic, net_type: Optional[int] = None) -> 'Keypair':
-        """Replace Placeholder docstring."""
+        """Return Keypair generated from a Mnemonic object."""
         entropy = mnemonic.to_entropy()
         seed = entropy + entropy if len(entropy) == 16 else entropy
         return cls.from_entropy(seed, net_type)
 
     @classmethod
     def from_entropy(cls, entropy: bytes, net_type: Optional[int] = None) -> 'Keypair':
-        """Replace Placeholder docstring."""
+        """Return Keypair generated from entropy."""
         if len(entropy) != 32:
             raise Exception(f'Invalid entropy, must be 32 bytes. Found {len(entropy)}')
         keypair = nacl.bindings.crypto_sign_seed_keypair(entropy)
         return cls(SodiumKeyPair(pk=keypair[0], sk=keypair[1]), net_type)
 
     def sign(self, message: bytes) -> bytes:
-        """Replace Placeholder docstring."""
+        """Return signature for provided message utilizing private_key."""
         signature = nacl.bindings.crypto_sign(message, self.private_key)
         signature = signature.rstrip(message)
         return signature
