@@ -1,7 +1,7 @@
 """Replace Placeholder docstring."""
 from helium_py.crypto.keypair import Keypair
 
-bobWords = [
+bob_words = [
   'indicate',
   'flee',
   'grace',
@@ -15,7 +15,7 @@ bobWords = [
   'calm',
   'energy',
 ]
-aliceWords = [
+alice_words = [
   'trash',
   'speed',
   'marriage',
@@ -32,7 +32,7 @@ aliceWords = [
 bobB58 = b'13M8dUbxymE3xtiAXszRkGMmezMhBS8Li7wEsMojLdb4Sdxc4wc'
 aliceB58 = b'148d8KTRcKA5JKPekBcKFd4KfvprvFRpjGtivhtmRmnZ8MFYnP3'
 
-bobBip39Words = ['episode' if word == 'energy' else word for word in bobWords]
+bob_bip39_words = ['episode' if word == 'energy' else word for word in bob_words]
 
-bob = Keypair.from_words(bobWords)
-alice = Keypair.from_words(aliceWords)
+bob = Keypair.from_words(bob_words)
+alice = Keypair.from_words(alice_words)
