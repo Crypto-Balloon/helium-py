@@ -1,7 +1,10 @@
 """Address class for cryptography."""
 from helium_py.crypto import utils
-from helium_py.crypto.key_types import SUPPORTED_KEY_TYPES
-from helium_py.crypto.net_types import SUPPORTED_NET_TYPES
+from helium_py.crypto.constants import (
+    ALLOWED_VERSIONS,
+    SUPPORTED_KEY_TYPES,
+    SUPPORTED_NET_TYPES,
+)
 
 
 class Address:
@@ -11,17 +14,18 @@ class Address:
     net_type: int
     key_type: int
     public_key: bytes
+    DEFAULT_VERSION: int = 0
 
     def __init__(self, version: int, net_type: int, key_type: int, public_key: bytes):
         """Instantiate an address class."""
-        if version != 0:
-            raise Exception('unsupported version')
+        if version not in ALLOWED_VERSIONS:
+            raise ValueError('unsupported version')
 
         if net_type not in SUPPORTED_NET_TYPES:
-            raise Exception('unsupported net_type')
+            raise ValueError('unsupported net_type')
 
         if key_type not in SUPPORTED_KEY_TYPES:
-            raise Exception('unsupported key_type')
+            raise ValueError('unsupported key_type')
 
         self.version = version
         self.net_type = net_type
@@ -50,12 +54,11 @@ class Address:
     @staticmethod
     def from_bin(bin_val: bytes) -> 'Address':
         """Return Address instance created from provided binary."""
-        version = 0
         byte = bin_val[0]
         netType = utils.byte_to_net_type(byte)
         keyType = utils.byte_to_key_type(byte)
         publicKey = bin_val[1:len(bin_val)]
-        return Address(version, netType, keyType, publicKey)
+        return Address(Address.DEFAULT_VERSION, netType, keyType, publicKey)
 
     @staticmethod
     def is_valid(b58: bytes) -> bool:

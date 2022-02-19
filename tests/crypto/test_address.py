@@ -1,16 +1,17 @@
 # flake8: noqa
 from helium_py.crypto.address import Address
-from helium_py.crypto.key_types import ED25519_KEY_TYPE
-from helium_py.crypto.net_types import MAINNET, TESTNET
+from helium_py.crypto.constants import KeyTypes, NetTypes
 from tests.crypto.fixtures import bob, bobB58
 
+ED25519_KEY_TYPE = KeyTypes.ED25519_KEY_TYPE.value
+MAINNET, TESTNET = NetTypes.MAINNET.value, NetTypes.TESTNET.value
 ECC_COMPACT_ADDRESS = b'112qB3YaH5bZkCnKA5uRH7tBtGNv2Y5B4smv1jsmvGUzgKT71QpE'
 BTC_ADDRESS = b'18wxa7qM8C8AXmGwJj13C7sGqn8hyFdcdR'
 TESTNET_ADDRESS = b'1bijtibPhc16wx4oJbyK8vtkAgdoRoaUvJeo7rXBnBCufEYakfd'
 
 
 def test_address_to_b58():
-    address = Address(0, MAINNET, ED25519_KEY_TYPE, bob.public_key)
+    address = Address(Address.DEFAULT_VERSION, MAINNET, ED25519_KEY_TYPE, bob.public_key)
     assert address.b58 == bobB58
 
 
@@ -25,12 +26,12 @@ def test_address_to_b58_ecc_compact():
 
 
 def test_bin_returns_binary_repr():
-    address = Address(0, MAINNET, ED25519_KEY_TYPE, bob.public_key)
+    address = Address(Address.DEFAULT_VERSION, MAINNET, ED25519_KEY_TYPE, bob.public_key)
     assert address.bin[0] == 1
 
 
 def test_build_address_from_binary_repr():
-    address = Address.from_bin(Address(0, MAINNET, ED25519_KEY_TYPE, bob.public_key).bin)
+    address = Address.from_bin(Address(Address.DEFAULT_VERSION, MAINNET, ED25519_KEY_TYPE, bob.public_key).bin)
     assert address.b58 == bobB58
 
 
@@ -50,7 +51,7 @@ def test_unsupported_key_type_via_b58():
 
 def test_unsupported_key_type_via_init():
     try:
-        Address(0, MAINNET, 57, b'some random public key')
+        Address(Address.DEFAULT_VERSION, MAINNET, 57, b'some random public key')
     except Exception:
         pass
     else:

@@ -5,8 +5,10 @@ import base58
 
 from helium_py.crypto import utils
 from helium_py.crypto.address import Address
-from helium_py.crypto.net_types import MAINNET
+from helium_py.crypto.constants import NetTypes
 from tests.crypto.fixtures import bob, bobB58
+
+MAINNET = NetTypes.MAINNET.value
 
 
 def test_derive_checksum_bits():
@@ -17,7 +19,7 @@ def test_derive_checksum_bits():
 
 
 def test_encode_publickey_to_bs58_address():
-    address = Address(0, MAINNET, 1, bob.public_key)
+    address = Address(Address.DEFAULT_VERSION, MAINNET, 1, bob.public_key)
     versioned_payload = bytes([0]) + address.bin
     checksum = utils.sha256(binascii.unhexlify(utils.sha256(versioned_payload)))
     checksum_bytes = bytes(binascii.unhexlify(checksum[:8]))
@@ -27,7 +29,7 @@ def test_encode_publickey_to_bs58_address():
 
 
 def test_bs58_to_bin():
-    address_b58 = Address(0, MAINNET, 1, bob.public_key).b58
+    address_b58 = Address(Address.DEFAULT_VERSION, MAINNET, 1, bob.public_key).b58
     binary = base58.b58decode(address_b58)
     versioned_payload = binary[0:-4]
     payload = binary[1:-4]

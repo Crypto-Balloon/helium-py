@@ -21,7 +21,7 @@ class Mnemonic:
     def create(length: int = 12) -> 'Mnemonic':
         """Return a randomly generated Mnemonic of the provided length."""
         if length not in ALLOWABLE_MNEMONIC_LENGTHS:
-            raise Exception(f'supported mnemonic lengths: 12, 24. received {length}')
+            raise ValueError(f'supported mnemonic lengths: 12, 24. received {length}')
         entropy_bytes = 16 if length == 12 else 32
         entropy = utils.random_bytes(entropy_bytes)
         return Mnemonic.from_entropy(entropy)
@@ -30,11 +30,11 @@ class Mnemonic:
     def from_entropy(entropy: bytes) -> 'Mnemonic':
         """Return a Mnemonic generated from provided entropy."""
         if len(entropy) < 16:
-            raise Exception('invalid entropy, less than 16')
+            raise ValueError('invalid entropy, less than 16')
         if len(entropy) > 32:
-            raise Exception('invalid entropy, greater than 32')
+            raise ValueError('invalid entropy, greater than 32')
         if len(entropy) % 4 != 0:
-            raise Exception('invalid entropy, not divisble by 4')
+            raise ValueError('invalid entropy, not divisible by 4')
 
         entropyBits = utils.bytes_to_binary(entropy)
         checksumBits = utils.derive_checksum_bits(entropy)
@@ -60,15 +60,15 @@ class Mnemonic:
         entropy_bytes = [int(entropy, 2).to_bytes((len(entropy) + 7) // 8, byteorder='big') for entropy in chunks]
 
         if len(entropy_bytes) < 16:
-            raise Exception('invalid checksum')
+            raise ValueError('invalid entropy, less than 16')
         if len(entropy_bytes) > 32:
-            raise Exception('invalid checksum')
+            raise ValueError('invalid entropy, greater than 32')
         if len(entropy_bytes) % 4 != 0:
-            raise Exception('invalid checksum')
+            raise ValueError('invalid entropy, not divisible by 4')
 
         entropy = bytes([int(byte_val, 2) for byte_val in chunks])
         new_checksum = utils.derive_checksum_bits(entropy)
         if checksumBits != '0000' and new_checksum != checksumBits:
-            raise Exception('invalid checksum')
+            raise ValueError('invalid checksum')
 
         return entropy

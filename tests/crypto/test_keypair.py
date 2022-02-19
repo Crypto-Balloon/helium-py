@@ -3,11 +3,13 @@ import base64
 import binascii
 
 from helium_py.crypto import utils
-from helium_py.crypto.key_types import ED25519_KEY_TYPE
+from helium_py.crypto.constants import KeyTypes, NetTypes
 from helium_py.crypto.keypair import Keypair
 from helium_py.crypto.mnemonic import Mnemonic
-from helium_py.crypto.net_types import TESTNET
 from tests.crypto.fixtures import bob_bip39_words, bob_words, bobB58
+
+ED25519_KEY_TYPE = KeyTypes.ED25519_KEY_TYPE.value
+TESTNET = NetTypes.TESTNET.value
 
 
 def test_keypair_returns_public_key():

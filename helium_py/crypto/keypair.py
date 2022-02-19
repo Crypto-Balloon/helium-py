@@ -5,9 +5,8 @@ from typing import List, Optional
 import nacl.bindings
 
 from .address import Address
-from .key_types import ED25519_KEY_TYPE
+from .constants import SUPPORTED_NET_TYPES, KeyTypes, NetTypes
 from .mnemonic import Mnemonic
-from .net_types import MAINNET, SUPPORTED_NET_TYPES
 
 
 @dataclass
@@ -33,13 +32,13 @@ class Keypair:
         self.keypair = keypair
         self.public_key = keypair.pk
         self.private_key = keypair.sk
-        self.key_type = keypair.key_type if keypair.key_type is not None else ED25519_KEY_TYPE
-        self.net_type = net_type if net_type in SUPPORTED_NET_TYPES else MAINNET
+        self.key_type = keypair.key_type if keypair.key_type is not None else KeyTypes.ED25519_KEY_TYPE.value
+        self.net_type = net_type if net_type in SUPPORTED_NET_TYPES else NetTypes.MAINNET.value
 
     @property
     def address(self) -> Address:
         """Return Address instance for Keypair."""
-        return Address(0, self.net_type, ED25519_KEY_TYPE, self.public_key)
+        return Address(Address.DEFAULT_VERSION, self.net_type, KeyTypes.ED25519_KEY_TYPE.value, self.public_key)
 
     @staticmethod
     def make_random(net_type: int = None) -> 'Keypair':
@@ -65,7 +64,7 @@ class Keypair:
     def from_entropy(cls, entropy: bytes, net_type: Optional[int] = None) -> 'Keypair':
         """Return Keypair generated from entropy."""
         if len(entropy) != 32:
-            raise Exception(f'Invalid entropy, must be 32 bytes. Found {len(entropy)}')
+            raise ValueError(f'Invalid entropy, must be 32 bytes. Found {len(entropy)}')
         keypair = nacl.bindings.crypto_sign_seed_keypair(entropy)
         return cls(SodiumKeyPair(pk=keypair[0], sk=keypair[1]), net_type)
 
