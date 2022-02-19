@@ -19,11 +19,11 @@ class NetTypes(Enum):
 
 
 SUPPORTED_KEY_TYPES = (
-    KeyTypes.ECC_COMPACT_KEY_TYPE,
-    KeyTypes.ED25519_KEY_TYPE,
+    KeyTypes.ECC_COMPACT_KEY_TYPE.value,
+    KeyTypes.ED25519_KEY_TYPE.value,
 )
 
 SUPPORTED_NET_TYPES = (
-    NetTypes.MAINNET,
-    NetTypes.TESTNET,
+    NetTypes.MAINNET.value,
+    NetTypes.TESTNET.value,
 )
