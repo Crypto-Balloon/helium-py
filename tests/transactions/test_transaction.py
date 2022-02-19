@@ -1,7 +1,7 @@
 """Replace placeholder docstrings."""
 from copy import copy
 
-from helium_py.transactions.transaction import Transaction, ChainVars
+from helium_py.transactions.transaction import ChainVars, Transaction
 
 
 def test_config_default_values():

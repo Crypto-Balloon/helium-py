@@ -2,7 +2,7 @@
 import base64
 import math
 from dataclasses import dataclass
-from typing import Optional, Any
+from typing import Optional
 
 from helium_py import proto
 
@@ -63,7 +63,7 @@ class Transaction:
         decoded = proto.BlockchainTxn.FromString(buf)
         return list(decoded.to_dict().keys())[0]
 
-    @staticmethod
-    def calculate_fee(payload) -> int:
+    @classmethod
+    def _calculate_fee(cls, payload) -> int:
         """Replace placeholder docstrings."""
-        return math.ceil(len(payload) / Transaction.dc_payload_size) * Transaction.transaction_fee_multiplier
+        return math.ceil(len(payload) / cls.dc_payload_size) * cls.transaction_fee_multiplier

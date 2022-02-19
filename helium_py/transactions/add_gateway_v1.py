@@ -1,16 +1,18 @@
+"""Replace Placeholder Docstring."""
 from dataclasses import dataclass
 from typing import Optional
 
+from helium_py import proto
 from helium_py.crypto.address import Address
 from helium_py.crypto.keypair import Keypair
-
-from helium_py import proto
 from helium_py.transactions.transaction import Transaction
 from helium_py.transactions.utils import EMPTY_SIGNATURE
 
 
 @dataclass
 class AddGatewayOptions:
+    """Replace Placeholder Docstring."""
+
     owner: Optional[Address] = None
     gateway: Optional[Address] = None
     payer: Optional[Address] = None
@@ -23,12 +25,16 @@ class AddGatewayOptions:
 
 @dataclass
 class SignOptions:
+    """Replace Placeholder Docstring."""
+
     owner: Optional[Keypair]
     gateway: Optional[Keypair]
     payer: Optional[Keypair]
 
 
 class AddGatewayV1(Transaction):
+    """Replace Placeholder Docstring."""
+
     type: str = 'add_gateway_v1'
 
     owner: Optional[Address]
@@ -41,6 +47,7 @@ class AddGatewayV1(Transaction):
     fee: Optional[int]
 
     def __init__(self, options: AddGatewayOptions):
+        """Replace Placeholder Docstring."""
         self.owner = options.owner
         self.gateway = options.gateway
         self.payer = options.payer
@@ -65,10 +72,12 @@ class AddGatewayV1(Transaction):
             self.payer_signature = options.payer_signature
 
     def serialize(self) -> bytes:
+        """Replace Placeholder Docstring."""
         return self.to_proto().SerializeToString()
 
     @classmethod
     def from_string(cls, serialized_transaction: bytes) -> 'AddGatewayV1':
+        """Replace Placeholder Docstring."""
         add_gateway_proto = proto.BlockchainTxn.FromString(serialized_transaction)
 
         owner = Address.from_bin(add_gateway_proto.owner) if add_gateway_proto.owner else None
@@ -94,6 +103,7 @@ class AddGatewayV1(Transaction):
         ))
 
     def sign(self, opts: SignOptions) -> 'AddGatewayV1':
+        """Replace Placeholder Docstring."""
         add_gateway_proto = self.to_proto(for_signing=True)
         serialized = add_gateway_proto.SerializeToString()
         if opts.owner:
@@ -105,21 +115,23 @@ class AddGatewayV1(Transaction):
         return self
 
     def to_proto(self, for_signing=False) -> proto.BlockchainTxnAddGatewayV1:
-        return proto.BlockchainTxnAddGatewayV1().from_dict({
-            'owner': self.owner.bin if self.owner else None,
-            'gateway': self.gateway.bin if self.gateway else None,
-            'payer': self.payer.bin if self.payer else None,
-            'owner_signature': self.owner_signature if self.owner_signature and for_signing else None,
-            'gateway_signature': self.gateway_signature if self.gateway_signature and for_signing else None,
-            'payer_signature': self.payer_signature if self.payer_signature and for_signing else None,
-            'staking_fee': self.staking_fee if self.staking_fee else None,
-            'free': self.fee if self.fee else None,
-        })
+        """Replace Placeholder Docstring."""
+        return proto.BlockchainTxnAddGatewayV1(
+            owner=self.owner.bin if self.owner else None,
+            gateway=self.gateway.bin if self.gateway else None,
+            payer=self.payer.bin if self.payer else None,
+            owner_signature=self.owner_signature if self.owner_signature and for_signing else None,
+            gateway_signature=self.gateway_signature if self.gateway_signature and for_signing else None,
+            payer_signature=self.payer_signature if self.payer and self.payer_signature and for_signing else None,
+            staking_fee=self.staking_fee if self.staking_fee else None,
+            fee=self.fee if self.fee else None,
+        )
 
     def calculate_fee(self):
+        """Replace Placeholder Docstring."""
         self.owner_signature = EMPTY_SIGNATURE
         self.gateway_signature = EMPTY_SIGNATURE
         if self.payer:
             self.payer_signature = EMPTY_SIGNATURE
         payload = self.serialize()
-        return Transaction.calculate_fee(payload)
+        return self._calculate_fee(payload)
