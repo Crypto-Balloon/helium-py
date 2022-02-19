@@ -1,0 +1,1 @@
+EMPTY_SIGNATURE = bytes([0]*64)

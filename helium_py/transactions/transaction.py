@@ -2,7 +2,7 @@
 import base64
 import math
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, Any
 
 from helium_py import proto
 
@@ -33,7 +33,7 @@ class Transaction:
         """Replace placeholder docstrings."""
         raise NotImplementedError()
 
-    def sign(self, opts: Optional[dict] = None) -> bytes:
+    def sign(self, opts: object = None) -> Any:
         """Replace placeholder docstrings."""
         raise NotImplementedError()
 
