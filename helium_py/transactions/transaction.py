@@ -33,10 +33,6 @@ class Transaction:
         """Replace placeholder docstrings."""
         raise NotImplementedError()
 
-    def sign(self, opts: object = None) -> Any:
-        """Replace placeholder docstrings."""
-        raise NotImplementedError()
-
     @classmethod
     def config(cls, chain_vars: Optional[ChainVars] = None):
         """Replace placeholder docstrings."""

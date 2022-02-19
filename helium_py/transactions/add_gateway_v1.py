@@ -11,14 +11,14 @@ from helium_py.transactions.utils import EMPTY_SIGNATURE
 
 @dataclass
 class AddGatewayOptions:
-    owner: Optional[Address]
-    gateway: Optional[Address]
-    payer: Optional[Address]
-    fee: Optional[int]
-    staking_fee: Optional[int]
-    owner_signature: Optional[bytes]
-    gateway_signature: Optional[bytes]
-    payer_signature: Optional[bytes]
+    owner: Optional[Address] = None
+    gateway: Optional[Address] = None
+    payer: Optional[Address] = None
+    fee: Optional[int] = None
+    staking_fee: Optional[int] = None
+    owner_signature: Optional[bytes] = None
+    gateway_signature: Optional[bytes] = None
+    payer_signature: Optional[bytes] = None
 
 
 @dataclass
@@ -105,13 +105,13 @@ class AddGatewayV1(Transaction):
         return self
 
     def to_proto(self, for_signing=False) -> proto.BlockchainTxnAddGatewayV1:
-        return proto.BlockchainTxnAddGatewayV1.from_dict({
-            'owner': bytes(self.owner.bin) if self.owner else None,
-            'gateway': bytes(self.gateway.bin) if self.gateway else None,
-            'payer': bytes(self.payer.bin) if self.payer else None,
-            'owner_signature': bytes(self.owner_signature) if self.owner_signature and for_signing else None,
-            'gateway_signature': bytes(self.gateway_signature) if self.gateway_signature and for_signing else None,
-            'payer_signature': bytes(self.payer_signature) if self.payer_signature and for_signing else None,
+        return proto.BlockchainTxnAddGatewayV1().from_dict({
+            'owner': self.owner.bin if self.owner else None,
+            'gateway': self.gateway.bin if self.gateway else None,
+            'payer': self.payer.bin if self.payer else None,
+            'owner_signature': self.owner_signature if self.owner_signature and for_signing else None,
+            'gateway_signature': self.gateway_signature if self.gateway_signature and for_signing else None,
+            'payer_signature': self.payer_signature if self.payer_signature and for_signing else None,
             'staking_fee': self.staking_fee if self.staking_fee else None,
             'free': self.fee if self.fee else None,
         })
