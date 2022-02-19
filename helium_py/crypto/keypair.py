@@ -27,13 +27,13 @@ class Keypair:
     key_type: int
     net_type: int
 
-    def __init__(self, keypair: SodiumKeyPair, net_type: int = None):
+    def __init__(self, keypair: SodiumKeyPair, net_type: Optional[int] = None):
         """Initialize Keypair instance."""
         self.keypair = keypair
         self.public_key = keypair.pk
         self.private_key = keypair.sk
         self.key_type = keypair.key_type if keypair.key_type is not None else KeyTypes.ED25519_KEY_TYPE.value
-        self.net_type = net_type if net_type in SUPPORTED_NET_TYPES else NetTypes.MAINNET.value
+        self.net_type = net_type if net_type is not None and net_type in SUPPORTED_NET_TYPES else NetTypes.MAINNET.value
 
     @property
     def address(self) -> Address:
