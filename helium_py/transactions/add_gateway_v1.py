@@ -1,5 +1,6 @@
 """Replace Placeholder Docstring."""
 import base64
+import typing
 from typing import Optional
 
 from helium_py import proto
@@ -51,7 +52,7 @@ class AddGatewayV1(Transaction):
         return self.to_proto().SerializeToString()
 
     @classmethod
-    def from_string(cls, serialized_transaction: bytes) -> 'AddGatewayV1':
+    def from_b64_string(cls, serialized_transaction: bytes) -> 'AddGatewayV1':
         """Replace Placeholder Docstring."""
         add_gateway_proto = proto.BlockchainTxnAddGatewayV1.FromString(base64.b64decode(serialized_transaction))
 
@@ -94,6 +95,7 @@ class AddGatewayV1(Transaction):
             self.payer_signature = payer.sign(serialized)
         return self
 
+    @typing.no_type_check
     def to_proto(self, for_signing=False) -> proto.BlockchainTxnAddGatewayV1:
         """Replace Placeholder Docstring."""
         return proto.BlockchainTxnAddGatewayV1(

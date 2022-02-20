@@ -25,11 +25,16 @@ class Transaction:
     staking_fee_txn_assert_location_v1: int = 1
     staking_fee_txn_add_gateway_v1: int = 1
 
-    def to_bytes_string(self):
+    def serialize(self) -> bytes:
+        """Replace placeholder docstrings."""
+        raise NotImplementedError()
+
+    def to_bs64_string(self) -> bytes:
         """Replace placeholder docstrings."""
         return base64.b64encode(self.serialize())
 
-    def serialize(self) -> bytes:
+    @classmethod
+    def from_b64_string(cls, serialized_transaction: bytes):
         """Replace placeholder docstrings."""
         raise NotImplementedError()
 

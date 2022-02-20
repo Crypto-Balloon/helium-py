@@ -1,10 +1,9 @@
 """Replace Placeholder Docstring."""
-
 import pytest
 
+from helium_py import proto
 from helium_py.transactions.add_gateway_v1 import AddGatewayV1
 from helium_py.transactions.transaction import ChainVars
-from helium_py.transactions.utils import EMPTY_SIGNATURE
 
 AddGatewayV1.config(ChainVars(
     transaction_fee_multiplier=5000,
@@ -58,16 +57,18 @@ def test_serialize_returns_value(add_gateway):
     assert len(add_gateway.serialize()) > 0
 
 
-def test_serialize_to_base64(add_gateway):
+def test_serialize_to_base64(add_gateway_no_payer):
     """Replace Placeholder Docstring."""
-    assert AddGatewayV1.from_string(add_gateway.serialize()).fee == 45000
-    # TODO: There's some bug in FromString betterproto
-    # assert proto.BlockchainTxnAddGatewayV1.FromString(add_gateway.to_bytes_string()).fee == 45000
+    assert AddGatewayV1.from_b64_string(add_gateway_no_payer.to_bs64_string()).fee == 45000
+    assert proto.BlockchainTxnAddGatewayV1.FromString(add_gateway_no_payer.serialize()).fee == 45000
 
 
 def test_deserializes_from_base64_string(add_gateway):
     """Replace Placeholder Docstring."""
-    deserialized = AddGatewayV1.from_string(add_gateway.to_bytes_string())
+    serialized = add_gateway.to_bs64_string()
+    assert serialized == b'CiEBNRpxwi/v7CIxk2rSgmshfs452fd/xsSWOZJimcOGkpUSIQGcZZ1yPMHoEKcuePfer0c2qH8Q74/PyAEAtTMn5' \
+                         b'+5JpCohATUaccIv7+wiMZNq0oJrIX7OOdn3f8bEljmSYpnDhpKVOICS9AFA6PsD'
+    deserialized = AddGatewayV1.from_b64_string(serialized)
     assert deserialized.owner.b58 == add_gateway.owner.b58
     assert deserialized.payer.b58 == add_gateway.payer.b58
     assert deserialized.gateway.b58 == add_gateway.gateway.b58
@@ -80,7 +81,7 @@ def test_deserializes_from_base64_string(add_gateway):
 
 def test_deserializes_from_base64_string_with_signatures(add_gateway):
     """Replace Placeholder Docstring."""
-    deserialized = AddGatewayV1.from_string(add_gateway.to_bytes_string())
+    deserialized = AddGatewayV1.from_b64_string(add_gateway.to_bs64_string())
     assert deserialized.owner.b58 == add_gateway.owner.b58
     assert deserialized.payer.b58 == add_gateway.payer.b58
     assert deserialized.gateway.b58 == add_gateway.gateway.b58
@@ -93,15 +94,15 @@ def test_deserializes_from_base64_string_with_signatures(add_gateway):
 
 def test_deserializes_empty_string():
     """Replace Placeholder Docstring."""
-    deserialized = AddGatewayV1.from_string(b'')
-    assert deserialized.owner.b58 is None
-    assert deserialized.payer.b58 is None
-    assert deserialized.gateway.b58 is None
-    assert deserialized.fee == 30000
-    assert deserialized.staking_fee == 4000000
-    assert deserialized.owner_signature == EMPTY_SIGNATURE
-    assert deserialized.payer_signature == EMPTY_SIGNATURE
-    assert deserialized.gateway_signature == EMPTY_SIGNATURE
+    deserialized = AddGatewayV1.from_b64_string(b'')
+    assert deserialized.owner is None
+    assert deserialized.payer is None
+    assert deserialized.gateway is None
+    assert deserialized.fee == 0
+    assert deserialized.staking_fee == 0
+    assert deserialized.owner_signature is None
+    assert deserialized.payer_signature is None
+    assert deserialized.gateway_signature is None
 
 #
 # describe('sign', () => {
