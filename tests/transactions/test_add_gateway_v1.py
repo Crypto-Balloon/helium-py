@@ -104,69 +104,23 @@ def test_deserializes_empty_string():
     assert deserialized.payer_signature is None
     assert deserialized.gateway_signature is None
 
-#
-# describe('sign', () => {
-#   it('adds the owner signature', async () => {
-#     const { bob, alice } = await usersFixture()
-#     const payment = new AddGatewayV1({
-#       owner: bob.address,
-#       gateway: alice.address,
-#     })
-#
-#     const signedTxn = await payment.sign({ owner: bob })
-#
-#     if (!signedTxn.ownerSignature) throw new Error('null')
-#     expect(Buffer.byteLength(Buffer.from(signedTxn.ownerSignature))).toBe(64)
-#   })
-#
-#   it('adds the gateway signature', async () => {
-#     const { bob, alice } = await usersFixture()
-#     const payment = new AddGatewayV1({
-#       owner: bob.address,
-#       gateway: alice.address,
-#     })
-#
-#     const signedTxn = await payment.sign({ gateway: alice })
-#
-#     if (!signedTxn.gatewaySignature) throw new Error('null')
-#
-#     expect(Buffer.byteLength(Buffer.from(signedTxn.gatewaySignature))).toBe(64)
-#
-#     const paymentString = signedTxn.toString()
-#     const deserialized = AddGatewayV1.fromString(paymentString)
-#     expect(deserialized.owner?.b58).toBe(signedTxn.owner?.b58)
-#     expect(deserialized.payer?.b58).toBe(signedTxn.payer?.b58)
-#     expect(deserialized.gateway?.b58).toBe(signedTxn.gateway?.b58)
-#     expect(deserialized.fee).toBe(signedTxn.fee)
-#     expect(deserialized.stakingFee).toBe(signedTxn.stakingFee)
-#     expect(deserialized.ownerSignature).toEqual(signedTxn.ownerSignature)
-#     expect(deserialized.payerSignature).toEqual(signedTxn.payerSignature)
-#     expect(deserialized.gatewaySignature).toEqual(signedTxn.gatewaySignature)
-#   })
-#
-#   it('adds the payer signature', async () => {
-#     const { bob, alice } = await usersFixture()
-#     const payment = new AddGatewayV1({
-#       owner: bob.address,
-#       gateway: alice.address,
-#       payer: bob.address,
-#     })
-#
-#     const signedTxn = await payment.sign({ payer: alice })
-#
-#     if (!signedTxn.payerSignature) throw new Error('null')
-#
-#     expect(Buffer.byteLength(Buffer.from(signedTxn.payerSignature))).toBe(64)
-#
-#     const paymentString = signedTxn.toString()
-#     const deserialized = AddGatewayV1.fromString(paymentString)
-#     expect(deserialized.owner?.b58).toBe(signedTxn.owner?.b58)
-#     expect(deserialized.payer?.b58).toBe(signedTxn.payer?.b58)
-#     expect(deserialized.gateway?.b58).toBe(signedTxn.gateway?.b58)
-#     expect(deserialized.fee).toBe(signedTxn.fee)
-#     expect(deserialized.stakingFee).toBe(signedTxn.stakingFee)
-#     expect(deserialized.ownerSignature).toEqual(signedTxn.ownerSignature)
-#     expect(deserialized.payerSignature).toEqual(signedTxn.payerSignature)
-#     expect(deserialized.gatewaySignature).toEqual(signedTxn.gatewaySignature)
-#   })
-# })
+
+def test_signing_adds_owner_signature(add_gateway_no_payer, users):
+    """Replace Placeholder Docstring."""
+    signed_transaction = add_gateway_no_payer.sign(owner=users.bob.keypair)
+    assert signed_transaction.owner_signature is not None
+    assert len(signed_transaction.owner_signature) == 64
+
+
+def test_signing_adds_gateway_signature(add_gateway_no_payer, users):
+    """Replace Placeholder Docstring."""
+    signed_transaction = add_gateway_no_payer.sign(gateway=users.alice.keypair)
+    assert signed_transaction.gateway_signature is not None
+    assert len(signed_transaction.gateway_signature) == 64
+
+
+def test_signing_adds_the_payer_signature(add_gateway, users):
+    """Replace Placeholder Docstring."""
+    signed_transaction = add_gateway.sign(payer=users.alice.keypair)
+    assert signed_transaction.payer_signature is not None
+    assert len(signed_transaction.payer_signature) == 64
