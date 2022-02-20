@@ -1,5 +1,4 @@
 """Replace Placeholder Docstring."""
-from dataclasses import dataclass
 from typing import Optional
 
 from helium_py import proto
@@ -9,67 +8,45 @@ from helium_py.transactions.transaction import Transaction
 from helium_py.transactions.utils import EMPTY_SIGNATURE
 
 
-@dataclass
-class AddGatewayOptions:
-    """Replace Placeholder Docstring."""
-
-    owner: Optional[Address] = None
-    gateway: Optional[Address] = None
-    payer: Optional[Address] = None
-    fee: Optional[int] = None
-    staking_fee: Optional[int] = None
-    owner_signature: Optional[bytes] = None
-    gateway_signature: Optional[bytes] = None
-    payer_signature: Optional[bytes] = None
-
-
-@dataclass
-class SignOptions:
-    """Replace Placeholder Docstring."""
-
-    owner: Optional[Keypair]
-    gateway: Optional[Keypair]
-    payer: Optional[Keypair]
-
-
 class AddGatewayV1(Transaction):
     """Replace Placeholder Docstring."""
 
     type: str = 'add_gateway_v1'
 
-    owner: Optional[Address]
-    gateway: Optional[Address]
-    payer: Optional[Address]
-    owner_signature: Optional[bytes]
-    gateway_signature: Optional[bytes]
-    payer_signature: Optional[bytes]
-    staking_fee: Optional[int]
-    fee: Optional[int]
-
-    def __init__(self, options: AddGatewayOptions):
+    def __init__(
+            self,
+            owner: Optional[Address] = None,
+            gateway: Optional[Address] = None,
+            payer: Optional[Address] = None,
+            owner_signature: Optional[bytes] = None,
+            gateway_signature: Optional[bytes] = None,
+            payer_signature: Optional[bytes] = None,
+            staking_fee: Optional[int] = None,
+            fee: Optional[int] = None,
+    ):
         """Replace Placeholder Docstring."""
-        self.owner = options.owner
-        self.gateway = options.gateway
-        self.payer = options.payer
+        self.owner = owner
+        self.gateway = gateway
+        self.payer = payer
         self.staking_fee = 0
         self.fee = 0
 
-        if options.fee is not None:
-            self.fee = options.fee
+        if fee is not None:
+            self.fee = fee
         else:
             self.fee = self.calculate_fee()
 
         if self.staking_fee is not None:
-            self.staking_fee = options.staking_fee
+            self.staking_fee = staking_fee
         else:
             self.staking_fee = Transaction.staking_fee_txn_add_gateway_v1
 
-        if options.owner_signature is not None:
-            self.owner_signature = options.owner_signature
-        if options.gateway_signature is not None:
-            self.gateway_signature = options.gateway_signature
-        if options.payer_signature is not None:
-            self.payer_signature = options.payer_signature
+        if owner_signature is not None:
+            self.owner_signature = owner_signature
+        if gateway_signature is not None:
+            self.gateway_signature = gateway_signature
+        if payer_signature is not None:
+            self.payer_signature = payer_signature
 
     def serialize(self) -> bytes:
         """Replace Placeholder Docstring."""
@@ -91,7 +68,7 @@ class AddGatewayV1(Transaction):
         fee = add_gateway_proto.fee
         staking_fee = add_gateway_proto.fee
 
-        return cls(AddGatewayOptions(
+        return cls(
             owner=owner,
             gateway=gateway,
             payer=payer,
@@ -100,18 +77,23 @@ class AddGatewayV1(Transaction):
             owner_signature=owner_signature,
             gateway_signature=gateway_signature,
             payer_signature=payer_signature,
-        ))
+        )
 
-    def sign(self, opts: SignOptions) -> 'AddGatewayV1':
+    def sign(
+            self,
+            owner: Optional[Keypair] = None,
+            gateway: Optional[Keypair] = None,
+            payer: Optional[Keypair] = None,
+    ) -> 'AddGatewayV1':
         """Replace Placeholder Docstring."""
         add_gateway_proto = self.to_proto(for_signing=True)
         serialized = add_gateway_proto.SerializeToString()
-        if opts.owner:
-            self.owner_signature = opts.owner.sign(serialized)
-        if opts.gateway:
-            self.gateway_signature = opts.gateway.sign(serialized)
-        if opts.payer:
-            self.payer_signature = opts.payer.sign(serialized)
+        if owner:
+            self.owner_signature = owner.sign(serialized)
+        if gateway:
+            self.gateway_signature = gateway.sign(serialized)
+        if payer:
+            self.payer_signature = payer.sign(serialized)
         return self
 
     def to_proto(self, for_signing=False) -> proto.BlockchainTxnAddGatewayV1:
