@@ -66,4 +66,4 @@ class Transaction:
     @classmethod
     def _calculate_fee(cls, payload) -> int:
         """Replace placeholder docstrings."""
-        return math.ceil(len(payload) / cls.dc_payload_size) * cls.transaction_fee_multiplier
+        return math.ceil(len(str(payload)) / cls.dc_payload_size) * cls.transaction_fee_multiplier

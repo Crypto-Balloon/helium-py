@@ -36,10 +36,10 @@ class AddGatewayV1(Transaction):
         else:
             self.fee = self.calculate_fee()
 
-        if self.staking_fee is not None:
+        if staking_fee is not None:
             self.staking_fee = staking_fee
         else:
-            self.staking_fee = Transaction.staking_fee_txn_add_gateway_v1
+            self.staking_fee = self.staking_fee_txn_add_gateway_v1
 
         if owner_signature is not None:
             self.owner_signature = owner_signature
