@@ -1,4 +1,5 @@
 """Replace Placeholder Docstring."""
+import base64
 from typing import Optional
 
 from helium_py import proto
@@ -41,12 +42,9 @@ class AddGatewayV1(Transaction):
         else:
             self.staking_fee = self.staking_fee_txn_add_gateway_v1
 
-        if owner_signature is not None:
-            self.owner_signature = owner_signature
-        if gateway_signature is not None:
-            self.gateway_signature = gateway_signature
-        if payer_signature is not None:
-            self.payer_signature = payer_signature
+        self.owner_signature = owner_signature
+        self.gateway_signature = gateway_signature
+        self.payer_signature = payer_signature
 
     def serialize(self) -> bytes:
         """Replace Placeholder Docstring."""
@@ -55,7 +53,7 @@ class AddGatewayV1(Transaction):
     @classmethod
     def from_string(cls, serialized_transaction: bytes) -> 'AddGatewayV1':
         """Replace Placeholder Docstring."""
-        add_gateway_proto = proto.BlockchainTxnAddGatewayV1.FromString(serialized_transaction)
+        add_gateway_proto = proto.BlockchainTxnAddGatewayV1.FromString(base64.b64decode(serialized_transaction))
 
         owner = Address.from_bin(add_gateway_proto.owner) if add_gateway_proto.owner else None
         gateway = Address.from_bin(add_gateway_proto.gateway) if add_gateway_proto.gateway else None
@@ -66,7 +64,7 @@ class AddGatewayV1(Transaction):
         payer_signature = add_gateway_proto.payer_signature or None
 
         fee = add_gateway_proto.fee
-        staking_fee = add_gateway_proto.fee
+        staking_fee = add_gateway_proto.staking_fee
 
         return cls(
             owner=owner,
