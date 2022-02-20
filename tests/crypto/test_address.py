@@ -59,24 +59,6 @@ def test_unsupported_key_type_via_init():
         raise Exception('Expected exception on bad key type')
 
 
-def test_is_valid_happy_path(users):
-    assert Address.is_valid(users.bob.b58) is True
-    assert Address.is_valid(ECC_COMPACT_ADDRESS) is True
-
-
-def test_is_valid_false_on_invalid():
-    assert Address.is_valid(b'some invalid address') is False
-
-
-def test_is_valid_false_on_decode_check_failure():
-    bad_bob_b58 = b'13M8dUbxymE3xtiAXszRkGMmezMhBS8Li7wEsMojLdb4Sdxc4wb'
-    assert Address.is_valid(bad_bob_b58) is False
-
-
-def test_is_valid_false_on_invalid_key_type():
-    assert Address.is_valid(BTC_ADDRESS) is False
-
-
 def test_unsupported_versions_raises(users):
     try:
         Address(1, MAINNET, ED25519_KEY_TYPE, users.bob.keypair.public_key)

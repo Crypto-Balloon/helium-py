@@ -37,22 +37,11 @@ class AddGatewayV1(Transaction):
         self.owner = owner
         self.gateway = gateway
         self.payer = payer
-        self.staking_fee = 0
-        self.fee = 0
-
-        if fee is not None:
-            self.fee = fee
-        else:
-            self.fee = self.calculate_fee()
-
-        if staking_fee is not None:
-            self.staking_fee = staking_fee
-        else:
-            self.staking_fee = self.staking_fee_txn_add_gateway_v1
-
         self.owner_signature = owner_signature
         self.gateway_signature = gateway_signature
         self.payer_signature = payer_signature
+        self.fee = fee if fee is not None else self.calculate_fee()
+        self.staking_fee = staking_fee if staking_fee is not None else self.staking_fee_txn_add_gateway_v1
 
     def serialize(self) -> bytes:
         """Replace Placeholder Docstring."""
