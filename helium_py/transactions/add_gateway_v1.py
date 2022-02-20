@@ -55,7 +55,7 @@ class AddGatewayV1(Transaction):
     @classmethod
     def from_string(cls, serialized_transaction: bytes) -> 'AddGatewayV1':
         """Replace Placeholder Docstring."""
-        add_gateway_proto = proto.BlockchainTxn.FromString(serialized_transaction)
+        add_gateway_proto = proto.BlockchainTxnAddGatewayV1.FromString(serialized_transaction)
 
         owner = Address.from_bin(add_gateway_proto.owner) if add_gateway_proto.owner else None
         gateway = Address.from_bin(add_gateway_proto.gateway) if add_gateway_proto.gateway else None

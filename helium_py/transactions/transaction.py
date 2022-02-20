@@ -25,9 +25,9 @@ class Transaction:
     staking_fee_txn_assert_location_v1: int = 1
     staking_fee_txn_add_gateway_v1: int = 1
 
-    def __str__(self):
+    def to_bytes_string(self):
         """Replace placeholder docstrings."""
-        return base64.b64encode(bytes(self.serialize()))
+        return base64.b64encode(self.serialize())
 
     def serialize(self) -> bytes:
         """Replace placeholder docstrings."""
