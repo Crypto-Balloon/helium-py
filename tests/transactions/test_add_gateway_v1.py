@@ -59,16 +59,16 @@ def test_serialize_returns_value(add_gateway):
 
 def test_serialize_to_base64(add_gateway_no_payer):
     """Replace Placeholder Docstring."""
-    assert AddGatewayV1.from_b64_string(add_gateway_no_payer.to_bs64_string()).fee == 45000
+    assert AddGatewayV1.from_b64(add_gateway_no_payer.to_b64()).fee == 45000
     assert proto.BlockchainTxnAddGatewayV1.FromString(add_gateway_no_payer.serialize()).fee == 45000
 
 
 def test_deserializes_from_base64_string(add_gateway):
     """Replace Placeholder Docstring."""
-    serialized = add_gateway.to_bs64_string()
+    serialized = add_gateway.to_b64()
     assert serialized == b'CiEBNRpxwi/v7CIxk2rSgmshfs452fd/xsSWOZJimcOGkpUSIQGcZZ1yPMHoEKcuePfer0c2qH8Q74/PyAEAtTMn5' \
                          b'+5JpCohATUaccIv7+wiMZNq0oJrIX7OOdn3f8bEljmSYpnDhpKVOICS9AFA6PsD'
-    deserialized = AddGatewayV1.from_b64_string(serialized)
+    deserialized = AddGatewayV1.from_b64(serialized)
     assert deserialized.owner.b58 == add_gateway.owner.b58
     assert deserialized.payer.b58 == add_gateway.payer.b58
     assert deserialized.gateway.b58 == add_gateway.gateway.b58
@@ -81,7 +81,7 @@ def test_deserializes_from_base64_string(add_gateway):
 
 def test_deserializes_from_base64_string_with_signatures(add_gateway):
     """Replace Placeholder Docstring."""
-    deserialized = AddGatewayV1.from_b64_string(add_gateway.to_bs64_string())
+    deserialized = AddGatewayV1.from_b64(add_gateway.to_b64())
     assert deserialized.owner.b58 == add_gateway.owner.b58
     assert deserialized.payer.b58 == add_gateway.payer.b58
     assert deserialized.gateway.b58 == add_gateway.gateway.b58
@@ -94,7 +94,7 @@ def test_deserializes_from_base64_string_with_signatures(add_gateway):
 
 def test_deserializes_empty_string():
     """Replace Placeholder Docstring."""
-    deserialized = AddGatewayV1.from_b64_string(b'')
+    deserialized = AddGatewayV1.from_b64(b'')
     assert deserialized.owner is None
     assert deserialized.payer is None
     assert deserialized.gateway is None

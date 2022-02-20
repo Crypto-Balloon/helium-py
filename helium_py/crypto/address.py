@@ -59,12 +59,3 @@ class Address:
         keyType = utils.byte_to_key_type(byte)
         publicKey = bin_val[1:len(bin_val)]
         return Address(Address.DEFAULT_VERSION, netType, keyType, publicKey)
-
-    @staticmethod
-    def is_valid(b58: bytes) -> bool:
-        """Return True if b58 is valid."""
-        try:
-            Address.from_b58(b58)
-            return True
-        except Exception:
-            return False

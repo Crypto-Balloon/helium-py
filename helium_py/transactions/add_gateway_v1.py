@@ -1,5 +1,4 @@
 """Replace Placeholder Docstring."""
-import base64
 import typing
 from typing import Optional
 
@@ -14,6 +13,14 @@ class AddGatewayV1(Transaction):
     """Replace Placeholder Docstring."""
 
     type: str = 'add_gateway_v1'
+    owner: Optional[Address]
+    gateway: Optional[Address]
+    payer: Optional[Address]
+    owner_signature: Optional[bytes]
+    gateway_signature: Optional[bytes]
+    payer_signature: Optional[bytes]
+    staking_fee: Optional[int]
+    fee: Optional[int]
 
     def __init__(
             self,
@@ -52,9 +59,9 @@ class AddGatewayV1(Transaction):
         return self.to_proto().SerializeToString()
 
     @classmethod
-    def from_b64_string(cls, serialized_transaction: bytes) -> 'AddGatewayV1':
+    def deserialize(cls, serialized_transaction: bytes) -> 'AddGatewayV1':
         """Replace Placeholder Docstring."""
-        add_gateway_proto = proto.BlockchainTxnAddGatewayV1.FromString(base64.b64decode(serialized_transaction))
+        add_gateway_proto = proto.BlockchainTxnAddGatewayV1.FromString(serialized_transaction)
 
         owner = Address.from_bin(add_gateway_proto.owner) if add_gateway_proto.owner else None
         gateway = Address.from_bin(add_gateway_proto.gateway) if add_gateway_proto.gateway else None
@@ -115,5 +122,4 @@ class AddGatewayV1(Transaction):
         self.gateway_signature = EMPTY_SIGNATURE
         if self.payer:
             self.payer_signature = EMPTY_SIGNATURE
-        payload = self.serialize()
-        return self._calculate_fee(payload)
+        return super().calculate_fee()
