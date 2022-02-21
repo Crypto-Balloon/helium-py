@@ -3,14 +3,13 @@ import pytest
 
 from helium_py import proto
 from helium_py.transactions.add_gateway_v1 import AddGatewayV1
-from helium_py.transactions.transaction import ChainVars
 
-AddGatewayV1.config(ChainVars(
+AddGatewayV1.config(
     transaction_fee_multiplier=5000,
     dc_payload_size=24,
     staking_fee_txn_add_gateway_v1=40 * 100000,
     staking_fee_txn_assert_location_v1=10 * 100000,
-))
+)
 
 
 @pytest.fixture
@@ -69,6 +68,7 @@ def test_deserializes_from_base64_string(add_gateway):
     assert serialized == b'CiEBNRpxwi/v7CIxk2rSgmshfs452fd/xsSWOZJimcOGkpUSIQGcZZ1yPMHoEKcuePfer0c2qH8Q74/PyAEAtTMn5' \
                          b'+5JpCohATUaccIv7+wiMZNq0oJrIX7OOdn3f8bEljmSYpnDhpKVOICS9AFA6PsD'
     deserialized = AddGatewayV1.from_b64(serialized)
+    deserialized.calculate_fee()
     assert deserialized.owner.b58 == add_gateway.owner.b58
     assert deserialized.payer.b58 == add_gateway.payer.b58
     assert deserialized.gateway.b58 == add_gateway.gateway.b58
@@ -82,6 +82,7 @@ def test_deserializes_from_base64_string(add_gateway):
 def test_deserializes_from_base64_string_with_signatures(add_gateway):
     """Replace Placeholder Docstring."""
     deserialized = AddGatewayV1.from_b64(add_gateway.to_b64())
+    deserialized.calculate_fee()
     assert deserialized.owner.b58 == add_gateway.owner.b58
     assert deserialized.payer.b58 == add_gateway.payer.b58
     assert deserialized.gateway.b58 == add_gateway.gateway.b58

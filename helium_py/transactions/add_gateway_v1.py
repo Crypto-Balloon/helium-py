@@ -19,8 +19,8 @@ class AddGatewayV1(Transaction):
     owner_signature: Optional[bytes]
     gateway_signature: Optional[bytes]
     payer_signature: Optional[bytes]
-    staking_fee: Optional[int]
-    fee: Optional[int]
+    fee: Optional[int] = None
+    staking_fee: Optional[int] = None
 
     def __init__(
             self,

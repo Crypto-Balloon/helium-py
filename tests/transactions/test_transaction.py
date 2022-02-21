@@ -1,7 +1,5 @@
 """Replace placeholder docstrings."""
-from copy import copy
-
-from helium_py.transactions.transaction import ChainVars, Transaction
+from helium_py.transactions.transaction import Transaction
 
 
 def test_config_default_values():
@@ -14,19 +12,18 @@ def test_config_default_values():
 
 def test_config_uses_chain_vars():
     """Replace placeholder docstrings."""
-    chain_vars = ChainVars(
+    old_vars = Transaction.config()
+    Transaction.config(
         transaction_fee_multiplier=100,
         dc_payload_size=48,
         staking_fee_txn_add_gateway_v1=1000,
         staking_fee_txn_assert_location_v1=2000
     )
-    old_vars = copy(Transaction.config())
-    Transaction.config(chain_vars)
     assert Transaction.transaction_fee_multiplier == 100
     assert Transaction.dc_payload_size == 48
     assert Transaction.staking_fee_txn_add_gateway_v1 == 1000
     assert Transaction.staking_fee_txn_assert_location_v1 == 2000
-    Transaction.config(old_vars)
+    Transaction.config(**old_vars)
 
 
 def test_config_without_chain_vars():
