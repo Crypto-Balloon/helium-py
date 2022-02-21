@@ -3,12 +3,11 @@ import binascii
 
 from helium_py.crypto.mnemonic import Mnemonic
 from helium_py.crypto.utils import random_bytes
-from tests.crypto.fixtures import bob_words
 
 
-def test_keypair():
-    mnemonic = Mnemonic(bob_words)
-    assert mnemonic.words == bob_words
+def test_keypair(users):
+    mnemonic = Mnemonic(users.bob.words)
+    assert mnemonic.words == users.bob.words
 
 
 def test_create_defaults_to_12_words():

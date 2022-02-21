@@ -6,7 +6,6 @@ from helium_py.crypto import utils
 from helium_py.crypto.constants import KeyTypes, NetTypes
 from helium_py.crypto.keypair import Keypair
 from helium_py.crypto.mnemonic import Mnemonic
-from tests.crypto.fixtures import bob_bip39_words, bob_words, bobB58
 
 ED25519_KEY_TYPE = KeyTypes.ED25519_KEY_TYPE.value
 TESTNET = NetTypes.TESTNET.value
@@ -27,14 +26,14 @@ def test_keypair_returns_key_type():
     assert keypair.key_type == ED25519_KEY_TYPE
 
 
-def test_returns_address_from_public_key():
-    keypair = Keypair.from_words(bob_words)
-    assert keypair.address.b58 == bobB58
+def test_returns_address_from_public_key(users):
+    keypair = Keypair.from_words(users.bob.words)
+    assert keypair.address.b58 == users.bob.b58
 
 
-def test_same_keypair_with_bip39_and_legacy_checksum_words():
-    words_keypair = Keypair.from_words(bob_words)
-    bip39_keypair = Keypair.from_words(bob_bip39_words)
+def test_same_keypair_with_bip39_and_legacy_checksum_words(users):
+    words_keypair = Keypair.from_words(users.bob.words)
+    bip39_keypair = Keypair.from_words(users.bob.bip_39_words)
     assert words_keypair.private_key == bip39_keypair.private_key
 
 
@@ -53,9 +52,8 @@ def test_raise_if_entropy_incorrect_byte_size():
     else:
         raise Exception('Expected failure on bad entropy bytes')
 
-
-def test_signing_message_with_private_key():
-    mnemonic = Mnemonic(bob_words)
+def test_signing_message_with_private_key(users):
+    mnemonic = Mnemonic(users.bob.words)
     keypair = Keypair.from_mnemonic(mnemonic)
     message = b'the shark feeds at midnight'
     signature = keypair.sign(message)
