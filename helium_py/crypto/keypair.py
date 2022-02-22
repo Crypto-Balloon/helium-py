@@ -71,5 +71,4 @@ class Keypair:
     def sign(self, message: bytes) -> bytes:
         """Return signature for provided message utilizing private_key."""
         signature = nacl.bindings.crypto_sign(message, self.private_key)
-        signature = signature.rstrip(message)
-        return signature
+        return signature[:signature.index(message)]
