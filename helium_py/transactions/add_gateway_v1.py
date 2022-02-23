@@ -43,10 +43,6 @@ class AddGatewayV1(Transaction):
         self.fee = fee if fee is not None else self.calculate_fee()
         self.staking_fee = staking_fee if staking_fee is not None else self.staking_fee_txn_add_gateway_v1
 
-    def serialize(self) -> bytes:
-        """Replace Placeholder Docstring."""
-        return self.to_proto().SerializeToString()
-
     @classmethod
     def deserialize(cls, serialized_transaction: bytes) -> 'AddGatewayV1':
         """Replace Placeholder Docstring."""
@@ -74,23 +70,6 @@ class AddGatewayV1(Transaction):
             payer_signature=payer_signature,
         )
 
-    def sign(
-            self,
-            owner: Optional[Keypair] = None,
-            gateway: Optional[Keypair] = None,
-            payer: Optional[Keypair] = None,
-    ) -> 'AddGatewayV1':
-        """Replace Placeholder Docstring."""
-        add_gateway_proto = self.to_proto(for_signing=True)
-        serialized = add_gateway_proto.SerializeToString()
-        if owner:
-            self.owner_signature = owner.sign(serialized)
-        if gateway:
-            self.gateway_signature = gateway.sign(serialized)
-        if payer:
-            self.payer_signature = payer.sign(serialized)
-        return self
-
     @typing.no_type_check
     def to_proto(self, for_signing=False) -> proto.BlockchainTxnAddGatewayV1:
         """Replace Placeholder Docstring."""
@@ -104,6 +83,23 @@ class AddGatewayV1(Transaction):
             staking_fee=self.staking_fee if self.staking_fee else None,
             fee=self.fee if self.fee else None,
         )
+
+    def sign(
+            self,
+            owner: Optional[Keypair] = None,
+            gateway: Optional[Keypair] = None,
+            payer: Optional[Keypair] = None,
+    ) -> 'AddGatewayV1':
+        """Replace Placeholder Docstring."""
+        add_gateway_proto = self.to_proto(for_signing=True)
+        serialized = bytes(add_gateway_proto)
+        if owner:
+            self.owner_signature = owner.sign(serialized)
+        if gateway:
+            self.gateway_signature = gateway.sign(serialized)
+        if payer:
+            self.payer_signature = payer.sign(serialized)
+        return self
 
     def calculate_fee(self):
         """Replace Placeholder Docstring."""

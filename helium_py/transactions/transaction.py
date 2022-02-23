@@ -15,6 +15,11 @@ class Transaction:
     staking_fee_txn_add_gateway_v1: int = 1
 
     def serialize(self) -> bytes:
+        """Replace Placeholder Docstring."""
+        return bytes(self.to_proto())
+
+    @classmethod
+    def deserialize(cls, serialized_transaction: bytes):
         """Replace placeholder docstrings."""
         raise NotImplementedError()
 
@@ -23,14 +28,13 @@ class Transaction:
         return base64.b64encode(self.serialize())
 
     @classmethod
-    def deserialize(cls, serialized_transaction: bytes):
-        """Replace placeholder docstrings."""
-        raise NotImplementedError()
-
-    @classmethod
     def from_b64(cls, serialized_transaction: bytes):
         """Replace placeholder docstrings."""
         return cls.deserialize(base64.b64decode(serialized_transaction))
+
+    def to_proto(self):
+        """Replace placeholder docstrings."""
+        raise NotImplementedError()
 
     @classmethod
     def config(
