@@ -55,7 +55,7 @@ class AssertLocationV2(Transaction):
     @classmethod
     def deserialize(cls, serialized_transaction: bytes) -> 'AssertLocationV2':
         """Replace Placeholder Docstring."""
-        assert_location_proto = proto.BlockchainTxnAssertLocationV2.FromString(serialized_transaction)
+        assert_location_proto = proto.BlockchainTxn.FromString(serialized_transaction).assert_location_v2
 
         owner = Address.from_bin(assert_location_proto.owner) if assert_location_proto.owner else None
         gateway = Address.from_bin(assert_location_proto.gateway) if assert_location_proto.gateway else None
@@ -84,9 +84,9 @@ class AssertLocationV2(Transaction):
         )
 
     @typing.no_type_check
-    def to_proto(self, for_signing=False) -> proto.BlockchainTxnAssertLocationV2:
+    def to_proto(self, for_signing=False) -> proto.BlockchainTxn:
         """Replace Placeholder Docstring."""
-        return proto.BlockchainTxnAssertLocationV2(
+        return proto.BlockchainTxn(assert_location_v2=proto.BlockchainTxnAssertLocationV2(
             owner=self.owner.bin if self.owner else None,
             gateway=self.gateway.bin if self.gateway else None,
             payer=self.payer.bin if self.payer else None,
@@ -98,7 +98,7 @@ class AssertLocationV2(Transaction):
             staking_fee=self.staking_fee if self.staking_fee else None,
             owner_signature=self.owner_signature if self.owner_signature and for_signing else None,
             payer_signature=self.payer_signature if self.payer and self.payer_signature and for_signing else None,
-        )
+        ))
 
     def sign(
             self,

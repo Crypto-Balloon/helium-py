@@ -67,15 +67,18 @@ def test_serialize_returns_value(assert_location):
 def test_serialize_to_base64(assert_location_no_payer):
     """Replace Placeholder Docstring."""
     assert AssertLocationV1.from_b64(assert_location_no_payer.to_b64()).fee == 50000
-    assert proto.BlockchainTxnAssertLocationV1.FromString(assert_location_no_payer.serialize()).fee == 50000
+    assert proto.BlockchainTxn.FromString(assert_location_no_payer.serialize()).assert_location.fee == 50000
 
 
 def test_deserializes_from_base64_string(assert_location):
     """Replace Placeholder Docstring."""
     serialized = assert_location.to_b64()
-    assert serialized == b'CiEBnGWdcjzB6BCnLnj33q9HNqh/EO+Pz8gBALUzJ+fuSaQSIQE1GnHCL+/sIjGTatKCayF+zjnZ93' \
-                         b'/GxJY5kmKZw4aSlRohATUaccIv7+wiMZNq0oJrIX7OOdn3f8bEljmSYpnDhpKVOg84YzM4MzA5Mjg0M' \
-                         b'WE3ZmZAAUjAhD1Q8KIE'
+    assert serialized == b'EsoCCiEBnGWdcjzB6BCnLnj33q9HNqh/EO+Pz8gBALUzJ+fuSaQSIQE1GnHCL+/sIjGTatKCayF+zjnZ93' \
+                         b'/GxJY5kmKZw4aSlRohATUaccIv7+wiMZNq0oJrIX7OOdn3f8bEljmSYpnDhpKVIkAAAAAAAAAAAAAAAAAA' \
+                         b'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKkAAAAAAAAAAAA' \
+                         b'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMkAAAAAA' \
+                         b'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOg' \
+                         b'84YzM4MzA5Mjg0MWE3ZmZAAUjAhD1Q8KIE'
     deserialized = AssertLocationV1.from_b64(serialized)
     deserialized.calculate_fee()
     assert deserialized.owner.b58 == assert_location.owner.b58

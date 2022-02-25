@@ -46,7 +46,7 @@ class AddGatewayV1(Transaction):
     @classmethod
     def deserialize(cls, serialized_transaction: bytes) -> 'AddGatewayV1':
         """Replace Placeholder Docstring."""
-        add_gateway_proto = proto.BlockchainTxnAddGatewayV1.FromString(serialized_transaction)
+        add_gateway_proto = proto.BlockchainTxn.FromString(serialized_transaction).add_gateway
 
         owner = Address.from_bin(add_gateway_proto.owner) if add_gateway_proto.owner else None
         gateway = Address.from_bin(add_gateway_proto.gateway) if add_gateway_proto.gateway else None
@@ -71,9 +71,9 @@ class AddGatewayV1(Transaction):
         )
 
     @typing.no_type_check
-    def to_proto(self, for_signing=False) -> proto.BlockchainTxnAddGatewayV1:
+    def to_proto(self, for_signing=False) -> proto.BlockchainTxn:
         """Replace Placeholder Docstring."""
-        return proto.BlockchainTxnAddGatewayV1(
+        return proto.BlockchainTxn(add_gateway=proto.BlockchainTxnAddGatewayV1(
             owner=self.owner.bin if self.owner else None,
             gateway=self.gateway.bin if self.gateway else None,
             payer=self.payer.bin if self.payer else None,
@@ -82,7 +82,7 @@ class AddGatewayV1(Transaction):
             payer_signature=self.payer_signature if self.payer and self.payer_signature and for_signing else None,
             staking_fee=self.staking_fee if self.staking_fee else None,
             fee=self.fee if self.fee else None,
-        )
+        ))
 
     def sign(
             self,

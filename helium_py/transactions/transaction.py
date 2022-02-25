@@ -16,7 +16,7 @@ class Transaction:
 
     def serialize(self) -> bytes:
         """Replace Placeholder Docstring."""
-        return bytes(self.to_proto())
+        return bytes(self.to_proto(for_signing=True))
 
     @classmethod
     def deserialize(cls, serialized_transaction: bytes):
@@ -32,7 +32,7 @@ class Transaction:
         """Replace placeholder docstrings."""
         return cls.deserialize(base64.b64decode(serialized_transaction))
 
-    def to_proto(self):
+    def to_proto(self, for_signing=False):
         """Replace placeholder docstrings."""
         raise NotImplementedError()
 
@@ -74,4 +74,4 @@ class Transaction:
     def calculate_fee(self) -> int:
         """Replace placeholder docstrings."""
         payload = self.serialize()
-        return math.ceil(len(str(payload)) / self.dc_payload_size) * self.transaction_fee_multiplier
+        return math.ceil(len(payload) / self.dc_payload_size) * self.transaction_fee_multiplier

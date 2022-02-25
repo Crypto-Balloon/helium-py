@@ -39,6 +39,11 @@ def test_create_add_gateway_transaction(add_gateway_no_payer, users):
     assert add_gateway_no_payer.fee == 45000
     assert add_gateway_no_payer.staking_fee == 4000000
     assert add_gateway_no_payer.type == 'add_gateway_v1'
+    assert add_gateway_no_payer.to_b64() == b'CtMBCiEBNRpxwi/v7CIxk2rSgmshfs452fd/xsSWOZJimcOGkpUSIQGcZZ1yPMHoEKcueP' \
+                                            b'fer0c2qH8Q74/PyAEAtTMn5+5JpBpAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' \
+                                            b'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACJAAAAAAAAAAAAAAAAAAAAAAA' \
+                                            b'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADiAkvQB' \
+                                            b'QMjfAg=='
 
 
 def test_create_add_gateway_transaction_with_payer(add_gateway, users):
@@ -49,6 +54,12 @@ def test_create_add_gateway_transaction_with_payer(add_gateway, users):
     assert add_gateway.fee == 65000
     assert add_gateway.staking_fee == 4000000
     assert add_gateway.type == 'add_gateway_v1'
+    assert add_gateway.to_b64() == b'CrgCCiEBNRpxwi/v7CIxk2rSgmshfs452fd/xsSWOZJimcOGkpUSIQGcZZ1yPMHoEKcuePfer0c2qH8' \
+                                   b'Q74/PyAEAtTMn5+5JpBpAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' \
+                                   b'AAAAAAAAAAAAAAAAAAAAAAAAAAACJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' \
+                                   b'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACohATUaccIv7+wiMZNq0oJrIX7OOdn3f8bEljmSYpnD' \
+                                   b'hpKVMkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' \
+                                   b'AAAAAAAAAAAAAOICS9AFA6PsD'
 
 
 def test_serialize_returns_value(add_gateway):
@@ -59,14 +70,12 @@ def test_serialize_returns_value(add_gateway):
 def test_serialize_to_base64(add_gateway_no_payer):
     """Replace Placeholder Docstring."""
     assert AddGatewayV1.from_b64(add_gateway_no_payer.to_b64()).fee == 45000
-    assert proto.BlockchainTxnAddGatewayV1.FromString(add_gateway_no_payer.serialize()).fee == 45000
+    assert proto.BlockchainTxn.FromString(add_gateway_no_payer.serialize()).add_gateway.fee == 45000
 
 
 def test_deserializes_from_base64_string(add_gateway):
     """Replace Placeholder Docstring."""
     serialized = add_gateway.to_b64()
-    assert serialized == b'CiEBNRpxwi/v7CIxk2rSgmshfs452fd/xsSWOZJimcOGkpUSIQGcZZ1yPMHoEKcuePfer0c2qH8Q74/PyAEAtTMn5' \
-                         b'+5JpCohATUaccIv7+wiMZNq0oJrIX7OOdn3f8bEljmSYpnDhpKVOICS9AFA6PsD'
     deserialized = AddGatewayV1.from_b64(serialized)
     deserialized.calculate_fee()
     assert deserialized.owner.b58 == add_gateway.owner.b58

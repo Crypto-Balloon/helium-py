@@ -51,7 +51,7 @@ def test_create_assert_location_transaction(assert_location_no_payer, users):
     assert assert_location_no_payer.elevation == 3
     assert assert_location_no_payer.fee == 35000
     assert assert_location_no_payer.staking_fee == 1000000
-    assert assert_location_no_payer.type == 'assert_location_v1'
+    assert assert_location_no_payer.type == 'assert_location_v2'
 
 
 def test_create_assert_location_transaction_with_payer(assert_location, users):
@@ -64,7 +64,7 @@ def test_create_assert_location_transaction_with_payer(assert_location, users):
     assert assert_location.elevation == 3
     assert assert_location.fee == 55000
     assert assert_location.staking_fee == 1000000
-    assert assert_location.type == 'assert_location_v1'
+    assert assert_location.type == 'assert_location_v2'
 
 
 def test_serialize_returns_value(assert_location):
@@ -74,16 +74,16 @@ def test_serialize_returns_value(assert_location):
 
 def test_serialize_to_base64(assert_location_no_payer):
     """Replace Placeholder Docstring."""
-    assert AssertLocationV2.from_b64(assert_location_no_payer.to_b64()).fee == 55000
-    assert proto.BlockchainTxnAssertLocationV2.FromString(assert_location_no_payer.serialize()).fee == 55000
+    assert AssertLocationV2.from_b64(assert_location_no_payer.to_b64()).fee == 35000
+    assert proto.BlockchainTxn.FromString(assert_location_no_payer.serialize()).assert_location_v2.fee == 35000
 
 
 def test_deserializes_from_base64_string(assert_location):
     """Replace Placeholder Docstring."""
     serialized = assert_location.to_b64()
-    assert serialized == b'CiEBnGWdcjzB6BCnLnj33q9HNqh/EO+Pz8gBALUzJ+fuSaQSIQE1GnHCL+/sIjGTatKCayF+zjnZ93' \
-                         b'/GxJY5kmKZw4aSlRohATUaccIv7+wiMZNq0oJrIX7OOdn3f8bEljmSYpnDhpKVMg84YzM4MzA5Mjg0' \
-                         b'MWE3ZmY4AUACSANQwIQ9WPjJBA=='
+    assert serialized == b'mgKIAQohAZxlnXI8wegQpy54996vRzaofxDvj8/IAQC1Myfn7kmkEiEBNRpxwi/v7CIxk2rSgmshfs452fd' \
+                         b'/xsSWOZJimcOGkpUaIQE1GnHCL+/sIjGTatKCayF+zjnZ93/GxJY5kmKZw4aSlTIPOGMzODMwOTI4NDFhN2' \
+                         b'ZmOAFAAkgDUMCEPVjYrQM='
     deserialized = AssertLocationV2.from_b64(serialized)
     assert deserialized.owner.b58 == assert_location.owner.b58
     assert deserialized.payer.b58 == assert_location.payer.b58
