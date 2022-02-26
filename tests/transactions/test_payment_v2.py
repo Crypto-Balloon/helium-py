@@ -3,7 +3,6 @@ import pytest
 
 from helium_py import proto
 from helium_py.transactions import PaymentV2
-from helium_py.transactions.payment_v2 import Payment
 
 PaymentV2.config(
     transaction_fee_multiplier=5000,
@@ -19,7 +18,7 @@ def payment(users):
     return PaymentV2(
         payer=users.bob.keypair.address,
         payments=[
-            Payment(
+            PaymentV2.Payment(
                 payee=users.alice.keypair.address,
                 amount=10,
                 memo=b'bW9ja21lbW8=',

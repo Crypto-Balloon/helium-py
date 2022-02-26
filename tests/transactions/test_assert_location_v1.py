@@ -2,7 +2,7 @@
 import pytest
 
 from helium_py import proto
-from helium_py.transactions.assert_location_v1 import AssertLocationV1
+from helium_py.transactions import AssertLocationV1
 
 AssertLocationV1.config(
     transaction_fee_multiplier=5000,

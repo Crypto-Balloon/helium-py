@@ -11,17 +11,16 @@ from helium_py.transactions.transaction import Transaction
 from helium_py.transactions.utils import EMPTY_SIGNATURE
 
 
-@dataclass
-class Payment:
-    """Replace Placeholder Docstring."""
-
-    payee: Address
-    amount: int
-    memo: Optional[bytes]
-
-
 class PaymentV2(Transaction):
     """Replace Placeholder Docstring."""
+
+    @dataclass
+    class Payment:
+        """Replace Placeholder Docstring."""
+
+        payee: Address
+        amount: int
+        memo: Optional[bytes]
 
     type: str = 'payment_v2'
     payer: Optional[Address]
@@ -52,7 +51,7 @@ class PaymentV2(Transaction):
 
         payer = Address.from_bin(payment_proto.payer) if payment_proto.payer else None
         payments = [
-            Payment(
+            cls.Payment(
                 payee=Address.from_bin(payment.payee),
                 amount=payment.amount,
                 memo=base64.b64encode(bytes(payment.memo.to_bytes(64, 'little', signed=False))))

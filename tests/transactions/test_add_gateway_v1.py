@@ -2,7 +2,7 @@
 import pytest
 
 from helium_py import proto
-from helium_py.transactions.add_gateway_v1 import AddGatewayV1
+from helium_py.transactions import AddGatewayV1
 
 AddGatewayV1.config(
     transaction_fee_multiplier=5000,

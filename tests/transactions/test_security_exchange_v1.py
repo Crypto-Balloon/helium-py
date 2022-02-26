@@ -78,3 +78,15 @@ def test_signing_adds_signature(security_exchange, users):
     signed_transaction = security_exchange.sign(payer=users.bob.keypair)
     assert signed_transaction.signature is not None
     assert len(signed_transaction.signature) == 64
+
+
+def test_does_not_calculate_fees_if_provided(users):
+    """Replace Placeholder Docstring."""
+    security_exchange = SecurityExchangeV1(
+        payer=users.bob.keypair.address,
+        payee=users.alice.keypair.address,
+        amount=10,
+        nonce=1,
+        fee=12345,
+    )
+    assert security_exchange.fee == 12345
