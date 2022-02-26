@@ -72,8 +72,7 @@ class PaymentV1(Transaction):
             payer: Optional[Keypair] = None,
     ) -> 'PaymentV1':
         """Replace Placeholder Docstring."""
-        serialized = self.serialize()
-        self.signature = payer.sign(serialized)
+        self.signature = payer.sign(self.serialize())
         return self
 
     def calculate_fee(self):
