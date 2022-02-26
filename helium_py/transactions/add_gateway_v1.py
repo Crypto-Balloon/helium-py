@@ -77,9 +77,9 @@ class AddGatewayV1(Transaction):
             owner=self.owner.bin if self.owner else None,
             gateway=self.gateway.bin if self.gateway else None,
             payer=self.payer.bin if self.payer else None,
-            owner_signature=self.owner_signature if self.owner_signature and for_signing else None,
-            gateway_signature=self.gateway_signature if self.gateway_signature and for_signing else None,
-            payer_signature=self.payer_signature if self.payer and self.payer_signature and for_signing else None,
+            owner_signature=self.owner_signature if self.owner_signature and not for_signing else None,
+            gateway_signature=self.gateway_signature if self.gateway_signature and not for_signing else None,
+            payer_signature=self.payer_signature if self.payer and self.payer_signature and not for_signing else None,
             staking_fee=self.staking_fee if self.staking_fee else None,
             fee=self.fee if self.fee else None,
         ))

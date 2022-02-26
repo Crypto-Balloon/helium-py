@@ -88,11 +88,11 @@ class AssertLocationV1(Transaction):
             payer=self.payer.bin if self.payer else None,
             location=self.location if self.location else None,
             nonce=self.nonce if self.nonce else None,
-            owner_signature=self.owner_signature if self.owner_signature and for_signing else None,
-            gateway_signature=self.gateway_signature if self.gateway_signature and for_signing else None,
-            payer_signature=self.payer_signature if self.payer and self.payer_signature and for_signing else None,
-            staking_fee=self.staking_fee if self.staking_fee else None,
-            fee=self.fee if self.fee else None,
+            owner_signature=self.owner_signature if self.owner_signature and not for_signing else None,
+            gateway_signature=self.gateway_signature if self.gateway_signature and not for_signing else None,
+            payer_signature=self.payer_signature if self.payer and self.payer_signature and not for_signing else None,
+            staking_fee=self.staking_fee if self.staking_fee and self.staking_fee > 0 else None,
+            fee=self.fee if self.fee and self.fee > 0 else None,
         ))
 
     def sign(

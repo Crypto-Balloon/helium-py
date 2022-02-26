@@ -16,7 +16,7 @@ class Transaction:
 
     def serialize(self) -> bytes:
         """Replace Placeholder Docstring."""
-        return bytes(self.to_proto(for_signing=True))
+        return bytes(self.to_proto())
 
     @classmethod
     def deserialize(cls, serialized_transaction: bytes):

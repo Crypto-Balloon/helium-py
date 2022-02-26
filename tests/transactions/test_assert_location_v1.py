@@ -39,6 +39,7 @@ def assert_location_no_payer(users):
 
 def test_create_assert_location_transaction(assert_location_no_payer, users):
     """Replace Placeholder Docstring."""
+    assert_location_no_payer.calculate_fee()
     assert assert_location_no_payer.owner.b58 == users.bob.b58
     assert assert_location_no_payer.gateway.b58 == users.alice.b58
     assert assert_location_no_payer.location == '8c383092841a7ff'
