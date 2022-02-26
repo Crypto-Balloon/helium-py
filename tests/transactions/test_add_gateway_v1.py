@@ -3,6 +3,7 @@ import pytest
 
 from helium_py import proto
 from helium_py.transactions import AddGatewayV1
+from helium_py.transactions.utils import EMPTY_SIGNATURE
 
 AddGatewayV1.config(
     transaction_fee_multiplier=5000,
@@ -39,6 +40,11 @@ def test_create_add_gateway_transaction(add_gateway_no_payer, users):
     assert add_gateway_no_payer.fee == 45000
     assert add_gateway_no_payer.staking_fee == 4000000
     assert add_gateway_no_payer.type == 'add_gateway_v1'
+
+    # helium-js mutates the instance when adding empty signatures to calculate payment
+    # and this is a reference b64 representation
+    add_gateway_no_payer.owner_signature = EMPTY_SIGNATURE
+    add_gateway_no_payer.gateway_signature = EMPTY_SIGNATURE
     assert add_gateway_no_payer.to_b64() == b'CtMBCiEBNRpxwi/v7CIxk2rSgmshfs452fd/xsSWOZJimcOGkpUSIQGcZZ1yPMHoEKcueP' \
                                             b'fer0c2qH8Q74/PyAEAtTMn5+5JpBpAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' \
                                             b'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACJAAAAAAAAAAAAAAAAAAAAAAA' \
@@ -54,6 +60,12 @@ def test_create_add_gateway_transaction_with_payer(add_gateway, users):
     assert add_gateway.fee == 65000
     assert add_gateway.staking_fee == 4000000
     assert add_gateway.type == 'add_gateway_v1'
+
+    # helium-js mutates the instance when adding empty signatures to calculate payment
+    # and this is a reference b64 representation
+    add_gateway.owner_signature = EMPTY_SIGNATURE
+    add_gateway.gateway_signature = EMPTY_SIGNATURE
+    add_gateway.payer_signature = EMPTY_SIGNATURE
     assert add_gateway.to_b64() == b'CrgCCiEBNRpxwi/v7CIxk2rSgmshfs452fd/xsSWOZJimcOGkpUSIQGcZZ1yPMHoEKcuePfer0c2qH8' \
                                    b'Q74/PyAEAtTMn5+5JpBpAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' \
                                    b'AAAAAAAAAAAAAAAAAAAAAAAAAAACJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' \
@@ -69,6 +81,7 @@ def test_serialize_returns_value(add_gateway):
 
 def test_serialize_to_base64(add_gateway_no_payer):
     """Replace Placeholder Docstring."""
+    # import IPython; IPython.embed()
     assert AddGatewayV1.from_b64(add_gateway_no_payer.to_b64()).fee == 45000
     assert proto.BlockchainTxn.FromString(add_gateway_no_payer.serialize()).add_gateway.fee == 45000
 

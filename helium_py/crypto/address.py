@@ -1,4 +1,6 @@
 """Address class for cryptography."""
+from typing import Optional
+
 from helium_py.crypto import utils
 from helium_py.crypto.constants import (
     ALLOWED_VERSIONS,
@@ -52,8 +54,11 @@ class Address:
         return Address(version, net_type, key_type, public_key)
 
     @staticmethod
-    def from_bin(bin_val: bytes) -> 'Address':
+    def from_bin(bin_val: Optional[bytes] = None) -> Optional['Address']:
         """Return Address instance created from provided binary."""
+        if bin_val is None or len(bin_val) == 0:
+            return None
+
         byte = bin_val[0]
         netType = utils.byte_to_net_type(byte)
         keyType = utils.byte_to_key_type(byte)
