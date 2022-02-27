@@ -3,6 +3,7 @@ import pytest
 
 from helium_py import proto
 from helium_py.transactions import PaymentV1
+from helium_py.transactions.utils import EMPTY_SIGNATURE
 
 PaymentV1.config(
     transaction_fee_multiplier=5000,
@@ -46,6 +47,9 @@ def test_serialize_to_base64(payment):
 
 def test_deserializes_from_base64_string(payment):
     """Replace Placeholder Docstring."""
+    # helium-js mutates the instance when adding empty signatures to calculate payment
+    # and this is a reference b64 representation
+    payment.signature = EMPTY_SIGNATURE
     serialized = payment.to_b64()
     assert serialized == b'QpABCiEBNRpxwi/v7CIxk2rSgmshfs452fd/xsSWOZJimcOGkpUSIQGcZZ1yPMHoEKcuePfer0c2qH8Q74' \
                          b'/PyAEAtTMn5+5JpBgKILDqASgBMkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' \
