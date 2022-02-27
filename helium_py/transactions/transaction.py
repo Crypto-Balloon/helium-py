@@ -129,6 +129,11 @@ class NewTransaction(Transaction):
         """Replace placeholder docstrings."""
         return cls._get_deserialized_plain(proto_model, cls.fields.get('integers', []))
 
+    @classmethod
+    def get_deserialized_strings(cls, proto_model):
+        """Replace placeholder docstrings."""
+        return cls._get_deserialized_plain(proto_model, cls.fields.get('strings', []))
+
     def get_addresses(self):
         """Replace placeholder docstrings."""
         return {key: getattr(getattr(self, key), 'bin', None) for key in self.fields.get('addresses', [])}
@@ -143,6 +148,10 @@ class NewTransaction(Transaction):
     def get_integers(self):
         """Replace placeholder docstrings."""
         return {key: getattr(self, key, None) for key in self.fields.get('integers', [])}
+
+    def get_strings(self):
+        """Replace placeholder docstrings."""
+        return {key: getattr(self, key, None) for key in self.fields.get('strings', [])}
 
     def get_calculate_fee_kwargs(self):
         """Replace placeholder docstrings."""
@@ -176,6 +185,7 @@ class NewTransaction(Transaction):
             **cls.get_deserialized_addresses(proto_model),
             **cls.get_deserialized_signatures(proto_model),
             **cls.get_deserialized_integers(proto_model),
+            **cls.get_deserialized_strings(proto_model),
         )
 
     @typing.no_type_check
@@ -184,6 +194,7 @@ class NewTransaction(Transaction):
         proto_model_kwargs = {
             **self.get_addresses(),
             **self.get_integers(),
+            **self.get_strings(),
             **self.get_signatures(for_signing),
         }
         proto_txn_kwargs = {

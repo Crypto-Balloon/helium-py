@@ -3,6 +3,7 @@ import pytest
 
 from helium_py import proto
 from helium_py.transactions import AssertLocationV1
+from helium_py.transactions.utils import EMPTY_SIGNATURE
 
 AssertLocationV1.config(
     transaction_fee_multiplier=5000,
@@ -73,6 +74,11 @@ def test_serialize_to_base64(assert_location_no_payer):
 
 def test_deserializes_from_base64_string(assert_location):
     """Replace Placeholder Docstring."""
+    # helium-js mutates the instance when adding empty signatures to calculate payment
+    # and this is a reference b64 representation
+    assert_location.owner_signature = EMPTY_SIGNATURE
+    assert_location.gateway_signature = EMPTY_SIGNATURE
+    assert_location.payer_signature = EMPTY_SIGNATURE
     serialized = assert_location.to_b64()
     assert serialized == b'EsoCCiEBnGWdcjzB6BCnLnj33q9HNqh/EO+Pz8gBALUzJ+fuSaQSIQE1GnHCL+/sIjGTatKCayF+zjnZ93' \
                          b'/GxJY5kmKZw4aSlRohATUaccIv7+wiMZNq0oJrIX7OOdn3f8bEljmSYpnDhpKVIkAAAAAAAAAAAAAAAAAA' \
