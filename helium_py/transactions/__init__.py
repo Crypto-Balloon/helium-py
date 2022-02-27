@@ -7,5 +7,6 @@ from .payment_v1 import PaymentV1
 from .payment_v2 import PaymentV2
 from .security_exchange_v1 import SecurityExchangeV1
 from .stake_validator_v1 import StakeValidatorV1
+from .transfer_hotspot_v1 import TransferHotspotV1
 
 __version__ = VERSION
