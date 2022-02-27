@@ -86,7 +86,7 @@ class NewTransaction(Transaction):
     """Replace placeholder docstrings."""
 
     type: str
-    proto_model_class: betterproto.Message
+    proto_model_class: typing.Type[betterproto.Message]
     proto_txn_field: str
 
     def __init__(self, **kwargs):

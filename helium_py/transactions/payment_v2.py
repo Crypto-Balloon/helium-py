@@ -50,12 +50,14 @@ class PaymentV2(Transaction):
         payment_proto = proto.BlockchainTxn.FromString(serialized_transaction).payment_v2
 
         payer = Address.from_bin(payment_proto.payer) if payment_proto.payer else None
-        payments = [
-            cls.Payment(
-                payee=Address.from_bin(payment.payee),
-                amount=payment.amount,
-                memo=base64.b64encode(bytes(payment.memo.to_bytes(64, 'little', signed=False))))
-            for payment in payment_proto.payments]
+        payments = []
+        for payment in payment_proto.payments:
+            payee = Address.from_bin(payment.payee)
+            if payee is not None:
+                payments.append(cls.Payment(
+                    payee=payee,
+                    amount=payment.amount,
+                    memo=base64.b64encode(bytes(payment.memo.to_bytes(64, 'little', signed=False)))))
         fee = payment_proto.fee
         nonce = payment_proto.nonce
 
