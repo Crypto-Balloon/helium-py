@@ -31,8 +31,12 @@ def transaction_class(cls):
             )
             for field in cls.fields[field_type]
         )
-    TransactionClass.__init__.__signature__ = signature(cls.__init__).replace(parameters=parameters)
-    TransactionClass.sign.__signature__ = signature(cls.sign).replace(parameters=tuple(
+    init_sig = signature(cls.__init__)
+    init_sig.replace(return_annotation=cls)
+    TransactionClass.__init__.__signature__ = init_sig.replace(parameters=parameters)
+    sign_sig = signature(cls.sign)
+    sign_sig.replace(return_annotation=cls)
+    TransactionClass.sign.__signature__ = sign_sig.replace(parameters=tuple(
         Parameter(
             field,
             Parameter.KEYWORD_ONLY,
