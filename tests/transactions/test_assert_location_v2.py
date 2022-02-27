@@ -5,7 +5,6 @@ from helium_py import proto
 from helium_py.transactions import AssertLocationV2
 from helium_py.transactions.utils import EMPTY_SIGNATURE
 
-
 AssertLocationV2.config(
     transaction_fee_multiplier=5000,
     dc_payload_size=24,
@@ -81,18 +80,19 @@ def test_serialize_to_base64(assert_location_no_payer):
     assert proto.BlockchainTxn.FromString(assert_location_no_payer.serialize()).assert_location_v2.fee == 35000
 
 
-def test_deserializes_from_base64_string(assert_location):
+def test_deserializes_assert_location_from_base64_string(assert_location):
     """Replace Placeholder Docstring."""
     # helium-js mutates the instance when adding empty signatures to calculate payment
     # and this is a reference b64 representation
-    #assert_location.owner_signature = EMPTY_SIGNATURE
-    #assert_location.payer_signature = EMPTY_SIGNATURE
+    assert_location.owner_signature = EMPTY_SIGNATURE
+    assert_location.payer_signature = EMPTY_SIGNATURE
     serialized = assert_location.to_b64()
-
-    # TODO repr from helium-js
-    # assert serialized == b'mgKIAQohAZxlnXI8wegQpy54996vRzaofxDvj8/IAQC1Myfn7kmkEiEBNRpxwi/v7CIxk2rSgmshfs452fd' \
-    #                      b'/xsSWOZJimcOGkpUaIQE1GnHCL+/sIjGTatKCayF+zjnZ93/GxJY5kmKZw4aSlTIPOGMzODMwOTI4NDFhN2' \
-    #                      b'ZmOAFAAkgDUMCEPVjYrQM='
+    assert serialized == (
+        b'mgKMAgohAZxlnXI8wegQpy54996vRzaofxDvj8/IAQC1Myfn7kmkEiEBNRpxwi/v7CIxk2rSgmshfs452fd/xsSWOZ'
+        b'JimcOGkpUaIQE1GnHCL+/sIjGTatKCayF+zjnZ93/GxJY5kmKZw4aSlSJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+        b'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACpAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+        b'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADIPOGMzODMwOTI4NDFhN2ZmOAFAAkgDUMCEPVjYrQM='
+    )
     deserialized = AssertLocationV2.from_b64(serialized)
     assert deserialized.owner.b58 == assert_location.owner.b58
     assert deserialized.payer.b58 == assert_location.payer.b58
