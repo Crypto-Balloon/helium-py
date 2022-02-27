@@ -12,6 +12,7 @@ def transaction_class(cls):
         'addresses': Optional[Address],
         'signatures': Optional[bytes],
         'integers': Optional[int],
+        'strings': Optional[str],
     }
 
     class TransactionClass(cls):
