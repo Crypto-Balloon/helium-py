@@ -3,6 +3,7 @@ import pytest
 
 from helium_py import proto
 from helium_py.transactions import StakeValidatorV1
+from helium_py.transactions.utils import EMPTY_SIGNATURE
 
 StakeValidatorV1.config(
     transaction_fee_multiplier=5000,
@@ -44,6 +45,7 @@ def test_serialize_to_base64(stake_validator):
 
 def test_deserializes_from_base64_string(stake_validator):
     """Replace Placeholder Docstring."""
+    stake_validator.owner_signature = EMPTY_SIGNATURE
     serialized = stake_validator.to_b64()
     assert serialized == b'6gGOAQohATUaccIv7+wiMZNq0oJrIX7OOdn3f8bEljmSYpnDhpKVEiEBnGWdcjzB6BCnLnj33q9HNqh/EO+Pz8g' \
                          b'BALUzJ+fuSaQYCiJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' \
