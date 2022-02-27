@@ -153,14 +153,21 @@ class NewTransaction(Transaction):
         """Replace placeholder docstrings."""
         return {key: getattr(self, key, None) for key in self.fields.get('strings', [])}
 
+    def orig_kwarg_gt0_or_none(self, key):
+        """Replace Placeholder Docstring."""
+        if (key not in self.orig_kwargs or (
+                self.orig_kwargs[key] is not None and
+                self.orig_kwargs[key] <= 0)):
+            return None
+        return self.orig_kwargs[key]
+
     def get_calculate_fee_kwargs(self):
         """Replace placeholder docstrings."""
         fee_kwargs = copy.deepcopy(self.orig_kwargs)
         fee_kwargs.update({
             key: EMPTY_SIGNATURE for key in self.get_signatures()
         })
-        if 'fee' not in self.orig_kwargs or self.orig_kwargs['fee'] <= 0:
-            fee_kwargs['fee'] = None
+        fee_kwargs['fee'] = self.orig_kwarg_gt0_or_none('fee')
         return fee_kwargs
 
     @property

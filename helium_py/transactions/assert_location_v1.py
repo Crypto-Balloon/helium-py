@@ -1,11 +1,12 @@
 """Replace Placeholder Docstring."""
 from helium_py import proto
 from helium_py.transactions.decorators import transaction_class
+from helium_py.transactions.mixins import AssertLocationMixin
 from helium_py.transactions.transaction import NewTransaction
 
 
 @transaction_class
-class AssertLocationV1(NewTransaction):
+class AssertLocationV1(AssertLocationMixin, NewTransaction):
     """Replace Placeholder Docstring."""
 
     type: str = 'assert_location_v1'
@@ -40,13 +41,3 @@ class AssertLocationV1(NewTransaction):
         'gateway': 'gateway_signature',
         'payer': 'payer_signature',
     }
-
-    def get_calculate_fee_kwargs(self):
-        """Replace placeholder docstrings."""
-        fee_kwargs = super().get_calculate_fee_kwargs()
-        if not self.payer:
-            try:
-                del fee_kwargs['payer_signature']
-            except KeyError:
-                pass
-        return fee_kwargs
