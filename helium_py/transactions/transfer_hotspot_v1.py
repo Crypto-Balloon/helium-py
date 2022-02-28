@@ -1,11 +1,11 @@
 """Replace Placeholder Docstring."""
 from helium_py import proto
 from helium_py.transactions.decorators import transaction_class
-from helium_py.transactions.transaction import NewTransaction
+from helium_py.transactions.transaction import Transaction
 
 
 @transaction_class
-class TransferHotspotV1(NewTransaction):
+class TransferHotspotV1(Transaction):
     """Replace Placeholder Docstring."""
 
     type: str = 'transfer_hotspot_v1'

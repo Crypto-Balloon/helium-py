@@ -1,9 +1,9 @@
 """Replace Placeholder Docstring."""
 from helium_py import proto
-from helium_py.transactions.transaction import NewTransaction
+from helium_py.transactions.transaction import Transaction
 
 
-class PaymentV2(NewTransaction):
+class PaymentV2(Transaction):
     """Replace Placeholder Docstring."""
 
     type: str = 'payment_v2'

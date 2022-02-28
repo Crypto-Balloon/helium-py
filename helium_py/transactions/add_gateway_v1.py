@@ -1,11 +1,11 @@
 """Replace Placeholder Docstring."""
 from helium_py import proto
 from helium_py.transactions.decorators import transaction_class
-from helium_py.transactions.transaction import NewTransaction
+from helium_py.transactions.transaction import Transaction
 
 
 @transaction_class
-class AddGatewayV1(NewTransaction):
+class AddGatewayV1(Transaction):
     """Replace Placeholder Docstring."""
 
     type = 'add_gateway_v1'

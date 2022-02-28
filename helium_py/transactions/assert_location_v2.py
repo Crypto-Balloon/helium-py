@@ -2,11 +2,11 @@
 from helium_py import proto
 from helium_py.transactions.decorators import transaction_class
 from helium_py.transactions.mixins import AssertLocationMixin
-from helium_py.transactions.transaction import NewTransaction
+from helium_py.transactions.transaction import Transaction
 
 
 @transaction_class
-class AssertLocationV2(AssertLocationMixin, NewTransaction):
+class AssertLocationV2(AssertLocationMixin, Transaction):
     """Replace Placeholder Docstring."""
 
     type = 'assert_location_v2'

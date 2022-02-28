@@ -1,11 +1,11 @@
 """Replace Placeholder Docstring."""
 from helium_py import proto
 from helium_py.transactions.decorators import transaction_class
-from helium_py.transactions.transaction import NewTransaction
+from helium_py.transactions.transaction import Transaction
 
 
 @transaction_class
-class UnstakeValidatorV1(NewTransaction):
+class UnstakeValidatorV1(Transaction):
     """Replace Placeholder Docstring."""
 
     type: str = 'unstake_validator_v1'

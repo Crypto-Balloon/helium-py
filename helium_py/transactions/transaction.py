@@ -15,10 +15,27 @@ from helium_py.transactions.utils import EMPTY_SIGNATURE
 class Transaction:
     """Replace placeholder docstrings."""
 
+    type: str
+    proto_model_class: typing.Type[betterproto.Message]
+    proto_txn_field: str
+    payment_class: typing.Type = Payment
+
+    # Configuration
     transaction_fee_multiplier: int = 0
     dc_payload_size: int = 24
     staking_fee_txn_assert_location_v1: int = 1
     staking_fee_txn_add_gateway_v1: int = 1
+
+    def __init__(self, **kwargs):
+        """Replace Placeholder Docstring."""
+        self.orig_kwargs = copy.deepcopy(kwargs)
+        for field_type in self.fields:
+            for field_name in self.fields[field_type]:
+                value = kwargs.get(field_name)
+                setattr(self, field_name, value)
+        for field_name in self.defaults:
+            if field_name not in kwargs:
+                setattr(self, field_name, getattr(self, self.defaults[field_name]))
 
     def serialize(self) -> bytes:
         """Replace Placeholder Docstring."""
@@ -81,26 +98,6 @@ class Transaction:
         """Replace placeholder docstrings."""
         payload = self.serialize()
         return math.ceil(len(payload) / self.dc_payload_size) * self.transaction_fee_multiplier
-
-
-class NewTransaction(Transaction):
-    """Replace placeholder docstrings."""
-
-    type: str
-    proto_model_class: typing.Type[betterproto.Message]
-    proto_txn_field: str
-    payment_class: typing.Type = Payment
-
-    def __init__(self, **kwargs):
-        """Replace Placeholder Docstring."""
-        self.orig_kwargs = copy.deepcopy(kwargs)
-        for field_type in self.fields:
-            for field_name in self.fields[field_type]:
-                value = kwargs.get(field_name)
-                setattr(self, field_name, value)
-        for field_name in self.defaults:
-            if field_name not in kwargs:
-                setattr(self, field_name, getattr(self, self.defaults[field_name]))
 
     @classmethod
     def get_deserialized_addresses(cls, proto_model):
