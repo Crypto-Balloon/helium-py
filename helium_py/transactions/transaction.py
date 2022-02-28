@@ -41,11 +41,6 @@ class Transaction:
         """Replace Placeholder Docstring."""
         return bytes(self.to_proto())
 
-    @classmethod
-    def deserialize(cls, serialized_transaction: bytes):
-        """Replace placeholder docstrings."""
-        raise NotImplementedError()
-
     def to_b64(self) -> bytes:
         """Replace placeholder docstrings."""
         return base64.b64encode(self.serialize())
@@ -54,10 +49,6 @@ class Transaction:
     def from_b64(cls, serialized_transaction: bytes):
         """Replace placeholder docstrings."""
         return cls.deserialize(base64.b64decode(serialized_transaction))
-
-    def to_proto(self, for_signing=False):
-        """Replace placeholder docstrings."""
-        raise NotImplementedError()
 
     @classmethod
     def config(
@@ -93,11 +84,6 @@ class Transaction:
         buf = base64.b64decode(transaction_string)
         decoded = proto.BlockchainTxn.FromString(buf)
         return list(decoded.to_dict().keys())[0]
-
-    def calculate_fee(self) -> int:
-        """Replace placeholder docstrings."""
-        payload = self.serialize()
-        return math.ceil(len(payload) / self.dc_payload_size) * self.transaction_fee_multiplier
 
     @classmethod
     def get_deserialized_addresses(cls, proto_model):
