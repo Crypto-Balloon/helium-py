@@ -8,6 +8,7 @@ import betterproto
 
 from helium_py import proto
 from helium_py.crypto.address import Address
+from helium_py.transactions.payment import Payment
 from helium_py.transactions.utils import EMPTY_SIGNATURE
 
 
@@ -88,6 +89,7 @@ class NewTransaction(Transaction):
     type: str
     proto_model_class: typing.Type[betterproto.Message]
     proto_txn_field: str
+    payment_class: typing.Type = Payment
 
     def __init__(self, **kwargs):
         """Replace Placeholder Docstring."""
@@ -134,6 +136,14 @@ class NewTransaction(Transaction):
         """Replace placeholder docstrings."""
         return cls._get_deserialized_plain(proto_model, cls.fields.get('strings', []))
 
+    @classmethod
+    def get_deserialized_payment_lists(cls, proto_model):
+        """Replace placeholder docstrings."""
+        return {
+            key: cls.payment_class.deserialize_payment_list(getattr(proto_model, key))
+            for key in cls.fields.get('payment_lists', [])
+        }
+
     def get_addresses(self):
         """Replace placeholder docstrings."""
         return {key: getattr(getattr(self, key), 'bin', None) for key in self.fields.get('addresses', [])}
@@ -152,6 +162,13 @@ class NewTransaction(Transaction):
     def get_strings(self):
         """Replace placeholder docstrings."""
         return {key: getattr(self, key, None) for key in self.fields.get('strings', [])}
+
+    def get_payment_lists(self):
+        """Replace placeholder docstrings."""
+        return {
+            key: self.payment_class.payment_list_to_proto(getattr(self, key) or None)
+            for key in self.fields.get('payment_lists', [])
+        }
 
     def orig_kwarg_gt0_or_none(self, key):
         """Replace Placeholder Docstring."""
@@ -193,6 +210,7 @@ class NewTransaction(Transaction):
             **cls.get_deserialized_signatures(proto_model),
             **cls.get_deserialized_integers(proto_model),
             **cls.get_deserialized_strings(proto_model),
+            **cls.get_deserialized_payment_lists(proto_model)
         )
 
     @typing.no_type_check
@@ -203,6 +221,7 @@ class NewTransaction(Transaction):
             **self.get_integers(),
             **self.get_strings(),
             **self.get_signatures(for_signing),
+            **self.get_payment_lists(),
         }
         proto_txn_kwargs = {
             self.proto_txn_field: self.proto_model_class(**proto_model_kwargs)
