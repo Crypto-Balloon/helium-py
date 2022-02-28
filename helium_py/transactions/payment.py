@@ -15,14 +15,14 @@ class Payment:
     amount: int
     memo: Optional[bytes]
 
-    @classmethod
-    def deserialize_payment_list(cls, protocol_buffer_payment_list):
+    @staticmethod
+    def deserialize_payment_list(protocol_buffer_payment_list):
         """Replace Placeholder Docstring."""
         payments = []
         for payment in protocol_buffer_payment_list:
             payee = Address.from_bin(payment.payee)
             if payee is not None:
-                payments.append(cls(
+                payments.append(Payment(
                     payee=payee,
                     amount=payment.amount,
                     memo=base64.b64encode(bytes(payment.memo.to_bytes(64, 'little', signed=False)))))
