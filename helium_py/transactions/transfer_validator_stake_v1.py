@@ -19,9 +19,11 @@ class TransferValidatorStakeV1(Transaction):
             'new_owner',
         ),
         'signatures': (
-            'owner_signature',
+            'old_owner_signature',
+            'new_owner_signature',
         ),
         'integers': (
+            'stake_amount',
             'payment_amount',
             'fee',
         ),

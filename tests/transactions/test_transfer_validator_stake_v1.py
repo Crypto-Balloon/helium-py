@@ -48,7 +48,7 @@ def test_serialize_to_base64(transfer_validator_stake):
     assert TransferValidatorStakeV1.from_b64(transfer_validator_stake.to_b64()).stake_amount == 10
     assert proto.BlockchainTxn.FromString(
         transfer_validator_stake.serialize(),
-    ).transfer_validator_stake.stake_amount == 10
+    ).transfer_val_stake.stake_amount == 10
 
 
 def test_deserializes_from_base64_string(transfer_validator_stake):
@@ -68,7 +68,7 @@ def test_deserializes_from_base64_string(transfer_validator_stake):
     )
     deserialized = TransferValidatorStakeV1.from_b64(serialized)
     deserialized.calculate_fee()
-    assert deserialized.old_address.b58 == transfer_validator_stake.old_addressb58
+    assert deserialized.old_address.b58 == transfer_validator_stake.old_address.b58
     assert deserialized.new_address.b58 == transfer_validator_stake.new_address.b58
     assert deserialized.old_owner.b58 == transfer_validator_stake.old_owner.b58
     assert deserialized.new_owner.b58 == transfer_validator_stake.new_owner.b58
