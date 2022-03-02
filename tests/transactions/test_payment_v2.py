@@ -55,8 +55,8 @@ def test_serialize_to_base64(payment):
 def test_deserializes_from_base64_string(payment):
     """Replace Placeholder Docstring."""
     serialized = payment.to_b64()
-    assert serialized == b'wgFaCiEBNRpxwi/v7CIxk2rSgmshfs452fd/xsSWOZJimcOGkpUSLwohAZxlnXI8wegQpy54996vRzaofxD' \
-                         b'vj8/IAQC1Myfn7kmkEAoY7d6N29at2bZvGLiRAiAB'
+    assert serialized == b'wgFaCiEBNRpxwi/v7CIxk2rSgmshfs452fd/xsSWOZJimcOGkpUSLwohAZxlnXI8wegQpy54996vRzaofxDvj8' \
+                         b'/IAQC1Myfn7kmkEAoY7d6N29at2bZvGLiRAiAB'
 
     deserialized = PaymentV2.from_b64(serialized)
     assert deserialized.payer.b58 == payment.payer.b58
