@@ -100,9 +100,18 @@ class Transaction:
         return value if value != b'' else None
 
     @classmethod
+    def _get_deserialized_memo(cls, proto_model):
+        memo = cls.getattr_none(proto_model, 'memo')
+        return memo.to_bytes((memo.bit_length() + 7) // 8, 'little', signed=False) if memo else None
+
+    @classmethod
     def _get_deserialized_plain(cls, proto_model, attr_names):
         """Replace placeholder docstrings."""
-        return {key: cls.getattr_none(proto_model, key) for key in attr_names}
+        return {
+            key: cls._get_deserialized_memo(proto_model)
+            if key == 'memo' else cls.getattr_none(proto_model, key)
+            for key in attr_names
+        }
 
     @classmethod
     def get_deserialized_signatures(cls, proto_model):
@@ -142,9 +151,19 @@ class Transaction:
         """Replace placeholder docstrings."""
         return {key: getattr(self, key, None) for key in self.fields.get('integers', [])}
 
+    def _get_memo(self):
+        memo = getattr(self, 'memo', None)
+        if memo and len(memo) > 8:
+            raise ValueError('Memo cannot contain more than 8 bytes.')
+        return int.from_bytes(memo, 'little', signed=False) if memo else None
+
     def get_strings(self):
         """Replace placeholder docstrings."""
-        return {key: getattr(self, key, None) for key in self.fields.get('strings', [])}
+        return {
+            key: self._get_memo()
+            if key == 'memo' else getattr(self, key, None)
+            for key in self.fields.get('strings', [])
+        }
 
     def get_payment_lists(self):
         """Replace placeholder docstrings."""

@@ -22,7 +22,7 @@ def payment(users):
             Payment(
                 payee=users.alice.keypair.address,
                 amount=10,
-                memo=b'bW9ja21lbW8=',
+                memo=b'mockmemo',
             ),
         ],
         nonce=1,
@@ -35,7 +35,7 @@ def test_create_payment_transaction(payment, users):
     assert len(payment.payments) == 1
     assert payment.payments[0].payee.b58 == users.alice.b58
     assert payment.payments[0].amount == 10
-    assert payment.payments[0].memo == b'bW9ja21lbW8='
+    assert payment.payments[0].memo == b'mockmemo'
     assert payment.nonce == 1
     assert payment.fee == 35000
     assert payment.type == 'payment_v2'
@@ -55,8 +55,8 @@ def test_serialize_to_base64(payment):
 def test_deserializes_from_base64_string(payment):
     """Replace Placeholder Docstring."""
     serialized = payment.to_b64()
-    assert serialized == b'wgFaCiEBNRpxwi/v7CIxk2rSgmshfs452fd/xsSWOZJimcOGkpUSLwohAZxlnXI8wegQpy54996vRzaofxD' \
-                         b'vj8/IAQC1Myfn7kmkEAoY7d6N29at2bZvGLiRAiAB'
+    assert serialized == b'wgFaCiEBNRpxwi/v7CIxk2rSgmshfs452fd/xsSWOZJimcOGkpUSLwohAZxlnXI8wegQpy54996vRzaofxDvj8' \
+                         b'/IAQC1Myfn7kmkEAoY7d6N29at2bZvGLiRAiAB'
 
     deserialized = PaymentV2.from_b64(serialized)
     assert deserialized.payer.b58 == payment.payer.b58
