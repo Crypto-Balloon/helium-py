@@ -1,0 +1,75 @@
+"""Replace Placeholder Docstring."""
+import pytest
+
+from helium_py import proto
+from helium_py.transactions import TokenBurnV1
+from helium_py.transactions.utils import EMPTY_SIGNATURE
+
+TokenBurnV1.config(
+    transaction_fee_multiplier=5000,
+    dc_payload_size=24,
+    staking_fee_txn_add_gateway_v1=40 * 100000,
+    staking_fee_txn_assert_location_v1=10 * 100000,
+)
+
+
+@pytest.fixture
+def token_burn(users):
+    """Replace Placeholder Docstring."""
+    return TokenBurnV1(
+        payer=users.bob.keypair.address,
+        payee=users.alice.keypair.address,
+        amount=10,
+        nonce=1,
+        memo=b'MTIzNDU2Nzg5MA==',
+    )
+
+
+def test_create_token_burn_transaction(token_burn, users):
+    """Replace Placeholder Docstring."""
+    assert token_burn.payer.b58 == users.bob.b58
+    assert token_burn.payee.b58 == users.alice.b58
+    assert token_burn.amount == 10
+    assert token_burn.nonce == 1
+    assert token_burn.fee == 35000
+    assert token_burn.memo == b'MTIzNDU2Nzg5MA=='
+    assert token_burn.type == 'token_burn_v1'
+
+
+def test_serialize_returns_value(token_burn):
+    """Replace Placeholder Docstring."""
+    assert len(token_burn.serialize()) > 0
+
+
+def test_serialize_to_base64(token_burn):
+    """Replace Placeholder Docstring."""
+    assert TokenBurnV1.from_b64(token_burn.to_b64()).amount == 10
+    assert proto.BlockchainTxn.FromString(token_burn.serialize()).token_burn.amount == 10
+
+
+def test_deserializes_from_base64_string(token_burn):
+    """Replace Placeholder Docstring."""
+    token_burn.signature = EMPTY_SIGNATURE
+    serialized = token_burn.to_b64()
+    breakpoint()
+    # TODO repr from helium-js
+    # assert serialized == b'igGaAQohATUaccIv7+wiMZNq0oJrIX7OOdn3f8bEljmSYpnDhpKVEiEBnGWdcjzB6BCnLnj33q9HNqh/EO+Pz' \
+    #                      b'8gBALUzJ+fuSaQYCiABKkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' \
+    #                      b'AAAAAAAAAAAAAAAAAAAAAAMLiRAjix5Myh08bNmzg='
+
+    deserialized = TokenBurnV1.from_b64(serialized)
+    deserialized.calculate_fee()
+    assert deserialized.payer.b58 == token_burn.buyer.b58
+    assert deserialized.payee.b58 == token_burn.seller.b58
+    assert deserialized.amount == 10
+    assert deserialized.nonce == 1
+    assert deserialized.memo == token_burn.memo
+    assert deserialized.fee == token_burn.fee
+    assert deserialized.signature == token_burn.signature
+
+
+def test_signing_adds_signature(token_burn, users):
+    """Replace Placeholder Docstring."""
+    signed_transaction = token_burn.sign(buyer=users.bob.keypair)
+    assert signed_transaction.signature is not None
+    assert len(signed_transaction.buyer_signature) == 64
