@@ -22,7 +22,7 @@ def payment(users):
             Payment(
                 payee=users.alice.keypair.address,
                 amount=10,
-                memo=b'bW9ja21lbW8=',
+                memo=b'mockmemo',
             ),
         ],
         nonce=1,
@@ -35,7 +35,7 @@ def test_create_payment_transaction(payment, users):
     assert len(payment.payments) == 1
     assert payment.payments[0].payee.b58 == users.alice.b58
     assert payment.payments[0].amount == 10
-    assert payment.payments[0].memo == b'bW9ja21lbW8='
+    assert payment.payments[0].memo == b'mockmemo'
     assert payment.nonce == 1
     assert payment.fee == 35000
     assert payment.type == 'payment_v2'

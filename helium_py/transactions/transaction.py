@@ -39,7 +39,6 @@ class Transaction:
 
     def serialize(self) -> bytes:
         """Replace Placeholder Docstring."""
-        breakpoint()
         return bytes(self.to_proto())
 
     def to_b64(self) -> bytes:
@@ -103,7 +102,7 @@ class Transaction:
     @classmethod
     def _get_deserialized_memo(cls, proto_model):
         memo = cls.getattr_none(proto_model, 'memo')
-        return memo.to_bytes(64, 'little', signed=False) if memo else None
+        return memo.to_bytes((memo.bit_length() + 7) // 8, 'little', signed=False) if memo else None
 
     @classmethod
     def _get_deserialized_plain(cls, proto_model, attr_names):
@@ -154,8 +153,9 @@ class Transaction:
 
     def _get_memo(self):
         memo = getattr(self, 'memo', None)
-        breakpoint()
-        return int.from_bytes(base64.b64decode(memo), byteorder='little', signed=False) if memo else None
+        if memo and len(memo) > 8:
+            raise ValueError('Memo cannot contain more than 8 bytes.')
+        return int.from_bytes(memo, 'little', signed=False) if memo else None
 
     def get_strings(self):
         """Replace placeholder docstrings."""
