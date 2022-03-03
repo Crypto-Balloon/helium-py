@@ -60,7 +60,7 @@ class Transaction:
             dc_payload_size: typing.Optional[int] = None,
             staking_fee_txn_assert_location_v1: typing.Optional[int] = None,
             staking_fee_txn_add_gateway_v1: typing.Optional[int] = None,
-    ) -> dict[str, int]:
+    ) -> typing.Dict[str, int]:
         """Optionally update and return configuration values for chain variables."""
         if transaction_fee_multiplier is not None:
             cls.transaction_fee_multiplier = transaction_fee_multiplier
@@ -95,7 +95,7 @@ class Transaction:
         return value if value != b'' else None
 
     @classmethod
-    def get_deserialized_addresses(cls, proto_model: betterproto.Message) -> dict[str, typing.Optional[Address]]:
+    def get_deserialized_addresses(cls, proto_model: betterproto.Message) -> typing.Dict[str, typing.Optional[Address]]:
         """Return all deserialized Address instances for Transaction instances address fields."""
         return {
             key: Address.from_bin(getattr(proto_model, key)) if getattr(proto_model, key) else None
@@ -113,7 +113,7 @@ class Transaction:
             cls,
             proto_model: betterproto.Message,
             attr_names: typing.List[str]
-    ) -> dict[str, typing.Any]:
+    ) -> typing.Dict[str, typing.Any]:
         """Return the deserialized values for the given attribute names."""
         return {
             key: cls._get_deserialized_memo(proto_model)
@@ -122,22 +122,22 @@ class Transaction:
         }
 
     @classmethod
-    def get_deserialized_signatures(cls, proto_model: betterproto.Message) -> dict[str, bytes]:
+    def get_deserialized_signatures(cls, proto_model: betterproto.Message) -> typing.Dict[str, bytes]:
         """Return deserialized signatures."""
         return cls._get_deserialized_plain(proto_model, cls.fields.get('signatures', []))
 
     @classmethod
-    def get_deserialized_integers(cls, proto_model: betterproto.Message) -> dict[str, int]:
+    def get_deserialized_integers(cls, proto_model: betterproto.Message) -> typing.Dict[str, int]:
         """Return deserialized integers."""
         return cls._get_deserialized_plain(proto_model, cls.fields.get('integers', []))
 
     @classmethod
-    def get_deserialized_strings(cls, proto_model: betterproto.Message) -> dict[str, str]:
+    def get_deserialized_strings(cls, proto_model: betterproto.Message) -> typing.Dict[str, str]:
         """Return deserialized strings."""
         return cls._get_deserialized_plain(proto_model, cls.fields.get('strings', []))
 
     @classmethod
-    def get_deserialized_payment_lists(cls, proto_model: betterproto.Message) -> dict[str, typing.List[Payment]]:
+    def get_deserialized_payment_lists(cls, proto_model: betterproto.Message) -> typing.Dict[str, typing.List[Payment]]:
         """Return deserialized payment lists."""
         return {
             key: cls.payment_class.deserialize_payment_list(getattr(proto_model, key))
