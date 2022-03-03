@@ -16,9 +16,12 @@ class Transaction:
     """Replace placeholder docstrings."""
 
     type: str
+    fields: dict
+    defaults: dict
+    keypairs: dict
     proto_model_class: typing.Type[betterproto.Message]
     proto_txn_field: str
-    payment_class: typing.Type = Payment
+    payment_class: typing.Type[Payment] = Payment
 
     # Configuration
     transaction_fee_multiplier: int = 0
