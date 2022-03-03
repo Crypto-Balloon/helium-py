@@ -23,8 +23,6 @@ class TokenBurnV1(Transaction):
             'amount',
             'nonce',
             'fee',
-        ),
-        'strings': (
             'memo',
         ),
     }

@@ -1,5 +1,6 @@
 """Utility methods for cryptography."""
 import binascii
+from typing import Tuple
 
 import nacl.bindings
 import nacl.encoding
@@ -51,6 +52,11 @@ def bs58_to_bin(bs58_address: bytes) -> bytes:
     if checksum_verify != checksum:
         raise ValueError('Invalid checksum')
     return payload
+
+
+def byte_to_net_type_and_key_type(byte_val: int) -> Tuple[int, int]:
+    """Return network type and key type in a tuple from byte value."""
+    return byte_to_net_type(byte_val), byte_to_key_type(byte_val)
 
 
 def byte_to_net_type(byte_val: int) -> int:

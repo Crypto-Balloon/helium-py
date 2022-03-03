@@ -54,13 +54,11 @@ class Address:
         return Address(version, net_type, key_type, public_key)
 
     @staticmethod
-    def from_bin(bin_val: Optional[bytes] = None) -> Optional['Address']:
+    def from_bin(value: Optional[bytes] = None) -> 'Address':
         """Return Address instance created from provided binary."""
-        if bin_val is None or len(bin_val) == 0:
-            return None
+        if value is None or len(value) == 0:
+            raise ValueError(f'Cannot create address instance.'
+                             f'Binary value is {"null" if value is None else "blank"}')
 
-        byte = bin_val[0]
-        netType = utils.byte_to_net_type(byte)
-        keyType = utils.byte_to_key_type(byte)
-        publicKey = bin_val[1:len(bin_val)]
-        return Address(Address.DEFAULT_VERSION, netType, keyType, publicKey)
+        netType, keyType = utils.byte_to_net_type_and_key_type(value[0])
+        return Address(Address.DEFAULT_VERSION, netType, keyType, public_key=value[1:])
