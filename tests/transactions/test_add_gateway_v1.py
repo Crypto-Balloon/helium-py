@@ -1,4 +1,4 @@
-"""Replace Placeholder Docstring."""
+"""Tests for AddGatewayV1."""
 import pytest
 
 from helium_py import proto
@@ -15,7 +15,7 @@ AddGatewayV1.config(
 
 @pytest.fixture
 def add_gateway(users):
-    """Replace Placeholder Docstring."""
+    """Fixture for Transaction class."""
     return AddGatewayV1(
         owner=users.bob.keypair.address,
         gateway=users.alice.keypair.address,
@@ -25,7 +25,7 @@ def add_gateway(users):
 
 @pytest.fixture
 def add_gateway_no_payer(users):
-    """Replace Placeholder Docstring."""
+    """Fixture for Transaction class with no payer."""
     return AddGatewayV1(
         owner=users.bob.keypair.address,
         gateway=users.alice.keypair.address,
@@ -34,7 +34,7 @@ def add_gateway_no_payer(users):
 
 
 def test_create_add_gateway_transaction(add_gateway_no_payer, users):
-    """Replace Placeholder Docstring."""
+    """Test create transaction."""
     assert add_gateway_no_payer.owner.b58 == users.bob.b58
     assert add_gateway_no_payer.gateway.b58 == users.alice.b58
     assert add_gateway_no_payer.fee == 45000
@@ -53,7 +53,7 @@ def test_create_add_gateway_transaction(add_gateway_no_payer, users):
 
 
 def test_create_add_gateway_transaction_with_payer(add_gateway, users):
-    """Replace Placeholder Docstring."""
+    """Test create transaction with payer."""
     assert add_gateway.owner.b58 == users.bob.b58
     assert add_gateway.gateway.b58 == users.alice.b58
     assert add_gateway.payer.b58 == users.bob.b58
@@ -75,19 +75,19 @@ def test_create_add_gateway_transaction_with_payer(add_gateway, users):
 
 
 def test_serialize_returns_value(add_gateway):
-    """Replace Placeholder Docstring."""
+    """Test serialize transaction."""
     assert len(add_gateway.serialize()) > 0
 
 
 def test_serialize_to_base64(add_gateway_no_payer):
-    """Replace Placeholder Docstring."""
+    """Test serialize transaction to base64 and deserialize transaction."""
     # import IPython; IPython.embed()
     assert AddGatewayV1.from_b64(add_gateway_no_payer.to_b64()).fee == 45000
     assert proto.BlockchainTxn.FromString(add_gateway_no_payer.serialize()).add_gateway.fee == 45000
 
 
 def test_deserializes_from_base64_string(add_gateway):
-    """Replace Placeholder Docstring."""
+    """Test deserialize transaction from base64."""
     serialized = add_gateway.to_b64()
     deserialized = AddGatewayV1.from_b64(serialized)
     deserialized.calculate_fee()
@@ -102,7 +102,7 @@ def test_deserializes_from_base64_string(add_gateway):
 
 
 def test_deserializes_from_base64_string_with_signatures(add_gateway):
-    """Replace Placeholder Docstring."""
+    """Test deserialize transaction from base64 with signatures."""
     deserialized = AddGatewayV1.from_b64(add_gateway.to_b64())
     deserialized.calculate_fee()
     assert deserialized.owner.b58 == add_gateway.owner.b58
@@ -116,7 +116,7 @@ def test_deserializes_from_base64_string_with_signatures(add_gateway):
 
 
 def test_deserializes_empty_string():
-    """Replace Placeholder Docstring."""
+    """Test deserialize transaction from base64 when empty."""
     deserialized = AddGatewayV1.from_b64(b'')
     assert deserialized.owner is None
     assert deserialized.payer is None
@@ -129,21 +129,21 @@ def test_deserializes_empty_string():
 
 
 def test_signing_adds_owner_signature(add_gateway_no_payer, users):
-    """Replace Placeholder Docstring."""
+    """Test signing as owner adds owner signature."""
     signed_transaction = add_gateway_no_payer.sign(owner=users.bob.keypair)
     assert signed_transaction.owner_signature is not None
     assert len(signed_transaction.owner_signature) == 64
 
 
 def test_signing_adds_gateway_signature(add_gateway_no_payer, users):
-    """Replace Placeholder Docstring."""
+    """Test signing as gateway adds owner signature."""
     signed_transaction = add_gateway_no_payer.sign(gateway=users.alice.keypair)
     assert signed_transaction.gateway_signature is not None
     assert len(signed_transaction.gateway_signature) == 64
 
 
 def test_signing_adds_the_payer_signature(add_gateway, users):
-    """Replace Placeholder Docstring."""
+    """Test signing as payer adds owner signature."""
     signed_transaction = add_gateway.sign(payer=users.alice.keypair)
     assert signed_transaction.payer_signature is not None
     assert len(signed_transaction.payer_signature) == 64

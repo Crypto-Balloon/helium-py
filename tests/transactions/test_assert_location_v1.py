@@ -1,4 +1,4 @@
-"""Replace Placeholder Docstring."""
+"""Tests for AssertLocationV1."""
 import pytest
 
 from helium_py import proto
@@ -16,7 +16,7 @@ AssertLocationV1.config(
 
 @pytest.fixture
 def assert_location(users):
-    """Replace Placeholder Docstring."""
+    """Fixture for Transaction class."""
     return AssertLocationV1(
         owner=users.bob.keypair.address,
         gateway=users.alice.keypair.address,
@@ -28,7 +28,7 @@ def assert_location(users):
 
 @pytest.fixture
 def assert_location_no_payer(users):
-    """Replace Placeholder Docstring."""
+    """Fixture for Transaction class with no payer."""
     return AssertLocationV1(
         owner=users.bob.keypair.address,
         gateway=users.alice.keypair.address,
@@ -39,7 +39,7 @@ def assert_location_no_payer(users):
 
 
 def test_create_assert_location_transaction(assert_location_no_payer, users):
-    """Replace Placeholder Docstring."""
+    """Test create transaction."""
     assert_location_no_payer.calculate_fee()
     assert assert_location_no_payer.owner.b58 == users.bob.b58
     assert assert_location_no_payer.gateway.b58 == users.alice.b58
@@ -51,7 +51,7 @@ def test_create_assert_location_transaction(assert_location_no_payer, users):
 
 
 def test_create_assert_location_transaction_with_payer(assert_location, users):
-    """Replace Placeholder Docstring."""
+    """Test create transaction with payer."""
     assert assert_location.owner.b58 == users.bob.b58
     assert assert_location.gateway.b58 == users.alice.b58
     assert assert_location.location == '8c383092841a7ff'
@@ -62,18 +62,18 @@ def test_create_assert_location_transaction_with_payer(assert_location, users):
 
 
 def test_serialize_returns_value(assert_location):
-    """Replace Placeholder Docstring."""
+    """Test serialize transaction."""
     assert len(assert_location.serialize()) > 0
 
 
 def test_serialize_to_base64(assert_location_no_payer):
-    """Replace Placeholder Docstring."""
+    """Test serialize transaction to base64 and deserialize transaction."""
     assert AssertLocationV1.from_b64(assert_location_no_payer.to_b64()).fee == 50000
     assert proto.BlockchainTxn.FromString(assert_location_no_payer.serialize()).assert_location.fee == 50000
 
 
 def test_deserializes_from_base64_string(assert_location):
-    """Replace Placeholder Docstring."""
+    """Test deserialize transaction from base64."""
     # helium-js mutates the instance when adding empty signatures to calculate payment
     # and this is a reference b64 representation
     assert_location.owner_signature = EMPTY_SIGNATURE
@@ -101,7 +101,7 @@ def test_deserializes_from_base64_string(assert_location):
 
 
 def test_deserializes_from_base64_string_with_signatures(assert_location):
-    """Replace Placeholder Docstring."""
+    """Test deserialize transaction from base64 with signatures."""
     deserialized = AssertLocationV1.from_b64(assert_location.to_b64())
     deserialized.calculate_fee()
     assert deserialized.owner.b58 == assert_location.owner.b58
@@ -117,21 +117,21 @@ def test_deserializes_from_base64_string_with_signatures(assert_location):
 
 
 def test_signing_adds_owner_signature(assert_location_no_payer, users):
-    """Replace Placeholder Docstring."""
+    """Test signing as owner adds owner signature."""
     signed_transaction = assert_location_no_payer.sign(owner=users.bob.keypair)
     assert signed_transaction.owner_signature is not None
     assert len(signed_transaction.owner_signature) == 64
 
 
 def test_signing_adds_gateway_signature(assert_location_no_payer, users):
-    """Replace Placeholder Docstring."""
+    """Test signing as gateway adds owner signature."""
     signed_transaction = assert_location_no_payer.sign(gateway=users.alice.keypair)
     assert signed_transaction.gateway_signature is not None
     assert len(signed_transaction.gateway_signature) == 64
 
 
 def test_signing_adds_the_payer_signature(assert_location, users):
-    """Replace Placeholder Docstring."""
+    """Test signing as payer adds owner signature."""
     signed_transaction = assert_location.sign(payer=users.alice.keypair)
     assert signed_transaction.payer_signature is not None
     assert len(signed_transaction.payer_signature) == 64
