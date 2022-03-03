@@ -1,8 +1,10 @@
 """Payment V2 Transaction Class."""
 from helium_py import proto
+from helium_py.transactions.decorators import transaction_class
 from helium_py.transactions.transaction import Transaction
 
 
+@transaction_class
 class PaymentV2(Transaction):
     """Payment V2 Transaction Class."""
 

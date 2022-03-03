@@ -1,9 +1,10 @@
 """Decorators for use in transactions classes."""
 from inspect import Parameter, signature
-from typing import Optional
+from typing import List, Optional
 
 from helium_py.crypto.address import Address
 from helium_py.crypto.keypair import Keypair
+from helium_py.transactions.payment import Payment
 
 
 def transaction_class(cls):
@@ -13,6 +14,7 @@ def transaction_class(cls):
         'signatures': Optional[bytes],
         'integers': Optional[int],
         'strings': Optional[str],
+        'payment_lists': Optional[List[Payment]],
     }
 
     class TransactionClass(cls):

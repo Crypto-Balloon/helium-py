@@ -1,4 +1,4 @@
-"""Replace Placeholder Docstring."""
+"""Tests for PaymentV1."""
 import pytest
 
 from helium_py import proto
@@ -15,7 +15,7 @@ PaymentV1.config(
 
 @pytest.fixture
 def payment(users):
-    """Replace Placeholder Docstring."""
+    """Fixture for Transaction class."""
     return PaymentV1(
         payer=users.bob.keypair.address,
         payee=users.alice.keypair.address,
@@ -25,7 +25,7 @@ def payment(users):
 
 
 def test_create_payment_transaction(payment, users):
-    """Replace Placeholder Docstring."""
+    """Test create transaction."""
     assert payment.payer.b58 == users.bob.b58
     assert payment.payee.b58 == users.alice.b58
     assert payment.amount == 10
@@ -35,18 +35,18 @@ def test_create_payment_transaction(payment, users):
 
 
 def test_serialize_returns_value(payment):
-    """Replace Placeholder Docstring."""
+    """Test serialize transaction."""
     assert len(payment.serialize()) > 0
 
 
 def test_serialize_to_base64(payment):
-    """Replace Placeholder Docstring."""
+    """Test serialize transaction to base64 and deserialize transaction."""
     assert PaymentV1.from_b64(payment.to_b64()).fee == 30000
     assert proto.BlockchainTxn.FromString(payment.serialize()).payment.fee == 30000
 
 
 def test_deserializes_from_base64_string(payment):
-    """Replace Placeholder Docstring."""
+    """Test deserialize transaction from base64."""
     # helium-js mutates the instance when adding empty signatures to calculate payment
     # and this is a reference b64 representation
     payment.signature = EMPTY_SIGNATURE
@@ -66,7 +66,7 @@ def test_deserializes_from_base64_string(payment):
 
 
 def test_deserializes_from_base64_string_with_signatures(payment):
-    """Replace Placeholder Docstring."""
+    """Test deserialize transaction from base64 with signatures."""
     deserialized = PaymentV1.from_b64(payment.to_b64())
     deserialized.calculate_fee()
     assert deserialized.payer.b58 == payment.payer.b58
@@ -78,7 +78,7 @@ def test_deserializes_from_base64_string_with_signatures(payment):
 
 
 def test_signing_adds_signature(payment, users):
-    """Replace Placeholder Docstring."""
+    """Test signing adds signature."""
     signed_transaction = payment.sign(payer=users.bob.keypair)
     assert signed_transaction.signature is not None
     assert len(signed_transaction.signature) == 64

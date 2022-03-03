@@ -1,4 +1,4 @@
-"""Replace Placeholder Docstring."""
+"""Tests for PaymentV2."""
 import pytest
 
 from helium_py import proto
@@ -15,7 +15,7 @@ PaymentV2.config(
 
 @pytest.fixture
 def payment(users):
-    """Replace Placeholder Docstring."""
+    """Fixture for Transaction class."""
     return PaymentV2(
         payer=users.bob.keypair.address,
         payments=[
@@ -30,7 +30,7 @@ def payment(users):
 
 
 def test_create_payment_transaction(payment, users):
-    """Replace Placeholder Docstring."""
+    """Test create transaction."""
     assert payment.payer.b58 == users.bob.b58
     assert len(payment.payments) == 1
     assert payment.payments[0].payee.b58 == users.alice.b58
@@ -42,18 +42,18 @@ def test_create_payment_transaction(payment, users):
 
 
 def test_serialize_returns_value(payment):
-    """Replace Placeholder Docstring."""
+    """Test serialize transaction."""
     assert len(payment.serialize()) > 0
 
 
 def test_serialize_to_base64(payment):
-    """Replace Placeholder Docstring."""
+    """Test serialize transaction to base64 and deserialize transaction."""
     assert PaymentV2.from_b64(payment.to_b64()).fee == 35000
     assert proto.BlockchainTxn.FromString(payment.serialize()).payment_v2.fee == 35000
 
 
 def test_deserializes_from_base64_string(payment):
-    """Replace Placeholder Docstring."""
+    """Test deserialize transaction from base64."""
     serialized = payment.to_b64()
     assert serialized == b'wgFaCiEBNRpxwi/v7CIxk2rSgmshfs452fd/xsSWOZJimcOGkpUSLwohAZxlnXI8wegQpy54996vRzaofxDvj8' \
                          b'/IAQC1Myfn7kmkEAoY7d6N29at2bZvGLiRAiAB'
@@ -68,7 +68,7 @@ def test_deserializes_from_base64_string(payment):
 
 
 def test_deserializes_from_base64_string_with_signatures(payment):
-    """Replace Placeholder Docstring."""
+    """Test deserialize transaction from base64 with signatures."""
     deserialized = PaymentV2.from_b64(payment.to_b64())
     assert deserialized.payer.b58 == payment.payer.b58
     assert deserialized.payments[0].payee.b58 == payment.payments[0].payee.b58
@@ -79,7 +79,7 @@ def test_deserializes_from_base64_string_with_signatures(payment):
 
 
 def test_signing_adds_signature(payment, users):
-    """Replace Placeholder Docstring."""
+    """Test signing adds signature."""
     signed_transaction = payment.sign(payer=users.bob.keypair)
     assert signed_transaction.signature is not None
     assert len(signed_transaction.signature) == 64

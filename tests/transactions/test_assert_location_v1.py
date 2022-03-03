@@ -124,14 +124,14 @@ def test_signing_adds_owner_signature(assert_location_no_payer, users):
 
 
 def test_signing_adds_gateway_signature(assert_location_no_payer, users):
-    """Test signing as gateway adds owner signature."""
+    """Test signing as gateway adds gateway signature."""
     signed_transaction = assert_location_no_payer.sign(gateway=users.alice.keypair)
     assert signed_transaction.gateway_signature is not None
     assert len(signed_transaction.gateway_signature) == 64
 
 
 def test_signing_adds_the_payer_signature(assert_location, users):
-    """Test signing as payer adds owner signature."""
+    """Test signing as payer adds payer signature."""
     signed_transaction = assert_location.sign(payer=users.alice.keypair)
     assert signed_transaction.payer_signature is not None
     assert len(signed_transaction.payer_signature) == 64

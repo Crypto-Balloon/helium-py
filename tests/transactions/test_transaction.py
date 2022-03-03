@@ -1,9 +1,9 @@
-"""Replace placeholder docstrings."""
+"""Tests for Transaction class."""
 from helium_py.transactions.transaction import Transaction
 
 
 def test_config_default_values():
-    """Replace placeholder docstrings."""
+    """Test config defaults."""
     assert Transaction.transaction_fee_multiplier == 0
     assert Transaction.dc_payload_size == 24
     assert Transaction.staking_fee_txn_add_gateway_v1 == 1
@@ -11,7 +11,7 @@ def test_config_default_values():
 
 
 def test_config_uses_chain_vars():
-    """Replace placeholder docstrings."""
+    """Test config uses provided chain variables."""
     old_vars = Transaction.config()
     Transaction.config(
         transaction_fee_multiplier=100,
@@ -27,13 +27,13 @@ def test_config_uses_chain_vars():
 
 
 def test_config_without_chain_vars():
-    """Replace placeholder docstrings."""
+    """Test config without chain vars returns current config."""
     Transaction.config()
     assert Transaction.transaction_fee_multiplier == 0
 
 
 def test_string_type():
-    """Replace placeholder docstrings."""
+    """Test that string type is deserialized properly."""
     serialized_add_gw_txn = 'CrMCCiEBHph7m4n8je5IHzLmg544qkxQb+K1g3efKHufp0dKURYSIQGySNPajUxhsIp5CIsV2et+Kx1Xw' \
                             'ECUOCUd4BBjekSeQxpAYCTigGLV8ch+5WmbbhO14L7mM2Djhidhl19b5zgE/Uo7T7j8OSa+Egir7oX3gkh' \
                             's8frsUT4uNDrfi48ezN3tAiJAAqe3gcYc5sj3XWl0oUyVbHFhZSRu8gDcXV5+IeN6jwK6amQNm4clp1wR/' \
