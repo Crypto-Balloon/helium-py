@@ -1,4 +1,4 @@
-"""Replace Placeholder Docstring."""
+"""Assert Location V1 Transaction Class."""
 from helium_py import proto
 from helium_py.transactions.decorators import transaction_class
 from helium_py.transactions.mixins import AssertLocationMixin
@@ -7,7 +7,7 @@ from helium_py.transactions.transaction import Transaction
 
 @transaction_class
 class AssertLocationV1(AssertLocationMixin, Transaction):
-    """Replace Placeholder Docstring."""
+    """Assert Location V1 Transaction Class."""
 
     type: str = 'assert_location_v1'
     proto_model_class = proto.BlockchainTxnAssertLocationV1

@@ -1,4 +1,4 @@
-"""Replace Placeholder Docstring."""
+"""Payment helper class for use in building payloads for the Payment V2 transaction."""
 from dataclasses import dataclass
 from typing import List, Optional
 
@@ -8,7 +8,7 @@ from helium_py.crypto.address import Address
 
 @dataclass
 class Payment:
-    """Replace Placeholder Docstring."""
+    """Payment Class providing protocol buffer serialization and deserialization of Payments."""
 
     payee: Address
     amount: int
@@ -16,7 +16,7 @@ class Payment:
 
     @staticmethod
     def deserialize_payment_list(protocol_buffer_payment_list: List[proto.Payment]) -> List['Payment']:
-        """Replace Placeholder Docstring."""
+        """Deserialize a list of Protocol Buffer Payment objects into a list of this Payment Dataclass."""
         payments = []
         for payment in protocol_buffer_payment_list:
             payee = Address.from_bin(payment.payee)
@@ -32,7 +32,7 @@ class Payment:
 
     @staticmethod
     def payment_list_to_proto(payment_list: List['Payment']) -> List[proto.Payment]:
-        """Replace Placeholder Docstring."""
+        """Serialize a list of this Payment Dataclass into a list of Protocol Buffer Payment objects."""
         payments = []
         for payment in payment_list:
             if payment.memo and len(payment.memo) > 8:

@@ -9,7 +9,7 @@ import betterproto
 from helium_py import proto
 from helium_py.crypto.address import Address
 from helium_py.transactions.payment import Payment
-from helium_py.transactions.utils import EMPTY_SIGNATURE
+from helium_py.crypto.utils import EMPTY_SIGNATURE
 
 
 class Transaction:

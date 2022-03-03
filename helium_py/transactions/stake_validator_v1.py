@@ -1,4 +1,4 @@
-"""Replace Placeholder Docstring."""
+"""Stake Validator V1 Transaction Class."""
 from helium_py import proto
 from helium_py.transactions.decorators import transaction_class
 from helium_py.transactions.transaction import Transaction
@@ -6,7 +6,7 @@ from helium_py.transactions.transaction import Transaction
 
 @transaction_class
 class StakeValidatorV1(Transaction):
-    """Replace Placeholder Docstring."""
+    """Stake Validator V1 Transaction Class."""
 
     type: str = 'stake_validator_v1'
     proto_model_class = proto.BlockchainTxnStakeValidatorV1

@@ -1,4 +1,4 @@
-"""Replace placeholder docstrings."""
+"""Decorators for use in transactions classes."""
 from inspect import Parameter, signature
 from typing import Optional
 
@@ -7,7 +7,7 @@ from helium_py.crypto.keypair import Keypair
 
 
 def transaction_class(cls):
-    """Replace placeholder docstrings."""
+    """Decorate transaction classes to dynamically generate method signatures."""
     ANNOTATION_MAP = {
         'addresses': Optional[Address],
         'signatures': Optional[bytes],
@@ -16,7 +16,7 @@ def transaction_class(cls):
     }
 
     class TransactionClass(cls):
-        """Replace placeholder docstrings."""
+        """Class to be returned post-modification."""
 
         pass
 

@@ -6,6 +6,8 @@ import nacl.encoding
 from base58 import b58decode, b58encode
 from nacl.hash import sha256
 
+EMPTY_SIGNATURE = bytes([0]*64)
+
 
 def random_bytes(n: int) -> bytes:
     """Return random bytes of size n."""

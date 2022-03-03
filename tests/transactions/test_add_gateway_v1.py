@@ -3,7 +3,7 @@ import pytest
 
 from helium_py import proto
 from helium_py.transactions import AddGatewayV1
-from helium_py.transactions.utils import EMPTY_SIGNATURE
+from helium_py.crypto.utils import EMPTY_SIGNATURE
 
 AddGatewayV1.config(
     transaction_fee_multiplier=5000,

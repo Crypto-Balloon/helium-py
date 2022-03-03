@@ -1,10 +1,10 @@
-"""Replace Placeholder Docstring."""
+"""Payment V2 Transaction Class."""
 from helium_py import proto
 from helium_py.transactions.transaction import Transaction
 
 
 class PaymentV2(Transaction):
-    """Replace Placeholder Docstring."""
+    """Payment V2 Transaction Class."""
 
     type: str = 'payment_v2'
     proto_model_class = proto.BlockchainTxnPaymentV2

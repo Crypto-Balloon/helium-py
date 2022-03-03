@@ -1,4 +1,4 @@
-"""Replace Placeholder Docstring."""
+"""Add Gateway V1 Transaction Class."""
 from helium_py import proto
 from helium_py.transactions.decorators import transaction_class
 from helium_py.transactions.transaction import Transaction
@@ -6,7 +6,7 @@ from helium_py.transactions.transaction import Transaction
 
 @transaction_class
 class AddGatewayV1(Transaction):
-    """Replace Placeholder Docstring."""
+    """Add Gateway Transaction Class."""
 
     type = 'add_gateway_v1'
     proto_model_class = proto.BlockchainTxnAddGatewayV1
@@ -38,7 +38,7 @@ class AddGatewayV1(Transaction):
     }
 
     def get_calculate_fee_kwargs(self):
-        """Replace placeholder docstrings."""
+        """Return kwargs for calculate_fee."""
         fee_kwargs = super().get_calculate_fee_kwargs()
         if not self.payer:
             try:
