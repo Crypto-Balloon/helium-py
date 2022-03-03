@@ -2,8 +2,8 @@
 import pytest
 
 from helium_py import proto
-from helium_py.transactions import TransferValidatorStakeV1
 from helium_py.crypto.utils import EMPTY_SIGNATURE
+from helium_py.transactions import TransferValidatorStakeV1
 
 TransferValidatorStakeV1.config(
     transaction_fee_multiplier=5000,
