@@ -1,6 +1,10 @@
-# helium-py
+<p align="center">
+<img src="helium-py.png" width="120px" height="120px" alt="helium-py logo" title="helium.py">
+</p>
 
-<img src="helium-py.png" width="250px" height="250px" alt="helium-py logo" title="helium.py">
+# helium-py
+![Test](https://github.com/Crypto-Balloon/helium-py/actions/workflows/test.yml/badge.svg)
+
 
 ## Versioning
 
