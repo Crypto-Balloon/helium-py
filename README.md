@@ -7,46 +7,45 @@
 This project follows [semantic versioning](https://semver.org/). Prior to 1.0.0 this project does not
 guarantee a stable public API.
 
-## Progress
+## Modules
 
-- [X] Connection management
+- [api](#api)
+- [crypto](#crypto)
+- [currency](#currency)
+- [onboarding](#onboarding)
+- [proto](#proto)
+- [test](#test)
+- [transactions](#transactions)
 
-- [X] In-memory page caching
+### API
 
-- [/] API module coverage ([helium docs](https://docs.helium.com/api/blockchain/introduction)):
+The API module classes provide client classes for interacting with the Helium APIs.
 
-  - [X] Stats
+For full API specification and documentation please reference [docs.helium.com](https://docs.helium.com/api/blockchain).
 
-  - [X] Blocks
+```python
+from datetime import datetime, timedelta
+from helium_py.api import ChainVariables, Hotspots
 
-  - [X] Accounts
+# Example of fetching chain variables
+chain_vars = ChainVariables()  # Create a ChainVariables client
+print(chain_vars.get_all())    # Get all chain variables
 
-  - [X] Validators
+# Example of fetching hotspot earnings for the last five days
+hotspot_address = "some_valid_hotspot_address"
+hotspots = Hotspots()
+hotspots.get_hotspot_rewards_total(hotspot_address, min_time=datetime.now() - timedelta(days=5))
+```
 
-  - [X] Hotspots
+### Crypto
 
-  - [X] Cities
+The Crypto module classes provide Address, Keypair, and Mnemonic classes as well as helpful utilities.
 
-  - [X] Locations
+```python
+from helium_py.crypto.keypair import Keypair
 
-  - [X] Transactions
- 
-  - [X] Pending Transactions
-
-  - [X] Oracle Prices
-
-  - [X] Chain Variables
-
-  - [X] OUIs
-
-  - [X] Rewards
-
-  - [X] DC Burns
-
-  - [X] Challenges
-
-  - [X] Elections
-
-  - [X] State Channels
-
-  - [X] Assert Locations
+# Example of creating a random keypair, accessing the address, and signing a message
+keypair = Keypair.make_random()
+address = keypair.address.b58  # B58 public key address
+keypair.sign(b'message')  # Sign a message with keypair private key
+```
