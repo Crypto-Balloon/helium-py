@@ -1,4 +1,4 @@
-"""Replace Placeholder Docstring."""
+"""Tests for TransferHotspotV1."""
 import pytest
 
 from helium_py import proto
@@ -15,7 +15,7 @@ TransferHotspotV1.config(
 
 @pytest.fixture
 def transfer(users):
-    """Replace Placeholder Docstring."""
+    """Fixture for Transaction class."""
     return TransferHotspotV1(
         gateway=users.alice.keypair.address,
         buyer=users.bob.keypair.address,
@@ -26,7 +26,7 @@ def transfer(users):
 
 
 def test_create_transfer_transaction(transfer, users):
-    """Replace Placeholder Docstring."""
+    """Test create transaction."""
     assert transfer.gateway.b58 == users.alice.b58
     assert transfer.buyer.b58 == users.bob.b58
     assert transfer.seller.b58 == users.alice.b58
@@ -37,18 +37,18 @@ def test_create_transfer_transaction(transfer, users):
 
 
 def test_serialize_returns_value(transfer):
-    """Replace Placeholder Docstring."""
+    """Test serialize transaction."""
     assert len(transfer.serialize()) > 0
 
 
 def test_serialize_to_base64(transfer):
-    """Replace Placeholder Docstring."""
+    """Test serialize transaction to base64 and deserialize transaction."""
     assert TransferHotspotV1.from_b64(transfer.to_b64()).amount_to_seller == 10
     assert proto.BlockchainTxn.FromString(transfer.serialize()).transfer_hotspot.amount_to_seller == 10
 
 
 def test_deserializes_from_base64_string(transfer):
-    """Replace Placeholder Docstring."""
+    """Test deserialize transaction from base64."""
     # helium-js mutates the instance when adding empty signatures to calculate payment
     # and this is a reference b64 representation
     transfer.seller_signature = EMPTY_SIGNATURE
@@ -73,7 +73,7 @@ def test_deserializes_from_base64_string(transfer):
 
 
 def test_signing_adds_signature(transfer, users):
-    """Replace Placeholder Docstring."""
+    """Test signing adds signature."""
     signed_transaction = transfer.sign(buyer=users.bob.keypair)
     assert signed_transaction.buyer_signature is not None
     assert len(signed_transaction.buyer_signature) == 64

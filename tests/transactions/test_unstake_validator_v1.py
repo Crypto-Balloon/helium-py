@@ -1,4 +1,4 @@
-"""Replace Placeholder Docstring."""
+"""Tests for UnstakeValidatorV1."""
 import pytest
 
 from helium_py import proto
@@ -15,7 +15,7 @@ UnstakeValidatorV1.config(
 
 @pytest.fixture
 def unstake_validator(users):
-    """Replace Placeholder Docstring."""
+    """Fixture for Transaction class."""
     return UnstakeValidatorV1(
         address=users.bob.keypair.address,
         owner=users.alice.keypair.address,
@@ -25,7 +25,7 @@ def unstake_validator(users):
 
 
 def test_create_unstake_validator_transaction(unstake_validator, users):
-    """Replace Placeholder Docstring."""
+    """Test create transaction."""
     assert unstake_validator.address.b58 == users.bob.b58
     assert unstake_validator.owner.b58 == users.alice.b58
     assert unstake_validator.stake_amount == 10
@@ -34,18 +34,18 @@ def test_create_unstake_validator_transaction(unstake_validator, users):
 
 
 def test_serialize_returns_value(unstake_validator):
-    """Replace Placeholder Docstring."""
+    """Test serialize transaction."""
     assert len(unstake_validator.serialize()) > 0
 
 
 def test_serialize_to_base64(unstake_validator):
-    """Replace Placeholder Docstring."""
+    """Test serialize transaction to base64 and deserialize transaction."""
     assert UnstakeValidatorV1.from_b64(unstake_validator.to_b64()).stake_amount == 10
     assert proto.BlockchainTxn.FromString(unstake_validator.serialize()).unstake_validator.stake_amount == 10
 
 
 def test_deserializes_from_base64_string(unstake_validator):
-    """Replace Placeholder Docstring."""
+    """Test deserialize transaction from base64."""
     # helium-js mutates the instance when adding empty signatures to calculate payment
     # and this is a reference b64 representation
     unstake_validator.owner_signature = EMPTY_SIGNATURE
@@ -66,14 +66,14 @@ def test_deserializes_from_base64_string(unstake_validator):
 
 
 def test_signing_adds_signature(unstake_validator, users):
-    """Replace Placeholder Docstring."""
+    """Test signing adds signature."""
     signed_transaction = unstake_validator.sign(owner=users.bob.keypair)
     assert signed_transaction.owner_signature is not None
     assert len(signed_transaction.owner_signature) == 64
 
 
 def test_does_not_calculate_fees_if_provided(users):
-    """Replace Placeholder Docstring."""
+    """Test fee not calculated if provided."""
     unstake_validator = UnstakeValidatorV1(
         address=users.bob.keypair.address,
         owner=users.alice.keypair.address,

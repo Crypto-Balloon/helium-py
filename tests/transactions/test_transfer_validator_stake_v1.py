@@ -1,4 +1,4 @@
-"""Replace Placeholder Docstring."""
+"""Tests for TransferValidatorStakeV1."""
 import pytest
 
 from helium_py import proto
@@ -15,7 +15,7 @@ TransferValidatorStakeV1.config(
 
 @pytest.fixture
 def transfer_validator_stake(users):
-    """Replace Placeholder Docstring."""
+    """Fixture for Transaction class."""
     return TransferValidatorStakeV1(
         old_address=users.bob.keypair.address,
         new_address=users.alice.keypair.address,
@@ -27,7 +27,7 @@ def transfer_validator_stake(users):
 
 
 def test_create_transfer_validator_stake_transaction(transfer_validator_stake, users):
-    """Replace Placeholder Docstring."""
+    """Test create transaction."""
     assert transfer_validator_stake.old_address.b58 == users.bob.b58
     assert transfer_validator_stake.new_address.b58 == users.alice.b58
     assert transfer_validator_stake.old_owner.b58 == users.bob.b58
@@ -39,12 +39,12 @@ def test_create_transfer_validator_stake_transaction(transfer_validator_stake, u
 
 
 def test_serialize_returns_value(transfer_validator_stake):
-    """Replace Placeholder Docstring."""
+    """Test serialize transaction."""
     assert len(transfer_validator_stake.serialize()) > 0
 
 
 def test_serialize_to_base64(transfer_validator_stake):
-    """Replace Placeholder Docstring."""
+    """Test serialize transaction to base64 and deserialize transaction."""
     assert TransferValidatorStakeV1.from_b64(transfer_validator_stake.to_b64()).stake_amount == 10
     assert proto.BlockchainTxn.FromString(
         transfer_validator_stake.serialize(),
@@ -52,7 +52,7 @@ def test_serialize_to_base64(transfer_validator_stake):
 
 
 def test_deserializes_from_base64_string(transfer_validator_stake):
-    """Replace Placeholder Docstring."""
+    """Test deserialize transaction from base64."""
     # helium-js mutates the instance when adding empty signatures to calculate payment
     # and this is a reference b64 representation
     transfer_validator_stake.old_owner_signature = EMPTY_SIGNATURE
@@ -79,14 +79,14 @@ def test_deserializes_from_base64_string(transfer_validator_stake):
 
 
 def test_signing_adds_signature(transfer_validator_stake, users):
-    """Replace Placeholder Docstring."""
+    """Test signing adds signature."""
     signed_transaction = transfer_validator_stake.sign(old_owner=users.bob.keypair)
     assert signed_transaction.old_owner_signature is not None
     assert len(signed_transaction.old_owner_signature) == 64
 
 
 def test_does_not_calculate_fees_if_provided(users):
-    """Replace Placeholder Docstring."""
+    """Test fee not calculated if provided."""
     transfer_validator_stake = TransferValidatorStakeV1(
         address=users.bob.keypair.address,
         owner=users.alice.keypair.address,

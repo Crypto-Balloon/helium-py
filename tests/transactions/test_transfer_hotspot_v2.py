@@ -1,4 +1,4 @@
-"""Replace Placeholder Docstring."""
+"""Tests for TransferHotspotV2."""
 import pytest
 
 from helium_py import proto
@@ -14,7 +14,7 @@ TransferHotspotV2.config(
 
 @pytest.fixture
 def transfer(users):
-    """Replace Placeholder Docstring."""
+    """Fixture for Transaction class."""
     txn = TransferHotspotV2(
         gateway=users.alice.keypair.address,
         new_owner=users.bob.keypair.address,
@@ -26,7 +26,7 @@ def transfer(users):
 
 
 def test_create_payment_transaction(transfer, users):
-    """Replace Placeholder Docstring."""
+    """Test create transaction."""
     assert transfer.gateway.b58 == users.alice.b58
     assert transfer.new_owner.b58 == users.bob.b58
     assert transfer.owner.b58 == users.alice.b58
@@ -36,18 +36,18 @@ def test_create_payment_transaction(transfer, users):
 
 
 def test_serialize_returns_value(transfer):
-    """Replace Placeholder Docstring."""
+    """Test serialize transaction."""
     assert len(transfer.serialize()) > 0
 
 
 def test_serialize_to_base64(transfer):
-    """Replace Placeholder Docstring."""
+    """Test serialize transaction to base64 and deserialize transaction."""
     assert TransferHotspotV2.from_b64(transfer.to_b64()).nonce == 1
     assert proto.BlockchainTxn.FromString(transfer.serialize()).transfer_hotspot_v2.nonce == 1
 
 
 def test_deserializes_from_base64_string(transfer):
-    """Replace Placeholder Docstring."""
+    """Test deserialize transaction from base64."""
     serialized = transfer.to_b64()
 
     # TODO repr from helium-js
@@ -66,7 +66,7 @@ def test_deserializes_from_base64_string(transfer):
 
 
 def test_signing_adds_signature(transfer, users):
-    """Replace Placeholder Docstring."""
+    """Test signing adds signature."""
     signed_transaction = transfer.sign(owner=users.alice.keypair)
     assert signed_transaction.owner_signature is not None
     assert len(signed_transaction.owner_signature) == 64
