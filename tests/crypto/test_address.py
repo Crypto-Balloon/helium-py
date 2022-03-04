@@ -36,6 +36,24 @@ def test_build_address_from_binary_repr(users):
     assert address.b58 == users.bob.b58
 
 
+def test_from_bin_raises_when_null(users):
+    try:
+        address = Address.from_bin(None)
+    except ValueError:
+        pass
+    else:
+        raise Exception("Expected ValueError")
+
+
+def test_from_bin_raises_when_empty(users):
+    try:
+        address = Address.from_bin(b'')
+    except ValueError:
+        pass
+    else:
+        raise Exception("Expected ValueError")
+
+
 def test_build_address_from_b58_str(users):
     address = Address.from_b58(users.bob.b58)
     assert address.b58 == users.bob.b58

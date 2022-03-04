@@ -6,6 +6,18 @@ from requests.exceptions import HTTPError
 from helium_py.api import Client
 
 
+def test_client_takes_custom_port():
+    """Test that client allows custom port."""
+    client = Client(port=1234)
+    assert client.port == 1234
+
+
+def test_client_takes_custom_user_agent():
+    """Test that client allows custom user agent."""
+    client = Client(user_agent='test_agent')
+    assert client.user_agent == 'test_agent'
+
+
 def test_client_cursor_cache():
     """Test that client cursor cache populated when moving across pages."""
     client = Client()

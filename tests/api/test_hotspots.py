@@ -1,4 +1,6 @@
 """Tests for Hotspots client."""
+from datetime import datetime, timedelta
+
 from helium_py.api import Hotspots
 
 
@@ -23,10 +25,11 @@ def test_hotspots():
     assert 'hash' in next(hotspots.get_hotspot_activity(exotic_green_gazelle))
     assert 'add_gateway_v1' in hotspots.get_hotspot_activity_counts(exotic_green_gazelle)
     assert 'challenger' in next(hotspots.get_hotspot_challenges(exotic_green_gazelle))
+    assert 'block_added' in hotspots.hotspots_search_by_location_distance(lat=41.28, lon=-70.16, distance=2000)[0]
     # Uncomment once more consistent
-    # assert 'amount' in next(hotspots.get_hotspot_rewards(
-    #     exotic_green_gazelle, min_time=datetime.now() - timedelta(days=5)))
-    # assert 'avg' in hotspots.get_hotspot_rewards_total(
-    #     exotic_green_gazelle, min_time=datetime.now() - timedelta(days=5))
-    # assert 'block_added' in hotspots.get_hotspot_witnesses(exotic_green_gazelle)[0]
-    # assert 'block_added' in hotspots.get_hotspot_witnessed(exotic_green_gazelle)[0]
+    assert 'amount' in next(hotspots.get_hotspot_rewards(
+        exotic_green_gazelle, min_time=datetime.now() - timedelta(days=7)))
+    assert 'avg' in hotspots.get_hotspot_rewards_total(
+        exotic_green_gazelle, min_time=datetime.now() - timedelta(days=7))
+    assert 'block_added' in hotspots.get_hotspot_witnesses(exotic_green_gazelle)[0]
+    assert 'block_added' in hotspots.get_hotspot_witnessed(exotic_green_gazelle)[0]

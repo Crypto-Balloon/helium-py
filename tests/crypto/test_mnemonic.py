@@ -20,6 +20,15 @@ def test_can_create_24_word_mnemonic():
     assert len(mnemonic.words) == 24
 
 
+def test_bad_length_mnemonic_raises():
+    try:
+        Mnemonic.create(55)
+    except ValueError:
+        pass
+    else:
+        raise Exception("Expected ValueError")
+
+
 def test_create_mnemonic_from_entropy():
     entropy = random_bytes(16)
     mnemonic = Mnemonic.from_entropy(entropy)

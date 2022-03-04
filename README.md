@@ -2,9 +2,14 @@
 <img src="helium-py.png" width="120px" height="120px" alt="helium-py logo" title="helium.py">
 </p>
 
-# helium-py
+# Helium-Py
 ![Test](https://github.com/Crypto-Balloon/helium-py/actions/workflows/test.yml/badge.svg)
 
+helium-py is 
+## Installation
+
+This project follows [semantic versioning](https://semver.org/). Prior to 1.0.0 this project does not
+guarantee a stable public API.
 
 ## Versioning
 
