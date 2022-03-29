@@ -16,6 +16,12 @@ class API:
     base_path: Optional[str] = None
     _client: Optional[Client] = None
 
+    def __init__(self, host=None, port=None, user_agent=None, base_path=None):
+        self.host = host if host else self.host
+        self.port = port if port else self.port
+        self.user_agent = user_agent if user_agent else self.user_agent
+        self.base_path = base_path if base_path else self.base_path
+
     @property
     def client(self) -> Client:
         """Return a client singleton per API."""
