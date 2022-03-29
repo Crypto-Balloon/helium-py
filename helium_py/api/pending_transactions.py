@@ -1,6 +1,8 @@
 """Pending Transactions client for Helium Blockchain API."""
+from typing import Union
+
 from .api import API
-from .constants import VALID_TRANSACTION_TYPES
+from ..transactions.transaction import Transaction
 
 
 class PendingTransactions(API):
@@ -19,13 +21,12 @@ class PendingTransactions(API):
         """
         return self.client.get(path=f'/{transaction_hash}')
 
-    def submit_transaction(self, transaction_hash: str, txn: str) -> dict:
+    def submit_transaction(self, txn: Union[str, Transaction]) -> dict:
         """Submit a transaction to the Helium Blockchain API.
 
         Args:
-            transaction_hash: The transaction hash for transaction being submitted.
-            txn: The base64 encoded transaction data.
+            txn: The base64 encoded transaction data str or Transaction object.
         """
-        if txn not in VALID_TRANSACTION_TYPES:
-            raise ValueError(f"Transaction {txn} is not a valid transaction")
-        return self.client.post(path=f'/{transaction_hash}', json={'txn': txn})
+        if not isinstance(txn, str):
+            txn = txn.to_b64().decode('ascii')
+        return self.client.post(path='', json={'txn': txn})
