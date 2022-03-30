@@ -1,0 +1,25 @@
+name: Docs
+
+on:
+  push:
+    branches: [ master ]
+    tags: ['v*']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+      - name: Install dev requirements
+        run: pip install -r requirements_dev.txt
+      - name: Build docs
+        run: cp docs && make html
+      - name: Python artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: helium-py-docs
+          path: docs/build/html

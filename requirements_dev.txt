@@ -16,3 +16,5 @@ pytest-cov
 pytest-mock
 
 tox
+
+sphinx
