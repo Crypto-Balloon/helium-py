@@ -1,6 +1,4 @@
 """Tests for Accounts client."""
-from datetime import datetime, timedelta
-
 from helium_py.api import Accounts
 
 
