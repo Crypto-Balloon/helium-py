@@ -61,7 +61,7 @@ class Client:
         retry_adapter = requests.adapters.HTTPAdapter(
             max_retries=Retry(
                 total=3,
-                status_forcelist=[429],
+                status_forcelist=[429, 503],
                 backoff_factor=1,
             ),
         )

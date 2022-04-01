@@ -17,7 +17,7 @@ def test_transactions():
     """
     pending_transactions = PendingTransactions()
 
-    assert pending_transactions.get_status('q7pnrm2LvPoZKclF4f2BB6AmcnD0SORECgq9VbNLir4') == []
+    assert pending_transactions.get_status('1USBZ2dUnxUT5pQ-mu4vYn-aDYurH0j0iHsBregQXJc')['status'] == 'cleared'
 
     with pytest.raises(HTTPError):
-        pending_transactions.submit_transaction(transaction_hash='foo', txn='bar')
+        pending_transactions.submit_transaction(txn='bar')
