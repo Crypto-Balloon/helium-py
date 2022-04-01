@@ -1,8 +1,8 @@
 """Pending Transactions client for Helium Blockchain API."""
 from typing import Union
 
-from .api import API
 from ..transactions.transaction import Transaction
+from .api import API
 
 
 class PendingTransactions(API):
