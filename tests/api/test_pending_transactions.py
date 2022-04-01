@@ -5,7 +5,7 @@ import logging
 import pytest
 from requests.exceptions import HTTPError
 
-from helium_py.api import PendingTransactions, HELIUM_API_TESTNET_HOST
+from helium_py.api import HELIUM_API_TESTNET_HOST, PendingTransactions
 
 logger = logging.getLogger(__name__)
 
