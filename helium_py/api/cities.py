@@ -19,6 +19,9 @@ class Cities(API):
 
         Args:
             search: Search term.
+
+        Returns:
+            All cities found by calling the api.
         """
         return self.client.fetch_all(params={'search': search} if search else None)
 
