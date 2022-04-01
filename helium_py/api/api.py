@@ -17,6 +17,7 @@ class API:
     _client: Optional[Client] = None
 
     def __init__(self, host=None, port=None, user_agent=None, base_path=None):
+        """Allow for overriding API details at instantiation."""
         self.host = host if host else self.host
         self.port = port if port else self.port
         self.user_agent = user_agent if user_agent else self.user_agent

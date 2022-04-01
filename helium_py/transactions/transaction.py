@@ -225,7 +225,7 @@ class Transaction:
         )
 
     @typing.no_type_check
-    def to_proto(self, for_signing: bool = False) -> proto.BlockchainTxn:
+    def to_proto(self, for_signing: bool = False) -> betterproto.Message:
         """Return a protocol buffer BlockchainTxn instance from this Transaction instance."""
         proto_model_kwargs = {
             **self.get_addresses(),
@@ -234,8 +234,13 @@ class Transaction:
             **self.get_signatures(for_signing),
             **self.get_payment_lists(),
         }
+        transaction_proto_model = self.proto_model_class(**proto_model_kwargs)
+
+        if for_signing:
+            return transaction_proto_model
+
         proto_txn_kwargs = {
-            self.proto_txn_field: self.proto_model_class(**proto_model_kwargs)
+            self.proto_txn_field: transaction_proto_model
         }
 
         return proto.BlockchainTxn(**proto_txn_kwargs)
