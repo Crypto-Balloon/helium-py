@@ -5,7 +5,7 @@ import logging
 import pytest
 from requests.exceptions import HTTPError
 
-from helium_py.api import PendingTransactions
+from helium_py.api import PendingTransactions, HELIUM_API_TESTNET_HOST
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +15,7 @@ def test_transactions():
 
     TODO: This are PoC tests and integration tests must be separated from unit tests.
     """
-    pending_transactions = PendingTransactions()
+    pending_transactions = PendingTransactions(host=HELIUM_API_TESTNET_HOST)
 
     assert pending_transactions.get_status('1USBZ2dUnxUT5pQ-mu4vYn-aDYurH0j0iHsBregQXJc')[0]['status'] == 'cleared'
 
