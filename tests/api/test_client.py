@@ -18,6 +18,7 @@ def test_client_takes_custom_user_agent():
     assert client.user_agent == 'test_agent'
 
 
+@pytest.mark.integration
 def test_client_cursor_cache():
     """Test that client cursor cache populated when moving across pages."""
     client = Client()
