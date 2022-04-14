@@ -48,14 +48,14 @@ class Accounts(API):
     @limit_api
     @time_filterable_api
     @filter_transaction_types_api
-    def get_account_activity(self, address: str, params: Optional[dict]) -> Generator[dict, None, None]:
-        """Yield all account activity for given account address."""
-        return self.client.fetch_all(path=f'/{address}/activity', params=params if params else None)
+    def get_roles(self, address: str, params: Optional[dict]) -> Generator[dict, None, None]:
+        """Yield all roles for given account address."""
+        return self.client.fetch_all(path=f'/{address}/roles', params=params if params else None)
 
     @filter_transaction_types_api
-    def get_account_activity_counts(self, address: str, params: Optional[dict]) -> dict:
-        """Return account activity counts for given account address."""
-        return self.client.get(path=f'/{address}/activity/count', params=params if params else None)
+    def get_roles_counts(self, address: str, params: Optional[dict]) -> dict:
+        """Return account roles for given account address."""
+        return self.client.get(path=f'/{address}/roles/count', params=params if params else None)
 
     @limit_api
     @time_filterable_api
