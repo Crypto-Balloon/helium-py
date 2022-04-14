@@ -6,6 +6,7 @@ from .api import API
 from .decorators import (
     filter_modes_api,
     filter_transaction_types_api,
+    limit_api,
     time_filterable_api,
 )
 
@@ -66,14 +67,17 @@ class Hotspots(API):
         """Return hotspots located within hex provided by h3_index."""
         return self.client.get(path=f'/hex/{h3_index}')
 
-    def get_hotspot_activity(self, address: str) -> Generator[dict, None, None]:
-        """Yield hotspot activity for provided address."""
-        return self.client.fetch_all(path=f'/{address}/activity')
+    @limit_api
+    @time_filterable_api
+    @filter_transaction_types_api
+    def get_roles(self, address: str, params: Optional[dict]) -> Generator[dict, None, None]:
+        """Yield all roles for provided address."""
+        return self.client.fetch_all(path=f'/{address}/roles', params=params if params else None)
 
     @filter_transaction_types_api
-    def get_hotspot_activity_counts(self, address: str, params: Optional[dict]) -> dict:
-        """Return hotspot activity counts for provided address."""
-        return self.client.get(path=f'/{address}/activity/count', params=params if params else None)
+    def get_roles_counts(self, address: str, params: Optional[dict]) -> dict:
+        """Return account roles for provided address."""
+        return self.client.get(path=f'/{address}/roles/count', params=params if params else None)
 
     @time_filterable_api
     def get_hotspot_challenges(self, address: str, params: Optional[dict]) -> Generator[dict, None, None]:

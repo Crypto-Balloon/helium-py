@@ -6,6 +6,7 @@ from .api import API
 from .decorators import (
     bucket_api,
     filter_transaction_types_api,
+    limit_api,
     time_filterable_api,
 )
 
@@ -36,16 +37,17 @@ class Validators(API):
         """Search for validators by name."""
         return self.client.get(path=f'/name?search={name}')
 
+    @limit_api
     @time_filterable_api
     @filter_transaction_types_api
-    def get_validator_activity(self, address: str, params: Optional[dict]) -> Generator[dict, None, None]:
-        """Yield validator activity for provided validator address."""
-        return self.client.fetch_all(path=f'/{address}/activity', params=params if params else None)
+    def get_roles(self, address: str, params: Optional[dict]) -> Generator[dict, None, None]:
+        """Yield all roles for provided validator address."""
+        return self.client.fetch_all(path=f'/{address}/roles', params=params if params else None)
 
     @filter_transaction_types_api
-    def get_validator_activity_counts(self, address: str, params: Optional[dict]) -> dict:
-        """Return validator activity counts for provided validator address."""
-        return self.client.get(path=f'/{address}/activity/count', params=params if params else None)
+    def get_roles_counts(self, address: str, params: Optional[dict]) -> dict:
+        """Return roles counts for provided validator address."""
+        return self.client.get(path=f'/{address}/roles/count', params=params if params else None)
 
     def get_stats(self) -> dict:
         """Return stats for all validators."""
