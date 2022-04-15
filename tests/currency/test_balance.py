@@ -1,15 +1,18 @@
 """Tests for Balance class."""
 from unittest import mock
 
-from helium_py.currency.balance import Balance, DC_TO_USD_MULTIPLIER
-from helium_py.currency.exceptions import UnsupportedCurrencyError, MixedCurrencyTypeError, \
-    UnsupportedCurrencyConversionError
+from helium_py.currency.balance import DC_TO_USD_MULTIPLIER, Balance
+from helium_py.currency.exceptions import (
+    MixedCurrencyTypeError,
+    UnsupportedCurrencyConversionError,
+    UnsupportedCurrencyError,
+)
 from helium_py.currency.types import (
     DATA_CREDITS,
     NETWORK_TOKENS,
+    SECURITY_TOKENS,
     TEST_NETWORK_TOKENS,
     US_DOLLARS,
-    SECURITY_TOKENS,
 )
 
 FIVE_USD = Balance(5, US_DOLLARS)
