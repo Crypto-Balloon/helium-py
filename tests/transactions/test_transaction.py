@@ -47,3 +47,23 @@ def test_string_type():
 
     assert Transaction.string_type(serialized_add_gw_txn) == 'addGateway'
     assert Transaction.string_type(serialized_assert_v2) == 'assertLocationV2'
+
+
+def test_orig_kwarg_gt0_or_none_gt0():
+    """Test that orig_kwarg_gt0_or_none returns properly."""
+    class TestTransaction(Transaction):
+        fields = {
+            'integers': ['key']
+        }
+        defaults = {}
+    assert TestTransaction(key=1).orig_kwarg_gt0_or_none('key') == 1
+
+
+def test_orig_kwarg_gt0_or_none_eq0():
+    """Test that orig_kwarg_gt0_or_none returns properly."""
+    class TestTransaction(Transaction):
+        fields = {
+            'integers': ['key']
+        }
+        defaults = {}
+    assert TestTransaction(key=0).orig_kwarg_gt0_or_none('key') is None

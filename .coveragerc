@@ -1,6 +1,7 @@
 [run]
 omit =
     tests/*
+    helium_py/proto/*
     setup.py
 
 [report]

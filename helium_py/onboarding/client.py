@@ -12,6 +12,7 @@ class OnboardingClient(API):
 
     def __init__(self, host=None):
         """Initialize OnboardingClient with a custom host."""
+        super().__init__()
         if host:
             self.host = host
 
