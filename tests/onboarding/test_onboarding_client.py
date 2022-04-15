@@ -1,14 +1,32 @@
 """Tests for OnboardingClient."""
 from unittest import mock
 
+import pytest
+
 from helium_py.onboarding.client import OnboardingClient
 
 some_hotspot = '11GsHnL2T2XMV2XnwoH3gcbwwGgGTsxa6xcwxK4rnscg4oE1iEP'
 
 
+@pytest.mark.integration
 def test_client_integration():
     """Test basic client integration."""
     client = OnboardingClient()
+    assert 'maker' in client.get_onboarding_record(some_hotspot)
+    assert 'locationNonceLimit' in client.get_makers()[0]
+    assert 'version' in client.get_firmware()
+
+
+def test_client_unit_test():
+    """Test basic client integration."""
+    client = OnboardingClient()
+    mock_client = mock.Mock()
+    mock_client.get.return_value = {
+        0: ['locationNonceLimit'],
+        'maker': None,
+        'version': None
+    }
+    client._client = mock_client
     assert 'maker' in client.get_onboarding_record(some_hotspot)
     assert 'locationNonceLimit' in client.get_makers()[0]
     assert 'version' in client.get_firmware()

@@ -34,6 +34,10 @@ class Balance:
         self.balance_in_currency = balance_in_currency
         self.currency_type = currency_type
 
+    def __eq__(self, other):
+        """Compare to see if two balances are equal."""
+        return self.currency_type == other.currency_type and self.balance_in_currency == other.balance_in_currency
+
     def to_string(self, max_decimal_places: Optional[int] = None, show_ticker: Optional[bool] = True) -> str:
         """Convert Balance objects to a string."""
         number_string = f'{self.balance_in_currency:,.{max_decimal_places}f}' if max_decimal_places \
@@ -74,6 +78,8 @@ class Balance:
             return Balance(self.balance_in_currency * DC_TO_USD_MULTIPLIER, US_DOLLARS)
         if self.currency_type == NETWORK_TOKENS:
             return Balance(self.balance_in_currency * oracle_price.balance_in_currency, US_DOLLARS)
+        if self.currency_type == TEST_NETWORK_TOKENS:
+            return Balance(self.balance_in_currency * oracle_price.balance_in_currency, US_DOLLARS)
         raise UnsupportedCurrencyConversionError()
 
     def to_network_tokens(self, oracle_price: Optional['Balance'] = None) -> 'Balance':
@@ -89,6 +95,7 @@ class Balance:
         if self.currency_type == TEST_NETWORK_TOKENS:
             return self
         if oracle_price is None:
+            # TODO: This should go to testnet
             oracle_price = Balance(OraclePrices().get_current()['price'], US_DOLLARS)
         return Balance(self.to_usd(
             oracle_price).balance_in_currency / oracle_price.balance_in_currency, TEST_NETWORK_TOKENS)
