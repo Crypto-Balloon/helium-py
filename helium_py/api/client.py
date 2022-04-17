@@ -60,9 +60,9 @@ class Client:
         self.session = requests.Session()
         retry_adapter = requests.adapters.HTTPAdapter(
             max_retries=Retry(
-                total=3,
+                total=10,
                 status_forcelist=[429, 503],
-                backoff_factor=1,
+                backoff_factor=1.5,
             ),
         )
         base_url = urlunsplit(('https', self.netloc, '', '', ''))
