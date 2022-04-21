@@ -2,7 +2,6 @@ on: [push]
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -25,6 +24,7 @@ jobs:
       - flake
       - isort
       - mypy
+      - bandit
 
   flake:
     runs-on: ubuntu-latest
