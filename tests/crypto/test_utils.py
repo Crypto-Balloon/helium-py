@@ -36,3 +36,14 @@ def test_bs58_to_bin(users):
     checksum_verify = utils.sha256(binascii.unhexlify(utils.sha256(versioned_payload)))[:8]
     assert checksum_verify == checksum
     assert payload == utils.bs58_to_bin(address_b58)
+
+
+def test_bs58_to_bin_invalid_checksum(users):
+    address_b58 = Address(Address.DEFAULT_VERSION, MAINNET, 1, users.bob.keypair.public_key).b58
+    bad_address_b58 = address_b58[:-1] + b'z'
+    try:
+        utils.bs58_to_bin(bad_address_b58)
+    except ValueError:
+        pass
+    else:
+        raise Exception("Expected bs58_to_bin to raise ValueError on Invalid Checksum")
