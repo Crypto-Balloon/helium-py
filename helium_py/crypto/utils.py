@@ -20,11 +20,6 @@ def bytes_to_binary(byte_array: bytes) -> str:
     return ''.join([format(byte_data, '08b') for byte_data in byte_array])
 
 
-def binary_to_byte(bin_val: str) -> bytes:
-    """Return bytes from provided binary."""
-    return int(bin_val, 2).to_bytes((len(bin_val) + 7) // 8, byteorder='big')
-
-
 def derive_checksum_bits(entropy: bytes):
     """Return checksum bits from entropy bytes."""
     ent = len(entropy) * 8
