@@ -1,6 +1,6 @@
 """Mnemonic class for cryptography."""
 from math import floor
-from typing import List
+from typing import List, Tuple
 
 from . import utils
 from .wordlists.english import wordlist
@@ -43,8 +43,7 @@ class Mnemonic:
         words = [wordlist[int(binary, 2)] for binary in chunks]
         return Mnemonic(words)
 
-    def to_entropy(self) -> bytes:
-        """Return entropy bytes generated from provided Mnemonic."""
+    def _get_entropy_bits_and_checksum(self) -> Tuple[str, str]:
         bits = ''.join([
             f'{bin(wordlist.index(word))}'.lstrip('0b').zfill(11)
             for word in self.words
@@ -52,12 +51,18 @@ class Mnemonic:
 
         # split the binary string into entropy and checksum
         dividerIndex = floor(len(bits) / 33) * 32
-        entropyBits = bits[0:dividerIndex]
-        checksumBits = bits[dividerIndex:]
+        return (bits[0:dividerIndex], bits[dividerIndex:])
 
+    @staticmethod
+    def _get_entropy_bytes(entropyBits) -> List[bytes]:
         # calculate the checksum and compare
         chunks = [entropyBits[x:x + 8] for x in range(0, len(entropyBits), 8)]
-        entropy_bytes = [int(entropy, 2).to_bytes((len(entropy) + 7) // 8, byteorder='big') for entropy in chunks]
+        return (chunks, [int(entropy, 2).to_bytes((len(entropy) + 7) // 8, byteorder='big') for entropy in chunks])
+
+    def to_entropy(self) -> bytes:
+        """Return entropy bytes generated from provided Mnemonic."""
+        entropyBits, checksumBits = self._get_entropy_bits_and_checksum()
+        entropy_chunks, entropy_bytes = self._get_entropy_bytes(entropyBits)
 
         if len(entropy_bytes) < 16:
             raise ValueError('invalid entropy, less than 16')
@@ -66,8 +71,10 @@ class Mnemonic:
         if len(entropy_bytes) % 4 != 0:
             raise ValueError('invalid entropy, not divisible by 4')
 
-        entropy = bytes([int(byte_val, 2) for byte_val in chunks])
+        # calculate the checksum and compare
+        entropy = bytes([int(byte_val, 2) for byte_val in entropy_chunks])
         new_checksum = utils.derive_checksum_bits(entropy)
+
         if checksumBits != '0000' and new_checksum != checksumBits:
             raise ValueError('invalid checksum')
 
