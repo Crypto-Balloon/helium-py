@@ -1,6 +1,6 @@
 """Mnemonic class for cryptography."""
 from math import floor
-from typing import List, Tuple
+from typing import Any, List, Tuple
 
 from . import utils
 from .wordlists.english import wordlist
@@ -54,7 +54,7 @@ class Mnemonic:
         return (bits[0:dividerIndex], bits[dividerIndex:])
 
     @staticmethod
-    def _get_entropy_bytes(entropyBits) -> List[bytes]:
+    def _get_entropy_bytes(entropyBits) -> Tuple[List[Any], List[bytes]]:
         # calculate the checksum and compare
         chunks = [entropyBits[x:x + 8] for x in range(0, len(entropyBits), 8)]
         return (chunks, [int(entropy, 2).to_bytes((len(entropy) + 7) // 8, byteorder='big') for entropy in chunks])
