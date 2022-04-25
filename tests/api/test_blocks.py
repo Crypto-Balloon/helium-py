@@ -1,9 +1,9 @@
 """Tests for Client."""
 from unittest import mock
 
-from requests import Session, Response
+from requests import Response, Session
 
-from helium_py.api import Blocks, HELIUM_API_DEFAULT_HOST
+from helium_py.api import HELIUM_API_DEFAULT_HOST, Blocks
 
 tx_instance = Blocks()
 base_path = Blocks.base_path
