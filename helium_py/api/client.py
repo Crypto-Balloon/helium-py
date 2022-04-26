@@ -140,11 +140,7 @@ class Client:
         prev_page_cursor = None
 
         while page_count < page_limit:
-            if 'cursor' in page and page['cursor'] in self._page_cache:
-                page = self._page_cache[params['cursor']]
-                logger.debug(f'loaded page from cache: {params["cursor"]}')
-            else:
-                page = self.__get(path, params)
+            page = self.get_next_page(page, path, params)
             data = page['data']
             if type(data) is list:
                 for obj in data:
@@ -154,17 +150,29 @@ class Client:
             if prev_page_cursor:
                 self._page_cache[prev_page_cursor] = page  # Unknown: Can we cache the first 'None' call?
                 logger.debug(f'caching page: {prev_page_cursor}')
-            if type(page) is dict:
-                prev_page_cursor = page.get('cursor', None)
-                page_count += 1
-                if 'cursor' not in page:
-                    page_limit = -1  # break
-                else:
-                    params['cursor'] = page['cursor']
+            prev_page_cursor = page.get('cursor', None)
+            page_count += 1
+            if 'cursor' not in page:
+                page_limit = -1  # break
             else:
-                break
+                params['cursor'] = page['cursor']
 
-    def post(self, path: str, json: dict) -> dict:
+    def get_next_page(self, current_page: dict, path: str, params: dict) -> dict:
+        """Return the next page from cache or from the API.
+
+        Args:
+            current_page: Current page or empty dict.
+            path: Path for initial query.
+            params: Query params
+        """
+        if 'cursor' in current_page and current_page['cursor'] in self._page_cache:
+            page = self._page_cache[params['cursor']]
+            logger.debug(f'loaded page from cache: {params["cursor"]}')
+        else:
+            page = self.__get(path, params)
+        return page
+
+    def post(self, path: str, json: Optional[dict]) -> dict:
         """Get the response for a POST request.
 
         Args:
