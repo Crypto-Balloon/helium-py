@@ -14,7 +14,7 @@ class Stats(API):
     base_path = 'stats'
     VALID_FORMAT = 'raw'
 
-    def get_all(self):
+    def get_all(self) -> dict:
         """Get all stats."""
         return self.client.get()
 

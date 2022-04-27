@@ -1,4 +1,5 @@
 """Tests for Client."""
+from datetime import datetime
 from unittest import mock
 
 from requests import Response, Session
@@ -26,9 +27,16 @@ def test_get_height(mock_get):
     mock_response = mock.Mock(spec=Response)
     mock_response.json.return_value = {'data': [{'some': 'data'}, {'some': 'data'}]}
     mock_get.return_value = mock_response
-    response = tx_instance.get_height()
+    response = tx_instance.get_height(
+        min_time=datetime(2021, 1, 1, 1, 0, 0, 0),
+        max_time=datetime(2022, 1, 1, 1, 0, 0, 0)
+    )
     assert response[0] == {'some': 'data'}
-    mock_get.assert_called_once_with(f'https://{HELIUM_API_DEFAULT_HOST}:443/v1/{base_path}/height/', params={})
+    mock_get.assert_called_once_with(f'https://{HELIUM_API_DEFAULT_HOST}:443/v1/{base_path}/height/',
+                                     params={
+                                         'min_time': '2021-01-01T01:00:00',
+                                         'max_time': '2022-01-01T01:00:00'
+                                     })
 
 
 @mock.patch.object(Session, 'get')

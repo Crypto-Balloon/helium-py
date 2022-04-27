@@ -158,10 +158,10 @@ def test_get_account_rewards_total(mock_get):
     mock_response = mock.Mock(spec=Response)
     mock_response.json.return_value = {'data': [{'some': 'data'}]}
     mock_get.return_value = mock_response
-    response = tx_instance.get_account_rewards_total('some_account')
+    response = tx_instance.get_account_rewards_total('some_account', bucket='hour')
     assert response[0] == {'some': 'data'}
     mock_get.assert_called_once_with(f'https://{HELIUM_API_DEFAULT_HOST}:443/v1/{base_path}/some_account/rewards/sum/',
-                                     params={})
+                                     params={'bucket': 'hour'})
 
 
 @mock.patch.object(Session, 'get')

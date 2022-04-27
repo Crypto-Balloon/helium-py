@@ -37,9 +37,22 @@ def test_hotspots_for_name(mock_get):
     mock_response = mock.Mock(spec=Response)
     mock_response.json.return_value = {'data': [{'some': 'data'}]}
     mock_get.return_value = mock_response
-    response = tx_instance.hotspots_for_name('some_name')
+    response = tx_instance.hotspots_for_name('some-hotspot-name')
     assert response[0] == {'some': 'data'}
-    mock_get.assert_called_once_with(f'https://{HELIUM_API_DEFAULT_HOST}:443/v1/{base_path}/name/some_name/', params={})
+    mock_get.assert_called_once_with(f'https://{HELIUM_API_DEFAULT_HOST}:443/v1/{base_path}/name/some-hotspot-name/',
+                                     params={})
+
+
+@mock.patch.object(Session, 'get')
+def test_hotspots_for_name_with_spaces(mock_get):
+    """Test that client allows custom port."""
+    mock_response = mock.Mock(spec=Response)
+    mock_response.json.return_value = {'data': [{'some': 'data'}]}
+    mock_get.return_value = mock_response
+    response = tx_instance.hotspots_for_name('some hotspot name')
+    assert response[0] == {'some': 'data'}
+    mock_get.assert_called_once_with(f'https://{HELIUM_API_DEFAULT_HOST}:443/v1/{base_path}/name/some-hotspot-name/',
+                                     params={})
 
 
 @mock.patch.object(Session, 'get')
@@ -76,6 +89,17 @@ def test_hotspots_search_by_geo(mock_get):
     assert response[0] == {'some': 'data'}
     mock_get.assert_called_once_with(f'https://{HELIUM_API_DEFAULT_HOST}:443/v1/{base_path}/location/box/',
                                      params={'swlat': 1, 'swlon': 2, 'nelat': 3, 'nelon': 4})
+
+
+@mock.patch.object(Session, 'get')
+def test_hotspots_by_hex(mock_get):
+    """Test that client allows custom port."""
+    mock_response = mock.Mock(spec=Response)
+    mock_response.json.return_value = {'data': [{'some': 'data'}]}
+    mock_get.return_value = mock_response
+    response = tx_instance.hotspots_by_hex('some_hex')
+    assert response[0] == {'some': 'data'}
+    mock_get.assert_called_once_with(f'https://{HELIUM_API_DEFAULT_HOST}:443/v1/{base_path}/hex/some_hex/', params={})
 
 
 @mock.patch.object(Session, 'get')
