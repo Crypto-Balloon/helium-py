@@ -35,7 +35,7 @@ class Validators(API):
 
     def validators_search_by_name(self, name: str) -> List[dict]:
         """Search for validators by name."""
-        return self.client.get(path=f'/name?search={name}')
+        return self.client.get(path='/name', params={'search': name})
 
     @limit_api
     @time_filterable_api
