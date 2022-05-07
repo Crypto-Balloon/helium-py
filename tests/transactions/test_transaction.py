@@ -1,7 +1,7 @@
 """Tests for Transaction class."""
 from unittest import mock
 
-from requests import Session, Response
+from requests import Response, Session
 
 from helium_py.transactions.transaction import Transaction
 
