@@ -7,6 +7,7 @@ import typing
 import betterproto
 
 from helium_py import proto
+from helium_py.api import ChainVariables
 from helium_py.crypto.address import Address
 from helium_py.crypto.utils import EMPTY_SIGNATURE
 from helium_py.transactions.payment import Payment
@@ -24,10 +25,10 @@ class Transaction:
     payment_class: typing.Type[Payment] = Payment
 
     # Configuration
-    transaction_fee_multiplier: int = 0
+    transaction_fee_multiplier: int = 5000
     dc_payload_size: int = 24
-    staking_fee_txn_assert_location_v1: int = 1
-    staking_fee_txn_add_gateway_v1: int = 1
+    staking_fee_txn_assert_location_v1: int = 1000000
+    staking_fee_txn_add_gateway_v1: int = 4000000
 
     def __init__(self, **kwargs):
         """Initialize a new Transaction instance."""
@@ -52,6 +53,17 @@ class Transaction:
     def from_b64(cls, serialized_transaction: bytes) -> 'Transaction':
         """Return a Transaction instance from the provided base64 bytes."""
         return cls.deserialize(base64.b64decode(serialized_transaction))
+
+    @classmethod
+    def fetch_config(cls):
+        """Update chain variables via API and return configuration values for chain variables."""
+        chain_vars = ChainVariables().get_all()
+        return cls.config(
+            transaction_fee_multiplier=chain_vars['txn_fee_multiplier'],
+            dc_payload_size=chain_vars['dc_payload_size'],
+            staking_fee_txn_assert_location_v1=chain_vars['staking_fee_txn_assert_location_v1'],
+            staking_fee_txn_add_gateway_v1=chain_vars['staking_fee_txn_add_gateway_v1'],
+        )
 
     @classmethod
     def config(

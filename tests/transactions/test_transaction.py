@@ -1,13 +1,17 @@
 """Tests for Transaction class."""
+from unittest import mock
+
+from requests import Session, Response
+
 from helium_py.transactions.transaction import Transaction
 
 
 def test_config_default_values():
     """Test config defaults."""
-    assert Transaction.transaction_fee_multiplier == 0
+    assert Transaction.transaction_fee_multiplier == 5000
     assert Transaction.dc_payload_size == 24
-    assert Transaction.staking_fee_txn_add_gateway_v1 == 1
-    assert Transaction.staking_fee_txn_assert_location_v1 == 1
+    assert Transaction.staking_fee_txn_assert_location_v1 == 1000000
+    assert Transaction.staking_fee_txn_add_gateway_v1 == 4000000
 
 
 def test_config_uses_chain_vars():
@@ -29,7 +33,25 @@ def test_config_uses_chain_vars():
 def test_config_without_chain_vars():
     """Test config without chain vars returns current config."""
     Transaction.config()
-    assert Transaction.transaction_fee_multiplier == 0
+    assert Transaction.transaction_fee_multiplier == 5000
+
+
+@mock.patch.object(Session, 'get')
+def test_fetch_config_from_api(mock_get):
+    """Test config without chain vars returns current config."""
+    mock_response = mock.Mock(spec=Response)
+    mock_response.json.return_value = {'data': {
+            'txn_fee_multiplier': 1,
+            'dc_payload_size': 2,
+            'staking_fee_txn_assert_location_v1': 3,
+            'staking_fee_txn_add_gateway_v1': 4
+        }}
+    mock_get.return_value = mock_response
+    Transaction.fetch_config()
+    assert Transaction.transaction_fee_multiplier == 1
+    assert Transaction.dc_payload_size == 2
+    assert Transaction.staking_fee_txn_assert_location_v1 == 3
+    assert Transaction.staking_fee_txn_add_gateway_v1 == 4
 
 
 def test_string_type():
