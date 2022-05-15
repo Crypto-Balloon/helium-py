@@ -1,5 +1,5 @@
 <p align="center">
-<img src="helium-py.png" width="120px" height="120px" alt="helium-py logo" title="helium.py">
+<img src="https://raw.githubusercontent.com/Crypto-Balloon/helium-py/main/helium-py.png" width="120px" height="120px" alt="helium-py logo" title="helium.py">
 </p>
 
 # Helium-Py

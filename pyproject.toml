@@ -1,46 +1,42 @@
 [project]
-name = "helium-py"
-version = "0.0.1"
-description = "Official python lib for interacting with the Helium blockchain"
+name = 'helium-py'
+version = '0.1-alpha.2'
+description = 'Official python lib for interacting with the Helium blockchain'
 authors = [
-    {name = "Joshua Miller", email = "joshua@cryptoballoon.net"},
-    {name = "Joe Cronyn", email = "joe@cryptoballoon.net"}
+    {name = 'Joshua Miller', email = 'joshua@cryptoballoon.net'},
+    {name = 'Joe Cronyn', email = 'joe@cryptoballoon.net'}
 ]
 maintainers = [
-    {name = "Joshua Miller", email = "joshua@cryptoballoon.net"},
-    {name = "Joe Cronyn", email = "joe@cryptoballoon.net"}
+    {name = 'Joshua Miller', email = 'joshua@cryptoballoon.net'},
+    {name = 'Joe Cronyn', email = 'joe@cryptoballoon.net'}
 ]
-license = {text = "Apache-2.0"}
-readme = "README.md"
-requires-python = ">=3.7"
+license = {text = 'Apache-2.0'}
+readme = 'README.md'
+requires-python = '>=3.7'
 classifiers = [
-    "Development Status :: 2 - Pre-Alpha",
-    "Classifier: Intended Audience :: Developers",
-    "Classifier: Operating System :: POSIX :: Linux",
-    "Classifier: Programming Language :: Python :: 3.7",
-    "Classifier: Programming Language :: Python :: 3.8",
-    "Classifier: Programming Language :: Python :: 3.9",
-    "Classifier: Programming Language :: Python :: 3.10",
-    "Classifier: License :: OSI Approved :: MIT License"
+    'Development Status :: 2 - Pre-Alpha',
+    'Intended Audience :: Developers',
+    'Operating System :: POSIX :: Linux',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'License :: OSI Approved :: MIT License'
 ]
 dependencies = [
     'requests>=2.26.0,<3',
     'betterproto[compiler]>=2.0.0b4,<3',
     'pynacl>=1.5.0',
     'base58==2.1.1',
+    'importlib-metadata >= 1.0 ; python_version < "3.8"',
 ]
 
 [build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ['setuptools']
+build-backend = 'setuptools.build_meta'
 
-[tool.isort]
-line_length = 110
-multi_line_output = 3
-include_trailing_comma = true
-known_local_folder = "booking_widget,tests,webapp"
-known_first_party = "petco_smart_logger"
-force_grid_wrap = 0
-use_parentheses = true
-sections = "FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
-default_section = "THIRDPARTY"
+[tool.mypy]
+exclude = """(?x)(
+    helium_py/proto/
+  )"""
+follow_imports = 'silent'
