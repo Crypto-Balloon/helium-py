@@ -27,4 +27,4 @@ jobs:
       - name: Install dev requirements
         run: pip install -r requirements_dev.txt
       - name: Publish docs
-        run: ./publish-docs.sh
+        run: PYTHONPATH=.. ./publish-docs.sh
