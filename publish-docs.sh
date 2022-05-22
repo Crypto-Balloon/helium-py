@@ -19,6 +19,7 @@ mv build/html /tmp/helium-py-docs-html
 cd ../
 rm -rf docs/*
 cp -a /tmp/helium-py-docs-html/* docs/
+git touch docs/.nojekyll  # Tell gh-pages not to build
 git add docs/
 git commit -m "Docs @$(git rev-parse --short HEAD) $(date +'%Y-%m-%d')"
 git push origin --force
