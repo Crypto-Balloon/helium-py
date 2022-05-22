@@ -2,7 +2,8 @@ name: Docs
 
 on:
   push:
-    tags: ['v*']
+    branches:
+      - main
 
 jobs:
   build:
@@ -19,10 +20,5 @@ jobs:
           python-version: "3.10"
       - name: Install dev requirements
         run: pip install -r requirements_dev.txt
-      - name: Build docs
-        run: cd docs && make html
-      - name: Python artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: helium-py-docs
-          path: docs/build/html
+      - name: Publish docs
+        run: ./publish-docs.sh
