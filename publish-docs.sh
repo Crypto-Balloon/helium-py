@@ -12,7 +12,6 @@ if [[ $(git rev-parse --abbrev-ref HEAD) != "$DOCS_BRANCH" ]]; then
     exit 1
 fi
 
-git reset --hard origin/main
 cd docs
 make html
 rm -rf /tmp/helium-py-docs-html
