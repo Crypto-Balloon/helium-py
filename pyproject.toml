@@ -1,16 +1,16 @@
 [project]
 name = 'helium-py'
-version = '0.2-alpha.0'
+version = '0.2-alpha.1'
 description = 'Official python lib for interacting with the Helium blockchain'
 authors = [
-    {name = 'Joshua Miller', email = 'joshua@cryptoballoon.net'},
-    {name = 'Joe Cronyn', email = 'joe@cryptoballoon.net'}
+    { name = 'Joshua Miller', email = 'joshua@cryptoballoon.net' },
+    { name = 'Joe Cronyn', email = 'joe@cryptoballoon.net' }
 ]
 maintainers = [
-    {name = 'Joshua Miller', email = 'joshua@cryptoballoon.net'},
-    {name = 'Joe Cronyn', email = 'joe@cryptoballoon.net'}
+    { name = 'Joshua Miller', email = 'joshua@cryptoballoon.net' },
+    { name = 'Joe Cronyn', email = 'joe@cryptoballoon.net' }
 ]
-license = {text = 'Apache-2.0'}
+license = { file = "LICENSE" }
 readme = 'README.md'
 requires-python = '>=3.7'
 classifiers = [

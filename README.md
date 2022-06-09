@@ -2,7 +2,7 @@
 <img src="https://raw.githubusercontent.com/Crypto-Balloon/helium-py/main/helium-py.png" width="120px" height="120px" alt="helium-py logo" title="helium.py">
 </p>
 
-# Helium-Py
+# helium-py
 ![Test](https://github.com/Crypto-Balloon/helium-py/actions/workflows/test.yml/badge.svg)
 
 ## Versioning
