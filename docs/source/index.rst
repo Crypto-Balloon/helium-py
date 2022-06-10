@@ -1,6 +1,6 @@
 helium-py: Official Helium Library
 =====================================
-Release V\ |version|. (:ref:`Installation <installation>`)
+Release v\ |release|. (:ref:`Installation <installation>`)
 
 .. image:: https://pepy.tech/badge/helium-py/month
     :target: https://pepy.tech/project/helium-py
@@ -21,7 +21,7 @@ Release V\ |version|. (:ref:`Installation <installation>`)
 **helium-py** is the official Python library for interacting
 with the Helium blockchain.
 
-Check out the :doc:`usage` section for further information.
+Check out the :doc:`quickstart` section to get started.
 
 -------------------
 
@@ -33,6 +33,7 @@ Contents
 --------
 
 .. toctree::
+   :maxdepth: 1
 
-   usage
-   helium_py
+   quickstart
+   modules

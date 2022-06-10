@@ -8,6 +8,9 @@
 
 import os
 import sys
+
+import helium_py
+
 sys.path.insert(0, os.path.abspath('../..'))
 
 
@@ -18,8 +21,7 @@ copyright = '2022, Crypto Balloon LLC'
 author = 'Crypto Balloon LLC'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1-alpha.0'
-
+release = helium_py.__version__
 
 # -- General configuration ---------------------------------------------------
 
@@ -49,3 +51,11 @@ html_theme = 'alabaster'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+# Custom sidebar templates, maps document names to template names.
+html_sidebars = {
+    "index": ["sidebar.html"],
+    "**": [
+        "sidebar.html"
+    ],
+}
