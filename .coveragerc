@@ -1,8 +1,9 @@
 [run]
 omit =
     tests/*
-    helium_py/proto/*
     setup.py
+    helium_py/proto/*
+    helium_py/version.py
 
 [report]
 skip_covered=true

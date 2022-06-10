@@ -28,7 +28,7 @@ def test_submit_transaction_with_string(mock_get):
     mock_response.json.return_value = {'data': [{'some': 'data'}]}
     mock_get.return_value = mock_response
     response = tx_instance.submit_transaction('some_transaction_payload')
-    assert response == {'data': [{'some': 'data'}]}
+    assert response == [{'some': 'data'}]
     mock_get.assert_called_once_with(f'https://{HELIUM_API_DEFAULT_HOST}:443/v1/{base_path}/',
                                      json={'txn': 'some_transaction_payload'})
 
@@ -42,6 +42,6 @@ def test_submit_transaction_with_transaction(mock_get):
     mock_transaction = mock.Mock(spec=Transaction)
     mock_transaction.to_b64.return_value = b'hello'
     response = tx_instance.submit_transaction(mock_transaction)
-    assert response == {'data': [{'some': 'data'}]}
+    assert response == [{'some': 'data'}]
     mock_get.assert_called_once_with(f'https://{HELIUM_API_DEFAULT_HOST}:443/v1/{base_path}/',
                                      json={'txn': 'hello'})

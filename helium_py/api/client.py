@@ -188,7 +188,8 @@ class Client:
         url = urlunsplit(('https', self.netloc, f'{self._base_path}{path}/', '', ''))
         r = self.session.post(url, json=json)
         r.raise_for_status()
-        return r.json()
+        result = r.json()
+        return result['data'] if isinstance(result, dict) and 'data' in result else result
 
 
 __all__ = [
