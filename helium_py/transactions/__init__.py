@@ -1,4 +1,5 @@
 # flake8: noqa
+"""Transactions classes for building and signing transactions."""
 from ..version import VERSION
 from .add_gateway_v1 import AddGatewayV1
 from .assert_location_v1 import AssertLocationV1

@@ -1,1 +1,1 @@
-"""helium-py test module."""
+"""Testing utilities."""
