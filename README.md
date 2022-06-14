@@ -3,52 +3,79 @@
 </p>
 
 # helium-py
+![https://crypto-balloon.github.io/helium-py/](https://github.com/Crypto-Balloon/helium-py/actions/workflows/docs.yml/badge.svg)
 ![Test](https://github.com/Crypto-Balloon/helium-py/actions/workflows/test.yml/badge.svg)
+![https://pypi.org/project/helium-py/](https://github.com/Crypto-Balloon/helium-py/actions/workflows/pypi.yml/badge.svg)
+![https://pepy.tech/project/helium-py](https://pepy.tech/badge/helium-py/month)
+![https://pypi.org/project/helium-py/](https://img.shields.io/pypi/l/helium-py.svg)
+![https://pypi.org/project/helium-py/](https://img.shields.io/pypi/pyversions/helium-py.svg)
 
 ## Versioning
 
 This project follows [semantic versioning](https://semver.org/). Prior to 1.0.0 this project does not
 guarantee a stable public API.
 
-## Modules
+## Installation
 
-- [api](#api)
-- [crypto](#crypto)
-- [currency](#currency)
-- [onboarding](#onboarding)
-- [proto](#proto)
-- [test](#test)
-- [transactions](#transactions)
+To use helium-py, first install it using pip:
 
-### API
-
-The API module classes provide client classes for interacting with the Helium APIs.
-
-For full API specification and documentation please reference [docs.helium.com](https://docs.helium.com/api/blockchain).
-
-```python
-from datetime import datetime, timedelta
-from helium_py.api import ChainVariables, Hotspots
-
-# Example of fetching chain variables
-chain_vars = ChainVariables()  # Create a ChainVariables client
-print(chain_vars.get_all())    # Get all chain variables
-
-# Example of fetching hotspot earnings for the last five days
-hotspot_address = "some_valid_hotspot_address"
-hotspots = Hotspots()
-hotspots.get_hotspot_rewards_total(hotspot_address, min_time=datetime.now() - timedelta(days=5))
+```console
+$ pip install helium-py
 ```
 
-### Crypto
+## Example Transactions
 
-The Crypto module classes provide Address, Keypair, and Mnemonic classes as well as helpful utilities.
+For more example transactions and full module documentation, view the [full documentation](https://crypto-balloon.github.io/helium-py/).
+
+For full API specification and network documentation please reference [docs.helium.com](https://docs.helium.com/api/blockchain).
+
+### Creating and submitting a payment transaction
+A payment from an owned keypair initialized with a 12 word mnemonic to an address specified by its base58 representation. The transaction is serialized to binary and submitted to the blockchain API.
+
 
 ```python
-from helium_py.crypto.keypair import Keypair
+import logging
 
-# Example of creating a random keypair, accessing the address, and signing a message
-keypair = Keypair.make_random()
-address = keypair.address.b58  # B58 public key address
-keypair.sign(b'message')  # Sign a message with keypair private key
+from helium_py.crypto.keypair import Address, Keypair
+from helium_py.transactions import Payment, PaymentV2
+from helium_py.api import Accounts, PendingTransactions, Transactions
+
+logger = logging.getLogger(__name__)
+
+# Initialize an owned keypair from a 12 word mnemonic
+bob = Keypair.from_words(['one', 'two', ..., 'twelve'])
+
+# Initialize an address from a b58 string
+alice = Address.from_b58(b'148d8KTRcKA5JKP ekBcKFd4KfvprvFRpjGtivhtmRmnZ8MFYnP3')
+
+# get the speculative nonce for the keypair
+account = Accounts().account_for_address(bob.address.b58.decode())
+
+payment_transaction = PaymentV2(
+    payer=bob,
+    payments=[
+        Payment(
+            payee=alice,
+            amount=10,
+            memo=b'memo',
+        ),
+    ],
+    nonce=account['speculative_nonce'] + 1,
+)
+
+# an appropriate transaction fee is calculated at initialization
+logger.info(f'transaction fee is: {payment_transaction.calculated_fee}')
+
+# sign the payment txn with bob's keypair
+signed_payment_transaction = payment_transaction.sign(payer=bob)
+
+# submit the serialized txn to the Blockchain HTTP API
+pending_transactions_client = PendingTransactions()
+response_dict = pending_transactions_client.submit_transaction(signed_payment_transaction)
+
+# check on status of pending transaction
+pending_transactions_client.get_status(response_dict['hash'])
+
+# view finalized transaction information
+transaction_dict = Transactions().get_transaction(response_dict['hash'])
 ```

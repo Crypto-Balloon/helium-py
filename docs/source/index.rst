@@ -49,6 +49,7 @@ Creating and submitting a payment transaction
 A payment from an owned keypair initialized with a 12 word mnemonic to an address specified by its base58 representation. The transaction is serialized to binary and submitted to the blockchain API.
 
 .. code-block:: python
+    :linenos:
 
     import logging
 
