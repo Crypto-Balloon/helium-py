@@ -52,7 +52,7 @@ alice = Address.from_b58(b'148d8KTRcKA5JKP ekBcKFd4KfvprvFRpjGtivhtmRmnZ8MFYnP3'
 account = Accounts().account_for_address(bob.address.b58.decode())
 
 payment_transaction = PaymentV2(
-    payer=bob,
+    payer=bob.address,
     payments=[
         Payment(
             payee=alice,

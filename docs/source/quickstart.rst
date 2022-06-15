@@ -42,7 +42,7 @@ A payment from an owned keypair initialized with a 12 word mnemonic to an addres
     account = Accounts().account_for_address(bob.address.b58.decode())
 
     payment_transaction = PaymentV2(
-        payer=bob,
+        payer=bob.address,
         payments=[
             Payment(
                 payee=alice,
@@ -99,7 +99,7 @@ The packages in helium-js provide utility functions to calculate the above:
     account = Accounts().account_for_address(bob.address.b58.decode())
 
     payment_transaction = PaymentV2(
-        payer=bob,
+        payer=bob.address,
         payments=[
             Payment(
                 payee=alice,
@@ -117,7 +117,7 @@ The packages in helium-js provide utility functions to calculate the above:
     amount_to_send = Balance(account['balance'], currency_type=types.NETWORK_TOKENS).minus(fee_in_hnt)
 
     payment_transaction_for_fee = PaymentV2(
-        payer=bob,
+        payer=bob.address,
         payments=[
             Payment(
                 payee=alice,
