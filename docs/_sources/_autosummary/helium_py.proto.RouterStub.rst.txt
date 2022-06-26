@@ -1,0 +1,26 @@
+helium\_py.proto.RouterStub
+===========================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: RouterStub
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~RouterStub.__init__
+      ~RouterStub.route
+   
+   
+
+   
+   
+   

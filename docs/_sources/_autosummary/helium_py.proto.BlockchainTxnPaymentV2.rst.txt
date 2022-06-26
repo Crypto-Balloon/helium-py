@@ -1,0 +1,42 @@
+helium\_py.proto.BlockchainTxnPaymentV2
+=======================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnPaymentV2
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnPaymentV2.FromString
+      ~BlockchainTxnPaymentV2.SerializeToString
+      ~BlockchainTxnPaymentV2.__init__
+      ~BlockchainTxnPaymentV2.from_dict
+      ~BlockchainTxnPaymentV2.from_json
+      ~BlockchainTxnPaymentV2.parse
+      ~BlockchainTxnPaymentV2.to_dict
+      ~BlockchainTxnPaymentV2.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnPaymentV2.fee
+      ~BlockchainTxnPaymentV2.nonce
+      ~BlockchainTxnPaymentV2.payer
+      ~BlockchainTxnPaymentV2.payments
+      ~BlockchainTxnPaymentV2.signature
+   
+   

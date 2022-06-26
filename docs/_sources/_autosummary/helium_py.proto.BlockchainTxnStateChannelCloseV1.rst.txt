@@ -1,0 +1,42 @@
+helium\_py.proto.BlockchainTxnStateChannelCloseV1
+=================================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnStateChannelCloseV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnStateChannelCloseV1.FromString
+      ~BlockchainTxnStateChannelCloseV1.SerializeToString
+      ~BlockchainTxnStateChannelCloseV1.__init__
+      ~BlockchainTxnStateChannelCloseV1.from_dict
+      ~BlockchainTxnStateChannelCloseV1.from_json
+      ~BlockchainTxnStateChannelCloseV1.parse
+      ~BlockchainTxnStateChannelCloseV1.to_dict
+      ~BlockchainTxnStateChannelCloseV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnStateChannelCloseV1.closer
+      ~BlockchainTxnStateChannelCloseV1.conflicts_with
+      ~BlockchainTxnStateChannelCloseV1.fee
+      ~BlockchainTxnStateChannelCloseV1.signature
+      ~BlockchainTxnStateChannelCloseV1.state_channel
+   
+   

@@ -1,0 +1,26 @@
+helium\_py.proto.BlockchainStateChannelStateV1
+==============================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainStateChannelStateV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainStateChannelStateV1.open
+      ~BlockchainStateChannelStateV1.closed
+   
+   

@@ -1,0 +1,39 @@
+helium\_py.proto.BlockchainSignatureV1
+======================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainSignatureV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainSignatureV1.FromString
+      ~BlockchainSignatureV1.SerializeToString
+      ~BlockchainSignatureV1.__init__
+      ~BlockchainSignatureV1.from_dict
+      ~BlockchainSignatureV1.from_json
+      ~BlockchainSignatureV1.parse
+      ~BlockchainSignatureV1.to_dict
+      ~BlockchainSignatureV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainSignatureV1.signature
+      ~BlockchainSignatureV1.signer
+   
+   

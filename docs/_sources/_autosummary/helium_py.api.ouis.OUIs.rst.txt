@@ -1,0 +1,39 @@
+helium\_py.api.ouis.OUIs
+========================
+
+.. currentmodule:: helium_py.api.ouis
+
+.. autoclass:: OUIs
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~OUIs.__init__
+      ~OUIs.all
+      ~OUIs.get_last
+      ~OUIs.get_oui
+      ~OUIs.get_stats
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~OUIs.base_path
+      ~OUIs.client
+      ~OUIs.host
+      ~OUIs.port
+      ~OUIs.user_agent
+   
+   

@@ -1,0 +1,49 @@
+helium\_py.proto.GatewayRespV1
+==============================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: GatewayRespV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GatewayRespV1.FromString
+      ~GatewayRespV1.SerializeToString
+      ~GatewayRespV1.__init__
+      ~GatewayRespV1.from_dict
+      ~GatewayRespV1.from_json
+      ~GatewayRespV1.parse
+      ~GatewayRespV1.to_dict
+      ~GatewayRespV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~GatewayRespV1.block_age
+      ~GatewayRespV1.block_time
+      ~GatewayRespV1.close_resp
+      ~GatewayRespV1.config_resp
+      ~GatewayRespV1.config_update_streamed_resp
+      ~GatewayRespV1.follow_streamed_resp
+      ~GatewayRespV1.height
+      ~GatewayRespV1.is_active_resp
+      ~GatewayRespV1.is_overpaid_resp
+      ~GatewayRespV1.routing_streamed_resp
+      ~GatewayRespV1.signature
+      ~GatewayRespV1.validators_resp
+   
+   

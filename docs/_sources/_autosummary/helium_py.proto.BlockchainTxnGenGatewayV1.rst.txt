@@ -1,0 +1,41 @@
+helium\_py.proto.BlockchainTxnGenGatewayV1
+==========================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnGenGatewayV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnGenGatewayV1.FromString
+      ~BlockchainTxnGenGatewayV1.SerializeToString
+      ~BlockchainTxnGenGatewayV1.__init__
+      ~BlockchainTxnGenGatewayV1.from_dict
+      ~BlockchainTxnGenGatewayV1.from_json
+      ~BlockchainTxnGenGatewayV1.parse
+      ~BlockchainTxnGenGatewayV1.to_dict
+      ~BlockchainTxnGenGatewayV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnGenGatewayV1.gateway
+      ~BlockchainTxnGenGatewayV1.location
+      ~BlockchainTxnGenGatewayV1.nonce
+      ~BlockchainTxnGenGatewayV1.owner
+   
+   

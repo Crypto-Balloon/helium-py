@@ -1,0 +1,42 @@
+helium\_py.api.blocks.Blocks
+============================
+
+.. currentmodule:: helium_py.api.blocks
+
+.. autoclass:: Blocks
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Blocks.__init__
+      ~Blocks.all
+      ~Blocks.get_block_descriptor_for_hash
+      ~Blocks.get_block_descriptor_for_height
+      ~Blocks.get_height
+      ~Blocks.get_stats
+      ~Blocks.get_transactions_for_hash
+      ~Blocks.get_transactions_for_height
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Blocks.base_path
+      ~Blocks.client
+      ~Blocks.host
+      ~Blocks.port
+      ~Blocks.user_agent
+   
+   

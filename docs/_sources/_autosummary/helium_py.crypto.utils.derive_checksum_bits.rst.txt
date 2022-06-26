@@ -1,0 +1,6 @@
+helium\_py.crypto.utils.derive\_checksum\_bits
+==============================================
+
+.. currentmodule:: helium_py.crypto.utils
+
+.. autofunction:: derive_checksum_bits

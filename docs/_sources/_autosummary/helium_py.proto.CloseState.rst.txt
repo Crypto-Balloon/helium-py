@@ -1,0 +1,28 @@
+helium\_py.proto.CloseState
+===========================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: CloseState
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~CloseState.close_state_closable
+      ~CloseState.close_state_closing
+      ~CloseState.close_state_closed
+      ~CloseState.close_state_dispute
+   
+   

@@ -1,0 +1,36 @@
+helium\_py.api.locations.Locations
+==================================
+
+.. currentmodule:: helium_py.api.locations
+
+.. autoclass:: Locations
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Locations.__init__
+      ~Locations.get_location
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Locations.base_path
+      ~Locations.client
+      ~Locations.host
+      ~Locations.port
+      ~Locations.user_agent
+   
+   

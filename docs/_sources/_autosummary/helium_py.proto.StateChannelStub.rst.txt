@@ -1,0 +1,26 @@
+helium\_py.proto.StateChannelStub
+=================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: StateChannelStub
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~StateChannelStub.__init__
+      ~StateChannelStub.msg
+   
+   
+
+   
+   
+   

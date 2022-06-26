@@ -1,0 +1,45 @@
+helium\_py.proto.BlockchainTxnStateChannelOpenV1
+================================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnStateChannelOpenV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnStateChannelOpenV1.FromString
+      ~BlockchainTxnStateChannelOpenV1.SerializeToString
+      ~BlockchainTxnStateChannelOpenV1.__init__
+      ~BlockchainTxnStateChannelOpenV1.from_dict
+      ~BlockchainTxnStateChannelOpenV1.from_json
+      ~BlockchainTxnStateChannelOpenV1.parse
+      ~BlockchainTxnStateChannelOpenV1.to_dict
+      ~BlockchainTxnStateChannelOpenV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnStateChannelOpenV1.amount
+      ~BlockchainTxnStateChannelOpenV1.expire_within
+      ~BlockchainTxnStateChannelOpenV1.fee
+      ~BlockchainTxnStateChannelOpenV1.id
+      ~BlockchainTxnStateChannelOpenV1.nonce
+      ~BlockchainTxnStateChannelOpenV1.oui
+      ~BlockchainTxnStateChannelOpenV1.owner
+      ~BlockchainTxnStateChannelOpenV1.signature
+   
+   

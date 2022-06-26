@@ -1,0 +1,64 @@
+helium\_py.transactions.transaction.Transaction
+===============================================
+
+.. currentmodule:: helium_py.transactions.transaction
+
+.. autoclass:: Transaction
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Transaction.__init__
+      ~Transaction.calculate_fee
+      ~Transaction.config
+      ~Transaction.deserialize
+      ~Transaction.fetch_config
+      ~Transaction.from_b64
+      ~Transaction.get_addresses
+      ~Transaction.get_calculate_fee_kwargs
+      ~Transaction.get_deserialized_addresses
+      ~Transaction.get_deserialized_integers
+      ~Transaction.get_deserialized_payment_lists
+      ~Transaction.get_deserialized_signatures
+      ~Transaction.get_deserialized_strings
+      ~Transaction.get_integers
+      ~Transaction.get_payment_lists
+      ~Transaction.get_signatures
+      ~Transaction.get_strings
+      ~Transaction.getattr_none
+      ~Transaction.orig_kwarg_gt0_or_none
+      ~Transaction.serialize
+      ~Transaction.sign
+      ~Transaction.string_type
+      ~Transaction.to_b64
+      ~Transaction.to_proto
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Transaction.calculated_fee
+      ~Transaction.dc_payload_size
+      ~Transaction.staking_fee_txn_add_gateway_v1
+      ~Transaction.staking_fee_txn_assert_location_v1
+      ~Transaction.transaction_fee_multiplier
+      ~Transaction.type
+      ~Transaction.fields
+      ~Transaction.defaults
+      ~Transaction.keypairs
+      ~Transaction.proto_model_class
+      ~Transaction.proto_txn_field
+   
+   

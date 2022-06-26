@@ -1,0 +1,33 @@
+helium\_py.proto.GatewayStub
+============================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: GatewayStub
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GatewayStub.__init__
+      ~GatewayStub.close_sc
+      ~GatewayStub.config
+      ~GatewayStub.config_update
+      ~GatewayStub.follow_sc
+      ~GatewayStub.is_active_sc
+      ~GatewayStub.is_overpaid_sc
+      ~GatewayStub.routing
+      ~GatewayStub.validators
+   
+   
+
+   
+   
+   

@@ -1,0 +1,41 @@
+helium\_py.proto.BlockchainStateChannelDiffV1
+=============================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainStateChannelDiffV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainStateChannelDiffV1.FromString
+      ~BlockchainStateChannelDiffV1.SerializeToString
+      ~BlockchainStateChannelDiffV1.__init__
+      ~BlockchainStateChannelDiffV1.from_dict
+      ~BlockchainStateChannelDiffV1.from_json
+      ~BlockchainStateChannelDiffV1.parse
+      ~BlockchainStateChannelDiffV1.to_dict
+      ~BlockchainStateChannelDiffV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainStateChannelDiffV1.add_nonce
+      ~BlockchainStateChannelDiffV1.diffs
+      ~BlockchainStateChannelDiffV1.id
+      ~BlockchainStateChannelDiffV1.signature
+   
+   

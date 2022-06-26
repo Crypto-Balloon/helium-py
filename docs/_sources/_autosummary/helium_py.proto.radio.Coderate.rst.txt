@@ -1,0 +1,29 @@
+helium\_py.proto.radio.Coderate
+===============================
+
+.. currentmodule:: helium_py.proto.radio
+
+.. autoclass:: Coderate
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Coderate.CR_UNDEFINED
+      ~Coderate.CR4_5
+      ~Coderate.CR4_6
+      ~Coderate.CR4_7
+      ~Coderate.CR4_8
+   
+   

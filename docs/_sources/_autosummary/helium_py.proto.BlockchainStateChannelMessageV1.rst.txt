@@ -1,0 +1,43 @@
+helium\_py.proto.BlockchainStateChannelMessageV1
+================================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainStateChannelMessageV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainStateChannelMessageV1.FromString
+      ~BlockchainStateChannelMessageV1.SerializeToString
+      ~BlockchainStateChannelMessageV1.__init__
+      ~BlockchainStateChannelMessageV1.from_dict
+      ~BlockchainStateChannelMessageV1.from_json
+      ~BlockchainStateChannelMessageV1.parse
+      ~BlockchainStateChannelMessageV1.to_dict
+      ~BlockchainStateChannelMessageV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainStateChannelMessageV1.banner
+      ~BlockchainStateChannelMessageV1.offer
+      ~BlockchainStateChannelMessageV1.packet
+      ~BlockchainStateChannelMessageV1.purchase
+      ~BlockchainStateChannelMessageV1.reject
+      ~BlockchainStateChannelMessageV1.response
+   
+   

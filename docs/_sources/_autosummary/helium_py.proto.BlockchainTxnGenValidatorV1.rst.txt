@@ -1,0 +1,40 @@
+helium\_py.proto.BlockchainTxnGenValidatorV1
+============================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnGenValidatorV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnGenValidatorV1.FromString
+      ~BlockchainTxnGenValidatorV1.SerializeToString
+      ~BlockchainTxnGenValidatorV1.__init__
+      ~BlockchainTxnGenValidatorV1.from_dict
+      ~BlockchainTxnGenValidatorV1.from_json
+      ~BlockchainTxnGenValidatorV1.parse
+      ~BlockchainTxnGenValidatorV1.to_dict
+      ~BlockchainTxnGenValidatorV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnGenValidatorV1.address
+      ~BlockchainTxnGenValidatorV1.owner
+      ~BlockchainTxnGenValidatorV1.stake
+   
+   

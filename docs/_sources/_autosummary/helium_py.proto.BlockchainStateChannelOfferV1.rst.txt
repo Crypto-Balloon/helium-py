@@ -1,0 +1,45 @@
+helium\_py.proto.BlockchainStateChannelOfferV1
+==============================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainStateChannelOfferV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainStateChannelOfferV1.FromString
+      ~BlockchainStateChannelOfferV1.SerializeToString
+      ~BlockchainStateChannelOfferV1.__init__
+      ~BlockchainStateChannelOfferV1.from_dict
+      ~BlockchainStateChannelOfferV1.from_json
+      ~BlockchainStateChannelOfferV1.parse
+      ~BlockchainStateChannelOfferV1.to_dict
+      ~BlockchainStateChannelOfferV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainStateChannelOfferV1.fcnt
+      ~BlockchainStateChannelOfferV1.hotspot
+      ~BlockchainStateChannelOfferV1.packet_hash
+      ~BlockchainStateChannelOfferV1.payload_size
+      ~BlockchainStateChannelOfferV1.region
+      ~BlockchainStateChannelOfferV1.req_diff
+      ~BlockchainStateChannelOfferV1.routing
+      ~BlockchainStateChannelOfferV1.signature
+   
+   

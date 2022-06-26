@@ -1,0 +1,39 @@
+helium\_py.proto.Eui
+====================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: Eui
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Eui.FromString
+      ~Eui.SerializeToString
+      ~Eui.__init__
+      ~Eui.from_dict
+      ~Eui.from_json
+      ~Eui.parse
+      ~Eui.to_dict
+      ~Eui.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Eui.appeui
+      ~Eui.deveui
+   
+   

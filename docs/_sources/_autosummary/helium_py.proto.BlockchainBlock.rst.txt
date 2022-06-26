@@ -1,0 +1,38 @@
+helium\_py.proto.BlockchainBlock
+================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainBlock
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainBlock.FromString
+      ~BlockchainBlock.SerializeToString
+      ~BlockchainBlock.__init__
+      ~BlockchainBlock.from_dict
+      ~BlockchainBlock.from_json
+      ~BlockchainBlock.parse
+      ~BlockchainBlock.to_dict
+      ~BlockchainBlock.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainBlock.v1
+   
+   

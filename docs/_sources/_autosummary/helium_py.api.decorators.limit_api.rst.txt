@@ -1,0 +1,6 @@
+helium\_py.api.decorators.limit\_api
+====================================
+
+.. currentmodule:: helium_py.api.decorators
+
+.. autofunction:: limit_api

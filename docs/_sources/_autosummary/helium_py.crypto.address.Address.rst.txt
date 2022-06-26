@@ -1,0 +1,39 @@
+helium\_py.crypto.address.Address
+=================================
+
+.. currentmodule:: helium_py.crypto.address
+
+.. autoclass:: Address
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Address.__init__
+      ~Address.from_b58
+      ~Address.from_bin
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Address.DEFAULT_VERSION
+      ~Address.b58
+      ~Address.bin
+      ~Address.version
+      ~Address.net_type
+      ~Address.key_type
+      ~Address.public_key
+   
+   

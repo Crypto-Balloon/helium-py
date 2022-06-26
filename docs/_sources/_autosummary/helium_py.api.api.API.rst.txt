@@ -1,0 +1,35 @@
+helium\_py.api.api.API
+======================
+
+.. currentmodule:: helium_py.api.api
+
+.. autoclass:: API
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~API.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~API.base_path
+      ~API.client
+      ~API.host
+      ~API.port
+      ~API.user_agent
+   
+   

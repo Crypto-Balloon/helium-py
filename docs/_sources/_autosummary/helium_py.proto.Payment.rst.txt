@@ -1,0 +1,40 @@
+helium\_py.proto.Payment
+========================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: Payment
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Payment.FromString
+      ~Payment.SerializeToString
+      ~Payment.__init__
+      ~Payment.from_dict
+      ~Payment.from_json
+      ~Payment.parse
+      ~Payment.to_dict
+      ~Payment.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Payment.amount
+      ~Payment.memo
+      ~Payment.payee
+   
+   

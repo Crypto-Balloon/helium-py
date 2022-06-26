@@ -1,0 +1,41 @@
+helium\_py.currency.balance.Balance
+===================================
+
+.. currentmodule:: helium_py.currency.balance
+
+.. autoclass:: Balance
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Balance.__init__
+      ~Balance.divided_by
+      ~Balance.minus
+      ~Balance.plus
+      ~Balance.times
+      ~Balance.to_data_credits
+      ~Balance.to_network_tokens
+      ~Balance.to_string
+      ~Balance.to_test_network_tokens
+      ~Balance.to_usd
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Balance.currency_type
+      ~Balance.balance_in_currency
+   
+   

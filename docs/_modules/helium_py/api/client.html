@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>helium_py.api.client &#8212; helium-py 0.2a2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for helium_py.api.client</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Base client for Helium Blockchain API.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Generator</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlunsplit</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">urllib3.util.retry</span> <span class="kn">import</span> <span class="n">Retry</span>
+
+<span class="kn">from</span> <span class="nn">..version</span> <span class="kn">import</span> <span class="n">VERSION</span>
+<span class="kn">from</span> <span class="nn">.constants</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">HELIUM_API_BETA_HOST</span><span class="p">,</span>
+    <span class="n">HELIUM_API_DEFAULT_HOST</span><span class="p">,</span>
+    <span class="n">HELIUM_API_DEFAULT_VERSION</span><span class="p">,</span>
+    <span class="n">HELIUM_API_OFFICIAL_HOSTS</span><span class="p">,</span>
+    <span class="n">HELIUM_API_TESTNET_HOST</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Client"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.client.Client.html#helium_py.api.client.Client">[docs]</a><span class="k">class</span> <span class="nc">Client</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Base client class for Helium Blockchain API.</span>
+
+<span class="sd">    Sub-classes define specific paths or parameters for different aspects of the</span>
+<span class="sd">    API.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">base_path</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="n">HELIUM_API_DEFAULT_HOST</span>
+    <span class="n">port</span> <span class="o">=</span> <span class="mi">443</span>
+    <span class="n">user_agent</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">_page_cache</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="Client.__init__"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.client.Client.html#helium_py.api.client.Client.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">user_agent</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">base_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the API client.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            host (str): Hostname for Helium blockchain API.</span>
+<span class="sd">            port (int): Port for Helium blockchain API.</span>
+<span class="sd">            user_agent (str): Custom user agent.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">host</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">host</span>
+        <span class="k">if</span> <span class="n">port</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
+        <span class="k">if</span> <span class="n">user_agent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">user_agent</span> <span class="o">=</span> <span class="n">user_agent</span>
+        <span class="k">if</span> <span class="n">base_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">base_path</span> <span class="o">=</span> <span class="n">base_path</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">netloc</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="si">}</span><span class="s1">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="si">}</span><span class="s1">&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+        <span class="n">retry_adapter</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">adapters</span><span class="o">.</span><span class="n">HTTPAdapter</span><span class="p">(</span>
+            <span class="n">max_retries</span><span class="o">=</span><span class="n">Retry</span><span class="p">(</span>
+                <span class="n">total</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                <span class="n">status_forcelist</span><span class="o">=</span><span class="p">[</span><span class="mi">429</span><span class="p">,</span> <span class="mi">503</span><span class="p">],</span>
+                <span class="n">backoff_factor</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">base_url</span> <span class="o">=</span> <span class="n">urlunsplit</span><span class="p">((</span><span class="s1">&#39;https&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">netloc</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="n">base_url</span><span class="p">,</span> <span class="n">retry_adapter</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_user_agent</span><span class="p">()})</span></div>
+
+<div class="viewcode-block" id="Client.build_user_agent"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.client.Client.html#helium_py.api.client.Client.build_user_agent">[docs]</a>    <span class="k">def</span> <span class="nf">build_user_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the User-Agent.&quot;&quot;&quot;</span>
+        <span class="n">agent</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;helium-py/</span><span class="si">{</span><span class="n">VERSION</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">agent</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">user_agent</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_agent</span> <span class="k">else</span> <span class="n">agent</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_base_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">base_path</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="ow">in</span> <span class="n">HELIUM_API_OFFICIAL_HOSTS</span><span class="p">:</span>
+            <span class="n">base_path</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">HELIUM_API_DEFAULT_VERSION</span><span class="si">}</span><span class="s1">/&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_path</span><span class="p">:</span>
+            <span class="n">base_path</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">base_path</span><span class="si">}</span><span class="s1">&#39;</span>
+
+        <span class="k">return</span> <span class="n">base_path</span>
+
+    <span class="k">def</span> <span class="nf">__get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get the response for a request.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            path: URL path for query.</span>
+<span class="sd">            params: Query parameters.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            The payload from the request.</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            requests.exceptions.HTTPError: If the response code is not a successful one.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">params</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">urlunsplit</span><span class="p">((</span><span class="s1">&#39;https&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">netloc</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_base_path</span><span class="si">}{</span><span class="n">path</span><span class="si">}</span><span class="s1">/&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">r</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Client.get"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.client.Client.html#helium_py.api.client.Client.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the response for a request.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            path: URL path for query.</span>
+<span class="sd">            params: Query parameters.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            The payload from the request, unpacked if possible</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            requests.exceptions.HTTPError: If the response code is not a successful one.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;data&#39;</span> <span class="ow">in</span> <span class="n">result</span> <span class="k">else</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="Client.fetch_all"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.client.Client.html#helium_py.api.client.Client.fetch_all">[docs]</a>    <span class="k">def</span> <span class="nf">fetch_all</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page_limit</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Yield objects returned by API.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            path: Path for initial query.</span>
+<span class="sd">            params: Query params</span>
+<span class="sd">            page_limit: The max number of pages to return. float is permitted since math.inf</span>
+<span class="sd">                is the provided representation of inifinity in the language, and the default is</span>
+<span class="sd">                that there is no limit.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">params</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="n">page_limit</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">page_limit</span><span class="p">)</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">page_limit</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span> <span class="ow">and</span> <span class="n">page_limit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">math</span><span class="o">.</span><span class="n">inf</span> <span class="k">else</span> <span class="n">page_limit</span>
+        <span class="n">page_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">page</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">prev_page_cursor</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">while</span> <span class="n">page_count</span> <span class="o">&lt;</span> <span class="n">page_limit</span><span class="p">:</span>
+            <span class="n">page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_next_page</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">page</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">list</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                    <span class="k">yield</span> <span class="n">obj</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">data</span>
+            <span class="k">if</span> <span class="n">prev_page_cursor</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_page_cache</span><span class="p">[</span><span class="n">prev_page_cursor</span><span class="p">]</span> <span class="o">=</span> <span class="n">page</span>  <span class="c1"># Unknown: Can we cache the first &#39;None&#39; call?</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;caching page: </span><span class="si">{</span><span class="n">prev_page_cursor</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">prev_page_cursor</span> <span class="o">=</span> <span class="n">page</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cursor&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">page_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="s1">&#39;cursor&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">page</span><span class="p">:</span>
+                <span class="n">page_limit</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">params</span><span class="p">[</span><span class="s1">&#39;cursor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">page</span><span class="p">[</span><span class="s1">&#39;cursor&#39;</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Client.get_next_page"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.client.Client.html#helium_py.api.client.Client.get_next_page">[docs]</a>    <span class="k">def</span> <span class="nf">get_next_page</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_page</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the next page from cache or from the API.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            current_page: Current page or empty dict.</span>
+<span class="sd">            path: Path for initial query.</span>
+<span class="sd">            params: Query params</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s1">&#39;cursor&#39;</span> <span class="ow">in</span> <span class="n">current_page</span> <span class="ow">and</span> <span class="n">current_page</span><span class="p">[</span><span class="s1">&#39;cursor&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_page_cache</span><span class="p">:</span>
+            <span class="n">page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_page_cache</span><span class="p">[</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;cursor&#39;</span><span class="p">]]</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;loaded page from cache: </span><span class="si">{</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;cursor&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">page</span></div>
+
+<div class="viewcode-block" id="Client.post"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.client.Client.html#helium_py.api.client.Client.post">[docs]</a>    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">json</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get the response for a POST request.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            path: URL path for query.</span>
+<span class="sd">            json: JSON payload as dict.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            The payload from the request.</span>
+<span class="sd">        Raises:</span>
+<span class="sd">            requests.exceptions.HTTPError: If the response code is not a successful one.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">json</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">json</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">urlunsplit</span><span class="p">((</span><span class="s1">&#39;https&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">netloc</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_base_path</span><span class="si">}{</span><span class="n">path</span><span class="si">}</span><span class="s1">/&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">json</span><span class="p">)</span>
+        <span class="n">r</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;data&#39;</span> <span class="ow">in</span> <span class="n">result</span> <span class="k">else</span> <span class="n">result</span></div></div>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;HELIUM_API_DEFAULT_HOST&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;HELIUM_API_BETA_HOST&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;HELIUM_API_TESTNET_HOST&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;HELIUM_API_OFFICIAL_HOSTS&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;HELIUM_API_DEFAULT_VERSION&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Client&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><p class="logo">
+  <a href="../../../index.html">
+    <img class="logo" src="../../../_static/helium-py.png" alt="helium-py logo" />
+  </a>
+</p>
+
+<p>
+  <iframe src="https://ghbtns.com/github-btn.html?user=Crypto-Balloon&repo=helium-py&type=watch&count=true&size=large"
+    allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+<p>
+  helium-py is the official Python library for interacting with the Helium blockchain.
+</p>
+
+<h3>Useful Links</h3>
+<ul>
+  <li><a href="./quickstart.html">Quickstart</a></li>
+  <li><a href="./modules.html">Modules</a></li>
+  <p></p>
+
+  <li><a href="https://github.com/Crypto-Balloon/helium-py/">helium-py @ GitHub</a></li>
+  <li><a href="https://pypi.org/project/helium-py/">helium-py @ PyPI</a></li>
+  <li><a href="https://github.com/Crypto-Balloon/helium-py/issues">Issue Tracker</a></li>
+</ul>
+
+<div id="native-ribbon">
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Crypto Balloon LLC.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

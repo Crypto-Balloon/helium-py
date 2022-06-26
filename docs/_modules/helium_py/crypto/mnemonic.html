@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>helium_py.crypto.mnemonic &#8212; helium-py 0.2a2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for helium_py.crypto.mnemonic</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Mnemonic class for cryptography.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">floor</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">utils</span>
+<span class="kn">from</span> <span class="nn">.wordlists.english</span> <span class="kn">import</span> <span class="n">wordlist</span>
+
+<span class="n">ALLOWABLE_MNEMONIC_LENGTHS</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">24</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Mnemonic"><a class="viewcode-back" href="../../../_autosummary/helium_py.crypto.mnemonic.Mnemonic.html#helium_py.crypto.mnemonic.Mnemonic">[docs]</a><span class="k">class</span> <span class="nc">Mnemonic</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Mnemonic class with conversion to/from entropy.&quot;&quot;&quot;</span>
+
+    <span class="n">words</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+
+<div class="viewcode-block" id="Mnemonic.__init__"><a class="viewcode-back" href="../../../_autosummary/helium_py.crypto.mnemonic.Mnemonic.html#helium_py.crypto.mnemonic.Mnemonic.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize Mnemonic class with list of words.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">words</span> <span class="o">=</span> <span class="n">words</span></div>
+
+<div class="viewcode-block" id="Mnemonic.create"><a class="viewcode-back" href="../../../_autosummary/helium_py.crypto.mnemonic.Mnemonic.html#helium_py.crypto.mnemonic.Mnemonic.create">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="n">length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Mnemonic&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return a randomly generated Mnemonic of the provided length.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">length</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ALLOWABLE_MNEMONIC_LENGTHS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;supported mnemonic lengths: 12, 24. received </span><span class="si">{</span><span class="n">length</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">entropy_bytes</span> <span class="o">=</span> <span class="mi">16</span> <span class="k">if</span> <span class="n">length</span> <span class="o">==</span> <span class="mi">12</span> <span class="k">else</span> <span class="mi">32</span>
+        <span class="n">entropy</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">random_bytes</span><span class="p">(</span><span class="n">entropy_bytes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Mnemonic</span><span class="o">.</span><span class="n">from_entropy</span><span class="p">(</span><span class="n">entropy</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Mnemonic.from_entropy"><a class="viewcode-back" href="../../../_autosummary/helium_py.crypto.mnemonic.Mnemonic.html#helium_py.crypto.mnemonic.Mnemonic.from_entropy">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">from_entropy</span><span class="p">(</span><span class="n">entropy</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Mnemonic&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return a Mnemonic generated from provided entropy.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">entropy</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">16</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;invalid entropy, less than 16&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">entropy</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">32</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;invalid entropy, greater than 32&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">entropy</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;invalid entropy, not divisible by 4&#39;</span><span class="p">)</span>
+
+        <span class="n">entropyBits</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">bytes_to_binary</span><span class="p">(</span><span class="n">entropy</span><span class="p">)</span>
+        <span class="n">checksumBits</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">derive_checksum_bits</span><span class="p">(</span><span class="n">entropy</span><span class="p">)</span>
+        <span class="n">bits</span> <span class="o">=</span> <span class="n">entropyBits</span> <span class="o">+</span> <span class="n">checksumBits</span>
+        <span class="n">chunks</span> <span class="o">=</span> <span class="p">[</span><span class="n">bits</span><span class="p">[</span><span class="n">x</span><span class="p">:</span><span class="n">x</span> <span class="o">+</span> <span class="mi">11</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">bits</span><span class="p">),</span> <span class="mi">11</span><span class="p">)]</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">wordlist</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">binary</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span> <span class="k">for</span> <span class="n">binary</span> <span class="ow">in</span> <span class="n">chunks</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">Mnemonic</span><span class="p">(</span><span class="n">words</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_get_entropy_bits_and_checksum</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="n">bits</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">bin</span><span class="p">(</span><span class="n">wordlist</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">word</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;0b&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">words</span>
+        <span class="p">])</span>
+
+        <span class="c1"># split the binary string into entropy and checksum</span>
+        <span class="n">dividerIndex</span> <span class="o">=</span> <span class="n">floor</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bits</span><span class="p">)</span> <span class="o">/</span> <span class="mi">33</span><span class="p">)</span> <span class="o">*</span> <span class="mi">32</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">bits</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">dividerIndex</span><span class="p">],</span> <span class="n">bits</span><span class="p">[</span><span class="n">dividerIndex</span><span class="p">:])</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_get_entropy_bytes</span><span class="p">(</span><span class="n">entropyBits</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]]:</span>
+        <span class="c1"># calculate the checksum and compare</span>
+        <span class="n">chunks</span> <span class="o">=</span> <span class="p">[</span><span class="n">entropyBits</span><span class="p">[</span><span class="n">x</span><span class="p">:</span><span class="n">x</span> <span class="o">+</span> <span class="mi">8</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">entropyBits</span><span class="p">),</span> <span class="mi">8</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">chunks</span><span class="p">,</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">entropy</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">entropy</span><span class="p">)</span> <span class="o">+</span> <span class="mi">7</span><span class="p">)</span> <span class="o">//</span> <span class="mi">8</span><span class="p">,</span> <span class="n">byteorder</span><span class="o">=</span><span class="s1">&#39;big&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">entropy</span> <span class="ow">in</span> <span class="n">chunks</span><span class="p">])</span>
+
+<div class="viewcode-block" id="Mnemonic.to_entropy"><a class="viewcode-back" href="../../../_autosummary/helium_py.crypto.mnemonic.Mnemonic.html#helium_py.crypto.mnemonic.Mnemonic.to_entropy">[docs]</a>    <span class="k">def</span> <span class="nf">to_entropy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return entropy bytes generated from provided Mnemonic.&quot;&quot;&quot;</span>
+        <span class="n">entropyBits</span><span class="p">,</span> <span class="n">checksumBits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_entropy_bits_and_checksum</span><span class="p">()</span>
+        <span class="n">entropy_chunks</span><span class="p">,</span> <span class="n">entropy_bytes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_entropy_bytes</span><span class="p">(</span><span class="n">entropyBits</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">entropy_bytes</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">16</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;invalid entropy, less than 16&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">entropy_bytes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">32</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;invalid entropy, greater than 32&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">entropy_bytes</span><span class="p">)</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;invalid entropy, not divisible by 4&#39;</span><span class="p">)</span>
+
+        <span class="c1"># calculate the checksum and compare</span>
+        <span class="n">entropy</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">byte_val</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">byte_val</span> <span class="ow">in</span> <span class="n">entropy_chunks</span><span class="p">])</span>
+        <span class="n">new_checksum</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">derive_checksum_bits</span><span class="p">(</span><span class="n">entropy</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">checksumBits</span> <span class="o">!=</span> <span class="s1">&#39;0000&#39;</span> <span class="ow">and</span> <span class="n">new_checksum</span> <span class="o">!=</span> <span class="n">checksumBits</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;invalid checksum&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">entropy</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><p class="logo">
+  <a href="../../../index.html">
+    <img class="logo" src="../../../_static/helium-py.png" alt="helium-py logo" />
+  </a>
+</p>
+
+<p>
+  <iframe src="https://ghbtns.com/github-btn.html?user=Crypto-Balloon&repo=helium-py&type=watch&count=true&size=large"
+    allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+<p>
+  helium-py is the official Python library for interacting with the Helium blockchain.
+</p>
+
+<h3>Useful Links</h3>
+<ul>
+  <li><a href="./quickstart.html">Quickstart</a></li>
+  <li><a href="./modules.html">Modules</a></li>
+  <p></p>
+
+  <li><a href="https://github.com/Crypto-Balloon/helium-py/">helium-py @ GitHub</a></li>
+  <li><a href="https://pypi.org/project/helium-py/">helium-py @ PyPI</a></li>
+  <li><a href="https://github.com/Crypto-Balloon/helium-py/issues">Issue Tracker</a></li>
+</ul>
+
+<div id="native-ribbon">
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Crypto Balloon LLC.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

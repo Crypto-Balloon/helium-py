@@ -1,0 +1,36 @@
+helium\_py.api.elections.Elections
+==================================
+
+.. currentmodule:: helium_py.api.elections
+
+.. autoclass:: Elections
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Elections.__init__
+      ~Elections.all
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Elections.base_path
+      ~Elections.client
+      ~Elections.host
+      ~Elections.port
+      ~Elections.user_agent
+   
+   

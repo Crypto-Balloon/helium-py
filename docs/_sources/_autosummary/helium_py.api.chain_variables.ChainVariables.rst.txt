@@ -1,0 +1,38 @@
+helium\_py.api.chain\_variables.ChainVariables
+==============================================
+
+.. currentmodule:: helium_py.api.chain_variables
+
+.. autoclass:: ChainVariables
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ChainVariables.__init__
+      ~ChainVariables.all_activity
+      ~ChainVariables.get_all
+      ~ChainVariables.get_by_name
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ChainVariables.base_path
+      ~ChainVariables.client
+      ~ChainVariables.host
+      ~ChainVariables.port
+      ~ChainVariables.user_agent
+   
+   

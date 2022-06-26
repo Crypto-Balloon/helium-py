@@ -1,0 +1,39 @@
+helium\_py.proto.local.KeyedUri
+===============================
+
+.. currentmodule:: helium_py.proto.local
+
+.. autoclass:: KeyedUri
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~KeyedUri.FromString
+      ~KeyedUri.SerializeToString
+      ~KeyedUri.__init__
+      ~KeyedUri.from_dict
+      ~KeyedUri.from_json
+      ~KeyedUri.parse
+      ~KeyedUri.to_dict
+      ~KeyedUri.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~KeyedUri.address
+      ~KeyedUri.uri
+   
+   

@@ -1,0 +1,49 @@
+helium\_py.api.hotspots.Hotspots
+================================
+
+.. currentmodule:: helium_py.api.hotspots
+
+.. autoclass:: Hotspots
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Hotspots.__init__
+      ~Hotspots.all
+      ~Hotspots.get_hotspot_challenges
+      ~Hotspots.get_hotspot_rewards
+      ~Hotspots.get_hotspot_rewards_total
+      ~Hotspots.get_hotspot_witnessed
+      ~Hotspots.get_hotspot_witnesses
+      ~Hotspots.get_roles
+      ~Hotspots.get_roles_counts
+      ~Hotspots.hotspot_for_address
+      ~Hotspots.hotspots_by_hex
+      ~Hotspots.hotspots_for_name
+      ~Hotspots.hotspots_search_by_geo
+      ~Hotspots.hotspots_search_by_location_distance
+      ~Hotspots.hotspots_search_by_name
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Hotspots.base_path
+      ~Hotspots.client
+      ~Hotspots.host
+      ~Hotspots.port
+      ~Hotspots.user_agent
+   
+   

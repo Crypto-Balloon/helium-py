@@ -1,0 +1,43 @@
+helium\_py.proto.BlockchainTxnUnstakeValidatorV1
+================================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnUnstakeValidatorV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnUnstakeValidatorV1.FromString
+      ~BlockchainTxnUnstakeValidatorV1.SerializeToString
+      ~BlockchainTxnUnstakeValidatorV1.__init__
+      ~BlockchainTxnUnstakeValidatorV1.from_dict
+      ~BlockchainTxnUnstakeValidatorV1.from_json
+      ~BlockchainTxnUnstakeValidatorV1.parse
+      ~BlockchainTxnUnstakeValidatorV1.to_dict
+      ~BlockchainTxnUnstakeValidatorV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnUnstakeValidatorV1.address
+      ~BlockchainTxnUnstakeValidatorV1.fee
+      ~BlockchainTxnUnstakeValidatorV1.owner
+      ~BlockchainTxnUnstakeValidatorV1.owner_signature
+      ~BlockchainTxnUnstakeValidatorV1.stake_amount
+      ~BlockchainTxnUnstakeValidatorV1.stake_release_height
+   
+   

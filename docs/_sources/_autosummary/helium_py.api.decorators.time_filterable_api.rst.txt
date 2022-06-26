@@ -1,0 +1,6 @@
+helium\_py.api.decorators.time\_filterable\_api
+===============================================
+
+.. currentmodule:: helium_py.api.decorators
+
+.. autofunction:: time_filterable_api

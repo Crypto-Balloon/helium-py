@@ -1,0 +1,6 @@
+helium\_py.test.utils.get\_test\_users
+======================================
+
+.. currentmodule:: helium_py.test.utils
+
+.. autofunction:: get_test_users

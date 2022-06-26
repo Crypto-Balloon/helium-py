@@ -1,0 +1,40 @@
+helium\_py.proto.local.HeightRes
+================================
+
+.. currentmodule:: helium_py.proto.local
+
+.. autoclass:: HeightRes
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~HeightRes.FromString
+      ~HeightRes.SerializeToString
+      ~HeightRes.__init__
+      ~HeightRes.from_dict
+      ~HeightRes.from_json
+      ~HeightRes.parse
+      ~HeightRes.to_dict
+      ~HeightRes.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~HeightRes.block_age
+      ~HeightRes.gateway
+      ~HeightRes.height
+   
+   

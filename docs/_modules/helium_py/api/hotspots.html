@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>helium_py.api.hotspots &#8212; helium-py 0.2a2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for helium_py.api.hotspots</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Hotspots client for Helium Blockchain API.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Generator</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">.api</span> <span class="kn">import</span> <span class="n">API</span>
+<span class="kn">from</span> <span class="nn">.decorators</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">filter_modes_api</span><span class="p">,</span>
+    <span class="n">filter_transaction_types_api</span><span class="p">,</span>
+    <span class="n">limit_api</span><span class="p">,</span>
+    <span class="n">time_filterable_api</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="Hotspots"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.hotspots.Hotspots.html#helium_py.api.hotspots.Hotspots">[docs]</a><span class="k">class</span> <span class="nc">Hotspots</span><span class="p">(</span><span class="n">API</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Hotspots client class for Helium Blockchain API.</span>
+
+<span class="sd">    https://docs.helium.com/api/blockchain/hotspots</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">base_path</span> <span class="o">=</span> <span class="s1">&#39;hotspots&#39;</span>
+
+<div class="viewcode-block" id="Hotspots.all"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.hotspots.Hotspots.html#helium_py.api.hotspots.Hotspots.all">[docs]</a>    <span class="nd">@filter_modes_api</span>
+    <span class="k">def</span> <span class="nf">all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Yield all hotspots.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            params: Filter mode params.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">fetch_all</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span> <span class="k">if</span> <span class="n">params</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Hotspots.hotspot_for_address"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.hotspots.Hotspots.html#helium_py.api.hotspots.Hotspots.hotspot_for_address">[docs]</a>    <span class="k">def</span> <span class="nf">hotspot_for_address</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return hotspot details for a hotspot with provided address.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">address</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Hotspots.hotspots_for_name"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.hotspots.Hotspots.html#helium_py.api.hotspots.Hotspots.hotspots_for_name">[docs]</a>    <span class="k">def</span> <span class="nf">hotspots_for_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return hotspot details for a hotspot with provided name.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">))</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">))</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;/name/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Hotspots.hotspots_search_by_name"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.hotspots.Hotspots.html#helium_py.api.hotspots.Hotspots.hotspots_search_by_name">[docs]</a>    <span class="k">def</span> <span class="nf">hotspots_search_by_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return search results for provided hotspot name.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;/name&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;search&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">})</span></div>
+
+<div class="viewcode-block" id="Hotspots.hotspots_search_by_location_distance"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.hotspots.Hotspots.html#helium_py.api.hotspots.Hotspots.hotspots_search_by_location_distance">[docs]</a>    <span class="k">def</span> <span class="nf">hotspots_search_by_location_distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lon</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">distance</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return hotspots that are contained within `distance` meters of point coordinates.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="s1">&#39;/location/distance&#39;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="n">lat</span><span class="p">,</span>
+                <span class="s1">&#39;lon&#39;</span><span class="p">:</span> <span class="n">lon</span><span class="p">,</span>
+                <span class="s1">&#39;distance&#39;</span><span class="p">:</span> <span class="n">distance</span><span class="p">,</span>
+            <span class="p">})</span></div>
+
+<div class="viewcode-block" id="Hotspots.hotspots_search_by_geo"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.hotspots.Hotspots.html#helium_py.api.hotspots.Hotspots.hotspots_search_by_geo">[docs]</a>    <span class="k">def</span> <span class="nf">hotspots_search_by_geo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">swlat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">swlon</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">nelat</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">nelon</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return hotspots that are contained within the box coordinates.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="s1">&#39;/location/box&#39;</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s1">&#39;swlat&#39;</span><span class="p">:</span> <span class="n">swlat</span><span class="p">,</span>
+                <span class="s1">&#39;swlon&#39;</span><span class="p">:</span> <span class="n">swlon</span><span class="p">,</span>
+                <span class="s1">&#39;nelat&#39;</span><span class="p">:</span> <span class="n">nelat</span><span class="p">,</span>
+                <span class="s1">&#39;nelon&#39;</span><span class="p">:</span> <span class="n">nelon</span><span class="p">,</span>
+            <span class="p">})</span></div>
+
+<div class="viewcode-block" id="Hotspots.hotspots_by_hex"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.hotspots.Hotspots.html#helium_py.api.hotspots.Hotspots.hotspots_by_hex">[docs]</a>    <span class="k">def</span> <span class="nf">hotspots_by_hex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">h3_index</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return hotspots located within hex provided by h3_index.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;/hex/</span><span class="si">{</span><span class="n">h3_index</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Hotspots.get_roles"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.hotspots.Hotspots.html#helium_py.api.hotspots.Hotspots.get_roles">[docs]</a>    <span class="nd">@limit_api</span>
+    <span class="nd">@time_filterable_api</span>
+    <span class="nd">@filter_transaction_types_api</span>
+    <span class="k">def</span> <span class="nf">get_roles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Yield all roles for provided address.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">fetch_all</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">address</span><span class="si">}</span><span class="s1">/roles&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span> <span class="k">if</span> <span class="n">params</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Hotspots.get_roles_counts"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.hotspots.Hotspots.html#helium_py.api.hotspots.Hotspots.get_roles_counts">[docs]</a>    <span class="nd">@filter_transaction_types_api</span>
+    <span class="k">def</span> <span class="nf">get_roles_counts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return account roles for provided address.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">address</span><span class="si">}</span><span class="s1">/roles/count&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span> <span class="k">if</span> <span class="n">params</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Hotspots.get_hotspot_challenges"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.hotspots.Hotspots.html#helium_py.api.hotspots.Hotspots.get_hotspot_challenges">[docs]</a>    <span class="nd">@time_filterable_api</span>
+    <span class="k">def</span> <span class="nf">get_hotspot_challenges</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Yield hotspot challenges for provided address.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">fetch_all</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">address</span><span class="si">}</span><span class="s1">/challenges&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span> <span class="k">if</span> <span class="n">params</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Hotspots.get_hotspot_rewards"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.hotspots.Hotspots.html#helium_py.api.hotspots.Hotspots.get_hotspot_rewards">[docs]</a>    <span class="nd">@time_filterable_api</span>
+    <span class="k">def</span> <span class="nf">get_hotspot_rewards</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Yield hotspot rewards for provided address.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">fetch_all</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">address</span><span class="si">}</span><span class="s1">/rewards&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span> <span class="k">if</span> <span class="n">params</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Hotspots.get_hotspot_rewards_total"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.hotspots.Hotspots.html#helium_py.api.hotspots.Hotspots.get_hotspot_rewards_total">[docs]</a>    <span class="nd">@time_filterable_api</span>
+    <span class="k">def</span> <span class="nf">get_hotspot_rewards_total</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return hotspot rewards totals for provided address.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">address</span><span class="si">}</span><span class="s1">/rewards/sum&#39;</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span> <span class="k">if</span> <span class="n">params</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Hotspots.get_hotspot_witnesses"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.hotspots.Hotspots.html#helium_py.api.hotspots.Hotspots.get_hotspot_witnesses">[docs]</a>    <span class="k">def</span> <span class="nf">get_hotspot_witnesses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return list of witnesses for a hotspot with provided address.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">address</span><span class="si">}</span><span class="s1">/witnesses&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Hotspots.get_hotspot_witnessed"><a class="viewcode-back" href="../../../_autosummary/helium_py.api.hotspots.Hotspots.html#helium_py.api.hotspots.Hotspots.get_hotspot_witnessed">[docs]</a>    <span class="k">def</span> <span class="nf">get_hotspot_witnessed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return list of hotspots witnessed by hotspot with provided address.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;/</span><span class="si">{</span><span class="n">address</span><span class="si">}</span><span class="s1">/witnessed&#39;</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><p class="logo">
+  <a href="../../../index.html">
+    <img class="logo" src="../../../_static/helium-py.png" alt="helium-py logo" />
+  </a>
+</p>
+
+<p>
+  <iframe src="https://ghbtns.com/github-btn.html?user=Crypto-Balloon&repo=helium-py&type=watch&count=true&size=large"
+    allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+<p>
+  helium-py is the official Python library for interacting with the Helium blockchain.
+</p>
+
+<h3>Useful Links</h3>
+<ul>
+  <li><a href="./quickstart.html">Quickstart</a></li>
+  <li><a href="./modules.html">Modules</a></li>
+  <p></p>
+
+  <li><a href="https://github.com/Crypto-Balloon/helium-py/">helium-py @ GitHub</a></li>
+  <li><a href="https://pypi.org/project/helium-py/">helium-py @ PyPI</a></li>
+  <li><a href="https://github.com/Crypto-Balloon/helium-py/issues">Issue Tracker</a></li>
+</ul>
+
+<div id="native-ribbon">
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Crypto Balloon LLC.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

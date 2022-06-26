@@ -1,0 +1,32 @@
+helium\_py.test.utils.TestUsers
+===============================
+
+.. currentmodule:: helium_py.test.utils
+
+.. autoclass:: TestUsers
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TestUsers.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~TestUsers.bob
+      ~TestUsers.alice
+   
+   

@@ -1,0 +1,38 @@
+helium\_py.proto.local.ConfigRes
+================================
+
+.. currentmodule:: helium_py.proto.local
+
+.. autoclass:: ConfigRes
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ConfigRes.FromString
+      ~ConfigRes.SerializeToString
+      ~ConfigRes.__init__
+      ~ConfigRes.from_dict
+      ~ConfigRes.from_json
+      ~ConfigRes.parse
+      ~ConfigRes.to_dict
+      ~ConfigRes.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ConfigRes.values
+   
+   

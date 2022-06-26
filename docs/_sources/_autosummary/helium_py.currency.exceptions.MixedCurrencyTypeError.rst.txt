@@ -1,0 +1,6 @@
+helium\_py.currency.exceptions.MixedCurrencyTypeError
+=====================================================
+
+.. currentmodule:: helium_py.currency.exceptions
+
+.. autoexception:: MixedCurrencyTypeError

@@ -1,0 +1,6 @@
+helium\_py.api.decorators.filter\_modes\_api
+============================================
+
+.. currentmodule:: helium_py.api.decorators
+
+.. autofunction:: filter_modes_api

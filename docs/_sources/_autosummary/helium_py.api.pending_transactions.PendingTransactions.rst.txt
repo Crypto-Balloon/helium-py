@@ -1,0 +1,37 @@
+helium\_py.api.pending\_transactions.PendingTransactions
+========================================================
+
+.. currentmodule:: helium_py.api.pending_transactions
+
+.. autoclass:: PendingTransactions
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~PendingTransactions.__init__
+      ~PendingTransactions.get_status
+      ~PendingTransactions.submit_transaction
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~PendingTransactions.base_path
+      ~PendingTransactions.client
+      ~PendingTransactions.host
+      ~PendingTransactions.port
+      ~PendingTransactions.user_agent
+   
+   

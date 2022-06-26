@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>helium_py.crypto.keypair.Keypair &#8212; helium-py 0.2a2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="helium_py.crypto.keypair.SodiumKeyPair" href="helium_py.crypto.keypair.SodiumKeyPair.html" />
+    <link rel="prev" title="helium_py.crypto.keypair" href="helium_py.crypto.keypair.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="helium-py-crypto-keypair-keypair">
+<h1>helium_py.crypto.keypair.Keypair<a class="headerlink" href="#helium-py-crypto-keypair-keypair" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="helium_py.crypto.keypair.Keypair">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">helium_py.crypto.keypair.</span></span><span class="sig-name descname"><span class="pre">Keypair</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keypair</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="helium_py.crypto.keypair.SodiumKeyPair.html#helium_py.crypto.keypair.SodiumKeyPair" title="helium_py.crypto.keypair.SodiumKeyPair"><span class="pre">SodiumKeyPair</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/helium_py/crypto/keypair.html#Keypair"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#helium_py.crypto.keypair.Keypair" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Keypair class with mnemonic, entropy, and signing capabilities.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="helium_py.crypto.keypair.Keypair.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keypair</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="helium_py.crypto.keypair.SodiumKeyPair.html#helium_py.crypto.keypair.SodiumKeyPair" title="helium_py.crypto.keypair.SodiumKeyPair"><span class="pre">SodiumKeyPair</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/helium_py/crypto/keypair.html#Keypair.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#helium_py.crypto.keypair.Keypair.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize Keypair instance.</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#helium_py.crypto.keypair.Keypair.__init__" title="helium_py.crypto.keypair.Keypair.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(keypair[, net_type])</p></td>
+<td><p>Initialize Keypair instance.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#helium_py.crypto.keypair.Keypair.from_entropy" title="helium_py.crypto.keypair.Keypair.from_entropy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_entropy</span></code></a>(entropy[, net_type])</p></td>
+<td><p>Return Keypair generated from entropy.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#helium_py.crypto.keypair.Keypair.from_mnemonic" title="helium_py.crypto.keypair.Keypair.from_mnemonic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_mnemonic</span></code></a>(mnemonic[, net_type])</p></td>
+<td><p>Return Keypair generated from a Mnemonic object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#helium_py.crypto.keypair.Keypair.from_words" title="helium_py.crypto.keypair.Keypair.from_words"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_words</span></code></a>(words[, net_type])</p></td>
+<td><p>Return Keypair generated from list of words (mnemonic).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#helium_py.crypto.keypair.Keypair.make_random" title="helium_py.crypto.keypair.Keypair.make_random"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_random</span></code></a>([net_type])</p></td>
+<td><p>Return randomly generated Keypair.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#helium_py.crypto.keypair.Keypair.sign" title="helium_py.crypto.keypair.Keypair.sign"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sign</span></code></a>(message)</p></td>
+<td><p>Return signature for provided message utilizing private_key.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#helium_py.crypto.keypair.Keypair.address" title="helium_py.crypto.keypair.Keypair.address"><code class="xref py py-obj docutils literal notranslate"><span class="pre">address</span></code></a></p></td>
+<td><p>Return Address instance for Keypair.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">keypair</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">public_key</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">private_key</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">key_type</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">net_type</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py property">
+<dt class="sig sig-object py" id="helium_py.crypto.keypair.Keypair.address">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">address</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="helium_py.crypto.address.Address.html#helium_py.crypto.address.Address" title="helium_py.crypto.address.Address"><span class="pre">Address</span></a></em><a class="headerlink" href="#helium_py.crypto.keypair.Keypair.address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return Address instance for Keypair.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="helium_py.crypto.keypair.Keypair.from_entropy">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entropy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#helium_py.crypto.keypair.Keypair" title="helium_py.crypto.keypair.Keypair"><span class="pre">Keypair</span></a></span></span><a class="reference internal" href="../_modules/helium_py/crypto/keypair.html#Keypair.from_entropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#helium_py.crypto.keypair.Keypair.from_entropy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return Keypair generated from entropy.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="helium_py.crypto.keypair.Keypair.from_mnemonic">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_mnemonic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mnemonic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="helium_py.crypto.mnemonic.Mnemonic.html#helium_py.crypto.mnemonic.Mnemonic" title="helium_py.crypto.mnemonic.Mnemonic"><span class="pre">Mnemonic</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#helium_py.crypto.keypair.Keypair" title="helium_py.crypto.keypair.Keypair"><span class="pre">Keypair</span></a></span></span><a class="reference internal" href="../_modules/helium_py/crypto/keypair.html#Keypair.from_mnemonic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#helium_py.crypto.keypair.Keypair.from_mnemonic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return Keypair generated from a Mnemonic object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="helium_py.crypto.keypair.Keypair.from_words">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_words</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">words</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">net_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#helium_py.crypto.keypair.Keypair" title="helium_py.crypto.keypair.Keypair"><span class="pre">Keypair</span></a></span></span><a class="reference internal" href="../_modules/helium_py/crypto/keypair.html#Keypair.from_words"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#helium_py.crypto.keypair.Keypair.from_words" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return Keypair generated from list of words (mnemonic).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="helium_py.crypto.keypair.Keypair.make_random">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">make_random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">net_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#helium_py.crypto.keypair.Keypair" title="helium_py.crypto.keypair.Keypair"><span class="pre">Keypair</span></a></span></span><a class="reference internal" href="../_modules/helium_py/crypto/keypair.html#Keypair.make_random"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#helium_py.crypto.keypair.Keypair.make_random" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return randomly generated Keypair.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="helium_py.crypto.keypair.Keypair.sign">
+<span class="sig-name descname"><span class="pre">sign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="reference internal" href="../_modules/helium_py/crypto/keypair.html#Keypair.sign"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#helium_py.crypto.keypair.Keypair.sign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return signature for provided message utilizing private_key.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/helium-py.png" alt="helium-py logo" />
+  </a>
+</p>
+
+<p>
+  <iframe src="https://ghbtns.com/github-btn.html?user=Crypto-Balloon&repo=helium-py&type=watch&count=true&size=large"
+    allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+<p>
+  helium-py is the official Python library for interacting with the Helium blockchain.
+</p>
+
+<h3>Useful Links</h3>
+<ul>
+  <li><a href="./quickstart.html">Quickstart</a></li>
+  <li><a href="./modules.html">Modules</a></li>
+  <p></p>
+
+  <li><a href="https://github.com/Crypto-Balloon/helium-py/">helium-py @ GitHub</a></li>
+  <li><a href="https://pypi.org/project/helium-py/">helium-py @ PyPI</a></li>
+  <li><a href="https://github.com/Crypto-Balloon/helium-py/issues">Issue Tracker</a></li>
+</ul>
+
+<div id="native-ribbon">
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Crypto Balloon LLC.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_autosummary/helium_py.crypto.keypair.Keypair.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

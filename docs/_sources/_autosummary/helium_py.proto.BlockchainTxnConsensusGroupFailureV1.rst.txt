@@ -1,0 +1,42 @@
+helium\_py.proto.BlockchainTxnConsensusGroupFailureV1
+=====================================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnConsensusGroupFailureV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnConsensusGroupFailureV1.FromString
+      ~BlockchainTxnConsensusGroupFailureV1.SerializeToString
+      ~BlockchainTxnConsensusGroupFailureV1.__init__
+      ~BlockchainTxnConsensusGroupFailureV1.from_dict
+      ~BlockchainTxnConsensusGroupFailureV1.from_json
+      ~BlockchainTxnConsensusGroupFailureV1.parse
+      ~BlockchainTxnConsensusGroupFailureV1.to_dict
+      ~BlockchainTxnConsensusGroupFailureV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnConsensusGroupFailureV1.delay
+      ~BlockchainTxnConsensusGroupFailureV1.failed_members
+      ~BlockchainTxnConsensusGroupFailureV1.height
+      ~BlockchainTxnConsensusGroupFailureV1.members
+      ~BlockchainTxnConsensusGroupFailureV1.signatures
+   
+   

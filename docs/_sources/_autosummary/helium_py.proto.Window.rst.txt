@@ -1,0 +1,40 @@
+helium\_py.proto.Window
+=======================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: Window
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Window.FromString
+      ~Window.SerializeToString
+      ~Window.__init__
+      ~Window.from_dict
+      ~Window.from_json
+      ~Window.parse
+      ~Window.to_dict
+      ~Window.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Window.datarate
+      ~Window.frequency
+      ~Window.timestamp
+   
+   

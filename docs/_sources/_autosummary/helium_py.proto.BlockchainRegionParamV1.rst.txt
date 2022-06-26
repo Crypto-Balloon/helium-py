@@ -1,0 +1,41 @@
+helium\_py.proto.BlockchainRegionParamV1
+========================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainRegionParamV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainRegionParamV1.FromString
+      ~BlockchainRegionParamV1.SerializeToString
+      ~BlockchainRegionParamV1.__init__
+      ~BlockchainRegionParamV1.from_dict
+      ~BlockchainRegionParamV1.from_json
+      ~BlockchainRegionParamV1.parse
+      ~BlockchainRegionParamV1.to_dict
+      ~BlockchainRegionParamV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainRegionParamV1.bandwidth
+      ~BlockchainRegionParamV1.channel_frequency
+      ~BlockchainRegionParamV1.max_eirp
+      ~BlockchainRegionParamV1.spreading
+   
+   

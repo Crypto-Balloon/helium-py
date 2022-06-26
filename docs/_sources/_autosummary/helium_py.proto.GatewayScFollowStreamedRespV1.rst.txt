@@ -1,0 +1,40 @@
+helium\_py.proto.GatewayScFollowStreamedRespV1
+==============================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: GatewayScFollowStreamedRespV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GatewayScFollowStreamedRespV1.FromString
+      ~GatewayScFollowStreamedRespV1.SerializeToString
+      ~GatewayScFollowStreamedRespV1.__init__
+      ~GatewayScFollowStreamedRespV1.from_dict
+      ~GatewayScFollowStreamedRespV1.from_json
+      ~GatewayScFollowStreamedRespV1.parse
+      ~GatewayScFollowStreamedRespV1.to_dict
+      ~GatewayScFollowStreamedRespV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~GatewayScFollowStreamedRespV1.close_state
+      ~GatewayScFollowStreamedRespV1.sc_id
+      ~GatewayScFollowStreamedRespV1.sc_owner
+   
+   

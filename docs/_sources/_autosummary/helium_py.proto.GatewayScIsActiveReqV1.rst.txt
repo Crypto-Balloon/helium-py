@@ -1,0 +1,39 @@
+helium\_py.proto.GatewayScIsActiveReqV1
+=======================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: GatewayScIsActiveReqV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GatewayScIsActiveReqV1.FromString
+      ~GatewayScIsActiveReqV1.SerializeToString
+      ~GatewayScIsActiveReqV1.__init__
+      ~GatewayScIsActiveReqV1.from_dict
+      ~GatewayScIsActiveReqV1.from_json
+      ~GatewayScIsActiveReqV1.parse
+      ~GatewayScIsActiveReqV1.to_dict
+      ~GatewayScIsActiveReqV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~GatewayScIsActiveReqV1.sc_id
+      ~GatewayScIsActiveReqV1.sc_owner
+   
+   

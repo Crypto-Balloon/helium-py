@@ -1,0 +1,39 @@
+helium\_py.onboarding.client.OnboardingClient
+=============================================
+
+.. currentmodule:: helium_py.onboarding.client
+
+.. autoclass:: OnboardingClient
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~OnboardingClient.__init__
+      ~OnboardingClient.get_firmware
+      ~OnboardingClient.get_makers
+      ~OnboardingClient.get_onboarding_record
+      ~OnboardingClient.post_payment_transaction
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~OnboardingClient.base_path
+      ~OnboardingClient.client
+      ~OnboardingClient.host
+      ~OnboardingClient.port
+      ~OnboardingClient.user_agent
+   
+   

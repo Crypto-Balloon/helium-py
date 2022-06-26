@@ -1,0 +1,36 @@
+helium\_py.api.challenges.Challenges
+====================================
+
+.. currentmodule:: helium_py.api.challenges
+
+.. autoclass:: Challenges
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Challenges.__init__
+      ~Challenges.all
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Challenges.base_path
+      ~Challenges.client
+      ~Challenges.host
+      ~Challenges.port
+      ~Challenges.user_agent
+   
+   

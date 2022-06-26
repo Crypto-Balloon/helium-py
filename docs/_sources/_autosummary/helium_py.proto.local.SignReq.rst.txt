@@ -1,0 +1,38 @@
+helium\_py.proto.local.SignReq
+==============================
+
+.. currentmodule:: helium_py.proto.local
+
+.. autoclass:: SignReq
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SignReq.FromString
+      ~SignReq.SerializeToString
+      ~SignReq.__init__
+      ~SignReq.from_dict
+      ~SignReq.from_json
+      ~SignReq.parse
+      ~SignReq.to_dict
+      ~SignReq.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SignReq.data
+   
+   

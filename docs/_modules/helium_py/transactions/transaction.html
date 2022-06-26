@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>helium_py.transactions.transaction &#8212; helium-py 0.2a2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for helium_py.transactions.transaction</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Base Transaction Class.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">base64</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="kn">import</span> <span class="nn">betterproto</span>
+
+<span class="kn">from</span> <span class="nn">helium_py</span> <span class="kn">import</span> <span class="n">proto</span>
+<span class="kn">from</span> <span class="nn">helium_py.api</span> <span class="kn">import</span> <span class="n">ChainVariables</span>
+<span class="kn">from</span> <span class="nn">helium_py.crypto.address</span> <span class="kn">import</span> <span class="n">Address</span>
+<span class="kn">from</span> <span class="nn">helium_py.crypto.utils</span> <span class="kn">import</span> <span class="n">EMPTY_SIGNATURE</span>
+<span class="kn">from</span> <span class="nn">helium_py.transactions.payment</span> <span class="kn">import</span> <span class="n">Payment</span>
+
+
+<div class="viewcode-block" id="Transaction"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction">[docs]</a><span class="k">class</span> <span class="nc">Transaction</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Base Transaction Class.&quot;&quot;&quot;</span>
+
+    <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">fields</span><span class="p">:</span> <span class="nb">dict</span>
+    <span class="n">defaults</span><span class="p">:</span> <span class="nb">dict</span>
+    <span class="n">keypairs</span><span class="p">:</span> <span class="nb">dict</span>
+    <span class="n">proto_model_class</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">]</span>
+    <span class="n">proto_txn_field</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">payment_class</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">Payment</span><span class="p">]</span> <span class="o">=</span> <span class="n">Payment</span>
+
+    <span class="c1"># Configuration</span>
+    <span class="n">transaction_fee_multiplier</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5000</span>
+    <span class="n">dc_payload_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">24</span>
+    <span class="n">staking_fee_txn_assert_location_v1</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000000</span>
+    <span class="n">staking_fee_txn_add_gateway_v1</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4000000</span>
+
+<div class="viewcode-block" id="Transaction.__init__"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a new Transaction instance.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">orig_kwargs</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">field_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">field_type</span><span class="p">]:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">field_name</span><span class="p">)</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">defaults</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">field_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_name</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">defaults</span><span class="p">[</span><span class="n">field_name</span><span class="p">]))</span></div>
+
+<div class="viewcode-block" id="Transaction.serialize"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.serialize">[docs]</a>    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the bytes representation of a Transaction instance.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_proto</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Transaction.to_b64"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.to_b64">[docs]</a>    <span class="k">def</span> <span class="nf">to_b64</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return base64 encoded byte value for serialized protocol buffer data.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">serialize</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Transaction.from_b64"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.from_b64">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_b64</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">serialized_transaction</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Transaction&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return a Transaction instance from the provided base64 bytes.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">serialized_transaction</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Transaction.fetch_config"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.fetch_config">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">fetch_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update chain variables via API and return configuration values for chain variables.&quot;&quot;&quot;</span>
+        <span class="n">chain_vars</span> <span class="o">=</span> <span class="n">ChainVariables</span><span class="p">()</span><span class="o">.</span><span class="n">get_all</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">config</span><span class="p">(</span>
+            <span class="n">transaction_fee_multiplier</span><span class="o">=</span><span class="n">chain_vars</span><span class="p">[</span><span class="s1">&#39;txn_fee_multiplier&#39;</span><span class="p">],</span>
+            <span class="n">dc_payload_size</span><span class="o">=</span><span class="n">chain_vars</span><span class="p">[</span><span class="s1">&#39;dc_payload_size&#39;</span><span class="p">],</span>
+            <span class="n">staking_fee_txn_assert_location_v1</span><span class="o">=</span><span class="n">chain_vars</span><span class="p">[</span><span class="s1">&#39;staking_fee_txn_assert_location_v1&#39;</span><span class="p">],</span>
+            <span class="n">staking_fee_txn_add_gateway_v1</span><span class="o">=</span><span class="n">chain_vars</span><span class="p">[</span><span class="s1">&#39;staking_fee_txn_add_gateway_v1&#39;</span><span class="p">],</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Transaction.config"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.config">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">config</span><span class="p">(</span>
+            <span class="bp">cls</span><span class="p">,</span>
+            <span class="n">transaction_fee_multiplier</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">dc_payload_size</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">staking_fee_txn_assert_location_v1</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">staking_fee_txn_add_gateway_v1</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Optionally update and return configuration values for chain variables.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">transaction_fee_multiplier</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">transaction_fee_multiplier</span> <span class="o">=</span> <span class="n">transaction_fee_multiplier</span>
+
+        <span class="k">if</span> <span class="n">dc_payload_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">dc_payload_size</span> <span class="o">=</span> <span class="n">dc_payload_size</span>
+
+        <span class="k">if</span> <span class="n">staking_fee_txn_assert_location_v1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">staking_fee_txn_assert_location_v1</span> <span class="o">=</span> <span class="n">staking_fee_txn_assert_location_v1</span>
+
+        <span class="k">if</span> <span class="n">staking_fee_txn_add_gateway_v1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">staking_fee_txn_add_gateway_v1</span> <span class="o">=</span> <span class="n">staking_fee_txn_add_gateway_v1</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;transaction_fee_multiplier&#39;</span><span class="p">:</span> <span class="bp">cls</span><span class="o">.</span><span class="n">transaction_fee_multiplier</span><span class="p">,</span>
+            <span class="s1">&#39;dc_payload_size&#39;</span><span class="p">:</span> <span class="bp">cls</span><span class="o">.</span><span class="n">dc_payload_size</span><span class="p">,</span>
+            <span class="s1">&#39;staking_fee_txn_assert_location_v1&#39;</span><span class="p">:</span> <span class="bp">cls</span><span class="o">.</span><span class="n">staking_fee_txn_assert_location_v1</span><span class="p">,</span>
+            <span class="s1">&#39;staking_fee_txn_add_gateway_v1&#39;</span><span class="p">:</span> <span class="bp">cls</span><span class="o">.</span><span class="n">staking_fee_txn_add_gateway_v1</span>
+        <span class="p">}</span></div>
+
+<div class="viewcode-block" id="Transaction.string_type"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.string_type">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">string_type</span><span class="p">(</span><span class="n">transaction_string</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the protocol buffer string type of the Transaction instance from bytes repr.&quot;&quot;&quot;</span>
+        <span class="n">buf</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">transaction_string</span><span class="p">)</span>
+        <span class="n">decoded</span> <span class="o">=</span> <span class="n">proto</span><span class="o">.</span><span class="n">BlockchainTxn</span><span class="o">.</span><span class="n">FromString</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">decoded</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Transaction.getattr_none"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.getattr_none">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">getattr_none</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span> <span class="n">attr</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;getattr() but return `None` for any attr that is empty bytes.&quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span> <span class="k">if</span> <span class="n">value</span> <span class="o">!=</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span> <span class="k">else</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="Transaction.get_deserialized_addresses"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.get_deserialized_addresses">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_deserialized_addresses</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">proto_model</span><span class="p">:</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">Address</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Return all deserialized Address instances for Transaction instances address fields.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">key</span><span class="p">:</span> <span class="n">Address</span><span class="o">.</span><span class="n">from_bin</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">proto_model</span><span class="p">,</span> <span class="n">key</span><span class="p">))</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">proto_model</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;addresses&#39;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="p">}</span></div>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_deserialized_memo</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">proto_model</span><span class="p">:</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the memo bytes from the int64 memo value if exists.&quot;&quot;&quot;</span>
+        <span class="n">memo</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">getattr_none</span><span class="p">(</span><span class="n">proto_model</span><span class="p">,</span> <span class="s1">&#39;memo&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">memo</span><span class="o">.</span><span class="n">to_bytes</span><span class="p">((</span><span class="n">memo</span><span class="o">.</span><span class="n">bit_length</span><span class="p">()</span> <span class="o">+</span> <span class="mi">7</span><span class="p">)</span> <span class="o">//</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;little&#39;</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">if</span> <span class="n">memo</span> <span class="k">else</span> <span class="kc">None</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_deserialized_plain</span><span class="p">(</span>
+            <span class="bp">cls</span><span class="p">,</span>
+            <span class="n">proto_model</span><span class="p">:</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">,</span>
+            <span class="n">attr_names</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return the deserialized values for the given attribute names.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">key</span><span class="p">:</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_deserialized_memo</span><span class="p">(</span><span class="n">proto_model</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;memo&#39;</span> <span class="k">else</span> <span class="bp">cls</span><span class="o">.</span><span class="n">getattr_none</span><span class="p">(</span><span class="n">proto_model</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">attr_names</span>
+        <span class="p">}</span>
+
+<div class="viewcode-block" id="Transaction.get_deserialized_signatures"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.get_deserialized_signatures">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_deserialized_signatures</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">proto_model</span><span class="p">:</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return deserialized signatures.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_deserialized_plain</span><span class="p">(</span><span class="n">proto_model</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;signatures&#39;</span><span class="p">,</span> <span class="p">[]))</span></div>
+
+<div class="viewcode-block" id="Transaction.get_deserialized_integers"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.get_deserialized_integers">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_deserialized_integers</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">proto_model</span><span class="p">:</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return deserialized integers.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_deserialized_plain</span><span class="p">(</span><span class="n">proto_model</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;integers&#39;</span><span class="p">,</span> <span class="p">[]))</span></div>
+
+<div class="viewcode-block" id="Transaction.get_deserialized_strings"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.get_deserialized_strings">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_deserialized_strings</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">proto_model</span><span class="p">:</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return deserialized strings.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_deserialized_plain</span><span class="p">(</span><span class="n">proto_model</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;strings&#39;</span><span class="p">,</span> <span class="p">[]))</span></div>
+
+<div class="viewcode-block" id="Transaction.get_deserialized_payment_lists"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.get_deserialized_payment_lists">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_deserialized_payment_lists</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">proto_model</span><span class="p">:</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">Payment</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Return deserialized payment lists.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">key</span><span class="p">:</span> <span class="bp">cls</span><span class="o">.</span><span class="n">payment_class</span><span class="o">.</span><span class="n">deserialize_payment_list</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">proto_model</span><span class="p">,</span> <span class="n">key</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;payment_lists&#39;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="p">}</span></div>
+
+<div class="viewcode-block" id="Transaction.get_addresses"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.get_addresses">[docs]</a>    <span class="k">def</span> <span class="nf">get_addresses</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return addresses for protocol buffer initialization.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">),</span> <span class="s1">&#39;bin&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;addresses&#39;</span><span class="p">,</span> <span class="p">[])}</span></div>
+
+<div class="viewcode-block" id="Transaction.get_signatures"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.get_signatures">[docs]</a>    <span class="k">def</span> <span class="nf">get_signatures</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">for_signing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return signatures for protocol buffer initialization.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">key</span><span class="p">:</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">for_signing</span> <span class="k">else</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="ow">or</span> <span class="kc">None</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;signatures&#39;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="p">}</span></div>
+
+    <span class="k">def</span> <span class="nf">_get_memo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return memo value for protocol buffer initialization.&quot;&quot;&quot;</span>
+        <span class="n">memo</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;memo&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">memo</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">memo</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Memo cannot contain more than 8 bytes.&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="o">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">memo</span><span class="p">,</span> <span class="s1">&#39;little&#39;</span><span class="p">,</span> <span class="n">signed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">if</span> <span class="n">memo</span> <span class="k">else</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Transaction.get_integers"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.get_integers">[docs]</a>    <span class="k">def</span> <span class="nf">get_integers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return integers for protocol buffer initialization.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">key</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_memo</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;memo&#39;</span> <span class="k">else</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;integers&#39;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="p">}</span></div>
+
+<div class="viewcode-block" id="Transaction.get_strings"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.get_strings">[docs]</a>    <span class="k">def</span> <span class="nf">get_strings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return strings for protocol buffer initialization.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;strings&#39;</span><span class="p">,</span> <span class="p">[])}</span></div>
+
+<div class="viewcode-block" id="Transaction.get_payment_lists"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.get_payment_lists">[docs]</a>    <span class="k">def</span> <span class="nf">get_payment_lists</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return payment lists for protocol buffer initialization.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">key</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_class</span><span class="o">.</span><span class="n">payment_list_to_proto</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;payment_lists&#39;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="p">}</span></div>
+
+<div class="viewcode-block" id="Transaction.orig_kwarg_gt0_or_none"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.orig_kwarg_gt0_or_none">[docs]</a>    <span class="k">def</span> <span class="nf">orig_kwarg_gt0_or_none</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return the original kwarg value if greater than zero and not None.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">orig_kwargs</span> <span class="ow">or</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">orig_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">orig_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">orig_kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Transaction.get_calculate_fee_kwargs"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.get_calculate_fee_kwargs">[docs]</a>    <span class="k">def</span> <span class="nf">get_calculate_fee_kwargs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return kwargs to use for calculating fee.&quot;&quot;&quot;</span>
+        <span class="n">fee_kwargs</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">orig_kwargs</span><span class="p">)</span>
+        <span class="n">fee_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+            <span class="n">key</span><span class="p">:</span> <span class="n">EMPTY_SIGNATURE</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_signatures</span><span class="p">()</span>
+        <span class="p">})</span>
+        <span class="n">fee_kwargs</span><span class="p">[</span><span class="s1">&#39;fee&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">orig_kwarg_gt0_or_none</span><span class="p">(</span><span class="s1">&#39;fee&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fee_kwargs</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">calculated_fee</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Property for calculated fee for Transaction in current state.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_fee</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">get_calculate_fee_kwargs</span><span class="p">())</span>
+
+<div class="viewcode-block" id="Transaction.calculate_fee"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.calculate_fee">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">calculate_fee</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">init_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return fee for transaction based on payload size and chain variables.&quot;&quot;&quot;</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">init_kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">serialize</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span> <span class="o">/</span> <span class="bp">cls</span><span class="o">.</span><span class="n">dc_payload_size</span><span class="p">)</span> <span class="o">*</span> <span class="bp">cls</span><span class="o">.</span><span class="n">transaction_fee_multiplier</span></div>
+
+<div class="viewcode-block" id="Transaction.deserialize"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.deserialize">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">serialized_transaction</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Transaction&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return a Transaction instance from the provided serialized transaction bytes.&quot;&quot;&quot;</span>
+        <span class="n">proto_model</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span>
+            <span class="n">proto</span><span class="o">.</span><span class="n">BlockchainTxn</span><span class="o">.</span><span class="n">FromString</span><span class="p">(</span><span class="n">serialized_transaction</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">proto_txn_field</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="o">**</span><span class="bp">cls</span><span class="o">.</span><span class="n">get_deserialized_addresses</span><span class="p">(</span><span class="n">proto_model</span><span class="p">),</span>
+            <span class="o">**</span><span class="bp">cls</span><span class="o">.</span><span class="n">get_deserialized_signatures</span><span class="p">(</span><span class="n">proto_model</span><span class="p">),</span>
+            <span class="o">**</span><span class="bp">cls</span><span class="o">.</span><span class="n">get_deserialized_integers</span><span class="p">(</span><span class="n">proto_model</span><span class="p">),</span>
+            <span class="o">**</span><span class="bp">cls</span><span class="o">.</span><span class="n">get_deserialized_strings</span><span class="p">(</span><span class="n">proto_model</span><span class="p">),</span>
+            <span class="o">**</span><span class="bp">cls</span><span class="o">.</span><span class="n">get_deserialized_payment_lists</span><span class="p">(</span><span class="n">proto_model</span><span class="p">)</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Transaction.to_proto"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.to_proto">[docs]</a>    <span class="nd">@typing</span><span class="o">.</span><span class="n">no_type_check</span>
+    <span class="k">def</span> <span class="nf">to_proto</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">for_signing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">betterproto</span><span class="o">.</span><span class="n">Message</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return a protocol buffer BlockchainTxn instance from this Transaction instance.&quot;&quot;&quot;</span>
+        <span class="n">proto_model_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">get_addresses</span><span class="p">(),</span>
+            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">get_integers</span><span class="p">(),</span>
+            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">get_strings</span><span class="p">(),</span>
+            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">get_signatures</span><span class="p">(</span><span class="n">for_signing</span><span class="p">),</span>
+            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">get_payment_lists</span><span class="p">(),</span>
+        <span class="p">}</span>
+        <span class="n">transaction_proto_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">proto_model_class</span><span class="p">(</span><span class="o">**</span><span class="n">proto_model_kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">for_signing</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">transaction_proto_model</span>
+
+        <span class="n">proto_txn_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">proto_txn_field</span><span class="p">:</span> <span class="n">transaction_proto_model</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">proto</span><span class="o">.</span><span class="n">BlockchainTxn</span><span class="p">(</span><span class="o">**</span><span class="n">proto_txn_kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Transaction.sign"><a class="viewcode-back" href="../../../_autosummary/helium_py.transactions.transaction.Transaction.html#helium_py.transactions.transaction.Transaction.sign">[docs]</a>    <span class="k">def</span> <span class="nf">sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Transaction&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Sign a Transaction instance using available keypairs.&quot;&quot;&quot;</span>
+        <span class="n">serialized</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_proto</span><span class="p">(</span><span class="n">for_signing</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">attr_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keypairs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">keypair</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">keypair</span><span class="p">:</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">keypair</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">serialized</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><p class="logo">
+  <a href="../../../index.html">
+    <img class="logo" src="../../../_static/helium-py.png" alt="helium-py logo" />
+  </a>
+</p>
+
+<p>
+  <iframe src="https://ghbtns.com/github-btn.html?user=Crypto-Balloon&repo=helium-py&type=watch&count=true&size=large"
+    allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+<p>
+  helium-py is the official Python library for interacting with the Helium blockchain.
+</p>
+
+<h3>Useful Links</h3>
+<ul>
+  <li><a href="./quickstart.html">Quickstart</a></li>
+  <li><a href="./modules.html">Modules</a></li>
+  <p></p>
+
+  <li><a href="https://github.com/Crypto-Balloon/helium-py/">helium-py @ GitHub</a></li>
+  <li><a href="https://pypi.org/project/helium-py/">helium-py @ PyPI</a></li>
+  <li><a href="https://github.com/Crypto-Balloon/helium-py/issues">Issue Tracker</a></li>
+</ul>
+
+<div id="native-ribbon">
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Crypto Balloon LLC.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

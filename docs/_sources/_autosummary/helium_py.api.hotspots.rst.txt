@@ -1,0 +1,31 @@
+helium\_py.api.hotspots
+=======================
+
+.. automodule:: helium_py.api.hotspots
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: custom-class-template.rst
+   
+      Hotspots
+   
+   
+
+   
+   
+   
+
+
+

@@ -1,0 +1,38 @@
+helium\_py.proto.GatewayConfigRespV1
+====================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: GatewayConfigRespV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GatewayConfigRespV1.FromString
+      ~GatewayConfigRespV1.SerializeToString
+      ~GatewayConfigRespV1.__init__
+      ~GatewayConfigRespV1.from_dict
+      ~GatewayConfigRespV1.from_json
+      ~GatewayConfigRespV1.parse
+      ~GatewayConfigRespV1.to_dict
+      ~GatewayConfigRespV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~GatewayConfigRespV1.result
+   
+   

@@ -1,0 +1,31 @@
+helium\_py.proto.RegionSpreading
+================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: RegionSpreading
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~RegionSpreading.SF_INVALID
+      ~RegionSpreading.SF7
+      ~RegionSpreading.SF8
+      ~RegionSpreading.SF9
+      ~RegionSpreading.SF10
+      ~RegionSpreading.SF11
+      ~RegionSpreading.SF12
+   
+   

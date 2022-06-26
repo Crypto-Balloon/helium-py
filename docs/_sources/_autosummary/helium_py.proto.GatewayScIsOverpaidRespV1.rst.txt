@@ -1,0 +1,40 @@
+helium\_py.proto.GatewayScIsOverpaidRespV1
+==========================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: GatewayScIsOverpaidRespV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GatewayScIsOverpaidRespV1.FromString
+      ~GatewayScIsOverpaidRespV1.SerializeToString
+      ~GatewayScIsOverpaidRespV1.__init__
+      ~GatewayScIsOverpaidRespV1.from_dict
+      ~GatewayScIsOverpaidRespV1.from_json
+      ~GatewayScIsOverpaidRespV1.parse
+      ~GatewayScIsOverpaidRespV1.to_dict
+      ~GatewayScIsOverpaidRespV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~GatewayScIsOverpaidRespV1.overpaid
+      ~GatewayScIsOverpaidRespV1.sc_id
+      ~GatewayScIsOverpaidRespV1.sc_owner
+   
+   

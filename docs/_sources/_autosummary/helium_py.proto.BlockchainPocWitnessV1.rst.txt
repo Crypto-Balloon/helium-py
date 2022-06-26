@@ -1,0 +1,46 @@
+helium\_py.proto.BlockchainPocWitnessV1
+=======================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainPocWitnessV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainPocWitnessV1.FromString
+      ~BlockchainPocWitnessV1.SerializeToString
+      ~BlockchainPocWitnessV1.__init__
+      ~BlockchainPocWitnessV1.from_dict
+      ~BlockchainPocWitnessV1.from_json
+      ~BlockchainPocWitnessV1.parse
+      ~BlockchainPocWitnessV1.to_dict
+      ~BlockchainPocWitnessV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainPocWitnessV1.channel
+      ~BlockchainPocWitnessV1.datarate
+      ~BlockchainPocWitnessV1.frequency
+      ~BlockchainPocWitnessV1.gateway
+      ~BlockchainPocWitnessV1.packet_hash
+      ~BlockchainPocWitnessV1.signal
+      ~BlockchainPocWitnessV1.signature
+      ~BlockchainPocWitnessV1.snr
+      ~BlockchainPocWitnessV1.timestamp
+   
+   

@@ -1,0 +1,29 @@
+helium\_py.proto.longfi.LongFiSpreading
+=======================================
+
+.. currentmodule:: helium_py.proto.longfi
+
+.. autoclass:: LongFiSpreading
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~LongFiSpreading.SF_INVALID
+      ~LongFiSpreading.SF7
+      ~LongFiSpreading.SF8
+      ~LongFiSpreading.SF9
+      ~LongFiSpreading.SF10
+   
+   

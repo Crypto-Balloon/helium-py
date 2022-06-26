@@ -1,0 +1,40 @@
+helium\_py.proto.BlockchainPocPathElementV1
+===========================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainPocPathElementV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainPocPathElementV1.FromString
+      ~BlockchainPocPathElementV1.SerializeToString
+      ~BlockchainPocPathElementV1.__init__
+      ~BlockchainPocPathElementV1.from_dict
+      ~BlockchainPocPathElementV1.from_json
+      ~BlockchainPocPathElementV1.parse
+      ~BlockchainPocPathElementV1.to_dict
+      ~BlockchainPocPathElementV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainPocPathElementV1.challengee
+      ~BlockchainPocPathElementV1.receipt
+      ~BlockchainPocPathElementV1.witnesses
+   
+   

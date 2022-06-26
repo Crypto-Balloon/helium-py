@@ -1,0 +1,33 @@
+helium\_py.proto.GatewayBase
+============================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: GatewayBase
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GatewayBase.__init__
+      ~GatewayBase.close_sc
+      ~GatewayBase.config
+      ~GatewayBase.config_update
+      ~GatewayBase.follow_sc
+      ~GatewayBase.is_active_sc
+      ~GatewayBase.is_overpaid_sc
+      ~GatewayBase.routing
+      ~GatewayBase.validators
+   
+   
+
+   
+   
+   

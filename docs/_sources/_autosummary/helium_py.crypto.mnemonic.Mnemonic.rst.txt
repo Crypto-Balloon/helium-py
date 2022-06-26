@@ -1,0 +1,34 @@
+helium\_py.crypto.mnemonic.Mnemonic
+===================================
+
+.. currentmodule:: helium_py.crypto.mnemonic
+
+.. autoclass:: Mnemonic
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Mnemonic.__init__
+      ~Mnemonic.create
+      ~Mnemonic.from_entropy
+      ~Mnemonic.to_entropy
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Mnemonic.words
+   
+   

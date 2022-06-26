@@ -1,0 +1,42 @@
+helium\_py.proto.BlockchainTxnRedeemHtlcV1
+==========================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnRedeemHtlcV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnRedeemHtlcV1.FromString
+      ~BlockchainTxnRedeemHtlcV1.SerializeToString
+      ~BlockchainTxnRedeemHtlcV1.__init__
+      ~BlockchainTxnRedeemHtlcV1.from_dict
+      ~BlockchainTxnRedeemHtlcV1.from_json
+      ~BlockchainTxnRedeemHtlcV1.parse
+      ~BlockchainTxnRedeemHtlcV1.to_dict
+      ~BlockchainTxnRedeemHtlcV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnRedeemHtlcV1.address
+      ~BlockchainTxnRedeemHtlcV1.fee
+      ~BlockchainTxnRedeemHtlcV1.payee
+      ~BlockchainTxnRedeemHtlcV1.preimage
+      ~BlockchainTxnRedeemHtlcV1.signature
+   
+   

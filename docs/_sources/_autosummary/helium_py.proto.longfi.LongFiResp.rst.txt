@@ -1,0 +1,42 @@
+helium\_py.proto.longfi.LongFiResp
+==================================
+
+.. currentmodule:: helium_py.proto.longfi
+
+.. autoclass:: LongFiResp
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~LongFiResp.FromString
+      ~LongFiResp.SerializeToString
+      ~LongFiResp.__init__
+      ~LongFiResp.from_dict
+      ~LongFiResp.from_json
+      ~LongFiResp.parse
+      ~LongFiResp.to_dict
+      ~LongFiResp.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~LongFiResp.id
+      ~LongFiResp.miner_name
+      ~LongFiResp.parse_err
+      ~LongFiResp.rx
+      ~LongFiResp.tx_status
+   
+   

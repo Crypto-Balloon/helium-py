@@ -1,0 +1,48 @@
+helium\_py.proto.longfi.LongFiRxPacket
+======================================
+
+.. currentmodule:: helium_py.proto.longfi
+
+.. autoclass:: LongFiRxPacket
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~LongFiRxPacket.FromString
+      ~LongFiRxPacket.SerializeToString
+      ~LongFiRxPacket.__init__
+      ~LongFiRxPacket.from_dict
+      ~LongFiRxPacket.from_json
+      ~LongFiRxPacket.parse
+      ~LongFiRxPacket.to_dict
+      ~LongFiRxPacket.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~LongFiRxPacket.crc_check
+      ~LongFiRxPacket.device_id
+      ~LongFiRxPacket.fingerprint
+      ~LongFiRxPacket.oui
+      ~LongFiRxPacket.payload
+      ~LongFiRxPacket.rssi
+      ~LongFiRxPacket.sequence
+      ~LongFiRxPacket.snr
+      ~LongFiRxPacket.spreading
+      ~LongFiRxPacket.tag_bits
+      ~LongFiRxPacket.timestamp
+   
+   

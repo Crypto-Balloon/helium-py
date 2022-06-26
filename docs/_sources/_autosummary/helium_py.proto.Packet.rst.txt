@@ -1,0 +1,47 @@
+helium\_py.proto.Packet
+=======================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: Packet
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Packet.FromString
+      ~Packet.SerializeToString
+      ~Packet.__init__
+      ~Packet.from_dict
+      ~Packet.from_json
+      ~Packet.parse
+      ~Packet.to_dict
+      ~Packet.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Packet.datarate
+      ~Packet.frequency
+      ~Packet.oui
+      ~Packet.payload
+      ~Packet.routing
+      ~Packet.rx2_window
+      ~Packet.signal_strength
+      ~Packet.snr
+      ~Packet.timestamp
+      ~Packet.type
+   
+   

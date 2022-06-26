@@ -1,0 +1,6 @@
+helium\_py.crypto.utils.random\_bytes
+=====================================
+
+.. currentmodule:: helium_py.crypto.utils
+
+.. autofunction:: random_bytes

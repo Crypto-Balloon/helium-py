@@ -1,0 +1,40 @@
+helium\_py.proto.BlockchainVarV1
+================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainVarV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainVarV1.FromString
+      ~BlockchainVarV1.SerializeToString
+      ~BlockchainVarV1.__init__
+      ~BlockchainVarV1.from_dict
+      ~BlockchainVarV1.from_json
+      ~BlockchainVarV1.parse
+      ~BlockchainVarV1.to_dict
+      ~BlockchainVarV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainVarV1.name
+      ~BlockchainVarV1.type
+      ~BlockchainVarV1.value
+   
+   

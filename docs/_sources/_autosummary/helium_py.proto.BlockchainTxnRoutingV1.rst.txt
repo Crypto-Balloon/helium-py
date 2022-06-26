@@ -1,0 +1,47 @@
+helium\_py.proto.BlockchainTxnRoutingV1
+=======================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnRoutingV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnRoutingV1.FromString
+      ~BlockchainTxnRoutingV1.SerializeToString
+      ~BlockchainTxnRoutingV1.__init__
+      ~BlockchainTxnRoutingV1.from_dict
+      ~BlockchainTxnRoutingV1.from_json
+      ~BlockchainTxnRoutingV1.parse
+      ~BlockchainTxnRoutingV1.to_dict
+      ~BlockchainTxnRoutingV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnRoutingV1.fee
+      ~BlockchainTxnRoutingV1.new_xor
+      ~BlockchainTxnRoutingV1.nonce
+      ~BlockchainTxnRoutingV1.oui
+      ~BlockchainTxnRoutingV1.owner
+      ~BlockchainTxnRoutingV1.request_subnet
+      ~BlockchainTxnRoutingV1.signature
+      ~BlockchainTxnRoutingV1.staking_fee
+      ~BlockchainTxnRoutingV1.update_routers
+      ~BlockchainTxnRoutingV1.update_xor
+   
+   

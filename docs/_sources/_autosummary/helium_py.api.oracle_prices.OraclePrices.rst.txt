@@ -1,0 +1,42 @@
+helium\_py.api.oracle\_prices.OraclePrices
+==========================================
+
+.. currentmodule:: helium_py.api.oracle_prices
+
+.. autoclass:: OraclePrices
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~OraclePrices.__init__
+      ~OraclePrices.all
+      ~OraclePrices.all_activity
+      ~OraclePrices.all_activity_for_oracle
+      ~OraclePrices.get_current
+      ~OraclePrices.get_price_at_block
+      ~OraclePrices.get_stats
+      ~OraclePrices.predictions
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~OraclePrices.base_path
+      ~OraclePrices.client
+      ~OraclePrices.host
+      ~OraclePrices.port
+      ~OraclePrices.user_agent
+   
+   

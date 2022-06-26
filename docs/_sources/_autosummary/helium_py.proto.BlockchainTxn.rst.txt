@@ -1,0 +1,73 @@
+helium\_py.proto.BlockchainTxn
+==============================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxn
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxn.FromString
+      ~BlockchainTxn.SerializeToString
+      ~BlockchainTxn.__init__
+      ~BlockchainTxn.from_dict
+      ~BlockchainTxn.from_json
+      ~BlockchainTxn.parse
+      ~BlockchainTxn.to_dict
+      ~BlockchainTxn.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxn.add_gateway
+      ~BlockchainTxn.assert_location
+      ~BlockchainTxn.assert_location_v2
+      ~BlockchainTxn.bundle
+      ~BlockchainTxn.coinbase
+      ~BlockchainTxn.consensus_group
+      ~BlockchainTxn.consensus_group_failure
+      ~BlockchainTxn.create_htlc
+      ~BlockchainTxn.dc_coinbase
+      ~BlockchainTxn.gen_gateway
+      ~BlockchainTxn.gen_price_oracle
+      ~BlockchainTxn.gen_validator
+      ~BlockchainTxn.oui
+      ~BlockchainTxn.payment
+      ~BlockchainTxn.payment_v2
+      ~BlockchainTxn.poc_receipts
+      ~BlockchainTxn.poc_request
+      ~BlockchainTxn.price_oracle_submission
+      ~BlockchainTxn.redeem_htlc
+      ~BlockchainTxn.rewards
+      ~BlockchainTxn.rewards_v2
+      ~BlockchainTxn.routing
+      ~BlockchainTxn.security_coinbase
+      ~BlockchainTxn.security_exchange
+      ~BlockchainTxn.stake_validator
+      ~BlockchainTxn.state_channel_close
+      ~BlockchainTxn.state_channel_open
+      ~BlockchainTxn.token_burn
+      ~BlockchainTxn.token_burn_exchange_rate
+      ~BlockchainTxn.transfer_hotspot
+      ~BlockchainTxn.transfer_hotspot_v2
+      ~BlockchainTxn.transfer_val_stake
+      ~BlockchainTxn.unstake_validator
+      ~BlockchainTxn.update_gateway_oui
+      ~BlockchainTxn.val_heartbeat
+      ~BlockchainTxn.vars
+   
+   

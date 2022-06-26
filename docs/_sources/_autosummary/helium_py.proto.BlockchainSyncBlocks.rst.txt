@@ -1,0 +1,38 @@
+helium\_py.proto.BlockchainSyncBlocks
+=====================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainSyncBlocks
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainSyncBlocks.FromString
+      ~BlockchainSyncBlocks.SerializeToString
+      ~BlockchainSyncBlocks.__init__
+      ~BlockchainSyncBlocks.from_dict
+      ~BlockchainSyncBlocks.from_json
+      ~BlockchainSyncBlocks.parse
+      ~BlockchainSyncBlocks.to_dict
+      ~BlockchainSyncBlocks.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainSyncBlocks.blocks
+   
+   

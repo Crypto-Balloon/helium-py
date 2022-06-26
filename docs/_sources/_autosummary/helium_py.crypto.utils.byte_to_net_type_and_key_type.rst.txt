@@ -1,0 +1,6 @@
+helium\_py.crypto.utils.byte\_to\_net\_type\_and\_key\_type
+===========================================================
+
+.. currentmodule:: helium_py.crypto.utils
+
+.. autofunction:: byte_to_net_type_and_key_type

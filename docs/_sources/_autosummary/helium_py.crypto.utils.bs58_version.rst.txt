@@ -1,0 +1,6 @@
+helium\_py.crypto.utils.bs58\_version
+=====================================
+
+.. currentmodule:: helium_py.crypto.utils
+
+.. autofunction:: bs58_version

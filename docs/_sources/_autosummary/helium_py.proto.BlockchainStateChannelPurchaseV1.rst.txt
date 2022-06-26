@@ -1,0 +1,42 @@
+helium\_py.proto.BlockchainStateChannelPurchaseV1
+=================================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainStateChannelPurchaseV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainStateChannelPurchaseV1.FromString
+      ~BlockchainStateChannelPurchaseV1.SerializeToString
+      ~BlockchainStateChannelPurchaseV1.__init__
+      ~BlockchainStateChannelPurchaseV1.from_dict
+      ~BlockchainStateChannelPurchaseV1.from_json
+      ~BlockchainStateChannelPurchaseV1.parse
+      ~BlockchainStateChannelPurchaseV1.to_dict
+      ~BlockchainStateChannelPurchaseV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainStateChannelPurchaseV1.hotspot
+      ~BlockchainStateChannelPurchaseV1.packet_hash
+      ~BlockchainStateChannelPurchaseV1.region
+      ~BlockchainStateChannelPurchaseV1.sc
+      ~BlockchainStateChannelPurchaseV1.sc_diff
+   
+   

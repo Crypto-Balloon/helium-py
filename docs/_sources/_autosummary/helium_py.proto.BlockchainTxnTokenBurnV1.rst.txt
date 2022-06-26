@@ -1,0 +1,44 @@
+helium\_py.proto.BlockchainTxnTokenBurnV1
+=========================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnTokenBurnV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnTokenBurnV1.FromString
+      ~BlockchainTxnTokenBurnV1.SerializeToString
+      ~BlockchainTxnTokenBurnV1.__init__
+      ~BlockchainTxnTokenBurnV1.from_dict
+      ~BlockchainTxnTokenBurnV1.from_json
+      ~BlockchainTxnTokenBurnV1.parse
+      ~BlockchainTxnTokenBurnV1.to_dict
+      ~BlockchainTxnTokenBurnV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnTokenBurnV1.amount
+      ~BlockchainTxnTokenBurnV1.fee
+      ~BlockchainTxnTokenBurnV1.memo
+      ~BlockchainTxnTokenBurnV1.nonce
+      ~BlockchainTxnTokenBurnV1.payee
+      ~BlockchainTxnTokenBurnV1.payer
+      ~BlockchainTxnTokenBurnV1.signature
+   
+   

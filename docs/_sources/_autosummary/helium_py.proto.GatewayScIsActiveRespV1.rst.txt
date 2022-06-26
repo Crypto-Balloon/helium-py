@@ -1,0 +1,42 @@
+helium\_py.proto.GatewayScIsActiveRespV1
+========================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: GatewayScIsActiveRespV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GatewayScIsActiveRespV1.FromString
+      ~GatewayScIsActiveRespV1.SerializeToString
+      ~GatewayScIsActiveRespV1.__init__
+      ~GatewayScIsActiveRespV1.from_dict
+      ~GatewayScIsActiveRespV1.from_json
+      ~GatewayScIsActiveRespV1.parse
+      ~GatewayScIsActiveRespV1.to_dict
+      ~GatewayScIsActiveRespV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~GatewayScIsActiveRespV1.active
+      ~GatewayScIsActiveRespV1.sc_expiry_at_block
+      ~GatewayScIsActiveRespV1.sc_id
+      ~GatewayScIsActiveRespV1.sc_original_dc_amount
+      ~GatewayScIsActiveRespV1.sc_owner
+   
+   

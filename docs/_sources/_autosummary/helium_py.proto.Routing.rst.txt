@@ -1,0 +1,42 @@
+helium\_py.proto.Routing
+========================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: Routing
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Routing.FromString
+      ~Routing.SerializeToString
+      ~Routing.__init__
+      ~Routing.from_dict
+      ~Routing.from_json
+      ~Routing.parse
+      ~Routing.to_dict
+      ~Routing.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Routing.addresses
+      ~Routing.filters
+      ~Routing.oui
+      ~Routing.owner
+      ~Routing.subnets
+   
+   

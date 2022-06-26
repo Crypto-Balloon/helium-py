@@ -1,0 +1,48 @@
+helium\_py.proto.BlockchainTxnVarsV1
+====================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnVarsV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnVarsV1.FromString
+      ~BlockchainTxnVarsV1.SerializeToString
+      ~BlockchainTxnVarsV1.__init__
+      ~BlockchainTxnVarsV1.from_dict
+      ~BlockchainTxnVarsV1.from_json
+      ~BlockchainTxnVarsV1.parse
+      ~BlockchainTxnVarsV1.to_dict
+      ~BlockchainTxnVarsV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnVarsV1.cancels
+      ~BlockchainTxnVarsV1.key_proof
+      ~BlockchainTxnVarsV1.master_key
+      ~BlockchainTxnVarsV1.multi_key_proofs
+      ~BlockchainTxnVarsV1.multi_keys
+      ~BlockchainTxnVarsV1.multi_proofs
+      ~BlockchainTxnVarsV1.nonce
+      ~BlockchainTxnVarsV1.proof
+      ~BlockchainTxnVarsV1.unsets
+      ~BlockchainTxnVarsV1.vars
+      ~BlockchainTxnVarsV1.version_predicate
+   
+   

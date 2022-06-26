@@ -1,0 +1,6 @@
+helium\_py.api.decorators.bucket\_api
+=====================================
+
+.. currentmodule:: helium_py.api.decorators
+
+.. autofunction:: bucket_api

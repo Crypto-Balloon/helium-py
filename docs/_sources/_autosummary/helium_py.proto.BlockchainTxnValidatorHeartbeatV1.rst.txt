@@ -1,0 +1,41 @@
+helium\_py.proto.BlockchainTxnValidatorHeartbeatV1
+==================================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnValidatorHeartbeatV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnValidatorHeartbeatV1.FromString
+      ~BlockchainTxnValidatorHeartbeatV1.SerializeToString
+      ~BlockchainTxnValidatorHeartbeatV1.__init__
+      ~BlockchainTxnValidatorHeartbeatV1.from_dict
+      ~BlockchainTxnValidatorHeartbeatV1.from_json
+      ~BlockchainTxnValidatorHeartbeatV1.parse
+      ~BlockchainTxnValidatorHeartbeatV1.to_dict
+      ~BlockchainTxnValidatorHeartbeatV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnValidatorHeartbeatV1.address
+      ~BlockchainTxnValidatorHeartbeatV1.height
+      ~BlockchainTxnValidatorHeartbeatV1.signature
+      ~BlockchainTxnValidatorHeartbeatV1.version
+   
+   

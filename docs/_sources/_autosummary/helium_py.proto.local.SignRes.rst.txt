@@ -1,0 +1,38 @@
+helium\_py.proto.local.SignRes
+==============================
+
+.. currentmodule:: helium_py.proto.local
+
+.. autoclass:: SignRes
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SignRes.FromString
+      ~SignRes.SerializeToString
+      ~SignRes.__init__
+      ~SignRes.from_dict
+      ~SignRes.from_json
+      ~SignRes.parse
+      ~SignRes.to_dict
+      ~SignRes.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SignRes.signature
+   
+   

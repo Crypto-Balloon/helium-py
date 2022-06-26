@@ -1,0 +1,41 @@
+helium\_py.proto.BlockchainGossipBlock
+======================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainGossipBlock
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainGossipBlock.FromString
+      ~BlockchainGossipBlock.SerializeToString
+      ~BlockchainGossipBlock.__init__
+      ~BlockchainGossipBlock.from_dict
+      ~BlockchainGossipBlock.from_json
+      ~BlockchainGossipBlock.parse
+      ~BlockchainGossipBlock.to_dict
+      ~BlockchainGossipBlock.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainGossipBlock.block
+      ~BlockchainGossipBlock.from_
+      ~BlockchainGossipBlock.hash
+      ~BlockchainGossipBlock.height
+   
+   

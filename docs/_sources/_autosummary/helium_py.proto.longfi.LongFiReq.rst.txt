@@ -1,0 +1,39 @@
+helium\_py.proto.longfi.LongFiReq
+=================================
+
+.. currentmodule:: helium_py.proto.longfi
+
+.. autoclass:: LongFiReq
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~LongFiReq.FromString
+      ~LongFiReq.SerializeToString
+      ~LongFiReq.__init__
+      ~LongFiReq.from_dict
+      ~LongFiReq.from_json
+      ~LongFiReq.parse
+      ~LongFiReq.to_dict
+      ~LongFiReq.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~LongFiReq.id
+      ~LongFiReq.tx
+   
+   

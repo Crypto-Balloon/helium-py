@@ -1,0 +1,40 @@
+helium\_py.proto.BlockchainStateChannelDiffAppendSummaryV1
+==========================================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainStateChannelDiffAppendSummaryV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainStateChannelDiffAppendSummaryV1.FromString
+      ~BlockchainStateChannelDiffAppendSummaryV1.SerializeToString
+      ~BlockchainStateChannelDiffAppendSummaryV1.__init__
+      ~BlockchainStateChannelDiffAppendSummaryV1.from_dict
+      ~BlockchainStateChannelDiffAppendSummaryV1.from_json
+      ~BlockchainStateChannelDiffAppendSummaryV1.parse
+      ~BlockchainStateChannelDiffAppendSummaryV1.to_dict
+      ~BlockchainStateChannelDiffAppendSummaryV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainStateChannelDiffAppendSummaryV1.client_pubkeybin
+      ~BlockchainStateChannelDiffAppendSummaryV1.num_dcs
+      ~BlockchainStateChannelDiffAppendSummaryV1.num_packets
+   
+   

@@ -1,0 +1,40 @@
+helium\_py.proto.DiscoveryStart
+===============================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: DiscoveryStart
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DiscoveryStart.FromString
+      ~DiscoveryStart.SerializeToString
+      ~DiscoveryStart.__init__
+      ~DiscoveryStart.from_dict
+      ~DiscoveryStart.from_json
+      ~DiscoveryStart.parse
+      ~DiscoveryStart.to_dict
+      ~DiscoveryStart.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~DiscoveryStart.hotspot
+      ~DiscoveryStart.packets
+      ~DiscoveryStart.signature
+   
+   

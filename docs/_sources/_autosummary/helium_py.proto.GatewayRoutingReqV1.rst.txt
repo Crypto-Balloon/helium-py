@@ -1,0 +1,38 @@
+helium\_py.proto.GatewayRoutingReqV1
+====================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: GatewayRoutingReqV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GatewayRoutingReqV1.FromString
+      ~GatewayRoutingReqV1.SerializeToString
+      ~GatewayRoutingReqV1.__init__
+      ~GatewayRoutingReqV1.from_dict
+      ~GatewayRoutingReqV1.from_json
+      ~GatewayRoutingReqV1.parse
+      ~GatewayRoutingReqV1.to_dict
+      ~GatewayRoutingReqV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~GatewayRoutingReqV1.height
+   
+   

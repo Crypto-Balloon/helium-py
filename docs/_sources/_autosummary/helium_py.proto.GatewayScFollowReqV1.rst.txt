@@ -1,0 +1,39 @@
+helium\_py.proto.GatewayScFollowReqV1
+=====================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: GatewayScFollowReqV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GatewayScFollowReqV1.FromString
+      ~GatewayScFollowReqV1.SerializeToString
+      ~GatewayScFollowReqV1.__init__
+      ~GatewayScFollowReqV1.from_dict
+      ~GatewayScFollowReqV1.from_json
+      ~GatewayScFollowReqV1.parse
+      ~GatewayScFollowReqV1.to_dict
+      ~GatewayScFollowReqV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~GatewayScFollowReqV1.sc_id
+      ~GatewayScFollowReqV1.sc_owner
+   
+   

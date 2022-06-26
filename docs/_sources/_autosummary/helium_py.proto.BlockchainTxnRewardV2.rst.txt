@@ -1,0 +1,39 @@
+helium\_py.proto.BlockchainTxnRewardV2
+======================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnRewardV2
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnRewardV2.FromString
+      ~BlockchainTxnRewardV2.SerializeToString
+      ~BlockchainTxnRewardV2.__init__
+      ~BlockchainTxnRewardV2.from_dict
+      ~BlockchainTxnRewardV2.from_json
+      ~BlockchainTxnRewardV2.parse
+      ~BlockchainTxnRewardV2.to_dict
+      ~BlockchainTxnRewardV2.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnRewardV2.account
+      ~BlockchainTxnRewardV2.amount
+   
+   

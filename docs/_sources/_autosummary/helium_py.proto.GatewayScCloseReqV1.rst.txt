@@ -1,0 +1,38 @@
+helium\_py.proto.GatewayScCloseReqV1
+====================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: GatewayScCloseReqV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GatewayScCloseReqV1.FromString
+      ~GatewayScCloseReqV1.SerializeToString
+      ~GatewayScCloseReqV1.__init__
+      ~GatewayScCloseReqV1.from_dict
+      ~GatewayScCloseReqV1.from_json
+      ~GatewayScCloseReqV1.parse
+      ~GatewayScCloseReqV1.to_dict
+      ~GatewayScCloseReqV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~GatewayScCloseReqV1.close_txn
+   
+   

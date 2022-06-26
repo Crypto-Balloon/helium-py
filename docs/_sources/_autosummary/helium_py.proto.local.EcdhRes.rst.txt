@@ -1,0 +1,38 @@
+helium\_py.proto.local.EcdhRes
+==============================
+
+.. currentmodule:: helium_py.proto.local
+
+.. autoclass:: EcdhRes
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~EcdhRes.FromString
+      ~EcdhRes.SerializeToString
+      ~EcdhRes.__init__
+      ~EcdhRes.from_dict
+      ~EcdhRes.from_json
+      ~EcdhRes.parse
+      ~EcdhRes.to_dict
+      ~EcdhRes.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~EcdhRes.secret
+   
+   

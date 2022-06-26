@@ -1,0 +1,38 @@
+helium\_py.proto.local.PubkeyRes
+================================
+
+.. currentmodule:: helium_py.proto.local
+
+.. autoclass:: PubkeyRes
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~PubkeyRes.FromString
+      ~PubkeyRes.SerializeToString
+      ~PubkeyRes.__init__
+      ~PubkeyRes.from_dict
+      ~PubkeyRes.from_json
+      ~PubkeyRes.parse
+      ~PubkeyRes.to_dict
+      ~PubkeyRes.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~PubkeyRes.address
+   
+   

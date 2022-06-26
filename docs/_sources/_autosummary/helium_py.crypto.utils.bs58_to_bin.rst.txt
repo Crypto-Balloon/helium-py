@@ -1,0 +1,6 @@
+helium\_py.crypto.utils.bs58\_to\_bin
+=====================================
+
+.. currentmodule:: helium_py.crypto.utils
+
+.. autofunction:: bs58_to_bin

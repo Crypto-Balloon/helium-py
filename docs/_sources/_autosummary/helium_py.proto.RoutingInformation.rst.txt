@@ -1,0 +1,39 @@
+helium\_py.proto.RoutingInformation
+===================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: RoutingInformation
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~RoutingInformation.FromString
+      ~RoutingInformation.SerializeToString
+      ~RoutingInformation.__init__
+      ~RoutingInformation.from_dict
+      ~RoutingInformation.from_json
+      ~RoutingInformation.parse
+      ~RoutingInformation.to_dict
+      ~RoutingInformation.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~RoutingInformation.devaddr
+      ~RoutingInformation.eui
+   
+   

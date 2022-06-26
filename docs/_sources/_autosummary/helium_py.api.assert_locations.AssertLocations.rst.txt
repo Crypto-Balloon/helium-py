@@ -1,0 +1,36 @@
+helium\_py.api.assert\_locations.AssertLocations
+================================================
+
+.. currentmodule:: helium_py.api.assert_locations
+
+.. autoclass:: AssertLocations
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~AssertLocations.__init__
+      ~AssertLocations.all
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~AssertLocations.base_path
+      ~AssertLocations.client
+      ~AssertLocations.host
+      ~AssertLocations.port
+      ~AssertLocations.user_agent
+   
+   

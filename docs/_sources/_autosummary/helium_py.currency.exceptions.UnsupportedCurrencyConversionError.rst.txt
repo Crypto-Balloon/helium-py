@@ -1,0 +1,6 @@
+helium\_py.currency.exceptions.UnsupportedCurrencyConversionError
+=================================================================
+
+.. currentmodule:: helium_py.currency.exceptions
+
+.. autoexception:: UnsupportedCurrencyConversionError

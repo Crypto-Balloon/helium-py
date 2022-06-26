@@ -1,0 +1,30 @@
+helium\_py.proto.local.ApiBase
+==============================
+
+.. currentmodule:: helium_py.proto.local
+
+.. autoclass:: ApiBase
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ApiBase.__init__
+      ~ApiBase.config
+      ~ApiBase.ecdh
+      ~ApiBase.height
+      ~ApiBase.pubkey
+      ~ApiBase.sign
+   
+   
+
+   
+   
+   

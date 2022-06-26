@@ -1,0 +1,39 @@
+helium\_py.proto.RoutingAddress
+===============================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: RoutingAddress
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~RoutingAddress.FromString
+      ~RoutingAddress.SerializeToString
+      ~RoutingAddress.__init__
+      ~RoutingAddress.from_dict
+      ~RoutingAddress.from_json
+      ~RoutingAddress.parse
+      ~RoutingAddress.to_dict
+      ~RoutingAddress.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~RoutingAddress.pub_key
+      ~RoutingAddress.uri
+   
+   

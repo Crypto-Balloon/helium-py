@@ -1,0 +1,39 @@
+helium\_py.proto.BlockchainSeenVoteV1
+=====================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainSeenVoteV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainSeenVoteV1.FromString
+      ~BlockchainSeenVoteV1.SerializeToString
+      ~BlockchainSeenVoteV1.__init__
+      ~BlockchainSeenVoteV1.from_dict
+      ~BlockchainSeenVoteV1.from_json
+      ~BlockchainSeenVoteV1.parse
+      ~BlockchainSeenVoteV1.to_dict
+      ~BlockchainSeenVoteV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainSeenVoteV1.index
+      ~BlockchainSeenVoteV1.vector
+   
+   

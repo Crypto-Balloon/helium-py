@@ -1,0 +1,39 @@
+helium\_py.proto.BlockchainPocResponseV1
+========================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainPocResponseV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainPocResponseV1.FromString
+      ~BlockchainPocResponseV1.SerializeToString
+      ~BlockchainPocResponseV1.__init__
+      ~BlockchainPocResponseV1.from_dict
+      ~BlockchainPocResponseV1.from_json
+      ~BlockchainPocResponseV1.parse
+      ~BlockchainPocResponseV1.to_dict
+      ~BlockchainPocResponseV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainPocResponseV1.receipt
+      ~BlockchainPocResponseV1.witness
+   
+   

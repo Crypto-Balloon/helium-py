@@ -1,0 +1,39 @@
+helium\_py.proto.TaggedSpreading
+================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: TaggedSpreading
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TaggedSpreading.FromString
+      ~TaggedSpreading.SerializeToString
+      ~TaggedSpreading.__init__
+      ~TaggedSpreading.from_dict
+      ~TaggedSpreading.from_json
+      ~TaggedSpreading.parse
+      ~TaggedSpreading.to_dict
+      ~TaggedSpreading.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~TaggedSpreading.max_packet_size
+      ~TaggedSpreading.region_spreading
+   
+   

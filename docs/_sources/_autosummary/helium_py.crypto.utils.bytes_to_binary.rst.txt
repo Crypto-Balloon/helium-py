@@ -1,0 +1,6 @@
+helium\_py.crypto.utils.bytes\_to\_binary
+=========================================
+
+.. currentmodule:: helium_py.crypto.utils
+
+.. autofunction:: bytes_to_binary

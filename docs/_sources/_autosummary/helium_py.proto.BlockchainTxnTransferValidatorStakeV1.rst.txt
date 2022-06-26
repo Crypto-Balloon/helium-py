@@ -1,0 +1,46 @@
+helium\_py.proto.BlockchainTxnTransferValidatorStakeV1
+======================================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnTransferValidatorStakeV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnTransferValidatorStakeV1.FromString
+      ~BlockchainTxnTransferValidatorStakeV1.SerializeToString
+      ~BlockchainTxnTransferValidatorStakeV1.__init__
+      ~BlockchainTxnTransferValidatorStakeV1.from_dict
+      ~BlockchainTxnTransferValidatorStakeV1.from_json
+      ~BlockchainTxnTransferValidatorStakeV1.parse
+      ~BlockchainTxnTransferValidatorStakeV1.to_dict
+      ~BlockchainTxnTransferValidatorStakeV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnTransferValidatorStakeV1.fee
+      ~BlockchainTxnTransferValidatorStakeV1.new_address
+      ~BlockchainTxnTransferValidatorStakeV1.new_owner
+      ~BlockchainTxnTransferValidatorStakeV1.new_owner_signature
+      ~BlockchainTxnTransferValidatorStakeV1.old_address
+      ~BlockchainTxnTransferValidatorStakeV1.old_owner
+      ~BlockchainTxnTransferValidatorStakeV1.old_owner_signature
+      ~BlockchainTxnTransferValidatorStakeV1.payment_amount
+      ~BlockchainTxnTransferValidatorStakeV1.stake_amount
+   
+   

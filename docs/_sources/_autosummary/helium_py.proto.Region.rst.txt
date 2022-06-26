@@ -1,0 +1,36 @@
+helium\_py.proto.Region
+=======================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: Region
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Region.US915
+      ~Region.EU868
+      ~Region.EU433
+      ~Region.CN470
+      ~Region.CN779
+      ~Region.AU915
+      ~Region.AS923_1
+      ~Region.KR920
+      ~Region.IN865
+      ~Region.AS923_2
+      ~Region.AS923_3
+      ~Region.AS923_4
+   
+   

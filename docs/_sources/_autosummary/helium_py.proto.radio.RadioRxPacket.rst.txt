@@ -1,0 +1,48 @@
+helium\_py.proto.radio.RadioRxPacket
+====================================
+
+.. currentmodule:: helium_py.proto.radio
+
+.. autoclass:: RadioRxPacket
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~RadioRxPacket.FromString
+      ~RadioRxPacket.SerializeToString
+      ~RadioRxPacket.__init__
+      ~RadioRxPacket.from_dict
+      ~RadioRxPacket.from_json
+      ~RadioRxPacket.parse
+      ~RadioRxPacket.to_dict
+      ~RadioRxPacket.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~RadioRxPacket.bandwidth
+      ~RadioRxPacket.coderate
+      ~RadioRxPacket.crc_check
+      ~RadioRxPacket.freq
+      ~RadioRxPacket.if_chain
+      ~RadioRxPacket.payload
+      ~RadioRxPacket.radio
+      ~RadioRxPacket.rssi
+      ~RadioRxPacket.snr
+      ~RadioRxPacket.spreading
+      ~RadioRxPacket.timestamp
+   
+   

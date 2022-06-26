@@ -1,0 +1,47 @@
+helium\_py.proto.BlockchainStateChannelV1
+=========================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainStateChannelV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainStateChannelV1.FromString
+      ~BlockchainStateChannelV1.SerializeToString
+      ~BlockchainStateChannelV1.__init__
+      ~BlockchainStateChannelV1.from_dict
+      ~BlockchainStateChannelV1.from_json
+      ~BlockchainStateChannelV1.parse
+      ~BlockchainStateChannelV1.to_dict
+      ~BlockchainStateChannelV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainStateChannelV1.credits
+      ~BlockchainStateChannelV1.expire_at_block
+      ~BlockchainStateChannelV1.id
+      ~BlockchainStateChannelV1.nonce
+      ~BlockchainStateChannelV1.owner
+      ~BlockchainStateChannelV1.root_hash
+      ~BlockchainStateChannelV1.signature
+      ~BlockchainStateChannelV1.skewed
+      ~BlockchainStateChannelV1.state
+      ~BlockchainStateChannelV1.summaries
+   
+   

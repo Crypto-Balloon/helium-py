@@ -1,0 +1,36 @@
+helium\_py.api.state\_channels.StateChannels
+============================================
+
+.. currentmodule:: helium_py.api.state_channels
+
+.. autoclass:: StateChannels
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~StateChannels.__init__
+      ~StateChannels.all
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~StateChannels.base_path
+      ~StateChannels.client
+      ~StateChannels.host
+      ~StateChannels.port
+      ~StateChannels.user_agent
+   
+   

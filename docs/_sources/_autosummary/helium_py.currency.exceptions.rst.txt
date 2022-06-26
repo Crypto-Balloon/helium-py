@@ -1,0 +1,32 @@
+helium\_py.currency.exceptions
+==============================
+
+.. automodule:: helium_py.currency.exceptions
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+      :toctree:
+   
+      MixedCurrencyTypeError
+      UnsupportedCurrencyConversionError
+      UnsupportedCurrencyError
+   
+   
+
+
+

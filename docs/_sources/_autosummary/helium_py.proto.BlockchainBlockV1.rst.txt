@@ -1,0 +1,50 @@
+helium\_py.proto.BlockchainBlockV1
+==================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainBlockV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainBlockV1.FromString
+      ~BlockchainBlockV1.SerializeToString
+      ~BlockchainBlockV1.__init__
+      ~BlockchainBlockV1.from_dict
+      ~BlockchainBlockV1.from_json
+      ~BlockchainBlockV1.parse
+      ~BlockchainBlockV1.to_dict
+      ~BlockchainBlockV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainBlockV1.bba_completion
+      ~BlockchainBlockV1.election_epoch
+      ~BlockchainBlockV1.epoch_start
+      ~BlockchainBlockV1.hbbft_round
+      ~BlockchainBlockV1.height
+      ~BlockchainBlockV1.prev_hash
+      ~BlockchainBlockV1.rescue_signature
+      ~BlockchainBlockV1.rescue_signatures
+      ~BlockchainBlockV1.seen_votes
+      ~BlockchainBlockV1.signatures
+      ~BlockchainBlockV1.snapshot_hash
+      ~BlockchainBlockV1.time
+      ~BlockchainBlockV1.transactions
+   
+   

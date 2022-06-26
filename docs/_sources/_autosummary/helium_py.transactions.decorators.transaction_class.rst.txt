@@ -1,0 +1,6 @@
+helium\_py.transactions.decorators.transaction\_class
+=====================================================
+
+.. currentmodule:: helium_py.transactions.decorators
+
+.. autofunction:: transaction_class

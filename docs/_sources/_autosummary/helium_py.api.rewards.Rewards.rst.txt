@@ -1,0 +1,36 @@
+helium\_py.api.rewards.Rewards
+==============================
+
+.. currentmodule:: helium_py.api.rewards
+
+.. autoclass:: Rewards
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Rewards.__init__
+      ~Rewards.get_total
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Rewards.base_path
+      ~Rewards.client
+      ~Rewards.host
+      ~Rewards.port
+      ~Rewards.user_agent
+   
+   

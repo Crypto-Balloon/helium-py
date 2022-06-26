@@ -1,0 +1,49 @@
+helium\_py.proto.BlockchainPocReceiptV1
+=======================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainPocReceiptV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainPocReceiptV1.FromString
+      ~BlockchainPocReceiptV1.SerializeToString
+      ~BlockchainPocReceiptV1.__init__
+      ~BlockchainPocReceiptV1.from_dict
+      ~BlockchainPocReceiptV1.from_json
+      ~BlockchainPocReceiptV1.parse
+      ~BlockchainPocReceiptV1.to_dict
+      ~BlockchainPocReceiptV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainPocReceiptV1.addr_hash
+      ~BlockchainPocReceiptV1.channel
+      ~BlockchainPocReceiptV1.data
+      ~BlockchainPocReceiptV1.datarate
+      ~BlockchainPocReceiptV1.frequency
+      ~BlockchainPocReceiptV1.gateway
+      ~BlockchainPocReceiptV1.origin
+      ~BlockchainPocReceiptV1.signal
+      ~BlockchainPocReceiptV1.signature
+      ~BlockchainPocReceiptV1.snr
+      ~BlockchainPocReceiptV1.timestamp
+      ~BlockchainPocReceiptV1.tx_power
+   
+   

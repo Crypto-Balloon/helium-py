@@ -1,0 +1,42 @@
+helium\_py.proto.BlockchainStateChannelPacketV1
+===============================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainStateChannelPacketV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainStateChannelPacketV1.FromString
+      ~BlockchainStateChannelPacketV1.SerializeToString
+      ~BlockchainStateChannelPacketV1.__init__
+      ~BlockchainStateChannelPacketV1.from_dict
+      ~BlockchainStateChannelPacketV1.from_json
+      ~BlockchainStateChannelPacketV1.parse
+      ~BlockchainStateChannelPacketV1.to_dict
+      ~BlockchainStateChannelPacketV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainStateChannelPacketV1.hold_time
+      ~BlockchainStateChannelPacketV1.hotspot
+      ~BlockchainStateChannelPacketV1.packet
+      ~BlockchainStateChannelPacketV1.region
+      ~BlockchainStateChannelPacketV1.signature
+   
+   

@@ -1,0 +1,38 @@
+helium\_py.api.dc\_burns.DCBurns
+================================
+
+.. currentmodule:: helium_py.api.dc_burns
+
+.. autoclass:: DCBurns
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DCBurns.__init__
+      ~DCBurns.all
+      ~DCBurns.get_stats
+      ~DCBurns.get_total
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~DCBurns.base_path
+      ~DCBurns.client
+      ~DCBurns.host
+      ~DCBurns.port
+      ~DCBurns.user_agent
+   
+   

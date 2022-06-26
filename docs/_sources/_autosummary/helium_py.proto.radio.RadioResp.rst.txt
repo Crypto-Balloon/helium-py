@@ -1,0 +1,41 @@
+helium\_py.proto.radio.RadioResp
+================================
+
+.. currentmodule:: helium_py.proto.radio
+
+.. autoclass:: RadioResp
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~RadioResp.FromString
+      ~RadioResp.SerializeToString
+      ~RadioResp.__init__
+      ~RadioResp.from_dict
+      ~RadioResp.from_json
+      ~RadioResp.parse
+      ~RadioResp.to_dict
+      ~RadioResp.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~RadioResp.id
+      ~RadioResp.parse_err
+      ~RadioResp.rx_packet
+      ~RadioResp.tx
+   
+   

@@ -1,0 +1,48 @@
+helium\_py.proto.BlockchainTxnAssertLocationV2
+==============================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnAssertLocationV2
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnAssertLocationV2.FromString
+      ~BlockchainTxnAssertLocationV2.SerializeToString
+      ~BlockchainTxnAssertLocationV2.__init__
+      ~BlockchainTxnAssertLocationV2.from_dict
+      ~BlockchainTxnAssertLocationV2.from_json
+      ~BlockchainTxnAssertLocationV2.parse
+      ~BlockchainTxnAssertLocationV2.to_dict
+      ~BlockchainTxnAssertLocationV2.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnAssertLocationV2.elevation
+      ~BlockchainTxnAssertLocationV2.fee
+      ~BlockchainTxnAssertLocationV2.gain
+      ~BlockchainTxnAssertLocationV2.gateway
+      ~BlockchainTxnAssertLocationV2.location
+      ~BlockchainTxnAssertLocationV2.nonce
+      ~BlockchainTxnAssertLocationV2.owner
+      ~BlockchainTxnAssertLocationV2.owner_signature
+      ~BlockchainTxnAssertLocationV2.payer
+      ~BlockchainTxnAssertLocationV2.payer_signature
+      ~BlockchainTxnAssertLocationV2.staking_fee
+   
+   

@@ -1,0 +1,30 @@
+helium\_py.proto.BlockchainTxnRewardV1Type
+==========================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnRewardV1Type
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnRewardV1Type.securities
+      ~BlockchainTxnRewardV1Type.data_credits
+      ~BlockchainTxnRewardV1Type.poc_challengees
+      ~BlockchainTxnRewardV1Type.poc_challengers
+      ~BlockchainTxnRewardV1Type.poc_witnesses
+      ~BlockchainTxnRewardV1Type.consensus
+   
+   

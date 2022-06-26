@@ -1,0 +1,31 @@
+helium\_py.proto.radio.Spreading
+================================
+
+.. currentmodule:: helium_py.proto.radio
+
+.. autoclass:: Spreading
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Spreading.SF_UNDEFINED
+      ~Spreading.SF7
+      ~Spreading.SF8
+      ~Spreading.SF9
+      ~Spreading.SF10
+      ~Spreading.SF11
+      ~Spreading.SF12
+   
+   

@@ -1,0 +1,45 @@
+helium\_py.proto.BlockchainTxnTransferHotspotV1
+===============================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnTransferHotspotV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnTransferHotspotV1.FromString
+      ~BlockchainTxnTransferHotspotV1.SerializeToString
+      ~BlockchainTxnTransferHotspotV1.__init__
+      ~BlockchainTxnTransferHotspotV1.from_dict
+      ~BlockchainTxnTransferHotspotV1.from_json
+      ~BlockchainTxnTransferHotspotV1.parse
+      ~BlockchainTxnTransferHotspotV1.to_dict
+      ~BlockchainTxnTransferHotspotV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnTransferHotspotV1.amount_to_seller
+      ~BlockchainTxnTransferHotspotV1.buyer
+      ~BlockchainTxnTransferHotspotV1.buyer_nonce
+      ~BlockchainTxnTransferHotspotV1.buyer_signature
+      ~BlockchainTxnTransferHotspotV1.fee
+      ~BlockchainTxnTransferHotspotV1.gateway
+      ~BlockchainTxnTransferHotspotV1.seller
+      ~BlockchainTxnTransferHotspotV1.seller_signature
+   
+   

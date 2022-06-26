@@ -1,0 +1,44 @@
+helium\_py.proto.BlockchainTxnPocRequestV1
+==========================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnPocRequestV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnPocRequestV1.FromString
+      ~BlockchainTxnPocRequestV1.SerializeToString
+      ~BlockchainTxnPocRequestV1.__init__
+      ~BlockchainTxnPocRequestV1.from_dict
+      ~BlockchainTxnPocRequestV1.from_json
+      ~BlockchainTxnPocRequestV1.parse
+      ~BlockchainTxnPocRequestV1.to_dict
+      ~BlockchainTxnPocRequestV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnPocRequestV1.block_hash
+      ~BlockchainTxnPocRequestV1.challenger
+      ~BlockchainTxnPocRequestV1.fee
+      ~BlockchainTxnPocRequestV1.onion_key_hash
+      ~BlockchainTxnPocRequestV1.secret_hash
+      ~BlockchainTxnPocRequestV1.signature
+      ~BlockchainTxnPocRequestV1.version
+   
+   

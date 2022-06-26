@@ -1,0 +1,32 @@
+helium\_py.proto.radio.Bandwidth
+================================
+
+.. currentmodule:: helium_py.proto.radio
+
+.. autoclass:: Bandwidth
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Bandwidth.BW_UNDEFINED
+      ~Bandwidth.BW7_8kHz
+      ~Bandwidth.BW15_6kHz
+      ~Bandwidth.BW31_2kHz
+      ~Bandwidth.BW62_5kHz
+      ~Bandwidth.BW125kHz
+      ~Bandwidth.BW250kHz
+      ~Bandwidth.BW500kHz
+   
+   

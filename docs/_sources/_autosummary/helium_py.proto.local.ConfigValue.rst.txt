@@ -1,0 +1,40 @@
+helium\_py.proto.local.ConfigValue
+==================================
+
+.. currentmodule:: helium_py.proto.local
+
+.. autoclass:: ConfigValue
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ConfigValue.FromString
+      ~ConfigValue.SerializeToString
+      ~ConfigValue.__init__
+      ~ConfigValue.from_dict
+      ~ConfigValue.from_json
+      ~ConfigValue.parse
+      ~ConfigValue.to_dict
+      ~ConfigValue.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ConfigValue.name
+      ~ConfigValue.type
+      ~ConfigValue.value
+   
+   

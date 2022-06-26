@@ -1,0 +1,38 @@
+helium\_py.proto.BlockchainTxnGenPriceOracleV1
+==============================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnGenPriceOracleV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnGenPriceOracleV1.FromString
+      ~BlockchainTxnGenPriceOracleV1.SerializeToString
+      ~BlockchainTxnGenPriceOracleV1.__init__
+      ~BlockchainTxnGenPriceOracleV1.from_dict
+      ~BlockchainTxnGenPriceOracleV1.from_json
+      ~BlockchainTxnGenPriceOracleV1.parse
+      ~BlockchainTxnGenPriceOracleV1.to_dict
+      ~BlockchainTxnGenPriceOracleV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnGenPriceOracleV1.price
+   
+   

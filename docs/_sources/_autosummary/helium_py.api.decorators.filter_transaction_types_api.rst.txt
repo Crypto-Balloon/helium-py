@@ -1,0 +1,6 @@
+helium\_py.api.decorators.filter\_transaction\_types\_api
+=========================================================
+
+.. currentmodule:: helium_py.api.decorators
+
+.. autofunction:: filter_transaction_types_api

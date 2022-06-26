@@ -1,0 +1,38 @@
+helium\_py.proto.GatewayRoutingStreamedRespV1
+=============================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: GatewayRoutingStreamedRespV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GatewayRoutingStreamedRespV1.FromString
+      ~GatewayRoutingStreamedRespV1.SerializeToString
+      ~GatewayRoutingStreamedRespV1.__init__
+      ~GatewayRoutingStreamedRespV1.from_dict
+      ~GatewayRoutingStreamedRespV1.from_json
+      ~GatewayRoutingStreamedRespV1.parse
+      ~GatewayRoutingStreamedRespV1.to_dict
+      ~GatewayRoutingStreamedRespV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~GatewayRoutingStreamedRespV1.routings
+   
+   

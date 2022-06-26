@@ -1,0 +1,6 @@
+helium\_py.test.utils.BOB\_BIP\_39\_WORDS
+=========================================
+
+.. currentmodule:: helium_py.test.utils
+
+.. autodata:: BOB_BIP_39_WORDS

@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>helium_py.currency.balance &#8212; helium-py 0.2a2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for helium_py.currency.balance</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Balance class for converting between currency types.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">..api</span> <span class="kn">import</span> <span class="n">OraclePrices</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">MixedCurrencyTypeError</span><span class="p">,</span>
+    <span class="n">UnsupportedCurrencyConversionError</span><span class="p">,</span>
+    <span class="n">UnsupportedCurrencyError</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.types</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ALL_CURRENCY_TYPES</span><span class="p">,</span>
+    <span class="n">DATA_CREDITS</span><span class="p">,</span>
+    <span class="n">NETWORK_TOKENS</span><span class="p">,</span>
+    <span class="n">TEST_NETWORK_TOKENS</span><span class="p">,</span>
+    <span class="n">US_DOLLARS</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">DC_TO_USD_MULTIPLIER</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.00001&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Balance"><a class="viewcode-back" href="../../../_autosummary/helium_py.currency.balance.Balance.html#helium_py.currency.balance.Balance">[docs]</a><span class="k">class</span> <span class="nc">Balance</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Represents a balance in a particular currency.&quot;&quot;&quot;</span>
+
+    <span class="n">currency_type</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">balance_in_currency</span><span class="p">:</span> <span class="n">Decimal</span>
+
+<div class="viewcode-block" id="Balance.__init__"><a class="viewcode-back" href="../../../_autosummary/helium_py.currency.balance.Balance.html#helium_py.currency.balance.Balance.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">balance_in_currency</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">],</span> <span class="n">currency_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize balance with a currency type and amount.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">currency_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ALL_CURRENCY_TYPES</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">UnsupportedCurrencyError</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">balance_in_currency</span><span class="p">,</span> <span class="n">Decimal</span><span class="p">):</span>
+            <span class="n">balance_in_currency</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">balance_in_currency</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance_in_currency</span> <span class="o">=</span> <span class="n">balance_in_currency</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span> <span class="o">=</span> <span class="n">currency_type</span></div>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compare to see if two balances are equal.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">currency_type</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance_in_currency</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">balance_in_currency</span>
+
+<div class="viewcode-block" id="Balance.to_string"><a class="viewcode-back" href="../../../_autosummary/helium_py.currency.balance.Balance.html#helium_py.currency.balance.Balance.to_string">[docs]</a>    <span class="k">def</span> <span class="nf">to_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_decimal_places</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">show_ticker</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Convert Balance objects to a string.&quot;&quot;&quot;</span>
+        <span class="n">number_string</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">balance_in_currency</span><span class="si">:</span><span class="s1">,.</span><span class="si">{</span><span class="n">max_decimal_places</span><span class="si">}</span><span class="s1">f</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="n">max_decimal_places</span> \
+            <span class="k">else</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">balance_in_currency</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">number_string</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span><span class="p">])</span> <span class="k">if</span> <span class="n">show_ticker</span> <span class="k">else</span> <span class="n">number_string</span></div>
+
+<div class="viewcode-block" id="Balance.plus"><a class="viewcode-back" href="../../../_autosummary/helium_py.currency.balance.Balance.html#helium_py.currency.balance.Balance.plus">[docs]</a>    <span class="k">def</span> <span class="nf">plus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">balance</span><span class="p">:</span> <span class="s1">&#39;Balance&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Balance&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Add two Balances of the same type together.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span> <span class="o">!=</span> <span class="n">balance</span><span class="o">.</span><span class="n">currency_type</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MixedCurrencyTypeError</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Balance</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">balance_in_currency</span> <span class="o">+</span> <span class="n">balance</span><span class="o">.</span><span class="n">balance_in_currency</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Balance.minus"><a class="viewcode-back" href="../../../_autosummary/helium_py.currency.balance.Balance.html#helium_py.currency.balance.Balance.minus">[docs]</a>    <span class="k">def</span> <span class="nf">minus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">balance</span><span class="p">:</span> <span class="s1">&#39;Balance&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Balance&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Subtract two Balances of the same type together.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span> <span class="o">!=</span> <span class="n">balance</span><span class="o">.</span><span class="n">currency_type</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MixedCurrencyTypeError</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Balance</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">balance_in_currency</span> <span class="o">-</span> <span class="n">balance</span><span class="o">.</span><span class="n">balance_in_currency</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Balance.times"><a class="viewcode-back" href="../../../_autosummary/helium_py.currency.balance.Balance.html#helium_py.currency.balance.Balance.times">[docs]</a>    <span class="k">def</span> <span class="nf">times</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">balance</span><span class="p">:</span> <span class="s1">&#39;Balance&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Balance&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Multiply two Balances of the same type together.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span> <span class="o">!=</span> <span class="n">balance</span><span class="o">.</span><span class="n">currency_type</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MixedCurrencyTypeError</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Balance</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">balance_in_currency</span> <span class="o">*</span> <span class="n">balance</span><span class="o">.</span><span class="n">balance_in_currency</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Balance.divided_by"><a class="viewcode-back" href="../../../_autosummary/helium_py.currency.balance.Balance.html#helium_py.currency.balance.Balance.divided_by">[docs]</a>    <span class="k">def</span> <span class="nf">divided_by</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">balance</span><span class="p">:</span> <span class="s1">&#39;Balance&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Balance&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Divide two Balances of the same type together.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span> <span class="o">!=</span> <span class="n">balance</span><span class="o">.</span><span class="n">currency_type</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MixedCurrencyTypeError</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">Balance</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">balance_in_currency</span> <span class="o">/</span> <span class="n">balance</span><span class="o">.</span><span class="n">balance_in_currency</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Balance.to_usd"><a class="viewcode-back" href="../../../_autosummary/helium_py.currency.balance.Balance.html#helium_py.currency.balance.Balance.to_usd">[docs]</a>    <span class="k">def</span> <span class="nf">to_usd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oracle_price</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;Balance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Balance&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Convert a balance to US_DOLLARS.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span> <span class="o">==</span> <span class="n">US_DOLLARS</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">if</span> <span class="n">oracle_price</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">oracle_price</span> <span class="o">=</span> <span class="n">Balance</span><span class="p">(</span><span class="n">OraclePrices</span><span class="p">()</span><span class="o">.</span><span class="n">get_current</span><span class="p">()[</span><span class="s1">&#39;price&#39;</span><span class="p">],</span> <span class="n">US_DOLLARS</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span> <span class="o">==</span> <span class="n">DATA_CREDITS</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Balance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">balance_in_currency</span> <span class="o">*</span> <span class="n">DC_TO_USD_MULTIPLIER</span><span class="p">,</span> <span class="n">US_DOLLARS</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span> <span class="o">==</span> <span class="n">NETWORK_TOKENS</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Balance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">balance_in_currency</span> <span class="o">*</span> <span class="n">oracle_price</span><span class="o">.</span><span class="n">balance_in_currency</span><span class="p">,</span> <span class="n">US_DOLLARS</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span> <span class="o">==</span> <span class="n">TEST_NETWORK_TOKENS</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Balance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">balance_in_currency</span> <span class="o">*</span> <span class="n">oracle_price</span><span class="o">.</span><span class="n">balance_in_currency</span><span class="p">,</span> <span class="n">US_DOLLARS</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">UnsupportedCurrencyConversionError</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Balance.to_network_tokens"><a class="viewcode-back" href="../../../_autosummary/helium_py.currency.balance.Balance.html#helium_py.currency.balance.Balance.to_network_tokens">[docs]</a>    <span class="k">def</span> <span class="nf">to_network_tokens</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oracle_price</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;Balance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Balance&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Convert a balance to NETWORK_TOKENS.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span> <span class="o">==</span> <span class="n">NETWORK_TOKENS</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">if</span> <span class="n">oracle_price</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">oracle_price</span> <span class="o">=</span> <span class="n">Balance</span><span class="p">(</span><span class="n">OraclePrices</span><span class="p">()</span><span class="o">.</span><span class="n">get_current</span><span class="p">()[</span><span class="s1">&#39;price&#39;</span><span class="p">],</span> <span class="n">US_DOLLARS</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Balance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_usd</span><span class="p">(</span><span class="n">oracle_price</span><span class="p">)</span><span class="o">.</span><span class="n">balance_in_currency</span> <span class="o">/</span> <span class="n">oracle_price</span><span class="o">.</span><span class="n">balance_in_currency</span><span class="p">,</span> <span class="n">NETWORK_TOKENS</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Balance.to_test_network_tokens"><a class="viewcode-back" href="../../../_autosummary/helium_py.currency.balance.Balance.html#helium_py.currency.balance.Balance.to_test_network_tokens">[docs]</a>    <span class="k">def</span> <span class="nf">to_test_network_tokens</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oracle_price</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;Balance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Balance&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Convert a balance to TEST_NETWORK_TOKENS.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span> <span class="o">==</span> <span class="n">TEST_NETWORK_TOKENS</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">if</span> <span class="n">oracle_price</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># TODO: This should go to testnet</span>
+            <span class="n">oracle_price</span> <span class="o">=</span> <span class="n">Balance</span><span class="p">(</span><span class="n">OraclePrices</span><span class="p">()</span><span class="o">.</span><span class="n">get_current</span><span class="p">()[</span><span class="s1">&#39;price&#39;</span><span class="p">],</span> <span class="n">US_DOLLARS</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Balance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_usd</span><span class="p">(</span>
+            <span class="n">oracle_price</span><span class="p">)</span><span class="o">.</span><span class="n">balance_in_currency</span> <span class="o">/</span> <span class="n">oracle_price</span><span class="o">.</span><span class="n">balance_in_currency</span><span class="p">,</span> <span class="n">TEST_NETWORK_TOKENS</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Balance.to_data_credits"><a class="viewcode-back" href="../../../_autosummary/helium_py.currency.balance.Balance.html#helium_py.currency.balance.Balance.to_data_credits">[docs]</a>    <span class="k">def</span> <span class="nf">to_data_credits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oracle_price</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s1">&#39;Balance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Balance&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Convert a balance to DATA_CREDITS.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span> <span class="o">==</span> <span class="n">DATA_CREDITS</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span> <span class="o">==</span> <span class="n">US_DOLLARS</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Balance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">balance_in_currency</span> <span class="o">/</span> <span class="n">DC_TO_USD_MULTIPLIER</span><span class="p">,</span> <span class="n">DATA_CREDITS</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">oracle_price</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">oracle_price</span> <span class="o">=</span> <span class="n">Balance</span><span class="p">(</span><span class="n">OraclePrices</span><span class="p">()</span><span class="o">.</span><span class="n">get_current</span><span class="p">()[</span><span class="s1">&#39;price&#39;</span><span class="p">],</span> <span class="n">US_DOLLARS</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">currency_type</span> <span class="o">==</span> <span class="n">NETWORK_TOKENS</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_usd</span><span class="p">(</span><span class="n">oracle_price</span><span class="p">)</span><span class="o">.</span><span class="n">to_data_credits</span><span class="p">(</span><span class="n">oracle_price</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">UnsupportedCurrencyConversionError</span><span class="p">()</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><p class="logo">
+  <a href="../../../index.html">
+    <img class="logo" src="../../../_static/helium-py.png" alt="helium-py logo" />
+  </a>
+</p>
+
+<p>
+  <iframe src="https://ghbtns.com/github-btn.html?user=Crypto-Balloon&repo=helium-py&type=watch&count=true&size=large"
+    allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+<p>
+  helium-py is the official Python library for interacting with the Helium blockchain.
+</p>
+
+<h3>Useful Links</h3>
+<ul>
+  <li><a href="./quickstart.html">Quickstart</a></li>
+  <li><a href="./modules.html">Modules</a></li>
+  <p></p>
+
+  <li><a href="https://github.com/Crypto-Balloon/helium-py/">helium-py @ GitHub</a></li>
+  <li><a href="https://pypi.org/project/helium-py/">helium-py @ PyPI</a></li>
+  <li><a href="https://github.com/Crypto-Balloon/helium-py/issues">Issue Tracker</a></li>
+</ul>
+
+<div id="native-ribbon">
+</div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Crypto Balloon LLC.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,38 @@
+helium\_py.api.cities.Cities
+============================
+
+.. currentmodule:: helium_py.api.cities
+
+.. autoclass:: Cities
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Cities.__init__
+      ~Cities.all
+      ~Cities.get_by_id
+      ~Cities.hotspots_for_id
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Cities.base_path
+      ~Cities.client
+      ~Cities.host
+      ~Cities.port
+      ~Cities.user_agent
+   
+   

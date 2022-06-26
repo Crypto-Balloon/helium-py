@@ -1,0 +1,39 @@
+helium\_py.proto.BlockchainStateChannelResponseV1
+=================================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainStateChannelResponseV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainStateChannelResponseV1.FromString
+      ~BlockchainStateChannelResponseV1.SerializeToString
+      ~BlockchainStateChannelResponseV1.__init__
+      ~BlockchainStateChannelResponseV1.from_dict
+      ~BlockchainStateChannelResponseV1.from_json
+      ~BlockchainStateChannelResponseV1.parse
+      ~BlockchainStateChannelResponseV1.to_dict
+      ~BlockchainStateChannelResponseV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainStateChannelResponseV1.accepted
+      ~BlockchainStateChannelResponseV1.downlink
+   
+   

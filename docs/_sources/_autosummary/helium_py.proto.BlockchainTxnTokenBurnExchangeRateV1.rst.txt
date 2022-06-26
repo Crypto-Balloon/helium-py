@@ -1,0 +1,38 @@
+helium\_py.proto.BlockchainTxnTokenBurnExchangeRateV1
+=====================================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnTokenBurnExchangeRateV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnTokenBurnExchangeRateV1.FromString
+      ~BlockchainTxnTokenBurnExchangeRateV1.SerializeToString
+      ~BlockchainTxnTokenBurnExchangeRateV1.__init__
+      ~BlockchainTxnTokenBurnExchangeRateV1.from_dict
+      ~BlockchainTxnTokenBurnExchangeRateV1.from_json
+      ~BlockchainTxnTokenBurnExchangeRateV1.parse
+      ~BlockchainTxnTokenBurnExchangeRateV1.to_dict
+      ~BlockchainTxnTokenBurnExchangeRateV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnTokenBurnExchangeRateV1.rate
+   
+   

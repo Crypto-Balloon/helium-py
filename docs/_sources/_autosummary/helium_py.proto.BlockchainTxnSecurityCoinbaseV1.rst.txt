@@ -1,0 +1,39 @@
+helium\_py.proto.BlockchainTxnSecurityCoinbaseV1
+================================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnSecurityCoinbaseV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnSecurityCoinbaseV1.FromString
+      ~BlockchainTxnSecurityCoinbaseV1.SerializeToString
+      ~BlockchainTxnSecurityCoinbaseV1.__init__
+      ~BlockchainTxnSecurityCoinbaseV1.from_dict
+      ~BlockchainTxnSecurityCoinbaseV1.from_json
+      ~BlockchainTxnSecurityCoinbaseV1.parse
+      ~BlockchainTxnSecurityCoinbaseV1.to_dict
+      ~BlockchainTxnSecurityCoinbaseV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnSecurityCoinbaseV1.amount
+      ~BlockchainTxnSecurityCoinbaseV1.payee
+   
+   

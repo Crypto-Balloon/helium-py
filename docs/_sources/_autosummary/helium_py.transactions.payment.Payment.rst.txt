@@ -1,0 +1,35 @@
+helium\_py.transactions.payment.Payment
+=======================================
+
+.. currentmodule:: helium_py.transactions.payment
+
+.. autoclass:: Payment
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Payment.__init__
+      ~Payment.deserialize_payment_list
+      ~Payment.payment_list_to_proto
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Payment.payee
+      ~Payment.amount
+      ~Payment.memo
+   
+   

@@ -1,0 +1,38 @@
+helium\_py.proto.BlockchainTxnBundleV1
+======================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnBundleV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnBundleV1.FromString
+      ~BlockchainTxnBundleV1.SerializeToString
+      ~BlockchainTxnBundleV1.__init__
+      ~BlockchainTxnBundleV1.from_dict
+      ~BlockchainTxnBundleV1.from_json
+      ~BlockchainTxnBundleV1.parse
+      ~BlockchainTxnBundleV1.to_dict
+      ~BlockchainTxnBundleV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnBundleV1.transactions
+   
+   

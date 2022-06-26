@@ -1,0 +1,41 @@
+helium\_py.proto.BlockchainTxnConsensusGroupV1
+==============================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnConsensusGroupV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnConsensusGroupV1.FromString
+      ~BlockchainTxnConsensusGroupV1.SerializeToString
+      ~BlockchainTxnConsensusGroupV1.__init__
+      ~BlockchainTxnConsensusGroupV1.from_dict
+      ~BlockchainTxnConsensusGroupV1.from_json
+      ~BlockchainTxnConsensusGroupV1.parse
+      ~BlockchainTxnConsensusGroupV1.to_dict
+      ~BlockchainTxnConsensusGroupV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnConsensusGroupV1.delay
+      ~BlockchainTxnConsensusGroupV1.height
+      ~BlockchainTxnConsensusGroupV1.members
+      ~BlockchainTxnConsensusGroupV1.proof
+   
+   

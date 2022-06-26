@@ -1,0 +1,43 @@
+helium\_py.proto.BlockchainTxnUpdateGatewayOuiV1
+================================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainTxnUpdateGatewayOuiV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainTxnUpdateGatewayOuiV1.FromString
+      ~BlockchainTxnUpdateGatewayOuiV1.SerializeToString
+      ~BlockchainTxnUpdateGatewayOuiV1.__init__
+      ~BlockchainTxnUpdateGatewayOuiV1.from_dict
+      ~BlockchainTxnUpdateGatewayOuiV1.from_json
+      ~BlockchainTxnUpdateGatewayOuiV1.parse
+      ~BlockchainTxnUpdateGatewayOuiV1.to_dict
+      ~BlockchainTxnUpdateGatewayOuiV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainTxnUpdateGatewayOuiV1.fee
+      ~BlockchainTxnUpdateGatewayOuiV1.gateway
+      ~BlockchainTxnUpdateGatewayOuiV1.gateway_owner_signature
+      ~BlockchainTxnUpdateGatewayOuiV1.nonce
+      ~BlockchainTxnUpdateGatewayOuiV1.oui
+      ~BlockchainTxnUpdateGatewayOuiV1.oui_owner_signature
+   
+   

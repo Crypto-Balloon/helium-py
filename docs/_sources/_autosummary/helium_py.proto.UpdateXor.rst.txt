@@ -1,0 +1,39 @@
+helium\_py.proto.UpdateXor
+==========================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: UpdateXor
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~UpdateXor.FromString
+      ~UpdateXor.SerializeToString
+      ~UpdateXor.__init__
+      ~UpdateXor.from_dict
+      ~UpdateXor.from_json
+      ~UpdateXor.parse
+      ~UpdateXor.to_dict
+      ~UpdateXor.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~UpdateXor.filter
+      ~UpdateXor.index
+   
+   

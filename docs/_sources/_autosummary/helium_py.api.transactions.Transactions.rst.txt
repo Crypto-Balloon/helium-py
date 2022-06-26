@@ -1,0 +1,36 @@
+helium\_py.api.transactions.Transactions
+========================================
+
+.. currentmodule:: helium_py.api.transactions
+
+.. autoclass:: Transactions
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Transactions.__init__
+      ~Transactions.get_transaction
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Transactions.base_path
+      ~Transactions.client
+      ~Transactions.host
+      ~Transactions.port
+      ~Transactions.user_agent
+   
+   

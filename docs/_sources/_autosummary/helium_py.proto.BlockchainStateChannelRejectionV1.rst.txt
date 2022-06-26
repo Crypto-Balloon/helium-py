@@ -1,0 +1,39 @@
+helium\_py.proto.BlockchainStateChannelRejectionV1
+==================================================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: BlockchainStateChannelRejectionV1
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BlockchainStateChannelRejectionV1.FromString
+      ~BlockchainStateChannelRejectionV1.SerializeToString
+      ~BlockchainStateChannelRejectionV1.__init__
+      ~BlockchainStateChannelRejectionV1.from_dict
+      ~BlockchainStateChannelRejectionV1.from_json
+      ~BlockchainStateChannelRejectionV1.parse
+      ~BlockchainStateChannelRejectionV1.to_dict
+      ~BlockchainStateChannelRejectionV1.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BlockchainStateChannelRejectionV1.packet_hash
+      ~BlockchainStateChannelRejectionV1.reject
+   
+   

@@ -1,0 +1,6 @@
+helium\_py.test.utils.BOB\_WORDS
+================================
+
+.. currentmodule:: helium_py.test.utils
+
+.. autodata:: BOB_WORDS

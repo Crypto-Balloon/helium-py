@@ -1,0 +1,38 @@
+helium\_py.proto.UpdateRouters
+==============================
+
+.. currentmodule:: helium_py.proto
+
+.. autoclass:: UpdateRouters
+   :members:
+   :show-inheritance:
+   :inherited-members:
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~UpdateRouters.FromString
+      ~UpdateRouters.SerializeToString
+      ~UpdateRouters.__init__
+      ~UpdateRouters.from_dict
+      ~UpdateRouters.from_json
+      ~UpdateRouters.parse
+      ~UpdateRouters.to_dict
+      ~UpdateRouters.to_json
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~UpdateRouters.router_addresses
+   
+   
